@@ -1,0 +1,20 @@
+<?php
+
+namespace DummyNamespace;
+
+use Gustavinho\LaravelViews\Filters\Filter;
+
+class DummyClass extends Filter
+{
+    public $field = '';
+
+    public function apply($query, $value, $request)
+    {
+        return $query->where($this->field, $value);
+    }
+
+    public function options()
+    {
+        return [];
+    }
+}

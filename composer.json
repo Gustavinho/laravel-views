@@ -1,0 +1,18 @@
+{
+    "name": "gustavinho/laravel-views",
+    "description": "My awesome Laravel package",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gustavo Martinez",
+            "email": "gustavinho.martinez@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Gustavinho\\LaravelViews\\": "src"
+        }
+    }
+}
