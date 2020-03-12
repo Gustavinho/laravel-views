@@ -12,11 +12,25 @@
         @if ($filter->type === 'select')
           @component('laravel-views::components.form.select', [
             'label' => $filter->getTitle(),
-            'name' => "filters[{$filter->field}]",
+            'name' => "filters[{$filter->id}]",
             'options' => array_merge(['--' => ''], $filter->options()),
-            'selected' => count($filtersValues) ? $filtersValues[$filter->field] : '',
+            'selected' => count($filtersValues) && isset($filtersValues[$filter->id]) ? $filtersValues[$filter->id] : '',
           ])
           @endcomponent
+        @endif
+
+        @if ($filter->type === 'boolean')
+          @foreach ($filter->options() as $title => $value)
+            <label for="checkbox-{{ $filter->id }}-{{ $value }}">
+              <input
+                id="checkbox-{{ $filter->id }}-{{ $value }}"
+                type="checkbox"
+                name="filters[{{ $filter->id }}][{{ $value }}]"
+                {{ count($filtersValues) && isset($filtersValues[$filter->id]) && isset($filtersValues[$filter->id][$value]) ? 'checked': '' }}
+              >
+              {{ $title }}
+            </label>
+          @endforeach
         @endif
 
       @endforeach

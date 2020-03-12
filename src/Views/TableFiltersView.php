@@ -25,7 +25,7 @@ class TableFiltersView extends View
         return [
             'fieldsToSearch' => $this->fieldsToSearch,
             'searchValue' => $request->query('query', ''),
-            'filtersValues' => $filterValues,
+            'filtersValues' => $filterValues->toArray(),
             'filters' => $this->filters
         ];
     }
@@ -39,7 +39,11 @@ class TableFiltersView extends View
 
     public function setFilters($filters)
     {
-        $this->filters = $filters;
+        if ($filters && count($filters)) {
+            foreach ($filters as $filter) {
+                $this->filters[$filter->id] = $filter;
+            }
+        }
 
         return $this;
     }

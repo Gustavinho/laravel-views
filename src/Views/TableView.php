@@ -57,11 +57,15 @@ class TableView extends View
     private function applyFilters($request, $query)
     {
         if ($request->has('filters')) {
-            $filters = $request->get('filters');
+            $filtersFromRequest = $request->get('filters');
 
             foreach ($this->filters() as $filter) {
-                if (isset($filters[$filter->field])) {
-                    $filter->apply($query, $filters[$filter->field], $request);
+                if (isset($filtersFromRequest[$filter->id])) {
+                    $filter->apply(
+                        $query,
+                        $filter->passValuesFromRequestToFilter($filtersFromRequest[$filter->id]),
+                        $request
+                    );
                 }
             }
         }
