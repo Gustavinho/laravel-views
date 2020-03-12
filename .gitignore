@@ -1,2 +1,4 @@
 node_modules
 public/hot
+vendor
+.phpunit.result.cache
