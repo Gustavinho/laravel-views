@@ -21,4 +21,9 @@ class View
 
         return view("laravel-views::{$this->view}", $data);
     }
+
+    protected function getData(Request $request)
+    {
+        return [];
+    }
 }

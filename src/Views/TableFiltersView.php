@@ -9,6 +9,7 @@ class TableFiltersView extends View
     protected $view = 'filters';
 
     private $fieldsToSearch = null;
+
     private $filters = null;
 
     protected function getData(Request $request)

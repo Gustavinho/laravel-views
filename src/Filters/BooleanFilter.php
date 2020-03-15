@@ -6,6 +6,8 @@ class BooleanFilter extends BaseFilter
 {
     public $type = 'boolean';
 
+    protected $view = 'boolean-filter';
+
     public function passValuesFromRequestToFilter($values)
     {
         $options = collect($this->options())->values()->toArray();
