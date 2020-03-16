@@ -5,7 +5,7 @@ namespace Gustavinho\LaravelViews\Filters;
 use Gustavinho\LaravelViews\Views\View;
 use Illuminate\Http\Request;
 
-class BaseFilter extends View
+class BaseFilter
 {
     protected $title;
     public $id;
@@ -15,8 +15,9 @@ class BaseFilter extends View
         $this->id = $this->getId();
     }
 
-    public function getData(Request $request)
+    public function selected()
     {
+        $request = request();
         $selected = '';
 
         if ($request->has('filters')) {

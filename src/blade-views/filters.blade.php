@@ -3,11 +3,14 @@
     <input wire:model="search" type="text" class="" name="query" placeholder="Buscar...">
   @endif
 
-  @if (isset($filters) && $filters)
-    <b>Filtros {{ count($filtersValues) ? "(" . count($filtersValues) . ")" : ''}} </b>
-    @foreach ($filters as $filter)
+  @if (isset($filtersViews) && $filtersViews)
+    {{-- <b>Filtros {{ count($filtersValues) ? "(" . count($filtersValues) . ")" : ''}} </b> --}}
+    @foreach ($filtersViews as $filter)
 
-      {!! $filter->render() !!}
+      {{-- {!! $filter->render() !!} --}}
+      @include('laravel-views::' . $filter->view, [
+        'view' => $filter
+      ])
 
     @endforeach
 

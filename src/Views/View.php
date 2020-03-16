@@ -11,10 +11,8 @@ class View extends Component
 
     public function render()
     {
-        $request = app('Illuminate\Http\Request');
-
         $data = array_merge(
-            $this->getData($request),
+            $this->getRenderData(),
             [
                 'view' => $this
             ]
@@ -23,7 +21,7 @@ class View extends Component
         return view("laravel-views::{$this->view}", $data);
     }
 
-    protected function getData(Request $request)
+    protected function getRenderData()
     {
         return [];
     }

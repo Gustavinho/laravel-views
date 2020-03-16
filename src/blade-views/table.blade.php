@@ -1,10 +1,5 @@
 <div>
-  {{-- {!! $tableFiltersView->render() !!} --}}
-  <form wire:submit.prevent="filter">
-    @include('laravel-views::filters', [
-      'searchBy' => $searchBy
-    ])
-  </form>
+  @include('laravel-views::filters')
 
   Mostrando {{ $total }} elementos
   <table>
