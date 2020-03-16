@@ -14,7 +14,7 @@ class BooleanFilter extends BaseFilter
         $valuesToFilter = [];
 
         foreach ($options as $option) {
-            if (isset($values[$option])) {
+            if (isset($values[$option]) && $values[$option]) {
                 $valuesToFilter[$option] = true;
             } else {
                 $valuesToFilter[$option] = false;

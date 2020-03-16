@@ -125,10 +125,8 @@ class TableView extends View
      */
     private function applyFilters($query)
     {
-        $filters = $this->filters;
-        if ($filters && is_array($filters) && count($filters) > 0) {
-            $filtersFromRequest = $filters;
-
+        $filtersFromRequest = $this->filters;
+        if ($filtersFromRequest && is_array($filtersFromRequest) && count($filtersFromRequest) > 0) {
             foreach ($this->filters() as $filter) {
                 if (isset($filtersFromRequest[$filter->id])) {
                     /** Applies some transformation bwtween url query and filter class created */
