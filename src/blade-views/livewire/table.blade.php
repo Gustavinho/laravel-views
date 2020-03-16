@@ -1,12 +1,6 @@
 <div>
+  hola
   {{-- {!! $tableFiltersView->render() !!} --}}
-  <form wire:submit.prevent="filter">
-    @include('laravel-views::filters', [
-      'searchBy' => $searchBy
-    ])
-  </form>
-
-  Mostrando {{ $total }} elementos
   <table>
     <thead class="">
       <tr>
@@ -27,5 +21,5 @@
     </tbody>
   </table>
 
-  {{ $items->links() }}
+  {!! $items->links() !!}
 </div>

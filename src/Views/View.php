@@ -3,8 +3,9 @@
 namespace Gustavinho\LaravelViews\Views;
 
 use Illuminate\Http\Request;
+use Livewire\Component;
 
-class View
+class View extends Component
 {
     protected $view;
 

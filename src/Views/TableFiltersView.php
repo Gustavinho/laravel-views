@@ -6,11 +6,20 @@ use Illuminate\Http\Request;
 
 class TableFiltersView extends View
 {
+
     protected $view = 'filters';
 
-    private $fieldsToSearch = null;
-
+    public $fieldsToSearch = null;
+    public $search;
     private $filters = null;
+
+    protected $updatesQueryString = ['search'];
+
+    public function mount($searchBy)
+    {
+        $this->fieldsToSearch = $searchBy;
+        $this->search = request()->query('search', $this->search);
+    }
 
     protected function getData(Request $request)
     {
@@ -24,7 +33,6 @@ class TableFiltersView extends View
         });
 
         return [
-            'fieldsToSearch' => $this->fieldsToSearch,
             'searchValue' => $request->query('query', ''),
             'filtersValues' => $filterValues->toArray(),
             'filters' => $this->filters
