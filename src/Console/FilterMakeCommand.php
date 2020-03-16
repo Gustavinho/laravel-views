@@ -16,6 +16,13 @@ class FilterMakeCommand extends GeneratorCommand
     protected $name = 'make:filter';
 
     /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'make:filter {name} {--type=select}';
+
+    /**
      * The console command description.
      *
      * @var string
@@ -36,7 +43,14 @@ class FilterMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/../../stubs/Filter.stub';
+        $type = $this->option('type');
+        $stub = 'Filter';
+
+        if ($type == 'boolean') {
+            $stub = 'BooleanFilter';
+        }
+
+        return __DIR__ . "/../../stubs/{$stub}.stub";
     }
 
     /**

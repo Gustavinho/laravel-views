@@ -9,10 +9,16 @@
             "email": "gustavinho.martinez@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "livewire/livewire": "1.0.*"
+    },
     "autoload": {
         "psr-4": {
-            "Gustavinho\\LaravelViews\\": "src"
+            "Gustavinho\\LaravelViews\\": "src",
+            "Gustavinho\\LaravelViews\\Test\\": "tests"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
     }
 }

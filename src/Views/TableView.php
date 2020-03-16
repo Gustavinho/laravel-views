@@ -3,75 +3,106 @@
 namespace Gustavinho\LaravelViews\Views;
 
 use Illuminate\Http\Request;
+use Livewire\WithPagination;
 
 class TableView extends View
 {
-    protected $view = 'table';
-    protected $paginate = 10;
-    protected $repository = null;
-    protected $searchBy = null;
+    use WithPagination;
 
-    public function __construct($repository)
+    protected $updatesQueryString = ['search', 'filters'];
+
+    /** Component name */
+    protected $view = 'table';
+
+    /**
+     * (Override) int Number of items to be showed,
+     * @var int $paginate
+     */
+    protected $paginate = 10;
+
+    /**
+     * (Override) Headers to be showed on every coulumn
+     * @var Array $headers
+     */
+    public $headers;
+
+    /** @var int $total Total of items found */
+    public $total = 0;
+
+    /** @var String $search Current query string with the search value */
+    public $search;
+
+    /** @var String $filters Current query string with the filters value */
+    public $filters = [];
+
+    /** @var Array<BaseFilter> $filtersViews All filters customized in the child class */
+    public $filtersViews;
+
+    /** @var Array<String> $searchBy All fileds to search */
+    public $searchBy;
+
+    public function hydrate()
     {
-        $this->repository = $repository;
+        $this->filtersViews = $this->filters();
+    }
+
+    public function mount()
+    {
+        $this->headers = $this->headers();
+        $this->search = request()->query('search', $this->search);
+        $this->filtersViews = $this->filters();
+        $this->filters = request()->query('filters', $this->filters);
     }
 
     /**
-     * Collects all data to be passed to the view,
-     * this include the items searched on the database through the filters
+     * Collects all data to be passed to the view, this includes the items searched on the database
+     * through the filters, this data will be passed to livewire render method
      */
-    protected function getData(Request $request)
+    protected function getRenderData()
     {
-        $query = $this->collection($this->repository);
-
-        $this->applySearch($request, $query);
-        $this->applyFilters($request, $query);
-
         return [
-            'headers' => $this->headers(),
-            'items' => $query->paginate($this->paginate),
-            'total' => $query->count(),
-            'tableFiltersView' => $this->getTableFiltersView(),
+            'items' => $this->getItems()
         ];
     }
 
-    private function getTableFiltersView()
+    /**
+     * Returns the itmes from the database regarding to the filters selected by the user
+     * applies the search query, the filters uesed and the total of items found
+     */
+    private function getItems()
     {
-        $tableFiltersView = new TableFiltersView();
-        $tableFiltersView->setFieldsToSearch($this->searchBy)
-            ->setFilters($this->filters());
+        $query = $this->repository();
 
-        return $tableFiltersView;
+        $this->searchItem($query)
+            ->applyFilters($query)
+            ->updateTotal($query);
+
+        return $query->paginate($this->paginate);
     }
 
-    public function collection($repository)
+    /**
+     * Updates the total items found with the currect query
+     *
+     * @param $query Object Current query created by the filters
+     */
+    private function updateTotal($query)
     {
-        return $repository;
+        $this->total = $query->count();
+
+        return $this;
     }
 
-    public function filters()
+    /**
+     * Searchs an item by a query value, this search is executed when some filter or
+     * the search value is changed
+     *
+     * @param $query Object Current query created by the filters
+     */
+    private function searchItem($query)
     {
-        return null;
-    }
-
-    private function applyFilters($request, $query)
-    {
-        if ($request->has('filters')) {
-            $filters = $request->get('filters');
-
-            foreach ($this->filters() as $filter) {
-                if (isset($filters[$filter->field])) {
-                    $filter->apply($query, $filters[$filter->field], $request);
-                }
-            }
-        }
-    }
-
-    private function applySearch($request, $query)
-    {
-        if ($request->has('query')) {
+        if ($this->search) {
             $fields = $this->searchBy;
-            $value = $request->get('query');
+            $value = $this->search;
 
             if ($value) {
                 foreach ($fields as $field) {
@@ -83,5 +114,31 @@ class TableView extends View
                 }
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Applies every filter customized in the child class
+     *
+     * @param $query Object Current query created by the filters
+     */
+    private function applyFilters($query)
+    {
+        $filtersFromRequest = $this->filters;
+        if ($filtersFromRequest && is_array($filtersFromRequest) && count($filtersFromRequest) > 0) {
+            foreach ($this->filters() as $filter) {
+                if (isset($filtersFromRequest[$filter->id])) {
+                    /** Applies some transformation bwtween url query and filter class created */
+                    $value = $filter->passValuesFromRequestToFilter($filtersFromRequest[$filter->id]);
+
+                    if ($value != "") {
+                        $filter->apply($query, $value, request());
+                    }
+                }
+            }
+        }
+
+        return $this;
     }
 }
