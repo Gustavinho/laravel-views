@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Views;
+
+use Carbon\Carbon;
+use Gustavinho\LaravelViews\Filters\DateFilter;
+use Illuminate\Database\Eloquent\Builder;
+
+class CreatedAtFilter extends DateFilter
+{
+    public function apply(Builder $query, Carbon $value)
+    {
+        // $query->where('', $value);
+    }
+}

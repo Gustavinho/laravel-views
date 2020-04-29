@@ -1,4 +1,5 @@
-<div class="text-left">
+{{-- {{ dd($view->selected()) }} --}}
+<div class="text-left mb-4">
   <label class="width-full block">
     {{ $view->getTitle() }}
   </label>
@@ -9,7 +10,7 @@
         id="checkbox-{{ $view->id }}-{{ $value }}"
         type="checkbox"
         name="filters[{{ $view->id }}][{{ $value }}]"
-        {{ isset($selected[$value]) ? 'checked': '' }}
+        {{-- {{ isset($selected[$value]) ? 'checked': '' }} --}}
       >
       {{ $title }}
     </label>

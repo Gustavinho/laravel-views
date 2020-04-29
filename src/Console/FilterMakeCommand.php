@@ -50,6 +50,10 @@ class FilterMakeCommand extends GeneratorCommand
             $stub = 'BooleanFilter';
         }
 
+        if ($type == 'date') {
+            $stub = 'DateFilter';
+        }
+
         return __DIR__ . "/../../stubs/{$stub}.stub";
     }
 

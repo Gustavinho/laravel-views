@@ -1,14 +1,12 @@
 <div class="flex flex-row">
   @if ($searchBy)
     <div class="flex-1">
-      <input
-        class="block appearance-none w-full bg-white border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-purple-500 focus:border-2 border"
-        type="text"
-        wire:model="search"
-        name="query"
-        placeholder="Search..."
-        autocomplete="off"
-      >
+      @component('laravel-views::components.form.input', [
+        'name' => 'query',
+        'placeholder' => 'Search',
+        'model' => "search"
+      ])
+      @endcomponent
     </div>
   @endif
 
@@ -25,16 +23,22 @@
       </button>
 
       <div
-        class="bg-white shadow-lg rounded p-4 absolute top-8 right-0 w-64 border"
+        class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left pt-4"
         x-show="open" @click.away="open = false"
       >
         @foreach ($filtersViews as $filter)
-
-          @include('laravel-views::' . $filter->view, [
+          <div class="px-4">
+            @include('laravel-views::' . $filter->view, [
             'view' => $filter
-          ])
-
+            ])
+          </div>
         @endforeach
+
+        {{-- <div class="p-4 bg-gray-100">
+          <button class="bg-blue-500 rounded px-4 py-2 w-full text-center text-white font-semibold">
+            Clear filters
+          </button>
+        </div> --}}
       </div>
     </div>
   @endif

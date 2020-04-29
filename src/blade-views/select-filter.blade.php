@@ -3,6 +3,5 @@
   'name' => "filters[{$view->id}]",
   'model' => "filters.{$view->id}",
   'options' => array_merge(['--' => ''], $view->options()),
-  'selected' => $view->selected(),
 ])
 @endcomponent
