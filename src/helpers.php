@@ -9,7 +9,7 @@ function avatar($src)
 {
     return view('laravel-views::components.img', [
         'src' => $src,
-        'class' => 'h-8 w-8 object-cover rounded-full'
+        'class' => 'h-8 w-8 object-cover rounded-full shadow-inner'
     ]);
 }
 

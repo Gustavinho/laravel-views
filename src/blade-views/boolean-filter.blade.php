@@ -1,7 +1,9 @@
-<div>
-  <label>{{ $view->getTitle() }}</label>
+<div class="text-left">
+  <label class="width-full block">
+    {{ $view->getTitle() }}
+  </label>
   @foreach ($view->options() as $title => $value)
-    <label for="checkbox-{{ $view->id }}-{{ $value }}">
+    <label for="checkbox-{{ $view->id }}-{{ $value }}" class="block">
       <input
         wire:model="filters.{{ $view->id }}.{{ $value }}"
         id="checkbox-{{ $view->id }}-{{ $value }}"

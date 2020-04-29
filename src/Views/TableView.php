@@ -18,7 +18,7 @@ class TableView extends View
      * (Override) int Number of items to be showed,
      * @var int $paginate
      */
-    protected $paginate = 10;
+    protected $paginate = 20;
 
     /**
      * (Override) Headers to be showed on every coulumn

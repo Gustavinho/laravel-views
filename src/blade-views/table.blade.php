@@ -1,26 +1,40 @@
 <div>
   @include('laravel-views::filters')
 
-  Mostrando {{ $total }} elementos
-  <table>
-    <thead class="">
-      <tr>
-        @foreach ($headers as $header)
-          <td>{{ $header }}</td>
-        @endforeach
-      </tr>
-    </thead>
+  <p class="mt-4 mb-4">
+    <b>Showing</b> {{ $total }} items
+    <span class="ml-8" wire:loading>
+      Loading
+    </span>
+  </p>
 
-    <tbody>
-      @foreach ($items as $item)
+  <div class="min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+    <table class="min-w-full">
+      <thead class="bg-gray-200">
         <tr>
-          @foreach ($view->row($item) as $column)
-            <td>{!! $column !!}</td>
+          @foreach ($headers as $header)
+            <th class="px-3 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+              {{ $header }}
+            </th>
           @endforeach
         </tr>
-      @endforeach
-    </tbody>
-  </table>
+      </thead>
 
-  {{ $items->links() }}
+      <tbody>
+        @foreach ($items as $item)
+          <tr>
+            @foreach ($view->row($item) as $column)
+              <td class="px-3 py-2 whitespace-no-wrap border-b border-gray-200 text-gray-900 text-sm">
+                {!! $column !!}
+              </td>
+            @endforeach
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+
+  {{ $items->links('laravel-views::components.paginator') }}
 </div>
+
+

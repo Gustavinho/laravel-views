@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "popper.js": "^1.16.1",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.2.0",
+    "tailwindcss-plugins": "^0.3.0"
   }
 }
