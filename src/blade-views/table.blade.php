@@ -1,14 +1,19 @@
-<div class="min-w-full shadow-md overflow-hidden sm:rounded-lg bg-white">
-  <div class="p-4">
+<div
+  class="min-w-full shadow-md overflow-hidden sm:rounded-lg bg-white relative"
+  x-init="feather.replace()"
+>
+  <div class="p-4 pb-0">
     @include('laravel-views::filters')
-
-    <p>
-      <b>Showing</b> {{ $total }} items
-      <span class="ml-8" wire:loading>
-        Loading
-      </span>
-    </p>
   </div>
+
+  @if (session()->has('message'))
+    <div class="bg-green-300 text-green-800 font-semibold p-4 flex">
+      <p class="flex-1">{{ session('message') }}</p>
+
+      {{-- Flush this message from the session --}}
+      <a href="#" wire:click="flushMessage"><i data-feather="x-circle"></i></a>
+    </div>
+  @endif
 
   @if (count($items))
     <table class="min-w-full">
@@ -19,6 +24,7 @@
               {{ $header }}
             </th>
           @endforeach
+          <th></th>
         </tr>
       </thead>
 
@@ -30,6 +36,20 @@
                 {!! $column !!}
               </td>
             @endforeach
+            <td>
+              <div class="px-3 py-2 flex justify-end">
+                @foreach ($actionsByRow as $action)
+                  @if ($action->renderIf($item))
+                    <a
+                      href="{{ $action->isRedirect() ? $action->to : '#' }}"
+                      @if(!$action->isRedirect()) wire:click="executeAction('{{ $action->id }}', '{{ $item->id }}', )" @endif
+                    >
+                      <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
+                    </a>
+                  @endif
+                @endforeach
+              </div>
+            </td>
           </tr>
         @endforeach
       </tbody>
@@ -41,7 +61,17 @@
     </div>
   @endif
 
-  <div class="p-4">
-    {{ $items->links('laravel-views::components.paginator') }}
+  <div class="p-4 flex items-center">
+    <div class="flex-1">
+      {{ $items->links('laravel-views::components.paginator') }}
+    </div>
+    <div class="flex items-center">
+      <span wire:loading class="mr-4">
+        Loading
+      </span>
+      <div>
+        <b>Showing</b> {{ $total }} items
+      </div>
+    </div>
   </div>
 </div>

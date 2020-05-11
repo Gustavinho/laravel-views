@@ -2,7 +2,9 @@
 
 namespace Gustavinho\LaravelViews\Views;
 
+use Gustavinho\LaravelViews\Actions\Action;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
 
 class TableView extends View
@@ -41,9 +43,13 @@ class TableView extends View
     /** @var Array<String> $searchBy All fileds to search */
     public $searchBy;
 
+    /** @var Array<Action> $actionsByRow All actions by row customized in the child class */
+    // public $actionsByRow;
+
     public function hydrate()
     {
         $this->filtersViews = $this->filters();
+        // $this->actionsByRow = $this->actionsByRow();
     }
 
     public function mount()
@@ -52,6 +58,7 @@ class TableView extends View
         $this->search = request()->query('search', $this->search);
         $this->filtersViews = $this->filters();
         $this->filters = request()->query('filters', $this->filters);
+        //$this->actionsByRow = $this->actionsByRow();
     }
 
     /**
@@ -61,7 +68,8 @@ class TableView extends View
     protected function getRenderData()
     {
         return [
-            'items' => $this->getItems()
+            'items' => $this->getItems(),
+            'actionsByRow' => $this->actionsByRow()
         ];
     }
 
@@ -140,5 +148,28 @@ class TableView extends View
         }
 
         return $this;
+    }
+
+    public function executeAction($action, $id)
+    {
+        $actionToExecute = collect($this->actionsByRow())->first(
+            function ($actionToFind) use ($action) {
+                return $actionToFind->id === $action;
+            }
+        );
+
+        if ($actionToExecute) {
+            $item = $this->repository()->find($id);
+            $actionToExecute->execute($item, $id);
+            session()->flash('message', $actionToExecute->messages($item)['sucess']);
+        }
+    }
+
+    /**
+     * Flushes all session messages about success and error statuses
+     */
+    public function flushMessage()
+    {
+        session()->forget('message');
     }
 }

@@ -7,7 +7,7 @@
   'attributes' => [
     "x-data" => "{ picker: null }",
     "x-ref" => $id ?? '',
-    "x-init" => 'picker = new Pikaday({
+    "x-init" => 'picker = new laravelViews.Pikaday({
       field: $refs["'. ($id ?? '' ).'"],
       format: "YYYY-MM-DD",
       onSelect: function(date) {

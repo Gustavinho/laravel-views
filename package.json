@@ -15,10 +15,17 @@
   "license": "ISC",
   "devDependencies": {
     "laravel-mix": "^5.0.1",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
+    "alpinejs": "^2.3.3",
     "axios": "^0.19.2",
+    "feather-icons": "^4.28.0",
+    "jquery": "^3.5.1",
+    "moment": "^2.25.3",
+    "pikaday": "^1.8.0",
     "popper.js": "^1.16.1",
     "tailwindcss": "^1.2.0",
     "tailwindcss-plugins": "^0.3.0"
