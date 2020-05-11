@@ -5,7 +5,7 @@ namespace Gustavinho\LaravelViews\Views;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
-class View extends Component
+abstract class View extends Component
 {
     protected $view;
 
@@ -21,8 +21,5 @@ class View extends Component
         return view("laravel-views::{$this->view}", $data);
     }
 
-    protected function getRenderData()
-    {
-        return [];
-    }
+    abstract protected function getRenderData();
 }

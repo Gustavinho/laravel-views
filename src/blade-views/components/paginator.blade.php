@@ -6,7 +6,7 @@ wire:click="nextPage"
   $active = 'bg-blue-600'
 @endphp
 @if ($paginator->hasPages())
-    <div class="flex items-center mt-8">
+    <div class="flex items-center">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <span class="rounded-l rounded-sm border border-brand-light px-3 py-2 cursor-not-allowed no-underline">&laquo;</span>
