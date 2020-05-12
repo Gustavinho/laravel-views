@@ -8,6 +8,14 @@
       ])
       @endcomponent
     </div>
+    {{-- <div class="flex-1">
+      <div class="relative text-left mb-4">
+        <input type="text" class="pr-12 appearance-none w-full bg-white border-gray-400 hover:border-gray-500 px-4 py-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-600 focus:border-2 border" placeholder="Search by name...">
+        <div class="absolute right-0 top-0 mt-3 mr-4 text-purple-lighter">
+          <i data-feather="search" class="text-gray-400"></i>
+        </div>
+      </div>
+    </div> --}}
   @endif
 
   @if (isset($filtersViews) && $filtersViews)
