@@ -37,7 +37,8 @@
         @foreach ($filtersViews as $filter)
           <div class="px-4">
             @include('laravel-views::' . $filter->view, [
-            'view' => $filter
+            'view' => $filter,
+            'filter' => $filter,
             ])
           </div>
         @endforeach

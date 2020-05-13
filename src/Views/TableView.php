@@ -2,16 +2,16 @@
 
 namespace Gustavinho\LaravelViews\Views;
 
-use Gustavinho\LaravelViews\Actions\Action;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
 
 class TableView extends View
 {
     use WithPagination;
 
-    protected $updatesQueryString = ['search', 'filters'];
+    protected $updatesQueryString = [
+        'search' => ['except' => ''],
+        'filters'
+    ];
 
     /** Component name */
     protected $view = 'table';
@@ -43,13 +43,9 @@ class TableView extends View
     /** @var Array<String> $searchBy All fileds to search */
     public $searchBy;
 
-    /** @var Array<Action> $actionsByRow All actions by row customized in the child class */
-    // public $actionsByRow;
-
     public function hydrate()
     {
         $this->filtersViews = $this->filters();
-        // $this->actionsByRow = $this->actionsByRow();
     }
 
     public function mount()
@@ -57,8 +53,7 @@ class TableView extends View
         $this->headers = $this->headers();
         $this->search = request()->query('search', $this->search);
         $this->filtersViews = $this->filters();
-        $this->filters = request()->query('filters', $this->filters);
-        //$this->actionsByRow = $this->actionsByRow();
+        $this->filters = $this->getFiltersFromQueryString();
     }
 
     /**
@@ -67,6 +62,7 @@ class TableView extends View
      */
     protected function getRenderData()
     {
+        /* dd($this->filters); */
         return [
             'items' => $this->getItems(),
             'actionsByRow' => $this->actionsByRow()
@@ -149,6 +145,32 @@ class TableView extends View
 
         return $this;
     }
+
+    /**
+     * Casts all boolean values of the querystring from string to boolean
+     * this is needed to set the boolean filter values properly
+     */
+    private function getFiltersFromQueryString()
+    {
+        $filters = request()->query('filters', $this->filters);
+
+        return collect($filters)->map(function ($filter) {
+            /** If is an array that means it came from a boolean filter */
+            if (is_array($filter)) {
+                foreach ($filter as $option => $checked) {
+                    /** Casts from string to boolean */
+                    $filter[$option] = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
+                }
+            }
+
+            return $filter;
+        })->toArray();
+    }
+
+    /**
+     * LIVEWIERE ACTIONS ARE HERE
+     * All these actions are executed from the UI and those aren't for internal use
+     */
 
     public function executeAction($action, $id)
     {

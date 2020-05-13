@@ -14,7 +14,7 @@ class BooleanFilter extends BaseFilter
         $valuesToFilter = [];
 
         foreach ($options as $option) {
-            if (isset($values[$option]) && $values[$option]) {
+            if (isset($values[$option]) && filter_var($values[$option], FILTER_VALIDATE_BOOLEAN)) {
                 $valuesToFilter[$option] = true;
             } else {
                 $valuesToFilter[$option] = false;
@@ -22,5 +22,12 @@ class BooleanFilter extends BaseFilter
         }
 
         return $valuesToFilter;
+    }
+
+    public function isChecked($option)
+    {
+        $values = $this->value();
+
+        return isset($values[$option]) && $values[$option];
     }
 }

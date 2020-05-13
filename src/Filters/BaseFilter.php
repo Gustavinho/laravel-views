@@ -26,6 +26,11 @@ class BaseFilter
                 $value = $filters[$this->id];
                 if ($value != "" && $value != null) {
                     $selected = $value;
+                    if (is_array($selected)) {
+                        foreach ($selected as $key => $value) {
+                            $selected[$key] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+                        }
+                    }
                 }
             }
         }
@@ -33,6 +38,11 @@ class BaseFilter
         return [
             'selected' => $selected
         ];
+    }
+
+    public function value()
+    {
+        return $this->selected()['selected'];
     }
 
     /**
