@@ -4,7 +4,7 @@ namespace Gustavinho\LaravelViews\Views;
 
 use Livewire\WithPagination;
 
-class TableView extends View
+abstract class TableView extends View
 {
     use WithPagination;
 
@@ -73,6 +73,7 @@ class TableView extends View
      * Returns the itmes from the database regarding to the filters selected by the user
      * applies the search query, the filters uesed and the total of items found
      */
+    // TODO: Move this querybuilding to another class
     private function getItems()
     {
         $query = $this->repository();
@@ -102,6 +103,7 @@ class TableView extends View
      *
      * @param $query Object Current query created by the filters
      */
+    // TODO: Move this query builing to another class
     private function searchItem($query)
     {
         if ($this->search) {
@@ -127,6 +129,8 @@ class TableView extends View
      *
      * @param $query Object Current query created by the filters
      */
+
+     // TODO: Move this query builing to another class
     private function applyFilters($query)
     {
         $filtersFromRequest = $this->filters;
@@ -150,6 +154,7 @@ class TableView extends View
      * Casts all boolean values of the querystring from string to boolean
      * this is needed to set the boolean filter values properly
      */
+    // TODO: Move this query string caster to another class
     private function getFiltersFromQueryString()
     {
         $filters = request()->query('filters', $this->filters);
@@ -193,5 +198,15 @@ class TableView extends View
     public function flushMessage()
     {
         session()->forget('message');
+    }
+
+    protected function filters()
+    {
+        return [];
+    }
+
+    protected function actionsByRow()
+    {
+        return [];
     }
 }

@@ -27,7 +27,7 @@
         class="bg-gray-200 hover:bg-gray-400 active:bg-gray-400 focus:bg-gray-400 py-2 px-4 rounded focus:outline-none shadow"
         @click="open = true"
       >
-        Filtros {{ count($filters) ? "(" . count($filters) . ")" : ''}}
+        Filters {{ count($filters) ? "(" . count($filters) . ")" : ''}}
       </button>
 
       <div
