@@ -3,6 +3,10 @@
 namespace Gustavinho\LaravelViews;
 
 use Gustavinho\LaravelViews\Console\FilterMakeCommand;
+use Gustavinho\LaravelViews\Data\Contracts\Filterable;
+use Gustavinho\LaravelViews\Data\Contracts\Searchable;
+use Gustavinho\LaravelViews\Data\TableViewFilterData;
+use Gustavinho\LaravelViews\Data\TableViewSearchData;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -28,6 +32,9 @@ class LaravelViewsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind(Searchable::class, TableViewSearchData::class);
+        $this->app->bind(Filterable::class, TableViewFilterData::class);
+
         $this->loadViews()
             ->loadCommands()
             ->publish();

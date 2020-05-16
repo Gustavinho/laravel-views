@@ -2,6 +2,9 @@
 
 namespace Gustavinho\LaravelViews\Views;
 
+use Gustavinho\LaravelViews\Data\Contracts\Filterable;
+use Gustavinho\LaravelViews\Data\Contracts\Searchable;
+use Gustavinho\LaravelViews\Data\QueryStringData;
 use Livewire\WithPagination;
 
 abstract class TableView extends View
@@ -22,12 +25,6 @@ abstract class TableView extends View
      */
     protected $paginate = 20;
 
-    /**
-     * (Override) Headers to be showed on every coulumn
-     * @var Array $headers
-     */
-    public $headers;
-
     /** @var int $total Total of items found */
     public $total = 0;
 
@@ -38,7 +35,7 @@ abstract class TableView extends View
     public $filters = [];
 
     /** @var Array<BaseFilter> $filtersViews All filters customized in the child class */
-    public $filtersViews;
+    private $filtersViews;
 
     /** @var Array<String> $searchBy All fileds to search */
     public $searchBy;
@@ -48,12 +45,11 @@ abstract class TableView extends View
         $this->filtersViews = $this->filters();
     }
 
-    public function mount()
+    public function mount(QueryStringData $queryStringData)
     {
-        $this->headers = $this->headers();
-        $this->search = request()->query('search', $this->search);
         $this->filtersViews = $this->filters();
-        $this->filters = $this->getFiltersFromQueryString();
+        $this->search = $queryStringData->getSearchValue($this->search);
+        $this->filters = $queryStringData->getFilterValues($this->filters);
     }
 
     /**
@@ -64,6 +60,7 @@ abstract class TableView extends View
     {
         /* dd($this->filters); */
         return [
+            'headers' => $this->headers(),
             'items' => $this->getItems(),
             'actionsByRow' => $this->actionsByRow()
         ];
@@ -77,99 +74,16 @@ abstract class TableView extends View
     private function getItems()
     {
         $query = $this->repository();
+        $searchable = app(Searchable::class);
+        $filterable = app(Filterable::class);
 
-        $this->searchItem($query)
-            ->applyFilters($query)
-            ->updateTotal($query);
+        $query = $searchable->searchItems($query, $this->searchBy, $this->search);
+        $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
 
-        return $query->paginate($this->paginate);
-    }
-
-    /**
-     * Updates the total items found with the currect query
-     *
-     * @param $query Object Current query created by the filters
-     */
-    private function updateTotal($query)
-    {
+        /** Updates the total items found with the currect query */
         $this->total = $query->count();
 
-        return $this;
-    }
-
-    /**
-     * Searchs an item by a query value, this search is executed when some filter or
-     * the search value is changed
-     *
-     * @param $query Object Current query created by the filters
-     */
-    // TODO: Move this query builing to another class
-    private function searchItem($query)
-    {
-        if ($this->search) {
-            $fields = $this->searchBy;
-            $value = $this->search;
-
-            if ($value) {
-                foreach ($fields as $field) {
-                    if ($field === reset($fields)) {
-                        $query->where($field, 'like', "%{$value}%");
-                    } else {
-                        $query->orWhere($field, 'like', "%{$value}%");
-                    }
-                }
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Applies every filter customized in the child class
-     *
-     * @param $query Object Current query created by the filters
-     */
-
-     // TODO: Move this query builing to another class
-    private function applyFilters($query)
-    {
-        $filtersFromRequest = $this->filters;
-        if ($filtersFromRequest && is_array($filtersFromRequest) && count($filtersFromRequest) > 0) {
-            foreach ($this->filters() as $filter) {
-                if (isset($filtersFromRequest[$filter->id])) {
-                    /** Applies some transformation bwtween url query and filter class created */
-                    $value = $filter->passValuesFromRequestToFilter($filtersFromRequest[$filter->id]);
-
-                    if ($value != "") {
-                        $filter->apply($query, $value, request());
-                    }
-                }
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Casts all boolean values of the querystring from string to boolean
-     * this is needed to set the boolean filter values properly
-     */
-    // TODO: Move this query string caster to another class
-    private function getFiltersFromQueryString()
-    {
-        $filters = request()->query('filters', $this->filters);
-
-        return collect($filters)->map(function ($filter) {
-            /** If is an array that means it came from a boolean filter */
-            if (is_array($filter)) {
-                foreach ($filter as $option => $checked) {
-                    /** Casts from string to boolean */
-                    $filter[$option] = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
-                }
-            }
-
-            return $filter;
-        })->toArray();
+        return $query->paginate($this->paginate);
     }
 
     /**
