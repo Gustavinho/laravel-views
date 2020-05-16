@@ -20,7 +20,6 @@ jobs:
         composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --dev
     - name: Create Database
       run: |
-        ls
         ls vendor
         mkdir -p database
         touch database/database.sqlite
