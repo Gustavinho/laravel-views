@@ -81,7 +81,7 @@ class TableViewTest extends TestCase
     private function assertSeeUsers($livewire, $users, $assert = 'assertSee')
     {
         foreach ($users as $user) {
-            $livewire->$assert($user->name)
+            $livewire->$assert(htmlspecialchars_decode($user->name))
                 ->$assert($user->email);
         }
 

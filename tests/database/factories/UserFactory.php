@@ -19,7 +19,7 @@ use Gustavinho\LaravelViews\Test\Database\UserTest;
 
 $factory->define(UserTest::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => str_replace("'", "", $faker->name),
         'email' => $faker->unique()->safeEmail,
         'is_admin' => $faker->randomElement([true, false]),
         'is_writer' => $faker->randomElement([true, false]),
