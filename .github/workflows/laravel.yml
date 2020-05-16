@@ -17,8 +17,7 @@ jobs:
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
       run: |
-        composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-        composer require phpunit/phpunit
+        composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --dev
     - name: Create Database
       run: |
         mkdir -p database
