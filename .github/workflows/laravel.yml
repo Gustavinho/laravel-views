@@ -18,6 +18,8 @@ jobs:
     - name: Install Dependencies
       run: |
         composer install
+        mkdir vendor/orchestra/testbench-core/laravel/app/Http
+        mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
     - name: Create Database
       run: |
         ls vendor
