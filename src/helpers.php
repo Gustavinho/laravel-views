@@ -13,7 +13,6 @@ function avatar($src)
     ]);
 }
 
-
 function badge($title, $type = 'info')
 {
     $types = ['success' => 'green', 'danger' => 'red', 'warning' => 'yellow', 'info' => 'blue', 'default' => 'gray'];
@@ -22,4 +21,20 @@ function badge($title, $type = 'info')
         'title' => $title,
         'type' => $types[$type]
     ]);
+}
+
+function attributes($attributes = null)
+{
+    $attributesStr = '';
+    if ($attributes) {
+        foreach ($attributes as $attribute => $attrValue) {
+            if ($attribute) {
+                $attributesStr .= "$attribute = $attrValue ";
+            } else {
+                $attributesStr .= $attrValue . ' ';
+            }
+        }
+    }
+
+    return $attributesStr;
 }

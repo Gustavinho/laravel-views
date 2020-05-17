@@ -13,14 +13,6 @@
     @endif
     wire:model="{{ $model ?? '' }}"
 
-    @if (isset($attributes))
-      @foreach ($attributes as $attribute => $attrValue)
-        @if ($attribute)
-          {{ $attribute }} = "{{ $attrValue }}"
-        @else
-          {{ $attrValue }}
-        @endif
-      @endforeach
-    @endif
+    {{-- {{ attributes($attributes ?? null) }} --}}
   >
 </div>

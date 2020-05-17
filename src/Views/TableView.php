@@ -35,7 +35,7 @@ abstract class TableView extends View
     public $filters = [];
 
     /** @var Array<BaseFilter> $filtersViews All filters customized in the child class */
-    private $filtersViews;
+    public $filtersViews;
 
     /** @var Array<String> $searchBy All fileds to search */
     public $searchBy;
@@ -58,7 +58,6 @@ abstract class TableView extends View
      */
     protected function getRenderData()
     {
-        /* dd($this->filters); */
         return [
             'headers' => $this->headers(),
             'items' => $this->getItems(),
@@ -84,6 +83,16 @@ abstract class TableView extends View
         $this->total = $query->count();
 
         return $query->paginate($this->paginate);
+    }
+
+    protected function filters()
+    {
+        return [];
+    }
+
+    protected function actionsByRow()
+    {
+        return [];
     }
 
     /**
@@ -114,13 +123,13 @@ abstract class TableView extends View
         session()->forget('message');
     }
 
-    protected function filters()
+    public function clearFilters()
     {
-        return [];
+        $this->filters = [];
     }
 
-    protected function actionsByRow()
+    public function clearSearch()
     {
-        return [];
+        $this->search = '';
     }
 }

@@ -80,6 +80,24 @@ class TableViewTest extends TestCase
 
     // TODO: Test flush message
 
+    public function testClearFilters()
+    {
+        Livewire::test(MockTableViewWithSearchAndFilters::class)
+            ->set('filters', [
+                'active-users-filter' => 1
+            ])
+            ->call('clearFilters')
+            ->assertSet('filters', []);
+    }
+
+    public function testClearSearch()
+    {
+        Livewire::test(MockTableViewWithSearchAndFilters::class)
+            ->set('search', 'my-custom-search')
+            ->call('clearSearch')
+            ->assertSet('search', '');
+    }
+
     private function assertSeeUsers($livewire, $users, $assert = 'assertSee')
     {
         foreach ($users as $user) {

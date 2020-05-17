@@ -1,7 +1,4 @@
-<div
-  class="min-w-full shadow-md overflow-hidden sm:rounded-lg bg-white relative"
-  x-init="feather.replace()"
->
+<div class="min-w-full shadow-md overflow-hidden sm:rounded-lg bg-white relative">
   <div class="p-4 pb-0">
     @include('laravel-views::filters')
   </div>
