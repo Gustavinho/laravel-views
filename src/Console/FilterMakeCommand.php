@@ -44,14 +44,14 @@ class FilterMakeCommand extends GeneratorCommand
     protected function getStub()
     {
         $type = $this->option('type');
-        $stub = 'Filter';
+        $stub = 'filter';
 
         if ($type == 'boolean') {
-            $stub = 'BooleanFilter';
+            $stub = 'boolean-filter';
         }
 
         if ($type == 'date') {
-            $stub = 'DateFilter';
+            $stub = 'date-filter';
         }
 
         return __DIR__ . "/../../stubs/{$stub}.stub";
