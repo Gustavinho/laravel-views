@@ -36,6 +36,9 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         $this->app->bind(Searchable::class, TableViewSearchData::class);
         $this->app->bind(Filterable::class, TableViewFilterData::class);
+        $this->app->bind('laravel-views', function () {
+            return new LaravelViews();
+        });
 
         $this->loadViews()
             ->loadCommands()
