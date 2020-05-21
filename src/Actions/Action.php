@@ -45,5 +45,5 @@ abstract class Action
         return true;
     }
 
-    abstract public function execute($item, $id);
+    abstract public function handle($item);
 }

@@ -110,8 +110,9 @@ abstract class TableView extends View
 
         if ($actionToExecute) {
             $item = $this->repository()->find($id);
-            $actionToExecute->execute($item, $id);
-            session()->flash('message', $actionToExecute->messages($item)['sucess']);
+            $actionToExecute->handle($item);
+
+            session()->flash('message', $actionToExecute->messages($item)['success']);
         }
     }
 

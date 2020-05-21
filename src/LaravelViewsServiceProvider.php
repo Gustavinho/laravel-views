@@ -2,6 +2,7 @@
 
 namespace Gustavinho\LaravelViews;
 
+use Gustavinho\LaravelViews\Console\ActionMakeCommand;
 use Gustavinho\LaravelViews\Console\FilterMakeCommand;
 use Gustavinho\LaravelViews\Data\Contracts\Filterable;
 use Gustavinho\LaravelViews\Data\Contracts\Searchable;
@@ -61,7 +62,8 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                FilterMakeCommand::class
+                FilterMakeCommand::class,
+                ActionMakeCommand::class
             ]);
         }
 

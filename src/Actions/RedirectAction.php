@@ -15,7 +15,7 @@ class RedirectAction extends Action
         $this->to = $to;
     }
 
-    public function execute($item, $id)
+    public function handle($item)
     {
     }
 }

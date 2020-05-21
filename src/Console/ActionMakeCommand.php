@@ -3,38 +3,29 @@
 namespace Gustavinho\LaravelViews\Console;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\InputOption;
 
-class FilterMakeCommand extends GeneratorCommand
+class ActionMakeCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'make:filter';
+    protected $name = 'make:action';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:filter {name} {--type=select}';
+    protected $signature = 'make:action {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new laravel-views Filter class';
-
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $type = 'Filter';
+    protected $description = 'Create a new laravel-views Action class';
 
     /**
      * Get the stub file for the generator.
@@ -43,18 +34,7 @@ class FilterMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        $type = $this->option('type');
-        $stub = 'Filter';
-
-        if ($type == 'boolean') {
-            $stub = 'BooleanFilter';
-        }
-
-        if ($type == 'date') {
-            $stub = 'DateFilter';
-        }
-
-        return __DIR__ . "/../../stubs/{$stub}.stub";
+        return __DIR__ . "/../../stubs/action.stub";
     }
 
     /**
