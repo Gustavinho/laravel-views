@@ -42,7 +42,8 @@ class LaravelViewsServiceProvider extends ServiceProvider
 
         $this->loadViews()
             ->loadCommands()
-            ->publish();
+            ->publish()
+            ->bladeDirectives();
     }
 
     private function publish()
@@ -51,13 +52,14 @@ class LaravelViewsServiceProvider extends ServiceProvider
             __DIR__.'/../public/app.js' => public_path('vendor/laravel-views.js'),
             __DIR__.'/../public/app.css' => public_path('vendor/laravel-views.css'),
         ], 'public');
+        // php artisan vendor:publish --tag=public --force
 
         return $this;
     }
 
     private function loadViews()
     {
-        $this->loadViewsFrom(__DIR__.'/blade-views', 'laravel-views');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-views');
 
         return $this;
     }
@@ -71,6 +73,20 @@ class LaravelViewsServiceProvider extends ServiceProvider
                 TableViewMakeCommand::class
             ]);
         }
+
+        return $this;
+    }
+
+    private function bladeDirectives()
+    {
+        $laravelViews = new LaravelViews;
+        Blade::directive('laravelViewsStyles', function () use ($laravelViews) {
+            return $laravelViews->css();
+        });
+
+        Blade::directive('laravelViewsScripts', function () use ($laravelViews) {
+            return $laravelViews->js();
+        });
 
         return $this;
     }

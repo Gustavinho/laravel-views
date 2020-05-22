@@ -39,6 +39,16 @@ class LaravelViews
         return $this;
     }
 
+    public function css()
+    {
+        return view("laravel-views::core.css")->render();
+    }
+
+    public function js()
+    {
+        return view("laravel-views::core.js")->render();
+    }
+
     public function render()
     {
         $bladeFile = ($this->layout && $this->section) ? 'render-in-layout' : 'render';
