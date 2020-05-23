@@ -15,6 +15,7 @@ env:
 
 php:
   - 7.2
+  - 7.3
 
 matrix:
   fast_finish: true
