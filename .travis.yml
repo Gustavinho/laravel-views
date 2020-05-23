@@ -3,7 +3,7 @@ anguage: php
 env:
   global:
     - DB_CONNECTION=sqlite
-    - DB_DATABASE=database/database.sqlite
+    - DB_DATABASE=":memory:"
     - APP_ENV=testing
 
 php:
