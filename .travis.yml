@@ -1,7 +1,7 @@
 anguage: php
 
 php:
-  - 7.1
+  - 7.2
 matrix:
   fast_finish: true
 
