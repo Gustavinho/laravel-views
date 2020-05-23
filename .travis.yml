@@ -1,0 +1,34 @@
+anguage: php
+
+env:
+  global:
+    - DB_CONNECTION=sqlite
+    - DB_DATABASE=":memory:"
+    - APP_ENV=testing
+  matrix:
+    - LARAVEL='5.5.*' TESTBENCH='3.5.*'
+    - LARAVEL='5.6.*' TESTBENCH='3.6.*'
+    - LARAVEL='5.7.*' TESTBENCH='3.7.*'
+    - LARAVEL='5.8.*' TESTBENCH='3.8.*'
+    - LARAVEL='6.*' TESTBENCH='4.*'
+    - LARAVEL='7.*' TESTBENCH='5.*'
+
+php:
+  - 7.2
+  - 7.3
+
+matrix:
+  fast_finish: true
+
+before_script:
+  - composer config discard-changes true
+  - mkdir vendor/orchestra/testbench-core/laravel/app/Http
+  - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
+before_install:
+  - travis_retry composer self-update
+  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-interaction --no-update
+install:
+  - travis_retry composer install --prefer-dist --no-interaction --no-suggest
+script:
+  - phpunit --testdox
+

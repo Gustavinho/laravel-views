@@ -16,8 +16,8 @@ class TestCase extends TestbenchTestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-        $this->withFactories(__DIR__.'/database/factories');
+        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+        $this->withFactories(__DIR__.'/Database/factories');
 
         // and other test setup steps you need to perform
     }
