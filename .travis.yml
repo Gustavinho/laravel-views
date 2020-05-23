@@ -9,6 +9,7 @@ env:
     - LARAVEL='5.5.*' TESTBENCH='3.5.*'
 
 php:
+  - 7.1
   - 7.2
 
 matrix:
