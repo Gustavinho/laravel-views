@@ -1,7 +1,13 @@
 anguage: php
 
+env:
+  - DB_CONNECTION=sqlite
+  - DB_DATABASE=database/database.sqlite
+  - APP_ENV=testing
+
 php:
   - 7.2
+
 matrix:
   fast_finish: true
 
@@ -10,7 +16,8 @@ before_script:
   - travis_retry composer install --prefer-source --no-interaction
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
-
+  - mkdir -p database
+   - touch database/database.sqlite
 script:
   - phpunit
-  
+
