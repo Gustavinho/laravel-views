@@ -20,6 +20,11 @@ php:
 matrix:
   fast_finish: true
 
+branches:
+  only:
+  - master
+  - dev
+
 before_script:
   - composer config discard-changes true
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http
