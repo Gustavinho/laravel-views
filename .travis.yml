@@ -6,10 +6,7 @@ env:
     - DB_DATABASE=":memory:"
     - APP_ENV=testing
   matrix:
-    - LARAVEL_VERSION=5.5.*
-    - LARAVEL_VERSION=5.6.*
-    - LARAVEL_VERSION=5.7.*
-    - LARAVEL_VERSION=5.8.*
+    - LARAVEL='5.5.*' TESTBENCH='3.5.*'
 
 php:
   - 7.2
@@ -18,12 +15,14 @@ matrix:
   fast_finish: true
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --prefer-source --no-interaction
-  - if [ "$LARAVEL_VERSION" != "" ]; then composer require --dev "laravel/laravel:${LARAVEL_VERSION}" --no-update; fi;
-  - composer update
+  - composer config discard-changes true
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
+before_install:
+  - travis_retry composer self-update
+  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-interaction --no-update
+install:
+  - travis_retry composer install --prefer-dist --no-interaction --no-suggest
 script:
   - phpunit --testdox
 
