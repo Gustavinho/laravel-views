@@ -5,10 +5,11 @@ env:
     - DB_CONNECTION=sqlite
     - DB_DATABASE=":memory:"
     - APP_ENV=testing
-  - LARAVEL_VERSION=5.5.*
-  - LARAVEL_VERSION=5.6.*
-  - LARAVEL_VERSION=5.7.*
-  - LARAVEL_VERSION=5.8.*
+  matrix:
+    - LARAVEL_VERSION=5.5.*
+    - LARAVEL_VERSION=5.6.*
+    - LARAVEL_VERSION=5.7.*
+    - LARAVEL_VERSION=5.8.*
 
 php:
   - 7.2
