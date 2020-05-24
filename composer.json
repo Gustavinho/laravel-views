@@ -1,6 +1,6 @@
 {
-    "name": "gustavinho/laravel-views",
-    "description": "My awesome Laravel package",
+    "name": "laravel-views/laravel-views",
+    "description": "Laravel package to create beautiful common views like tables using only PHP code",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -21,5 +21,17 @@
     "require-dev": {
         "phpunit/phpunit": "6.0.*|7.0.*|8.5.*",
         "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|4.*|5.*"
-    }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gustavinho\\LaravelViews\\LaravelViewsServiceProvider"
+            ],
+            "aliases": {
+                "LaravelViews": "Gustavinho\\LaravelViews\\Facades\\LaravelViews"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
