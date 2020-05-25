@@ -41,12 +41,14 @@ class LaravelViews
 
     public function css()
     {
-        return view("laravel-views::core.css")->render();
+        // return view("laravel-views::core.css")->render();
+        return '<link rel="stylesheet" href="http://test-packages.test/vendor/laravel-views.css" />';
     }
 
     public function js()
     {
-        return view("laravel-views::core.js")->render();
+        // return view("laravel-views::core.js")->render();
+        return '<script src="http://test-packages.test/vendor/laravel-views.js" type="text/javascript"></script>';
     }
 
     public function render()

@@ -1,2 +1,1 @@
-@livewireStyles
-<link rel="stylesheet" href="{{ asset('/vendor/laravel-views.css') }}">
+<link rel="stylesheet" href="{{ asset('/vendor/laravel-views.css') }}" />
