@@ -13,8 +13,19 @@ class LaravelViewsTest extends TestCase
 
         $this->assertEquals(
             $css,
-            '<style>[wire\:loading] {display: none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}</style>
-<link rel="stylesheet" href="http://localhost/vendor/laravel-views.css">'
+            \Livewire\Livewire::styles()."\n".
+            '<link rel="stylesheet" href="http://test-packages.test/vendor/laravel-views.css" />'
+        );
+    }
+
+    public function testRenderJsLinks()
+    {
+        $js = LaravelViews::js();
+
+        $this->assertEquals(
+            $js,
+            \Livewire\Livewire::scripts()."\n".
+            '<script src="http://test-packages.test/vendor/laravel-views.js" type="text/javascript"></script>'
         );
     }
 }

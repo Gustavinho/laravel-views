@@ -13,6 +13,6 @@
     @endif
     wire:model="{{ $model ?? '' }}"
 
-    {{-- {{ attributes($attributes ?? null) }} --}}
+    {!! $attributes ?? null !!}
   >
 </div>

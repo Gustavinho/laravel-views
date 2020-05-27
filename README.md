@@ -35,7 +35,10 @@ Add the following Blade directives in the *head* tag, and before the end *body* 
 </body>
 </html>
 ```
-These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) styles and scripts
+These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) styles and scripts, after that maybe you will need to clear the view cache
+```bash
+php artisan view:clear
+```
 
 ## First table view
 Once you have installed the package and included the assets you can start to create a basic table view.
