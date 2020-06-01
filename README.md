@@ -53,7 +53,7 @@ php artisan view:clear
 ```
 
 # First table view
-This is a basic usage of a table view, you can [read the full table view documentation ](#doc/table-view)
+This is a basic usage of a table view, you can [read the full table view documentation ](doc/table-view.md)
 
 
 Once you have installed the package and included the assets you can start to create a basic table view.
@@ -81,25 +81,14 @@ class UsersTableView extends TableView
 
     public function headers(): array
     {
-        return [
-          'Name',
-          'Email'
-          'Created',
-          'Updated'
-        ];
+        return ['Name', 'Email' 'Created', 'Updated'];
     }
 
     public function row($model)
     {
-        return [
-            $model->name,
-            $model->email,
-            $model->created_at,
-            $model->updated_at
-        ];
+        return [$model->name, $model->email, $model->created_at, $model->updated_at];
     }
 }
-
 ```
 
 ## Rendering the table view
@@ -114,7 +103,7 @@ In the exaple above the view is using the User model created by default in every
 
 This is the basic usage of the table view, but you can customize it with more features.
 
-[Read the full table view documentation ](#doc/table-view)
+[Read the full table view documentation ](doc/table-view.md)
 
 # Rendering a view
 
