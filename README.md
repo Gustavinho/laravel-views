@@ -1,9 +1,21 @@
 # Laravel views
 
-Laravel package to create beautiful common views like tables using only PHP code, these views are built with [Laravel livewire](https://laravel-livewire.com/) and styled using [Tailwind css](https://tailwindcss.com/)
+Laravel package to create beautiful common views like tables using only PHP code, inspired by [Laravel Nova](https://nova.laravel.com/), these views are built with [Laravel Livewire](https://laravel-livewire.com/) and styled using [Tailwind CSS](https://tailwindcss.com/)
 
-## Table view example
+## Table View example
+
 ![](doc/table.png)
+
+- [Installation and basic usage](#installation-and-basic-usage)
+    - [Installing laravel views](#installing-laravel-views)
+    - [Publishing assets](#publishing-assets)
+    - [Including assets](#including-assets)
+- [First table view](#first-table-view)
+    - [Rendering the table view](#rendering-the-table-view)
+- [Rendering a view](#rendering-a-view)
+    - [From a controller](#from-a-controller)
+    - [Specifying a layout and section](#specifying-a-layout-and-section)
+    - [Send extra data](send-extra-data)
 
 # Installation and basic usage
 
@@ -40,12 +52,17 @@ These blade directives are also including [Laravel livewire](https://laravel-liv
 php artisan view:clear
 ```
 
-## First table view
+# First table view
+This is a basic usage of a table view, you can [read the full table view documentation ](#doc/table-view)
+
+
 Once you have installed the package and included the assets you can start to create a basic table view.
 ```bash
 php artisan make:table-view UsersTableView
 ```
-With this artisan command a UsersTableView.php file will be created inside `app/Views` with this content
+With this artisan command a UsersTableView.php file will be created inside `app/Livewire` directory.
+
+The basic usage needs a data repository (Eloquent query), headers and rows, you can customize the items to be showed, the headers and the data for each row like this example
 ```php
 <?php
 
@@ -53,63 +70,9 @@ namespace App\Views;
 
 use Gustavinho\LaravelViews\Views\TableView;
 use Illuminate\Database\Eloquent\Builder;
-
-class UsersTableView extends TableView
-{
-    public function repository(): Builder
-    {
-    }
-
-    public function headers(): array
-    {
-        return [];
-    }
-
-    public function row($model)
-    {
-        return [];
-    }
-}
-
-```
-With this class you can customize the behavior of your table view.
-
-## Rendering the table view
-The easiest way to render the view is directly in a blade file
-```blade
-{!! LaravelViews::create(App\Views\UsersTableView::class)->render !!}
-```
-
-But also you can inject a `LaravelViews` instance as a dependency in your controller
-```php
-public function index(LaravelViews $laravelViews)
-{
-    $laravelViews->create(App\Views\UsersTableView::class);
-
-    return view('my-view', [
-      'view' => $laravelViews
-    ]);
-}
-```
-Then in your blade file
-```blade
-{!! $view->render() !!}
-```
-At this point you would be able to see a empty table view
-
-## Adding data
-
-The basic usage needs a data repository (Eloquent query), headers and rows, try adding some data like this example
-```php
-<?php
-
-namespace DummyNamespace;
-
-use Gustavinho\LaravelViews\Views\TableView;
-use Illuminate\Database\Eloquent\Builder;
 use App\User;
 
-class DummyClass extends TableView
+class UsersTableView extends TableView
 {
     public function repository(): Builder
     {
@@ -138,14 +101,73 @@ class DummyClass extends TableView
 }
 
 ```
-In the exaple above the view is using the User model created by default in every Laravel project, feel free to use any model you have, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model
+
+## Rendering the table view
+The easiest way to render the view is using the facade directly with a blade file
+```blade
+{!! LaravelViews::create(App\Views\UsersTableView::class)->render() !!}
+```
+
+At this point you would be able to see a table with some data
+
+In the exaple above the view is using the User model created by default in every Laravel project, feel free to use any model you have, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model.
 
 This is the basic usage of the table view, but you can customize it with more features.
 
-See a site demo here
+[Read the full table view documentation ](#doc/table-view)
 
+# Rendering a view
 
+## From a controller
+
+The easiest way to render a view is using the facade directly on the blade file as the example above,
+but it is a better practice if you inject a `LaravelViews` instance as a dependency in your controller.
+
+```php
+use use Gustavinho\LaravelViews\LaravelViews;
+
+public function index(LaravelViews $laravelViews)
+{
+    $laravelViews->create(App\Views\UsersTableView::class);
+
+    return view('my-view', [
+      'view' => $laravelViews
+    ]);
+}
+```
+And render it in your blade file
+```blade
+{!! $view->render() !!}
+```
+
+## Specifying a layout and section
+You can also return the view directly from your controller and specify the layout and section of your layout
+```php
+use use Gustavinho\LaravelViews\LaravelViews;
+
+public function index(LaravelViews $laravelViews)
+{
+    $laravelViews->create(App\Views\UsersTableView::class)
+      ->layout('layout', 'section-name');
+
+    return $laravelViews->render();
+}
+```
+
+## Send extra data
+Same as you usually send data to your views, you can send more data to the layout file
+```php
+use use Gustavinho\LaravelViews\LaravelViews;
+
+public function index(LaravelViews $laravelViews)
+{
+    $laravelViews->create(App\Views\UsersTableView::class)
+      ->layout('layout', 'section-name', [
+        'title' => 'My layout title'
+      ]);
+
+    return $laravelViews->render();
+}
+```
 
 php artisan make:filter Views/CivilAssociations/ActiveFilter
-
-php artisan vendor:publish --tag=public --force
