@@ -6,10 +6,10 @@
   </div>
 
   {{-- Success feedback --}}
-  @if (session()->has('message'))
+  @if (!session()->has('message'))
     @component('laravel-views::components.alert', [
-      'message' => session('message'),
-      'onClose' => 'flushMessage'
+      'message' => 'This is the succes message to enhance the UI',
+      'onClose' => 'flushMessage',
     ])
     @endcomponent
   @endif
