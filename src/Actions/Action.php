@@ -12,6 +12,11 @@ abstract class Action
 
     public $id;
 
+    private $messages = [
+        'success' => 'Action was executed successfully',
+        'error' => 'There was an error executing this action',
+    ];
+
     public function __construct()
     {
         $this->id = $this->getId();
@@ -20,14 +25,6 @@ abstract class Action
     public function isRedirect()
     {
         return get_class($this) === RedirectAction::class;
-    }
-
-    public function messages($item)
-    {
-        return [
-            'success' => 'Action was executed successfully',
-            'error' => 'There was an error executing this action',
-        ];
     }
 
     public function getId()
@@ -43,6 +40,22 @@ abstract class Action
     public function renderIf($item)
     {
         return true;
+    }
+
+    public function success($message = null)
+    {
+        $this->setMessage('success', $message);
+    }
+
+    public function error($message = null)
+    {
+        $this->setMessage('error', $message);
+    }
+
+    private function setMessage($type = 'success', $message = null)
+    {
+        session()->flash('messageType', $type);
+        session()->flash('message', $message ? $message : $this->messages[$type]);
     }
 
     abstract public function handle($item);

@@ -2,6 +2,7 @@
 
 namespace Gustavinho\LaravelViews\Views;
 
+use Exception;
 use Gustavinho\LaravelViews\Data\Contracts\Filterable;
 use Gustavinho\LaravelViews\Data\Contracts\Searchable;
 use Gustavinho\LaravelViews\Data\QueryStringData;
@@ -110,9 +111,8 @@ abstract class TableView extends View
 
         if ($actionToExecute) {
             $item = $this->repository()->find($id);
-            $actionToExecute->handle($item);
 
-            session()->flash('message', $actionToExecute->messages($item)['success']);
+            return $actionToExecute->handle($item);
         }
     }
 
@@ -122,6 +122,7 @@ abstract class TableView extends View
     public function flushMessage()
     {
         session()->forget('message');
+        session()->forget('messageType');
     }
 
     public function clearFilters()

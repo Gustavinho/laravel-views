@@ -1,8 +1,8 @@
 @php
   $alerts = [
-    'success' => ['color' => 'green', 'icon' => 'check'],
-    'warning' => ['color' => 'yellow', 'icon' => 'alert-circle'],
-    'error' => ['color' => 'red', 'icon' => 'x']
+    'success' => ['color' => 'green', 'icon' => 'check', 'title' => 'Success'],
+    'warning' => ['color' => 'yellow', 'icon' => 'alert-circle', 'title' => 'Warning'],
+    'error' => ['color' => 'red', 'icon' => 'x', 'title' => 'Error']
   ];
   $alertType = isset($type) ? $type : 'success';
   $color = $alerts[$alertType]['color'];
@@ -15,7 +15,9 @@
   </div>
 
   <div class="flex-1">
-    <b class="text-{{ $color }}-900 font-semibold">Success!</b>
+    <b class="text-{{ $color }}-900 font-semibold">
+      {{ $alerts[$alertType]['title'] }}!
+    </b>
     <p class="text-sm">{{ $message }}</p>
   </div>
 

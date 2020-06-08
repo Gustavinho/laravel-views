@@ -13,6 +13,7 @@
 - [Actions](#actions)
     - [Registering actions](#registering-actions)
     - [Redirect action](#redirect-action)
+    - [Showing alert messages](#showing-alert-messages)
 
 # Table view
 
@@ -212,3 +213,25 @@ protected function actionsByRow()
 }
 ```
 The first param is the name of the route to be redirected, it is important to be a named route, the `RedirectAction` will inject the model id to that route
+
+## Showing alert messages
+To display a success alert message you can execute the `$this->succes()` at the end of the handle method, a default message will be displayed once the action is executed
+
+```php
+public function handle($model)
+{
+    $model->active = true;
+    $model->save();
+
+    $this->success();
+}
+```
+You can customize the message passing it as a param
+```php
+$this->success('My custom message');
+```
+
+To display an error message just execute `error` instead of `success`
+```php
+$this->error();
+```

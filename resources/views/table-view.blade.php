@@ -8,8 +8,9 @@
   {{-- Success feedback --}}
   @if (session()->has('message'))
     @component('laravel-views::components.alert', [
-      'message' => 'This is the succes message to enhance the UI',
+      'message' => session('message'),
       'onClose' => 'flushMessage',
+      'type' => session('messageType')
     ])
     @endcomponent
   @endif
