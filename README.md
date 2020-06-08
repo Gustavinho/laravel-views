@@ -158,5 +158,3 @@ public function index(LaravelViews $laravelViews)
     return $laravelViews->render();
 }
 ```
-
-php artisan make:filter Views/CivilAssociations/ActiveFilter

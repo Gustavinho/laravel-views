@@ -7,12 +7,24 @@ use Illuminate\Database\Eloquent\Builder;
 
 class DummyClass extends Filter
 {
-    public function apply(Builder $query, $value, $request)
+    /**
+     * Modify the current query when the filter is used
+     *
+     * @param Builder $query Current query
+     * @param $value Value selected by the user
+     * @return Builder Query modified
+     */
+    public function apply(Builder $query, $value, $request): Builder
     {
         return $query->where('', $value);
     }
 
-    public function options()
+    /**
+     * Defines the title and value for each option
+     *
+     * @return Array associative array with the title and values
+     */
+    public function options(): Array
     {
         return [];
     }
