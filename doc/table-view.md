@@ -201,12 +201,14 @@ protected function actionsByRow()
 ```
 
 ## Redirect action
-This package has a defined action to redirect the user to an other route when the button is clicked, you can use it directly on the `actionsByRow` method
+This package has a defined action to redirect the user to a named route related to your model inside your project when the button is clicked, you can use it directly on the `actionsByRow` method
 ```php
 protected function actionsByRow()
 {
     return [
-        new RedirectAction('https://google.com', 'See user', 'eye'),
+        // Will redirect to route('user', $user->id)
+        new RedirectAction('user', 'See user', 'eye'),
     ];
 }
 ```
+The first param is the name of the route to be redirected, it is important to be a named route, the `RedirectAction` will inject the model id to that route

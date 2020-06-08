@@ -17,5 +17,6 @@ class RedirectAction extends Action
 
     public function handle($item)
     {
+        return redirect()->route($this->to, $item);
     }
 }

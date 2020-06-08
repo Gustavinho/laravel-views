@@ -34,10 +34,7 @@
               @foreach ($actionsByRow as $action)
                 {{-- This renderIf method is implemented in every action --}}
                 @if ($action->renderIf($item))
-                  <a
-                    href="{{ $action->isRedirect() ? $action->to : '#' }}"
-                    @if(!$action->isRedirect()) wire:click="executeAction('{{ $action->id }}', '{{ $item->id }}', )" @endif
-                  >
+                  <a href="#" wire:click="executeAction('{{ $action->id }}', '{{ $item->id }}')">
                     <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
                   </a>
                 @endif
