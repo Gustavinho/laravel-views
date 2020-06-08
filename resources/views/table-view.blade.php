@@ -1,4 +1,4 @@
-<div class="min-w-full shadow-md overflow-hidden sm:rounded-lg bg-white relative">
+<div class="min-w-full shadow-md sm:rounded-lg bg-white relative">
 
   {{-- Search input and filters --}}
   <div class="p-4 pb-0">
@@ -6,7 +6,7 @@
   </div>
 
   {{-- Success feedback --}}
-  @if (!session()->has('message'))
+  @if (session()->has('message'))
     @component('laravel-views::components.alert', [
       'message' => 'This is the succes message to enhance the UI',
       'onClose' => 'flushMessage',

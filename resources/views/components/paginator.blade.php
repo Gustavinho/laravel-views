@@ -31,7 +31,7 @@ wire:click="nextPage"
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <span class="{{ $active }} text-white border-t border-b border-l border-brand-light px-3 py-2 bg-brand-light no-underline">{{ $page }}</span>
+                        <span class="{{ $active }} text-white border-t border-b border-l border-blue-600 px-3 py-2 no-underline">{{ $page }}</span>
                     @else
                         <a class="border-t border-b border-l border-brand-light px-3 py-2 hover:bg-brand-light text-brand-dark no-underline cursor-pointer" wire:click="gotoPage({{ $page }})">{{ $page }}</a>
                     @endif
