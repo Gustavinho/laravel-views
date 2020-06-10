@@ -18,7 +18,7 @@ abstract class TableView extends View
     ];
 
     /** Component name */
-    protected $view = 'table-view';
+    protected $view = 'table-view.table-view';
 
     /**
      * (Override) int Number of items to be showed,
