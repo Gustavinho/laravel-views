@@ -1,3 +1,8 @@
+# Table view
+
+This view creates a dinamic data table, you can customize the headers, the data to be displayed for each row, add a search input, filters and actions
+
+- [Laravel views](../README.md)
 - [Table view](#table-view)
     - [Create new table view](#create-new-table-view)
     - [Defining initial data](#defining-initial-data)
@@ -10,14 +15,15 @@
     - [Boolean filter](#boolean-filter)
     - [Date filter](#date-filter)
     - [Registering filters](#registering-filters)
+    - [Changing title](#changing-title)
 - [Actions](#actions)
     - [Registering actions](#registering-actions)
     - [Redirect action](#redirect-action)
     - [Showing alert messages](#showing-alert-messages)
 
-# Table view
+## Table View example
 
-This view creates a dinamic data table, you can customize the headers, the data to be displayed for each row, add a search input, filters and actions
+![](../doc/table.png)
 
 ## Create new table view
 ```bash
@@ -70,8 +76,14 @@ protected $paginate = 50;
 # Filters
 You can add features to filter the table data, when a filter is configured a button is showd at the top right of the table. These filters are created inside `app` directory and you can user any namespace you want.
 
+![](filters.png)
+
 ## Select filter
+
 The most common filter, allow the user to choose an option from a dropdown menu.
+
+![](select.png)
+
 ```bash
 php artisan make:filter Filters/UsersActiveFilter
 ```
@@ -97,6 +109,9 @@ The `apply` method receives que current `$query`, the `$value` selected by the u
 
 ## Boolean filter
 This filter allows the user to choose multiple options from a list of input check boxes
+
+![](boolean.png)
+
 ```bash
 php artisan make:filter Filters/UsersTypeFilter --type=boolean
 ```
@@ -133,6 +148,9 @@ In this case the `apply` method receives the current `$query` and an associative
 ## Date filter
 
 The date filter allows the user select the value by a date picker
+
+![](date.png)
+
 ```bash
 php artisan make:filter Filters/CreatedFilter --type=date
 ```
@@ -163,6 +181,13 @@ protected function filters()
         new UsersTypeFilter
     ];
 }
+```
+
+## Changing title
+You can customize the title of the filter adding a public property `$title` with the title you want
+
+```php
+public $title =  "My custom title";
 ```
 
 # Actions
@@ -203,6 +228,7 @@ protected function actionsByRow()
 
 ## Redirect action
 This package has a defined action to redirect the user to a named route related to your model inside your project when the button is clicked, you can use it directly on the `actionsByRow` method
+
 ```php
 protected function actionsByRow()
 {
@@ -212,10 +238,13 @@ protected function actionsByRow()
     ];
 }
 ```
+
 The first param is the name of the route to be redirected, it is important to be a named route, the `RedirectAction` will inject the model id to that route
 
 ## Showing alert messages
 To display a success alert message you can execute the `$this->succes()` at the end of the handle method, a default message will be displayed once the action is executed
+
+![](success.png)
 
 ```php
 public function handle($model)
@@ -235,3 +264,5 @@ To display an error message just execute `error` instead of `success`
 ```php
 $this->error();
 ```
+
+![](error.png)
