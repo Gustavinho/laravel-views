@@ -50,6 +50,32 @@ class Variants
     }
 
     /**
+     * Uses the badge component
+     *
+     * @param String $variant component variant
+     */
+    public function badge($variant = '')
+    {
+        $this->component = 'badges';
+        $this->variant = $variant;
+
+        return $this;
+    }
+
+    /**
+     * Uses the img component
+     *
+     * @param String $variant component variant
+     */
+    public function img($variant = '')
+    {
+        $this->component = 'images';
+        $this->variant = $variant;
+
+        return $this;
+    }
+
+    /**
      * Get the class string for the component and variant selected
      *
      * @param String $element Set the internal element of the component if there are any
@@ -72,7 +98,7 @@ class Variants
         $titles = [
             'alerts' => [
                 'success' => 'Success',
-                'error' => 'Error',
+                'danger' => 'Error',
                 'warning' => 'Warning',
             ]
         ];
@@ -88,7 +114,7 @@ class Variants
         $icons = [
             'alerts' => [
                 'success' => 'check',
-                'error' => 'x',
+                'danger' => 'x',
                 'warning' => 'alert-circle',
             ]
         ];

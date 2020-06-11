@@ -14,7 +14,7 @@ abstract class Action
 
     private $messages = [
         'success' => 'Action was executed successfully',
-        'error' => 'There was an error executing this action',
+        'danger' => 'There was an error executing this action',
     ];
 
     public function __construct()
@@ -49,7 +49,7 @@ abstract class Action
 
     public function error($message = null)
     {
-        $this->setMessage('error', $message);
+        $this->setMessage('danger', $message);
     }
 
     private function setMessage($type = 'success', $message = null)

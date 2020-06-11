@@ -1,7 +1,7 @@
 {{-- table-view.table-view
 
 Base layout to render all the UI componentes related to the table view, this is the main file for this view,
-the resto of the files are included from here
+the rest of the files are included from here
 
 You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIERE DIRECTIVES
 

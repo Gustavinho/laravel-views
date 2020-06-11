@@ -1,3 +1,13 @@
+{{-- components.table
+
+Renders a data table
+You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIRE DIRECTIVES,
+
+props:
+  - headers
+  - itmes
+  - actionsByRow --}}
+
 <table class="min-w-full">
 
   <thead class="border-b border-t border-gray-200 bg-gray-100 text-xs leading-4 font-semibold uppercase tracking-wider text-left">

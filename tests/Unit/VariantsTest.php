@@ -26,7 +26,7 @@ class VariantsTest extends TestCase
             'bg-green-100 border-green-300 text-green-700'
         );
         $this->assertEquals(
-            Variants::alert('error')->class('icon'),
+            Variants::alert('danger')->class('icon'),
             'bg-red-200'
         );
         $this->assertEquals(
@@ -38,8 +38,28 @@ class VariantsTest extends TestCase
             'Success'
         );
         $this->assertEquals(
-            Variants::alert('error')->icon(),
+            Variants::alert('danger')->icon(),
             'x'
+        );
+    }
+
+    public function testBadgeVariants()
+    {
+        $this->assertEquals(
+            Variants::badge('success')->class(),
+            'bg-green-200 text-green-800'
+        );
+    }
+
+    public function testImgVariants()
+    {
+        $this->assertEquals(
+            Variants::img('avatar')->class(),
+            'h-8 w-8 object-cover rounded-full shadow-inner'
+        );
+        $this->assertEquals(
+            Variants::img()->class(),
+            ''
         );
     }
 }

@@ -1,3 +1,17 @@
+{{-- table-view.select.blade
+
+Renders an input component
+You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIERE DIRECTIVES
+
+props:
+ - $label
+ - $name
+ - $placeholder
+ - $value
+ - $model
+ - $id
+ - $attributes
+--}}
 <div class="text-left mb-4">
   <label class="block">
     {{ $label ?? '' }}
