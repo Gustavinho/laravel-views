@@ -28,7 +28,8 @@
                 "Gustavinho\\LaravelViews\\LaravelViewsServiceProvider"
             ],
             "aliases": {
-                "LaravelViews": "Gustavinho\\LaravelViews\\Facades\\LaravelViews"
+                "LaravelViews": "Gustavinho\\LaravelViews\\Facades\\LaravelViews",
+                "Variants": "Gustavinho\\LaravelViews\\Facades\\Variants"
             }
         }
     },

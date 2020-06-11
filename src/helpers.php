@@ -1,5 +1,7 @@
 <?php
 
+use Gustavinho\LaravelViews\Variants;
+
 function admin($class)
 {
     return $class->render();
@@ -37,4 +39,9 @@ function attributes($attributes = null)
     }
 
     return $attributesStr;
+}
+
+function variants()
+{
+    return new Variants;
 }

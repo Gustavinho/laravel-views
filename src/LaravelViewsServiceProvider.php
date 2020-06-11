@@ -39,11 +39,15 @@ class LaravelViewsServiceProvider extends ServiceProvider
         $this->app->bind('laravel-views', function () {
             return new LaravelViews();
         });
+        $this->app->bind('variants', function () {
+            return new Variants();
+        });
 
         $this->loadViews()
             ->loadCommands()
             ->publish()
-            ->bladeDirectives();
+            ->bladeDirectives()
+            ->configFiltes();
     }
 
     private function publish()
@@ -87,6 +91,13 @@ class LaravelViewsServiceProvider extends ServiceProvider
         Blade::directive('laravelViewsScripts', function () use ($laravelViews) {
             return $laravelViews->js();
         });
+
+        return $this;
+    }
+
+    private function configFiltes()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/config/laravel-views.php', 'laravel-views');
 
         return $this;
     }
