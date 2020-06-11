@@ -56,7 +56,15 @@ class LaravelViewsServiceProvider extends ServiceProvider
             __DIR__.'/../public/laravel-views.js' => public_path('vendor/laravel-views.js'),
             __DIR__.'/../public/laravel-views.css' => public_path('vendor/laravel-views.css'),
         ], 'public');
-        // php artisan vendor:publish --tag=public --force
+
+        $this->publishes([
+            __DIR__.'/config/laravel-views.php' => config_path('laravel-views.php'),
+        ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../resources/views/components' => resource_path('views/vendor/laravel-views/components'),
+            __DIR__.'/../resources/views/table-view' => resource_path('views/vendor/laravel-views/table-view'),
+        ], 'views');
 
         return $this;
     }

@@ -16,6 +16,9 @@ Laravel package to create beautiful common views like tables using only PHP code
     - [From a controller](#from-a-controller)
     - [Specifying a layout and section](#specifying-a-layout-and-section)
     - [Send extra data](send-extra-data)
+- [Components customization](#components-customization)
+    - [Component variants using tailwindcss](#using-tailwindcss)
+    - [Components full customization](#using-tailwindcss)
 
 # Installation and basic usage
 
@@ -157,4 +160,32 @@ public function index(LaravelViews $laravelViews)
 
     return $laravelViews->render();
 }
+```
+
+# Components customization
+These views are build with [Tailwind CSS](https://tailwindcss.com/) and you can either change the colors of the components following tailwindcss utilities or fully cutomize all the html of the components
+
+## Component variants using tailwindcss
+If you are using [Tailwind CSS](https://tailwindcss.com/) or you dont have problems handling Tailwindcss and your onw css styles You can customize some utilities to change the color for each variant of the components publishing a config file
+
+```bash
+php artisan vendor:publish --tag=config
+```
+or you can specify the provider
+```bash
+php artisan vendor:publish --tag=config --provider='Gustavinho\LaravelViews\LaravelViewsServiceProvider'
+```
+
+Inside this config file you can change the colors for each component variant
+
+## Components full customization
+
+If you are not using taildwindcss, or you want to have a full cutomization over the html components, you can publish all the blade files used for these views.
+
+```bash
+php artisan vendor:publish --tag=views
+```
+or you can specify the provider
+```bash
+php artisan vendor:publish --tag=views --provider='Gustavinho\LaravelViews\LaravelViewsServiceProvider'
 ```
