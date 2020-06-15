@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews;
+namespace LaravelViews;
 
 use Livewire\Livewire;
 
@@ -43,15 +43,12 @@ class LaravelViews
 
     public function css()
     {
-        /* dd(\Livewire\Livewire::scripts()); */
-        // return view("laravel-views::core.css")->render();
         return \Livewire\Livewire::styles()."\n"
             .'<link rel="stylesheet" href="http://test-packages.test/vendor/laravel-views.css" />';
     }
 
     public function js()
     {
-        // return view("laravel-views::core.js")->render();
         return \Livewire\Livewire::scripts()."\n".
             '<script src="http://test-packages.test/vendor/laravel-views.js" type="text/javascript"></script>';
     }

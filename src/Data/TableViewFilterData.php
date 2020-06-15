@@ -1,8 +1,8 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Data;
+namespace LaravelViews\Data;
 
-use Gustavinho\LaravelViews\Data\Contracts\Filterable;
+use LaravelViews\Data\Contracts\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 
 class TableViewFilterData implements Filterable

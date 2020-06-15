@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Filters;
+namespace LaravelViews\Filters;
 
 class Filter extends BaseFilter
 {

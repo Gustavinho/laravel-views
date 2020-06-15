@@ -1,8 +1,8 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Unit;
+namespace LaravelViews\Test\Unit;
 
-use Gustavinho\LaravelViews\Filters\Filter;
+use LaravelViews\Filters\Filter;
 use PHPUnit\Framework\TestCase as FrameworkTestCase;
 
 class ExampleTest extends Filter

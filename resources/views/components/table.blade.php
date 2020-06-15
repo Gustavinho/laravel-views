@@ -1,3 +1,13 @@
+{{-- components.table
+
+Renders a data table
+You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIRE DIRECTIVES,
+
+props:
+  - headers
+  - itmes
+  - actionsByRow --}}
+
 <table class="min-w-full">
 
   <thead class="border-b border-t border-gray-200 bg-gray-100 text-xs leading-4 font-semibold uppercase tracking-wider text-left">
@@ -34,10 +44,7 @@
               @foreach ($actionsByRow as $action)
                 {{-- This renderIf method is implemented in every action --}}
                 @if ($action->renderIf($item))
-                  <a
-                    href="{{ $action->isRedirect() ? $action->to : '#' }}"
-                    @if(!$action->isRedirect()) wire:click="executeAction('{{ $action->id }}', '{{ $item->id }}', )" @endif
-                  >
+                  <a href="#" wire:click="executeAction('{{ $action->id }}', '{{ $item->id }}')">
                     <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
                   </a>
                 @endif

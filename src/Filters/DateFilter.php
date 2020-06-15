@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Filters;
+namespace LaravelViews\Filters;
 
 use Carbon\Carbon;
 

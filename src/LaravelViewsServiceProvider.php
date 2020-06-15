@@ -1,14 +1,16 @@
 <?php
 
-namespace Gustavinho\LaravelViews;
+namespace LaravelViews;
 
-use Gustavinho\LaravelViews\Console\ActionMakeCommand;
-use Gustavinho\LaravelViews\Console\FilterMakeCommand;
-use Gustavinho\LaravelViews\Console\TableViewMakeCommand;
-use Gustavinho\LaravelViews\Data\Contracts\Filterable;
-use Gustavinho\LaravelViews\Data\Contracts\Searchable;
-use Gustavinho\LaravelViews\Data\TableViewFilterData;
-use Gustavinho\LaravelViews\Data\TableViewSearchData;
+use LaravelViews\Console\ActionMakeCommand;
+use LaravelViews\Console\FilterMakeCommand;
+use LaravelViews\Console\TableViewMakeCommand;
+use LaravelViews\Data\Contracts\Filterable;
+use LaravelViews\Data\Contracts\Searchable;
+use LaravelViews\Data\TableViewFilterData;
+use LaravelViews\Data\TableViewSearchData;
+use LaravelViews\UI\UI;
+use LaravelViews\UI\Variants;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -39,11 +41,18 @@ class LaravelViewsServiceProvider extends ServiceProvider
         $this->app->bind('laravel-views', function () {
             return new LaravelViews();
         });
+        $this->app->bind('variants', function () {
+            return new Variants;
+        });
+        $this->app->bind('ui', function () {
+            return new UI;
+        });
 
         $this->loadViews()
             ->loadCommands()
             ->publish()
-            ->bladeDirectives();
+            ->bladeDirectives()
+            ->configFiltes();
     }
 
     private function publish()
@@ -52,7 +61,15 @@ class LaravelViewsServiceProvider extends ServiceProvider
             __DIR__.'/../public/laravel-views.js' => public_path('vendor/laravel-views.js'),
             __DIR__.'/../public/laravel-views.css' => public_path('vendor/laravel-views.css'),
         ], 'public');
-        // php artisan vendor:publish --tag=public --force
+
+        $this->publishes([
+            __DIR__.'/config/laravel-views.php' => config_path('laravel-views.php'),
+        ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../resources/views/components' => resource_path('views/vendor/laravel-views/components'),
+            __DIR__.'/../resources/views/table-view' => resource_path('views/vendor/laravel-views/table-view'),
+        ], 'views');
 
         return $this;
     }
@@ -87,6 +104,13 @@ class LaravelViewsServiceProvider extends ServiceProvider
         Blade::directive('laravelViewsScripts', function () use ($laravelViews) {
             return $laravelViews->js();
         });
+
+        return $this;
+    }
+
+    private function configFiltes()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/config/laravel-views.php', 'laravel-views');
 
         return $this;
     }

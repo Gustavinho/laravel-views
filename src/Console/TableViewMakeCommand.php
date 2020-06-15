@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Console;
+namespace LaravelViews\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
@@ -46,6 +46,6 @@ class TableViewMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Views';
+        return $rootNamespace . '\Livewire';
     }
 }

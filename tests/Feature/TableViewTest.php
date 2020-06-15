@@ -1,11 +1,12 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Feature;
+namespace LaravelViews\Test\Feature;
 
-use Gustavinho\LaravelViews\Test\Database\UserTest;
-use Gustavinho\LaravelViews\Test\Mock\MockTableView;
-use Gustavinho\LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
-use Gustavinho\LaravelViews\Test\TestCase;
+use LaravelViews\Test\Database\UserTest;
+use LaravelViews\Test\Mock\MockTableView;
+use LaravelViews\Test\Mock\MockTableViewWithActions;
+use LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
+use LaravelViews\Test\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
@@ -78,8 +79,6 @@ class TableViewTest extends TestCase
             ->assertDontSeeUsers($livewire, $inactiveUsers);
     }
 
-    // TODO: Test flush message
-
     public function testClearFilters()
     {
         Livewire::test(MockTableViewWithSearchAndFilters::class)
@@ -96,6 +95,31 @@ class TableViewTest extends TestCase
             ->set('search', 'my-custom-search')
             ->call('clearSearch')
             ->assertSet('search', '');
+    }
+
+    public function testSeeSuccessAlert()
+    {
+        Livewire::test(MockTableViewWithActions::class)
+            ->call('executeAction', 'test-success-action', 1)
+            ->assertSee('Action was executed successfully')
+            ->assertSee('Success');
+    }
+
+    public function testSeeErrorAlert()
+    {
+        Livewire::test(MockTableViewWithActions::class)
+            ->call('executeAction', 'test-error-action', 1)
+            ->assertSee('There was an error executing this action')
+            ->assertSee('Error!');
+    }
+
+    public function testClearAlert()
+    {
+        Livewire::test(MockTableViewWithActions::class)
+            ->call('executeAction', 'test-success-action', 1)
+            ->assertSee('Action was executed successfully')
+            ->call('flushMessage')
+            ->assertDontSee('Action was executed successfully');
     }
 
     private function assertSeeUsers($livewire, $users, $assert = 'assertSee')

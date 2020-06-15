@@ -1,10 +1,11 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Views;
+namespace LaravelViews\Views;
 
-use Gustavinho\LaravelViews\Data\Contracts\Filterable;
-use Gustavinho\LaravelViews\Data\Contracts\Searchable;
-use Gustavinho\LaravelViews\Data\QueryStringData;
+use Exception;
+use LaravelViews\Data\Contracts\Filterable;
+use LaravelViews\Data\Contracts\Searchable;
+use LaravelViews\Data\QueryStringData;
 use Livewire\WithPagination;
 
 abstract class TableView extends View
@@ -17,7 +18,7 @@ abstract class TableView extends View
     ];
 
     /** Component name */
-    protected $view = 'table-view';
+    protected $view = 'table-view.table-view';
 
     /**
      * (Override) int Number of items to be showed,
@@ -110,9 +111,8 @@ abstract class TableView extends View
 
         if ($actionToExecute) {
             $item = $this->repository()->find($id);
-            $actionToExecute->handle($item);
 
-            session()->flash('message', $actionToExecute->messages($item)['success']);
+            return $actionToExecute->handle($item);
         }
     }
 
@@ -122,6 +122,7 @@ abstract class TableView extends View
     public function flushMessage()
     {
         session()->forget('message');
+        session()->forget('messageType');
     }
 
     public function clearFilters()

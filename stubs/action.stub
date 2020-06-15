@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use Gustavinho\LaravelViews\Actions\Action;
+use LaravelViews\Actions\Action;
 
 class DummyClass extends Action
 {

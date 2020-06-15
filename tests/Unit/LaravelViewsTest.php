@@ -1,9 +1,9 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Unit;
+namespace LaravelViews\Test\Unit;
 
-use Gustavinho\LaravelViews\Facades\LaravelViews;
-use Gustavinho\LaravelViews\Test\TestCase;
+use LaravelViews\Facades\LaravelViews;
+use LaravelViews\Test\TestCase;
 
 class LaravelViewsTest extends TestCase
 {

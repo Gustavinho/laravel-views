@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Data;
+namespace LaravelViews\Data;
 
 use Illuminate\Http\Request;
 

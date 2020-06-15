@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Database;
+namespace LaravelViews\Test\Database;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

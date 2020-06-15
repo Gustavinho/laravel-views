@@ -1,9 +1,25 @@
+{{-- table-view.select.blade
+
+Renders a input group component
+You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIERE DIRECTIVES
+
+props:
+ - $label
+ - $name
+ - $placeholder
+ - $value
+ - $model
+ - $id
+ - $onClick
+ - $icon
+--}}
+
 <div class="relative text-left mb-4">
   <label class="block">
     {{ $label ?? '' }}
   </label>
   <input
-    class="pr-12 appearance-none w-full bg-white border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-600 focus:border-2 border"
+    class="pr-12 appearance-none w-full bg-white border-gray-400 hover:border-blue-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-400 focus:border-2 border"
     type="text"
     name="{{ $name ?? '' }}"
     placeholder="{{ $placeholder ?? ''}}"

@@ -1,8 +1,8 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Data;
+namespace LaravelViews\Data;
 
-use Gustavinho\LaravelViews\Data\Contracts\Searchable;
+use LaravelViews\Data\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 
 class TableViewSearchData implements Searchable

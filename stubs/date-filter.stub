@@ -1,14 +1,21 @@
 <?php
 
-namespace App\Views;
+namespace DummyNamespace;
 
 use Carbon\Carbon;
-use Gustavinho\LaravelViews\Filters\DateFilter;
+use LaravelViews\Filters\DateFilter;
 use Illuminate\Database\Eloquent\Builder;
 
-class CreatedAtFilter extends DateFilter
+class DummyClass extends DateFilter
 {
-    public function apply(Builder $query, Carbon $value)
+    /**
+     * Modify the current query when the filter is used
+     *
+     * @param Builder $query Current query
+     * @param Carbon $date Carbon instance with the date selected
+     * @return Builder Query modified
+     */
+    public function apply(Builder $query, Carbon $date, $request): Builder
     {
         // $query->where('', $value);
     }
