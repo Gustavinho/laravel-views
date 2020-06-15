@@ -2,3 +2,4 @@ node_modules
 public/hot
 vendor
 .phpunit.result.cache
+public/laravel-views.js.LICENSE.txt

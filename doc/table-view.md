@@ -29,13 +29,16 @@ This view creates a dinamic data table, you can customize the headers, the data 
 ![](../doc/table.png)
 
 ## Create new table view
+
 ```bash
 php artisan make:table-view UsersTableView
 ```
-With this artisan command a UsersTableView.php file will be created inside `app/Livewire` directory, this this class you can customize the behavior of the table view.
+
+With this artisan command a `UsersTableView.php` file will be created inside `app/Http/Livewire` directory, with this class you can customize the behavior of the table view.
 
 ## Defining initial data
 Return an `Eloquent` query with the initial data to be displayed on the table, it is important to return the query, not the data collection.
+
 ```php
 use App\User;
 
@@ -47,6 +50,7 @@ public function repository(): Builder
 
 ## Headers
 Return an array with all the headers you need
+
 ```php
 public function headers(): array
 {
@@ -56,6 +60,7 @@ public function headers(): array
 
 ## Rows
 Return an array with all the data you need for each row, this method receives an model instance for every row in the database according with the initial query and the filters activated.
+
 ```php
 public function row($model)
 {
@@ -65,19 +70,22 @@ public function row($model)
 
 ## Searching data
 You can enable a search input specifying a class property with the fields you want to search by
+
 ```php
 public $searchBy = ['name', 'email'];
 ```
-When this property is configured, a search input is showed at the top left of the table
+
+When this property is configured, a search input is shown at the top left of the table
 
 ## Pagination
-The data is paginated by default showing 20 elements per page, you can customize this behavior with class property
+The data is paginated by default showing 20 elements per page, you can customize this behavior with a class property
+
 ```php
 protected $paginate = 50;
 ```
 
 # Filters
-You can add features to filter the table data, when a filter is configured a button is showd at the top right of the table. These filters are created inside `app` directory and you can user any namespace you want.
+You can add features to filter the table data, when a filter is configured a button is shown at the top right of the table. These filters are created inside `app` directory and you can use any namespace you want.
 
 ![](filters.png)
 
@@ -90,7 +98,9 @@ The most common filter, allow the user to choose an option from a dropdown menu.
 ```bash
 php artisan make:filter Filters/UsersActiveFilter
 ```
+
 With this artisan command a `UsersActiveFilter.php` file will be created inside `app/Filters` directory, you can use any namespace you want. The select filter class created have 2 methods, `apply` and `options`, with `apply` you can modify the current query with your own business logic for this filter, with the `options` method you can define the title and the values for each option
+
 ```php
 class UsersActiveFilter extends Filter
 {
@@ -108,7 +118,7 @@ class UsersActiveFilter extends Filter
     }
 }
 ```
-The `apply` method receives que current `$query`, the `$value` selected by the user (defined in the `options` method) and the current `$request`, it should return the modified query
+The `apply` method receives the current `$query`, the `$value` selected by the user (defined in the `options` method) and the current `$request`, it should return the modified query
 
 ## Boolean filter
 This filter allows the user to choose multiple options from a list of input check boxes
@@ -146,6 +156,7 @@ class UsersTypeFilter extends BooleanFilter
     }
 }
 ```
+
 In this case the `apply` method receives the current `$query` and an associative array with the boolean value for each of the options defined and the current `$request`, it should return the modified query
 
 ## Date filter
@@ -194,7 +205,7 @@ public $title =  "My custom title";
 ```
 
 # Actions
-You can define actions to be executed in every row when a user clicks on a button, these actions are created inside `app` directory and you can user any namespace you want.
+You can define actions to be executed in every row when a user clicks on a button, these actions are created inside `app` directory and you can use any namespace you want.
 
 ```bash
 php artisan make:action Actions/ActivateUserAction
@@ -258,12 +269,15 @@ public function handle($model)
     $this->success();
 }
 ```
+
 You can customize the message passing it as a param
+
 ```php
 $this->success('My custom message');
 ```
 
 To display an error message just execute `error` instead of `success`
+
 ```php
 $this->error();
 ```
@@ -274,7 +288,7 @@ $this->error();
 You can display some UI components instead of plain text like avateres or badges
 
 ## Avatar
-Show an 32x32 rounded image
+Shows an 32x32 rounded image
 
 ```php
 use LaravelViews\Facades\UI

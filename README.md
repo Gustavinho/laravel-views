@@ -38,6 +38,7 @@ php artisan vendor:publish --tag=public --provider='LaravelViews\LaravelViewsSer
 
 ## Including assets
 Add the following Blade directives in the *head* tag, and before the end *body* tag in your template
+
 ```blade
 <html>
 <head>
@@ -50,7 +51,8 @@ Add the following Blade directives in the *head* tag, and before the end *body* 
 </body>
 </html>
 ```
-These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) styles and scripts, after that maybe you will need to clear the view cache
+
+These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) styles and scripts, after that you may need to clear the view cache
 ```bash
 php artisan view:clear
 ```
@@ -63,13 +65,13 @@ Once you have installed the package and included the assets you can start to cre
 ```bash
 php artisan make:table-view UsersTableView
 ```
-With this artisan command a UsersTableView.php file will be created inside `app/Livewire` directory.
+With this artisan command a UsersTableView.php file will be created inside `app/Http/Livewire` directory.
 
-The basic usage needs a data repository (Eloquent query), headers and rows, you can customize the items to be showed, the headers and the data for each row like this example
+The basic usage needs a data repository (Eloquent query), headers and rows, you can customize the items to be shown, and the headers and data for each row like this example
 ```php
 <?php
 
-namespace App\Views;
+namespace App\Http\Livewire;
 
 use LaravelViews\Views\TableView;
 use Illuminate\Database\Eloquent\Builder;
@@ -97,12 +99,12 @@ class UsersTableView extends TableView
 ## Rendering the table view
 The easiest way to render the view is using the facade directly with a blade file
 ```blade
-{!! LaravelViews::create(App\Views\UsersTableView::class)->render() !!}
+{!! LaravelViews::create(App\Http\Livewire\UsersTableView::class)->render() !!}
 ```
 
-At this point you would be able to see a table with some data
+At this point, you would be able to see a table with some data
 
-In the exaple above the view is using the User model created by default in every Laravel project, feel free to use any model you have, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model.
+In the example above the view is using the User model created by default in every Laravel project, feel free to use any model you have, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model.
 
 This is the basic usage of the table view, but you can customize it with more features.
 
@@ -120,7 +122,7 @@ use use LaravelViews\LaravelViews;
 
 public function index(LaravelViews $laravelViews)
 {
-    $laravelViews->create(App\Views\UsersTableView::class);
+    $laravelViews->create(App\Http\Livewire\UsersTableView::class);
 
     return view('my-view', [
       'view' => $laravelViews
@@ -139,7 +141,7 @@ use use LaravelViews\LaravelViews;
 
 public function index(LaravelViews $laravelViews)
 {
-    $laravelViews->create(App\Views\UsersTableView::class)
+    $laravelViews->create(App\Http\Livewire\UsersTableView::class)
       ->layout('layout', 'section-name');
 
     return $laravelViews->render();
@@ -147,13 +149,13 @@ public function index(LaravelViews $laravelViews)
 ```
 
 ## Send extra data
-Same as you usually send data to your views, you can send more data to the layout file
+In the same way that you would send data to your views, you can send more data to the layout file
 ```php
 use use LaravelViews\LaravelViews;
 
 public function index(LaravelViews $laravelViews)
 {
-    $laravelViews->create(App\Views\UsersTableView::class)
+    $laravelViews->create(App\Http\Livewire\UsersTableView::class)
       ->layout('layout', 'section-name', [
         'title' => 'My layout title'
       ]);
@@ -163,10 +165,10 @@ public function index(LaravelViews $laravelViews)
 ```
 
 # Components customization
-These views are build with [Tailwind CSS](https://tailwindcss.com/) and you can either change the colors of the components following tailwindcss utilities or fully cutomize all the html of the components
+These views are build with [Tailwind CSS](https://tailwindcss.com/) and you can either change the colors of the components following tailwindcss utilities or fully customize all the html of the components
 
 ## Component variants using tailwindcss
-If you are using [Tailwind CSS](https://tailwindcss.com/) or you dont have problems handling Tailwindcss and your onw css styles You can customize some utilities to change the color for each variant of the components publishing a config file
+If you are using [Tailwind CSS](https://tailwindcss.com/) or if you don't have issues  using Tailwindcss and your own css styles, you can customize some utilities to change the color for each variant of the components publishing a config file
 
 ```bash
 php artisan vendor:publish --tag=config
@@ -180,7 +182,7 @@ Inside this config file you can change the colors for each component variant
 
 ## Components full customization
 
-If you are not using taildwindcss, or you want to have a full cutomization over the html components, you can publish all the blade files used for these views.
+If you are not using taildwindcss, or if you want to have a full customization over the html components, you can publish all the blade files used for these views.
 
 ```bash
 php artisan vendor:publish --tag=views

@@ -46,6 +46,6 @@ class TableViewMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Livewire';
+        return $rootNamespace . '\Http\Livewire';
     }
 }
