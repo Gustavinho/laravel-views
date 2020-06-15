@@ -9,6 +9,8 @@ use Gustavinho\LaravelViews\Data\Contracts\Filterable;
 use Gustavinho\LaravelViews\Data\Contracts\Searchable;
 use Gustavinho\LaravelViews\Data\TableViewFilterData;
 use Gustavinho\LaravelViews\Data\TableViewSearchData;
+use Gustavinho\LaravelViews\UI\UI;
+use Gustavinho\LaravelViews\UI\Variants;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -40,7 +42,10 @@ class LaravelViewsServiceProvider extends ServiceProvider
             return new LaravelViews();
         });
         $this->app->bind('variants', function () {
-            return new Variants();
+            return new Variants;
+        });
+        $this->app->bind('ui', function () {
+            return new UI;
         });
 
         $this->loadViews()

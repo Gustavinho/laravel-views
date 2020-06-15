@@ -29,7 +29,8 @@
             ],
             "aliases": {
                 "LaravelViews": "Gustavinho\\LaravelViews\\Facades\\LaravelViews",
-                "Variants": "Gustavinho\\LaravelViews\\Facades\\Variants"
+                "Variants": "Gustavinho\\LaravelViews\\Facades\\Variants",
+                "UI": "Gustavinho\\LaravelViews\\Facades\\UI"
             }
         }
     },
