@@ -20,6 +20,9 @@ This view creates a dinamic data table, you can customize the headers, the data 
     - [Registering actions](#registering-actions)
     - [Redirect action](#redirect-action)
     - [Showing alert messages](#showing-alert-messages)
+- [Showing UI components](#showing-ui-components)
+    - [Avatar](#avatar)
+    - [Badges](#badges)
 
 ## Table View example
 
@@ -266,3 +269,31 @@ $this->error();
 ```
 
 ![](error.png)
+
+# Showing UI components
+You can display some UI components instead of plain text like avateres or badges
+
+## Avatar
+Show an 32x32 rounded image
+
+```php
+use Gustavinho\LaravelViews\Facades\UI
+
+public function row($model)
+{
+    return [
+        UI::avatar($model->avatar_url)
+    ];
+}
+```
+
+## Badges
+Shows a colored badge with a text, it is gray by default
+
+```php
+UI::badge('My title');
+UI::badge('My title', 'info');
+UI::badge('My title', 'success');
+UI::badge('My title', 'warning');
+UI::badge('My title', 'danger');
+```

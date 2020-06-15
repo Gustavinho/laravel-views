@@ -11,7 +11,7 @@ class UITest extends TestCase
     public function testBagdeDefaultHelper()
     {
         $badge = UI::badge('active');
-        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-200 text-blue-800">
+        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">
                         active
                     </span>';
 

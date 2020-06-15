@@ -4,7 +4,7 @@ namespace Gustavinho\LaravelViews\UI;
 
 class UI
 {
-    public function badge($title, $type = 'info')
+    public function badge($title, $type = 'default')
     {
         return view('laravel-views::components.badge', [
             'title' => $title,
