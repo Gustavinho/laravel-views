@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Views;
+namespace LaravelViews\Views;
 
 use Illuminate\Http\Request;
 use Livewire\Component;

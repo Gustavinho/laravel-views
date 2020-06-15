@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Facades;
+namespace LaravelViews\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

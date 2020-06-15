@@ -1,12 +1,12 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Feature;
+namespace LaravelViews\Test\Feature;
 
-use Gustavinho\LaravelViews\Test\Database\UserTest;
-use Gustavinho\LaravelViews\Test\Mock\MockTableView;
-use Gustavinho\LaravelViews\Test\Mock\MockTableViewWithActions;
-use Gustavinho\LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
-use Gustavinho\LaravelViews\Test\TestCase;
+use LaravelViews\Test\Database\UserTest;
+use LaravelViews\Test\Mock\MockTableView;
+use LaravelViews\Test\Mock\MockTableViewWithActions;
+use LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
+use LaravelViews\Test\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 

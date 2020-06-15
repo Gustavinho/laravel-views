@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Console;
+namespace LaravelViews\Console;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;

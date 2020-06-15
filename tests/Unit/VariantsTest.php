@@ -1,9 +1,9 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Unit;
+namespace LaravelViews\Test\Unit;
 
-use Gustavinho\LaravelViews\Facades\Variants;
-use Gustavinho\LaravelViews\Test\TestCase;
+use LaravelViews\Facades\Variants;
+use LaravelViews\Test\TestCase;
 
 class VariantsTest extends TestCase
 {

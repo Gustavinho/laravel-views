@@ -1,6 +1,6 @@
 <?php
 
-use Gustavinho\LaravelViews\UI\Variants;
+use LaravelViews\UI\Variants;
 
 function attributes($attributes = null)
 {

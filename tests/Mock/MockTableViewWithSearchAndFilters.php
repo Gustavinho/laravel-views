@@ -1,8 +1,8 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Mock;
+namespace LaravelViews\Test\Mock;
 
-use Gustavinho\LaravelViews\Filters\Filter;
+use LaravelViews\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 
 class ActiveUsersFilter extends Filter

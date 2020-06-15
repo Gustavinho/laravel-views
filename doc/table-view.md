@@ -277,7 +277,7 @@ You can display some UI components instead of plain text like avateres or badges
 Show an 32x32 rounded image
 
 ```php
-use Gustavinho\LaravelViews\Facades\UI
+use LaravelViews\Facades\UI
 
 public function row($model)
 {

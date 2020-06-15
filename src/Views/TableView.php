@@ -1,11 +1,11 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Views;
+namespace LaravelViews\Views;
 
 use Exception;
-use Gustavinho\LaravelViews\Data\Contracts\Filterable;
-use Gustavinho\LaravelViews\Data\Contracts\Searchable;
-use Gustavinho\LaravelViews\Data\QueryStringData;
+use LaravelViews\Data\Contracts\Filterable;
+use LaravelViews\Data\Contracts\Searchable;
+use LaravelViews\Data\QueryStringData;
 use Livewire\WithPagination;
 
 abstract class TableView extends View

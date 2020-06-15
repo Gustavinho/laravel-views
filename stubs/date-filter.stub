@@ -3,7 +3,7 @@
 namespace DummyNamespace;
 
 use Carbon\Carbon;
-use Gustavinho\LaravelViews\Filters\DateFilter;
+use LaravelViews\Filters\DateFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 class DummyClass extends DateFilter

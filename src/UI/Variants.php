@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\UI;
+namespace LaravelViews\UI;
 
 class Variants
 {

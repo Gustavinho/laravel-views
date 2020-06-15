@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Data\Contracts;
+namespace LaravelViews\Data\Contracts;
 
 use Illuminate\Database\Eloquent\Builder;
 

@@ -33,7 +33,7 @@ php artisan vendor:publish --tag=public --force
 ```
 or you can specify the provider
 ```bash
-php artisan vendor:publish --tag=public --provider='Gustavinho\LaravelViews\LaravelViewsServiceProvider' --force
+php artisan vendor:publish --tag=public --provider='LaravelViews\LaravelViewsServiceProvider' --force
 ```
 
 ## Including assets
@@ -71,7 +71,7 @@ The basic usage needs a data repository (Eloquent query), headers and rows, you 
 
 namespace App\Views;
 
-use Gustavinho\LaravelViews\Views\TableView;
+use LaravelViews\Views\TableView;
 use Illuminate\Database\Eloquent\Builder;
 use App\User;
 
@@ -116,7 +116,7 @@ The easiest way to render a view is using the facade directly on the blade file 
 but it is a better practice if you inject a `LaravelViews` instance as a dependency in your controller.
 
 ```php
-use use Gustavinho\LaravelViews\LaravelViews;
+use use LaravelViews\LaravelViews;
 
 public function index(LaravelViews $laravelViews)
 {
@@ -135,7 +135,7 @@ And render it in your blade file
 ## Specifying a layout and section
 You can also return the view directly from your controller and specify the layout and section of your layout
 ```php
-use use Gustavinho\LaravelViews\LaravelViews;
+use use LaravelViews\LaravelViews;
 
 public function index(LaravelViews $laravelViews)
 {
@@ -149,7 +149,7 @@ public function index(LaravelViews $laravelViews)
 ## Send extra data
 Same as you usually send data to your views, you can send more data to the layout file
 ```php
-use use Gustavinho\LaravelViews\LaravelViews;
+use use LaravelViews\LaravelViews;
 
 public function index(LaravelViews $laravelViews)
 {
@@ -173,7 +173,7 @@ php artisan vendor:publish --tag=config
 ```
 or you can specify the provider
 ```bash
-php artisan vendor:publish --tag=config --provider='Gustavinho\LaravelViews\LaravelViewsServiceProvider'
+php artisan vendor:publish --tag=config --provider='LaravelViews\LaravelViewsServiceProvider'
 ```
 
 Inside this config file you can change the colors for each component variant
@@ -187,5 +187,5 @@ php artisan vendor:publish --tag=views
 ```
 or you can specify the provider
 ```bash
-php artisan vendor:publish --tag=views --provider='Gustavinho\LaravelViews\LaravelViewsServiceProvider'
+php artisan vendor:publish --tag=views --provider='LaravelViews\LaravelViewsServiceProvider'
 ```

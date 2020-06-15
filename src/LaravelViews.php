@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews;
+namespace LaravelViews;
 
 use Livewire\Livewire;
 

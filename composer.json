@@ -14,8 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Gustavinho\\LaravelViews\\": "src",
-            "Gustavinho\\LaravelViews\\Test\\": "tests"
+            "LaravelViews\\": "src",
+            "LaravelViews\\Test\\": "tests"
         }
     },
     "require-dev": {
@@ -25,12 +25,12 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Gustavinho\\LaravelViews\\LaravelViewsServiceProvider"
+                "LaravelViews\\LaravelViewsServiceProvider"
             ],
             "aliases": {
-                "LaravelViews": "Gustavinho\\LaravelViews\\Facades\\LaravelViews",
-                "Variants": "Gustavinho\\LaravelViews\\Facades\\Variants",
-                "UI": "Gustavinho\\LaravelViews\\Facades\\UI"
+                "LaravelViews": "LaravelViews\\Facades\\LaravelViews",
+                "Variants": "LaravelViews\\Facades\\Variants",
+                "UI": "LaravelViews\\Facades\\UI"
             }
         }
     },

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Mock;
+namespace LaravelViews\Test\Mock;
 
-use Gustavinho\LaravelViews\Actions\Action;
-use Gustavinho\LaravelViews\Filters\Filter;
+use LaravelViews\Actions\Action;
+use LaravelViews\Filters\Filter;
 
 class TestSuccessAction extends Action
 {

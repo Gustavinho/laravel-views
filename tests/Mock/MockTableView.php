@@ -1,9 +1,9 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Mock;
+namespace LaravelViews\Test\Mock;
 
-use Gustavinho\LaravelViews\Test\Database\UserTest;
-use Gustavinho\LaravelViews\Views\TableView;
+use LaravelViews\Test\Database\UserTest;
+use LaravelViews\Views\TableView;
 use Illuminate\Database\Eloquent\Builder;
 
 class MockTableView extends TableView

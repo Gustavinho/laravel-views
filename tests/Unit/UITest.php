@@ -1,10 +1,10 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test\Unit;
+namespace LaravelViews\Test\Unit;
 
 use DOMDocument;
-use Gustavinho\LaravelViews\Facades\UI;
-use Gustavinho\LaravelViews\Test\TestCase;
+use LaravelViews\Facades\UI;
+use LaravelViews\Test\TestCase;
 
 class UITest extends TestCase
 {

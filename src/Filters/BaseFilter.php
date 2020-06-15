@@ -1,8 +1,8 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Filters;
+namespace LaravelViews\Filters;
 
-use Gustavinho\LaravelViews\Views\View;
+use LaravelViews\Views\View;
 use Illuminate\Http\Request;
 
 class BaseFilter

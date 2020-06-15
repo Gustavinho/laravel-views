@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use Gustavinho\LaravelViews\Filters\Filter;
+use LaravelViews\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 
 class DummyClass extends Filter

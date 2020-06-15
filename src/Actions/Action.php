@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Actions;
+namespace LaravelViews\Actions;
 
 abstract class Action
 {

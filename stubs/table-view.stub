@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use Gustavinho\LaravelViews\Views\TableView;
+use LaravelViews\Views\TableView;
 use Illuminate\Database\Eloquent\Builder;
 
 class DummyClass extends TableView

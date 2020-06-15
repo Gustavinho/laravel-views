@@ -1,8 +1,8 @@
 <?php
 
-namespace Gustavinho\LaravelViews\Test;
+namespace LaravelViews\Test;
 
-use Gustavinho\LaravelViews\LaravelViewsServiceProvider;
+use LaravelViews\LaravelViewsServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
 use PHPUnit\Framework\TestCase as FrameworkTestCase;

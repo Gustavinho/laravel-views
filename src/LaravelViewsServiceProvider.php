@@ -1,16 +1,16 @@
 <?php
 
-namespace Gustavinho\LaravelViews;
+namespace LaravelViews;
 
-use Gustavinho\LaravelViews\Console\ActionMakeCommand;
-use Gustavinho\LaravelViews\Console\FilterMakeCommand;
-use Gustavinho\LaravelViews\Console\TableViewMakeCommand;
-use Gustavinho\LaravelViews\Data\Contracts\Filterable;
-use Gustavinho\LaravelViews\Data\Contracts\Searchable;
-use Gustavinho\LaravelViews\Data\TableViewFilterData;
-use Gustavinho\LaravelViews\Data\TableViewSearchData;
-use Gustavinho\LaravelViews\UI\UI;
-use Gustavinho\LaravelViews\UI\Variants;
+use LaravelViews\Console\ActionMakeCommand;
+use LaravelViews\Console\FilterMakeCommand;
+use LaravelViews\Console\TableViewMakeCommand;
+use LaravelViews\Data\Contracts\Filterable;
+use LaravelViews\Data\Contracts\Searchable;
+use LaravelViews\Data\TableViewFilterData;
+use LaravelViews\Data\TableViewSearchData;
+use LaravelViews\UI\UI;
+use LaravelViews\UI\Variants;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
