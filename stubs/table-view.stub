@@ -32,7 +32,7 @@ class DummyClass extends TableView
      *
      * @param $model Current model for each row
      */
-    public function row($model)
+    public function row($model): array
     {
         return [];
     }
