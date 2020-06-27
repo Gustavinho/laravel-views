@@ -17,8 +17,9 @@ Laravel package to create beautiful common views like tables using only PHP code
     - [Specifying a layout and section](#specifying-a-layout-and-section)
     - [Send extra data](send-extra-data)
 - [Components customization](#components-customization)
-    - [Component variants using tailwindcss](#using-tailwindcss)
-    - [Components full customization](#using-tailwindcss)
+    - [Component variants using tailwindcss](#component-variants-using-tailwindcss)
+    - [Components full customization](#components-full-customization)
+- [Table view](doc/table-view.md)
 
 # Installation and basic usage
 
@@ -102,7 +103,7 @@ The easiest way to render the view is using the facade directly with a blade fil
 {!! LaravelViews::create(App\Http\Livewire\UsersTableView::class)->render() !!}
 ```
 
-At this point, you would be able to see a table with some data
+At this point, you would be able to see a table with some data, the table view doesn't have any styled container or title as the image example, you can render the table view inside any container you want.
 
 In the example above the view is using the User model created by default in every Laravel project, feel free to use any model you have, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model.
 
