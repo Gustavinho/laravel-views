@@ -30,13 +30,15 @@ UI components used:
   @if (count($items))
 
     {{-- Content table --}}
-    @component('laravel-views::components.table', [
-      'headers' => $headers,
-      'actionsByRow' => $actionsByRow,
-      'items' => $items,
-      'view' => $view
-    ])
-    @endcomponent
+    <div class="overflow-x-auto">
+      @component('laravel-views::components.table', [
+        'headers' => $headers,
+        'actionsByRow' => $actionsByRow,
+        'items' => $items,
+        'view' => $view
+      ])
+      @endcomponent
+    </div>
 
   @else
 

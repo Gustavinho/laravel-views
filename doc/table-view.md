@@ -1,6 +1,6 @@
 # Table view
 
-This view creates a dinamic data table, you can customize the headers, the data to be displayed for each row, add a search input, filters and actions
+This view creates a dinamic data table with some features like filters, pagination and search input, you can customize the headers, the data to be displayed for each row.
 
 - [Laravel views](../README.md)
 - [Table view](#table-view)
@@ -20,6 +20,7 @@ This view creates a dinamic data table, you can customize the headers, the data 
     - [Registering actions](#registering-actions)
     - [Redirect action](#redirect-action)
     - [Showing alert messages](#showing-alert-messages)
+    - [Hiding actions](#hiding-actions)
 - [Showing UI components](#showing-ui-components)
     - [Avatar](#avatar)
     - [Badges](#badges)
@@ -27,6 +28,8 @@ This view creates a dinamic data table, you can customize the headers, the data 
 ## Table View example
 
 ![](../doc/table.png)
+
+The table view doesn't have any styled container or title as the image example so you can render the table view inside any container you want.
 
 ## Create new table view
 
@@ -283,6 +286,16 @@ $this->error();
 ```
 
 ![](error.png)
+
+## Hiding actions
+You can choose if the action will be shown or hidden for an specific row defining a `renderIf` method and returning a boolean value, if you don't define this method the action will be shown aways.
+
+```php
+public function renderIf($model)
+{
+    return !$model->active;
+}
+```
 
 # Showing UI components
 You can display some UI components instead of plain text like avateres or badges
