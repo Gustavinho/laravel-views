@@ -9,6 +9,7 @@
 - Changed inputs border color
 ### Fixed
 - Fixed some broken links on the documentation
+- Bumped websocket-extensions from 0.1.3 to 0.1.4
 
 ## [1.0.0] - 2020-06-14
 ### Added
