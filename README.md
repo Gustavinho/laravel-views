@@ -87,7 +87,7 @@ class UsersTableView extends TableView
 
     public function headers(): array
     {
-        return ['Name', 'Email' 'Created', 'Updated'];
+        return ['Name', 'Email', 'Created', 'Updated'];
     }
 
     public function row($model)
