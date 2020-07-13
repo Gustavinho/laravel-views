@@ -44,13 +44,13 @@ class LaravelViews
     public function css()
     {
         return \Livewire\Livewire::styles()."\n"
-            .'<link rel="stylesheet" href="http://test-packages.test/vendor/laravel-views.css" />';
+            .'<link rel="stylesheet" href="' . asset('/vendor/laravel-views.css') . '" />';
     }
 
     public function js()
     {
         return \Livewire\Livewire::scripts()."\n".
-            '<script src="http://test-packages.test/vendor/laravel-views.js" type="text/javascript"></script>';
+            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript"></script>';
     }
 
     public function render()

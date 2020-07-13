@@ -14,7 +14,7 @@ class LaravelViewsTest extends TestCase
         $this->assertEquals(
             $css,
             \Livewire\Livewire::styles()."\n".
-            '<link rel="stylesheet" href="http://test-packages.test/vendor/laravel-views.css" />'
+            '<link rel="stylesheet" href="' . asset('/vendor/laravel-views.css') . '" />'
         );
     }
 
@@ -25,7 +25,7 @@ class LaravelViewsTest extends TestCase
         $this->assertEquals(
             $js,
             \Livewire\Livewire::scripts()."\n".
-            '<script src="http://test-packages.test/vendor/laravel-views.js" type="text/javascript"></script>'
+            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript"></script>'
         );
     }
 }

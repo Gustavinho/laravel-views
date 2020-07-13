@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2356655d191e1c7de565491bd0f7d2c8",
+    "content-hash": "2ce09cc250be92b4c01830101677473c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -558,22 +558,22 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v1.0.4",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "8bbb099df73608ad6b31469629d33d8fc74a3773"
+                "reference": "abca3b56975b2d6f7e482f2b65c1556ff1bd7e65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/8bbb099df73608ad6b31469629d33d8fc74a3773",
-                "reference": "8bbb099df73608ad6b31469629d33d8fc74a3773",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/abca3b56975b2d6f7e482f2b65c1556ff1bd7e65",
+                "reference": "abca3b56975b2d6f7e482f2b65c1556ff1bd7e65",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
-                "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
-                "illuminate/validation": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+                "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+                "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+                "illuminate/validation": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
                 "php": "^7.1.3",
                 "symfony/http-kernel": "^4.0|^5.0"
             },
@@ -611,7 +611,7 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2020-03-14T16:27:59+00:00"
+            "time": "2020-07-08T14:40:56+00:00"
         },
         {
             "name": "monolog/monolog",
