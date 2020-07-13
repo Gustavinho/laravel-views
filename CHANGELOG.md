@@ -4,6 +4,7 @@
 ### Fixed
 - Added support for newer livewire versions
 - Fixed some typos on the documentation
+- Fixed assets URL
 
 ## [1.0.1] - 2020-06-27
 ### Added
