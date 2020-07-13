@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.2] - 2020-07-13
+### Fixed
+- Added support for newer livewire versions
+- Fixed some typos on the documentation
+
 ## [1.0.1] - 2020-06-27
 ### Added
 - Added the changelog file
