@@ -23,10 +23,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $file =  __DIR__ . '/helpers.php';
-        if (file_exists($file)) {
-            require_once($file);
-        }
+        //
     }
 
     /**
