@@ -13,6 +13,9 @@ class RedirectAction extends Action
         $this->title = $title;
         $this->icon = $icon;
         $this->to = $to;
+
+        // Overrides the original id to create different ids for each redirect action
+        $this->id = $this->id . '-' . $this->to;
     }
 
     public function handle($item)

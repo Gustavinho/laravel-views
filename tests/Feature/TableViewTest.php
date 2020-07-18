@@ -8,6 +8,7 @@ use LaravelViews\Test\Mock\MockTableViewWithActions;
 use LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
 use LaravelViews\Test\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelViews\Test\Mock\MockTableViewWithRedirectActions;
 use Livewire\Livewire;
 
 class TableViewTest extends TestCase
@@ -120,6 +121,20 @@ class TableViewTest extends TestCase
             ->assertSee('Action was executed successfully')
             ->call('flushMessage')
             ->assertDontSee('Action was executed successfully');
+    }
+
+    public function testSeeMultipleRedirectActions()
+    {
+        $icons = ['eye', 'pencil'];
+        $class = 'mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600';
+
+        factory(UserTest::class)->create();
+
+        $table = Livewire::test(MockTableViewWithRedirectActions::class);
+
+        foreach ($icons as $icon) {
+            $table->assertSeeHtml('<i data-feather="' . $icon . '" class="' . $class . '"></i>');
+        }
     }
 
     private function assertSeeUsers($livewire, $users, $assert = 'assertSee')
