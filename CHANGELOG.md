@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3] - NOT RELEASED YET
+### Fixed
+- Fixed a bug using multiple redirect actions on the same table
+- Fixed some typos on the documentation
+
+### Changed
+- Moved helpers load to composer
+
 ## [1.0.2] - 2020-07-13
 ### Fixed
 - Added support for newer livewire versions
