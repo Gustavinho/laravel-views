@@ -16,10 +16,7 @@
         "psr-4": {
             "LaravelViews\\": "src",
             "LaravelViews\\Test\\": "tests"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "require-dev": {
         "phpunit/phpunit": "6.0.*|7.0.*|8.5.*",
