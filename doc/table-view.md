@@ -145,7 +145,7 @@ class UsersTypeFilter extends BooleanFilter
         }
         // $value['writer'] = true/false
         if ($value['writer']) {
-            $query->where('is_writer', true)
+            $query->where('is_writer', true);
         }
         return $query;
     }
