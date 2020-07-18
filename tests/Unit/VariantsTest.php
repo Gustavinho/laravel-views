@@ -4,9 +4,15 @@ namespace LaravelViews\Test\Unit;
 
 use LaravelViews\Facades\Variants;
 use LaravelViews\Test\TestCase;
+use LaravelViews\UI\Variants as UIVariants;
 
 class VariantsTest extends TestCase
 {
+    public function testVariantsHelper()
+    {
+        $this->assertInstanceOf(UIVariants::class, variants());
+    }
+
     public function testButtonVariants()
     {
         $this->assertEquals(
