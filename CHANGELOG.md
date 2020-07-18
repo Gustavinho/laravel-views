@@ -1,9 +1,13 @@
 # Changelog
 
-## [1.0.3] - NOT RELEASED YET
+## [1.0.3] - 2020-07-18
 ### Fixed
 - Fixed a bug using multiple redirect actions on the same table
 - Fixed some typos on the documentation
+
+### Added
+- Added road map to the documentation
+- Added contribution guide to the documentation
 
 ### Changed
 - Moved helpers load to composer
