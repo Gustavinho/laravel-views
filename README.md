@@ -20,6 +20,7 @@ Laravel package to create beautiful common views like tables using only PHP code
     - [Component variants using tailwindcss](#component-variants-using-tailwindcss)
     - [Components full customization](#components-full-customization)
 - [Table view](doc/table-view.md)
+- [Roadmap](#roadmap)
 
 # Installation and basic usage
 
@@ -192,3 +193,17 @@ or you can specify the provider
 ```bash
 php artisan vendor:publish --tag=views --provider='LaravelViews\LaravelViewsServiceProvider'
 ```
+
+## Roadmap
+
+Laravel Views is still under heavy development, I'm going to add more awesome features and views
+
+Here's the plan for what's coming:
+
+- *New grid view* to display data as a grid instead of as a table
+- Add tooltips to actions buttons
+- Add confirmation message on actions
+- Add a download action
+- Add translations
+- Add sortable columns
+- Add links as a UI helpers
