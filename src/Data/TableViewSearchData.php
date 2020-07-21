@@ -20,13 +20,11 @@ class TableViewSearchData implements Searchable
     public function searchItems(Builder $query, $fields, $value): Builder
     {
         if ($value) {
-            foreach ($fields as $field) {
-                if ($field === reset($fields)) {
-                    $query->where($field, 'like', "%{$value}%");
-                } else {
+            $query->where(function ($query) use ($fields, $value) {
+                foreach ($fields as $field) {
                     $query->orWhere($field, 'like', "%{$value}%");
                 }
-            }
+            });
         }
 
         return $query;
