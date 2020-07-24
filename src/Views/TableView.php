@@ -38,7 +38,7 @@ abstract class TableView extends View
     /** @var Array<BaseFilter> $filtersViews All filters customized in the child class */
     public $filtersViews;
 
-    /** @var Array<String> $searchBy All fileds to search */
+    /** @var Array<String> $searchBy All fields to search */
     public $searchBy;
 
     public function hydrate()
@@ -68,7 +68,7 @@ abstract class TableView extends View
 
     /**
      * Returns the itmes from the database regarding to the filters selected by the user
-     * applies the search query, the filters uesed and the total of items found
+     * applies the search query, the filters used and the total of items found
      */
     // TODO: Move this querybuilding to another class
     private function getItems()
@@ -80,7 +80,7 @@ abstract class TableView extends View
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
 
-        /** Updates the total items found with the currect query */
+        /** Updates the total items found with the correct query */
         $this->total = $query->count();
 
         return $query->paginate($this->paginate);
