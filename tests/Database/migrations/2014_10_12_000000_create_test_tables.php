@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateTestTables extends Migration
 {
     /**
      * Run the migrations.
@@ -22,6 +22,14 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(true);
             $table->text('avatar')->nullable();
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('foods', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->text('description');
+            $table->string('photo');
             $table->timestamps();
         });
     }
