@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.4] - 2020-07-26
+### Fixed
+- Fixed some typos and syntax errors
+- Fixed the query builder wrapping the table view search
+
 ## [1.0.3] - 2020-07-18
 ### Fixed
 - Fixed a bug using multiple redirect actions on the same table
