@@ -15,11 +15,12 @@ class MockGridView extends GridView
         return FoodTest::query();
     }
 
-    public function cell(FoodTest $food)
+    public function card(FoodTest $food)
     {
         return [
-            'photo' => $food->photo,
+            'image' => $food->photo,
             'title' => $food->name,
+            'subtitle' => $food->name,
             'description' => $food->description
         ];
     }
