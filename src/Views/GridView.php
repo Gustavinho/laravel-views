@@ -9,7 +9,7 @@ class GridView extends TableView
 
     public $cardComponent = 'laravel-views::components.card';
 
-    public $withBackground = true;
+    public $withBackground = false;
 
     protected function headers()
     {
