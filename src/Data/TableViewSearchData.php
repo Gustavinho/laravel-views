@@ -2,8 +2,8 @@
 
 namespace LaravelViews\Data;
 
-use LaravelViews\Data\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelViews\Data\Contracts\Searchable;
 
 class TableViewSearchData implements Searchable
 {
@@ -19,12 +19,31 @@ class TableViewSearchData implements Searchable
      */
     public function searchItems(Builder $query, $fields, $value): Builder
     {
+        $relationalFields = array_filter($fields, function ($item) {
+            return str_contains($item, '.');
+        });
+
+        $regularFields = array_diff($fields, $relationalFields);
+
         if ($value) {
-            $query->where(function ($query) use ($fields, $value) {
-                foreach ($fields as $field) {
+
+            $query->where(function ($query) use ($value, $regularFields, $relationalFields) {
+
+                foreach ($regularFields as $field) {
                     $query->orWhere($field, 'like', "%{$value}%");
                 }
+
+                foreach ($relationalFields as $relationalValue) {
+                    $keys = explode('.', $relationalValue);
+
+                    $query->orWhereHas($keys[0], function ($query) use ($value, $keys) {
+                        $query->where($keys[1], 'like', "%{$value}%");
+                    });
+                }
+
             });
+
+
         }
 
         return $query;
