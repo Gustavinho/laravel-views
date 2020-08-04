@@ -24,6 +24,7 @@ branches:
   only:
   - master
   - dev
+  - /^release-.*$/
 
 before_script:
   - composer config discard-changes true
