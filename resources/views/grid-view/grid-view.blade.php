@@ -1,3 +1,16 @@
+{{-- grid-view.grid-view
+
+Base layout to render all the UI componentes related to the grid view, this is the main file for this view,
+the rest of the files are included from here
+
+You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIERE DIRECTIVES
+
+UI components used:
+  - table-view.filters
+  - components.alert
+  - components.card
+  - components.paginator --}}
+
 <div>
   {{-- Search input and filters --}}
   <div class="mb-2">
@@ -40,12 +53,27 @@
           @endif
 
           @component($cardComponent, array_merge(
-            $view->card($item),
-            ['withBackground' => $withBackground]
+              $view->card($item),
+              ['withBackground' => $withBackground]
             ))
           @endcomponent
         </div>
       </div>
     @endforeach
+  </div>
+
+  {{-- Paginator, loading indicator and totals --}}
+  <div class="mt-8 flex items-center">
+    <div class="flex-1">
+      {{ $items->links('laravel-views::components.paginator') }}
+    </div>
+    <div class="flex items-center">
+      <span wire:loading class="mr-4">
+        Loading
+      </span>
+      <div>
+        <b>Showing</b> {{ $total }} items
+      </div>
+    </div>
   </div>
 </div>
