@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5] - 2020-08-09
+### Fixed
+- Fixed default behavior clicking on actions adding a prevent directive
+
 ## [1.0.4] - 2020-07-26
 ### Fixed
 - Fixed some typos and syntax errors
