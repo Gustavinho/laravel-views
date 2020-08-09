@@ -27,7 +27,7 @@ class TableViewFilterData implements Filterable
                     $currentFilterValue = $filterValues[$filter->id];
                     $value = $filter->passValuesFromRequestToFilter($currentFilterValue);
 
-                    if ($value != "") {
+                    if ($value !== "") {
                         $filter->apply($query, $value, request());
                     }
                 }

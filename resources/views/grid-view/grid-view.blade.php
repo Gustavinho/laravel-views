@@ -27,7 +27,7 @@
                     {{-- This renderIf method is implemented in every action --}}
                     @if ($action->renderIf($item))
                       <li class="py-2 px-4">
-                        <a href="#!" wire:click="executeAction('{{ $action->id }}', '{{ $item->id }}')" class="flex hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600">
+                        <a href="#!" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $item->id }}')" class="flex hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600">
                           <i data-feather="{{ $action->icon }}" class="mr-4"></i>
                           <span>{{ $action->title }}</span>
                         </a>

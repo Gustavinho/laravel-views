@@ -34,7 +34,7 @@ props
     </div>
 
     {{-- Flush this message from the session --}}
-    <a href="#" wire:click="{{ $onClose ?? ''}}">
+    <a href="#" wire:click.prevent="{{ $onClose ?? ''}}">
       <i data-feather="x-circle"></i>
     </a>
   </div>

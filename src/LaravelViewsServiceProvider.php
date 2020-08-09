@@ -53,7 +53,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
             ->loadCommands()
             ->publish()
             ->bladeDirectives()
-            ->configFiltes();
+            ->configFiles();
     }
 
     private function publish()
@@ -110,7 +110,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function configFiltes()
+    private function configFiles()
     {
         $this->mergeConfigFrom(__DIR__ . '/config/laravel-views.php', 'laravel-views');
 
