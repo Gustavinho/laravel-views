@@ -9,8 +9,6 @@ This view creates a dynamic grid view using card data, same as a TableView this 
   - [Defining card data](#defining-card-data)
   - [Customizing card data](#customizing-card-data)
   - [More features](#more-features)
-  - [Properties](#properties)
-  - [Methods](#methods)
 
 ## Grid view example
 
@@ -62,3 +60,11 @@ The grid view has a card component by default with some data but you can either 
 ```php
 public $cardComponent = 'components.my-card';
 ```
+
+## More features
+This grid view is based on a table view, so you could use some of the table view features as:
+
+- [Searching data](./table-view#searching-data)
+- [Pagination](./table-view#pagination)
+- [Filters](./table-view#filters)
+- [Actions](./table-view#actions)
