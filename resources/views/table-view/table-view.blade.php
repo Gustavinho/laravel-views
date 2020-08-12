@@ -17,7 +17,7 @@ UI components used:
     @include('laravel-views::table-view.filters')
   </div>
 
-  {{-- Success feedback --}}
+  {{-- Success/Error feedback --}}
   @if (session()->has('message'))
     @component('laravel-views::components.alert', [
       'message' => session('message'),

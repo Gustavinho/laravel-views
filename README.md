@@ -4,7 +4,7 @@ Laravel package to create beautiful common views like tables using only PHP code
 
 ## Table View example
 
-![](doc/table.png)
+![](doc/laravel-views.png)
 
 - [Installation and basic usage](#installation-and-basic-usage)
     - [Installing laravel views](#installing-laravel-views)
@@ -20,6 +20,7 @@ Laravel package to create beautiful common views like tables using only PHP code
     - [Component variants using tailwindcss](#component-variants-using-tailwindcss)
     - [Components full customization](#components-full-customization)
 - [Table view](doc/table-view.md)
+- [Grid view](doc/grid-view.md)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 
