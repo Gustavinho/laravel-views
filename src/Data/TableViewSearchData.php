@@ -19,7 +19,7 @@ class TableViewSearchData implements Searchable
      */
     public function searchItems(Builder $query, $fields, $value): Builder
     {
-        $relationalFields = array_filter($fields, function ($item) {
+        $relationalFields = array_filter($fields, static function ($item) {
             return str_contains($item, '.');
         });
 
@@ -27,17 +27,18 @@ class TableViewSearchData implements Searchable
 
         if ($value) {
 
-            $query->where(function ($query) use ($value, $regularFields, $relationalFields) {
+            $query->where(static function ($query) use ($value, $regularFields, $relationalFields) {
 
                 foreach ($regularFields as $field) {
                     $query->orWhere($field, 'like', "%{$value}%");
                 }
 
                 foreach ($relationalFields as $relationalValue) {
-                    $keys = explode('.', $relationalValue);
 
-                    $query->orWhereHas($keys[0], function ($query) use ($value, $keys) {
-                        $query->where($keys[1], 'like', "%{$value}%");
+                    [$relationship, $field] = explode('.', $relationalValue);
+
+                    $query->orWhereHas($relationship, static function ($query) use ($value, $field) {
+                        $query->where($field, 'like', "%{$value}%");
                     });
                 }
 
