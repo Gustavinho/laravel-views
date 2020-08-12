@@ -19,13 +19,15 @@ class TableViewSearchData implements Searchable
      */
     public function searchItems(Builder $query, $fields, $value): Builder
     {
-        $relationalFields = array_filter($fields, static function ($item) {
-            return str_contains($item, '.');
-        });
 
-        $regularFields = array_diff($fields, $relationalFields);
 
         if ($value) {
+
+            $relationalFields = array_filter($fields, static function ($item) {
+                return str_contains($item, '.');
+            });
+
+            $regularFields = array_diff($fields, $relationalFields);
 
             $query->where(static function ($query) use ($value, $regularFields, $relationalFields) {
 
