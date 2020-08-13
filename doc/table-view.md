@@ -78,12 +78,12 @@ You can enable a search input specifying a class property with the fields you wa
 public $searchBy = ['name', 'email'];
 ```
 
-When this property is configured, a search input is shown at the top left of the table
+When this property is configured, a search input is shown at the top left of the table.
 
-When you want to search with relational properties, you can specify the search key by `$relation.$column`
+You can also search with relational properties, by specifying the key in the format of `$relationship.$column`.
+ 
+Ex . When your `$model` has a relationship called `user`. 
 
-
-When your `$model` has a relationship called `user`. 
 ```php
 
 class Review extends Model
@@ -91,7 +91,7 @@ class Review extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(UserTest::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 }
