@@ -38,4 +38,9 @@ class UserTest extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ReviewTest::class, 'user_id', 'id');
+    }
 }
