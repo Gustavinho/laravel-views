@@ -8,7 +8,7 @@ use LaravelViews\Views\TableView;
 
 class MockReviewTableView extends TableView
 {
-    // public $searchBy = ['email'];
+    // public $searchBy = ['id'];
 
     public function repository(): Builder
     {
