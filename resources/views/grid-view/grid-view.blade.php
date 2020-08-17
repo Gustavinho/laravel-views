@@ -40,10 +40,10 @@ UI components used:
                     {{-- This renderIf method is implemented in every action --}}
                     @if ($action->renderIf($item))
                       <li class="py-2 px-4">
-                        <a href="#!" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $item->id }}')" class="flex hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600">
+                        @component('laravel-views::components.action', ['action' => $action, 'item' => $item])
                           <i data-feather="{{ $action->icon }}" class="mr-4"></i>
                           <span>{{ $action->title }}</span>
-                        </a>
+                        @endcomponent
                       </li>
                     @endif
                   @endforeach
@@ -76,4 +76,6 @@ UI components used:
       </div>
     </div>
   </div>
+
+  @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
 </div>

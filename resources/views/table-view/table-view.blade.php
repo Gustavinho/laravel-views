@@ -63,5 +63,7 @@ UI components used:
       </div>
     </div>
   </div>
+
+  @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
 </div>
 

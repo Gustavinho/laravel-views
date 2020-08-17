@@ -137,6 +137,24 @@ class TableViewTest extends TestCase
         }
     }
 
+    public function testSeeConfirmationMessage()
+    {
+        $message = 'This is the confirmation message';
+        $livewire = Livewire::test(MockTableView::class);
+        $livewire->set('confirmationMessage', $message)
+            ->assertSee($message);
+    }
+
+    public function testCallActionAfterConfirmationMessage()
+    {
+        $user = factory(UserTest::class)->create();
+        Livewire::test(MockTableViewWithActions::class)
+            ->call('executeAction', 'test-confirmed-action', $user->id, true)
+            ->assertSee('Do you really want to perform this action?')
+            ->call('executeAction', 'test-confirmed-action', $user->id, false)
+            ->assertSee('Action was executed successfully');
+    }
+
     private function assertSeeUsers($livewire, $users, $assert = 'assertSee')
     {
         foreach ($users as $user) {
