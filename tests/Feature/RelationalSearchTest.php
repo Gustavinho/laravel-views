@@ -27,7 +27,7 @@ class RelationalSearchTest extends TestCase
         $this->users = factory(UserTest::class, 10)
             ->create()
             ->each(function (UserTest $user) {
-                $user->reviews()->saveMany(factory(ReviewTest::class)->make());
+                $user->reviews()->saveMany(factory(ReviewTest::class, 3)->make());
             });
 
         $this->reviews = ReviewTest::all();
