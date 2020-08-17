@@ -29,20 +29,11 @@ class TableViewSearchData implements Searchable
 
             $regularFields = array_diff($fields, $relationalFields);
 
-            $query->where(static function ($query) use ($value, $regularFields, $relationalFields) {
+            $query->where(function ($query) use ($value, $regularFields, $relationalFields) {
 
-                foreach ($regularFields as $field) {
-                    $query->orWhere($field, 'like', "%{$value}%");
-                }
+                $this->applyRegularFields($regularFields, $query, $value);
 
-                foreach ($relationalFields as $relationalValue) {
-
-                    [$relationship, $field] = explode('.', $relationalValue);
-
-                    $query->orWhereHas($relationship, static function ($query) use ($value, $field) {
-                        $query->where($field, 'like', "%{$value}%");
-                    });
-                }
+                $this->applyRelationalFields($relationalFields, $query, $value);
 
             });
 
@@ -50,5 +41,34 @@ class TableViewSearchData implements Searchable
         }
 
         return $query;
+    }
+
+    /**
+     * @param $relationalFields
+     * @param $query
+     * @param String $value
+     */
+    private static function applyRelationalFields($relationalFields, $query, string $value): void
+    {
+        foreach ($relationalFields as $relationalValue) {
+
+            [$relationship, $field] = explode('.', $relationalValue);
+
+            $query->orWhereHas($relationship, static function ($query) use ($value, $field) {
+                $query->where($field, 'like', "%{$value}%");
+            });
+        }
+    }
+
+    /**
+     * @param array $regularFields
+     * @param $query
+     * @param String $value
+     */
+    private function applyRegularFields(array $regularFields, $query, string $value): void
+    {
+        foreach ($regularFields as $field) {
+            $query->orWhere($field, 'like', "%{$value}%");
+        }
     }
 }
