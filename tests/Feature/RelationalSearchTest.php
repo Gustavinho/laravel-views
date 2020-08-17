@@ -8,14 +8,12 @@ use LaravelViews\Test\Database\ReviewTest;
 use LaravelViews\Test\Database\UserTest;
 use LaravelViews\Test\Mock\MockReviewTableView;
 use LaravelViews\Test\Mock\MockReviewTableViewWithSearch;
-use LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
 use LaravelViews\Test\TestCase;
 use Livewire\Livewire;
 
-class ReviewTableViewTest extends TestCase
+class RelationalSearchTest extends TestCase
 {
     use RefreshDatabase;
-
 
     private $livewire;
     private $users;
@@ -29,7 +27,7 @@ class ReviewTableViewTest extends TestCase
         $this->users = factory(UserTest::class, 10)
             ->create()
             ->each(function (UserTest $user) {
-                $user->reviews()->saveMany(factory(ReviewTest::class, 1)->make());
+                $user->reviews()->saveMany(factory(ReviewTest::class)->make());
             });
 
         $this->reviews = ReviewTest::all();
@@ -37,33 +35,6 @@ class ReviewTableViewTest extends TestCase
         $this->livewire = Livewire::test(MockReviewTableView::class);
     }
 
-    public function testSeeAllHeaders()
-    {
-
-        $headers = ['Id', 'Author Email', 'Food'];
-
-        foreach ($headers as $header) {
-            $this->livewire->assertSee($header);
-        }
-    }
-
-    public function testSeeAllDataOnTheTable()
-    {
-
-        $this->assertSeeReviews($this->livewire, $this->reviews);
-    }
-
-    public function testDontSeeSearchInputIf()
-    {
-        $this->livewire
-            ->assertDontSee('Search');
-    }
-
-    public function testDontSeeFiltersButton()
-    {
-        $this->livewire
-            ->assertDontSee('Filters');
-    }
 
     public function testSeeAllDataFoundBySearchInput()
     {
@@ -81,15 +52,6 @@ class ReviewTableViewTest extends TestCase
         $this->assertSeeReviews($this->livewire, $userReviews)
             // Rest of the users
             ->assertDontSeeReviews($this->livewire, $otherUserReviews);
-    }
-
-
-    public function testClearSearch()
-    {
-        Livewire::test(MockTableViewWithSearchAndFilters::class)
-            ->set('search', 'my-custom-search')
-            ->call('clearSearch')
-            ->assertSet('search', '');
     }
 
 
