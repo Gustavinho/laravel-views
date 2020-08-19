@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTestTables extends Migration
 {
@@ -22,6 +22,14 @@ class CreateTestTables extends Migration
             $table->boolean('active')->default(true);
             $table->text('avatar')->nullable();
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('reviews', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('food_id');
+            $table->bigInteger('user_id');
+            $table->text('message');
             $table->timestamps();
         });
 
