@@ -19,8 +19,9 @@ This view creates a dynamic data table with some features like filters, paginati
 - [Actions](#actions)
     - [Registering actions](#registering-actions)
     - [Redirect action](#redirect-action)
-    - [Showing alert messages](#showing-alert-messages)
+    - [Showing feedback messages](#showing-alert-messages)
     - [Hiding actions](#hiding-actions)
+    - [Confirmation message](#confirmation-message)
 - [Showing UI components](#showing-ui-components)
     - [Avatar](#avatar)
     - [Badges](#badges)
@@ -282,7 +283,7 @@ protected function actionsByRow()
 
 The first param is the name of the route to be redirected, it is important to be a named route, the `RedirectAction` will inject the model id to that route
 
-## Showing alert messages
+## Showing feedback messages
 To display a success alert message you can execute the `$this->succes()` at the end of the handle method, a default message will be displayed once the action is executed
 
 ![](success.png)
@@ -318,6 +319,29 @@ You can choose if the action will be shown or hidden for an specific row definin
 public function renderIf($model)
 {
     return !$model->active;
+}
+```
+
+## Confirmation message
+Some actions might need to be confirmed before the its execution, just add the `Confirmable` trait.
+
+```php
+use LaravelViews\Actions\Confirmable;
+
+class ActivateUserAction extends Action
+{
+    use Confirmable;
+}
+```
+
+![](confirmation-message.png)
+
+To customize the message just overwrite the `getConfirmationMessage` method returning your custom message. You also have access to the model the action will be executed with.
+
+```php
+public function getConfirmationMessage($item = null)
+{
+    return 'My custom confirmation message';
 }
 ```
 

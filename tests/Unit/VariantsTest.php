@@ -21,7 +21,7 @@ class VariantsTest extends TestCase
         );
         $this->assertEquals(
             Variants::button('primary-light')->class(),
-            'text-blue-700 bg-blue-200 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white active:bg-blue-600 active:text-white'
+            'text-blue-700 border border-blue-600 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white active:bg-blue-600 active:text-white'
         );
     }
 

@@ -12,6 +12,9 @@ abstract class Action
 
     public $id;
 
+    /** Item the action will be executed with */
+    public $item;
+
     private $messages = [
         'success' => 'Action was executed successfully',
         'danger' => 'There was an error executing this action',
@@ -56,6 +59,15 @@ abstract class Action
     {
         session()->flash('messageType', $type);
         session()->flash('message', $message ? $message : $this->messages[$type]);
+    }
+
+    public function shouldBeConfirmed()
+    {
+        if (method_exists($this, 'getConfirmationMessage')) {
+            return !empty($this->getConfirmationMessage(null));
+        }
+
+        return false;
     }
 
     abstract public function handle($item);

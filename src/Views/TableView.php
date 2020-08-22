@@ -3,6 +3,8 @@
 namespace LaravelViews\Views;
 
 use Exception;
+use LaravelViews\Actions\Action;
+use LaravelViews\Actions\ExecuteAction;
 use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\QueryStringData;
@@ -40,6 +42,12 @@ abstract class TableView extends View
 
     /** @var Array<String> $searchBy All fields to search */
     public $searchBy;
+
+    /** @var String $confirmationMessage sets the confirmation message to be shown when an action requires it */
+    public $confirmationMessage = null;
+
+    /** @var Action $actionToBeConfirmed sets a temporal action to be executed once it will be confirmed */
+    public $actionToBeConfirmed = null;
 
     public function hydrate()
     {
@@ -101,18 +109,24 @@ abstract class TableView extends View
      * All these actions are executed from the UI and those aren't for internal use
      */
 
-    public function executeAction($action, $id)
+    public function executeAction($action, $id, $shouldVerifyConfirmation, ExecuteAction $executeAction)
     {
-        $actionToExecute = collect($this->actionsByRow())->first(
-            function ($actionToFind) use ($action) {
-                return $actionToFind->id === $action;
-            }
-        );
+        $item = $this->repository()->find($id);
 
-        if ($actionToExecute) {
-            $item = $this->repository()->find($id);
+        /** Executes the action, if it needs to be confirmed it will return the action to be confirmed  */
+        $actionToBeConfirmed = $executeAction
+            ->shouldVerifyConfirmation($shouldVerifyConfirmation)
+            ->callByActionName($action, $item, $this->actionsByRow());
 
-            return $actionToExecute->handle($item);
+        /** If the action need to be confirmed */
+        if ($actionToBeConfirmed) {
+            $this->fill([
+                /** Stores action id and item id to be executed before, this is needed on the confirmation message component */
+                'actionToBeConfirmed' => [$actionToBeConfirmed->id, $item->id,],
+                'confirmationMessage' => $actionToBeConfirmed->getConfirmationMessage($item)
+            ]);
+        } else {
+            $this->closeConfirmationMessage();
         }
     }
 
@@ -133,5 +147,11 @@ abstract class TableView extends View
     public function clearSearch()
     {
         $this->search = '';
+    }
+
+    public function closeConfirmationMessage()
+    {
+        $this->confirmationMessage = null;
+        $this->actionToBeConfirmed = null;
     }
 }

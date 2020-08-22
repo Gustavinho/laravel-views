@@ -42,12 +42,9 @@ props:
           <td>
             <div class="px-3 py-2 flex justify-end">
               @foreach ($actionsByRow as $action)
-                {{-- This renderIf method is implemented in every action --}}
-                @if ($action->renderIf($item))
-                  <a href="#" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $item->id }}')">
-                    <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
-                  </a>
-                @endif
+                @component('laravel-views::components.action', ['action' => $action, 'item' => $item])
+                  <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
+                @endcomponent
               @endforeach
             </div>
           </td>
