@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.6] - 2010-08-22
+- Fixed typos
+- Fixed filter stub file name
+
 ## [1.0.5] - 2020-08-09
 ### Fixed
 - Fixed default behavior clicking on actions adding a prevent directive
