@@ -11,6 +11,7 @@ use LaravelViews\Data\TableViewFilterData;
 use LaravelViews\Data\TableViewSearchData;
 use LaravelViews\UI\UI;
 use LaravelViews\UI\Variants;
+use LaravelViews\UI\Header;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use LaravelViews\Console\GridViewMakeCommand;
@@ -47,6 +48,9 @@ class LaravelViewsServiceProvider extends ServiceProvider
         });
         $this->app->bind('ui', function () {
             return new UI;
+        });
+        $this->app->bind('header', function () {
+            return new Header();
         });
 
         $this->loadViews()
