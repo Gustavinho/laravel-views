@@ -49,7 +49,7 @@ class TableViewTest extends TestCase
     public function testDontSeeFiltersButton()
     {
         Livewire::test(MockTableView::class)
-            ->assertDontSee('Fiters');
+            ->assertDontSee('Filters');
     }
 
     public function testSeeAllDataFoundBySearchInput()
