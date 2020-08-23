@@ -35,7 +35,9 @@ UI components used:
         'headers' => $headers,
         'actionsByRow' => $actionsByRow,
         'items' => $items,
-        'view' => $view
+        'view' => $view,
+        'sortBy' => $sortBy,
+        'sortOrder' => $sortOrder
       ])
       @endcomponent
     </div>

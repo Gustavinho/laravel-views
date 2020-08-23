@@ -17,7 +17,9 @@ abstract class TableView extends View
 
     protected $updatesQueryString = [
         'search' => ['except' => ''],
-        'filters'
+        'filters',
+        'sortBy',
+        'sortOrder'
     ];
 
     /** Component name */
@@ -64,6 +66,8 @@ abstract class TableView extends View
         $this->filtersViews = $this->filters();
         $this->search = $queryStringData->getSearchValue($this->search);
         $this->filters = $queryStringData->getFilterValues($this->filters);
+        $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
+        $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
     }
 
     /**

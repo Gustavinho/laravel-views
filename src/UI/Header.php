@@ -16,9 +16,10 @@ class Header
      */
     public function title(string $title)
     {
-        $this->title = $title;
+        $header = new static;
+        $header->title = $title;
 
-        return $this;
+        return $header;
     }
 
     /**
