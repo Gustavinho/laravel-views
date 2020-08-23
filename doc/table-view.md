@@ -10,6 +10,7 @@ This view creates a dynamic data table with some features like filters, paginati
     - [Rows](#rows)
     - [Searching data](#searching-data)
     - [Pagination](#pagination)
+    - [Sorting data](#sorting-data)
 - [Filters](#filters)
     - [Select filter](#select-filter)
     - [Boolean filter](#boolean-filter)
@@ -82,8 +83,8 @@ public $searchBy = ['name', 'email'];
 When this property is configured, a search input is shown at the top left of the table.
 
 You can also search with relational properties, by specifying the key in the format of `$relationship.$column`.
- 
-Ex . When your `$model` has a relationship called `user`. 
+
+Ex . When your `$model` has a relationship called `user`.
 
 ```php
 
@@ -110,6 +111,21 @@ The data is paginated by default showing 20 elements per page, you can customize
 
 ```php
 protected $paginate = 50;
+```
+
+## Sorting data
+You could create a complex header instead so you can set it as a sortable, just use the `Header` facade instead of a string in the `headers()` method. This will add sort icons on this header.
+
+```php
+use LaravelViews\Facades\Header;
+
+public function headers(): array
+{
+    return [
+        Header::title('Name')->sortBy('name'),
+        'Email',
+    ];
+}
 ```
 
 # Filters
