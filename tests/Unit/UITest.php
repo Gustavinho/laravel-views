@@ -36,6 +36,16 @@ class UITest extends TestCase
         $this->assertHtmlEquals($avatar, $expected);
     }
 
+    public function testLinkHelper()
+    {
+        $link = UI::link('title', '/');
+        $expected = '<a href="/" class="hover:text-blue-500 hover:underlinei">
+                        title
+                    </a>';
+
+        $this->assertHtmlEquals($link, $expected);
+    }
+
     private function assertHtmlEquals($html, $expected)
     {
         $this->assertEquals(

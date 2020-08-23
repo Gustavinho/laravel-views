@@ -19,4 +19,12 @@ class UI
             'variant' => 'avatar'
         ])->render();
     }
+
+    public function link($title, $to)
+    {
+        return view('laravel-views::components.link', compact(
+            'to',
+            'title'
+        ))->render();
+    }
 }
