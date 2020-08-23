@@ -82,8 +82,8 @@ public $searchBy = ['name', 'email'];
 When this property is configured, a search input is shown at the top left of the table.
 
 You can also search with relational properties, by specifying the key in the format of `$relationship.$column`.
- 
-Ex . When your `$model` has a relationship called `user`. 
+
+Ex . When your `$model` has a relationship called `user`.
 
 ```php
 
@@ -346,7 +346,7 @@ public function getConfirmationMessage($item = null)
 ```
 
 # Showing UI components
-You can display some UI components instead of plain text like avateres or badges
+You can display some UI components instead of plain text like avateres, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
 
 ## Avatar
 Shows an 32x32 rounded image
@@ -371,4 +371,21 @@ UI::badge('My title', 'info');
 UI::badge('My title', 'success');
 UI::badge('My title', 'warning');
 UI::badge('My title', 'danger');
+```
+
+## Link
+Shows a simple link to navigate to another route.
+
+```php
+UI::link('My link title', 'my-route-to-navigate');
+```
+
+## Icons
+Shows a feather icon with a custom variant, it is important to set valid [feather icon.](https://feathericons.com/)
+
+```php
+UI::icon('check');
+UI::icon('check', 'success');
+UI::icon('check', 'danger');
+UI::icon('check', 'warning');
 ```

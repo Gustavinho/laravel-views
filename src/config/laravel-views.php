@@ -49,7 +49,7 @@ return [
 
     "icons" => [
         'success' => 'text-green-500',
-        'danger' => 'txt-red-500',
+        'danger' => 'text-red-500',
         'warning' => 'text-yellow-500',
         'info' => 'text-blue-500',
     ]
