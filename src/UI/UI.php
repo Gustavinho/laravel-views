@@ -27,4 +27,13 @@ class UI
             'title'
         ))->render();
     }
+
+    public function icon($icon, $type = 'default', $class = "")
+    {
+        return view('laravel-views::components.icon', compact(
+            'icon',
+            'type',
+            'class'
+        ))->render();
+    }
 }
