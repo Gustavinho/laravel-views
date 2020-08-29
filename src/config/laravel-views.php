@@ -45,5 +45,12 @@ return [
 
     "images" => [
         'avatar' => 'h-8 w-8 object-cover rounded-full shadow-inner'
+    ],
+
+    "icons" => [
+        'success' => 'text-green-500',
+        'danger' => 'text-red-500',
+        'warning' => 'text-yellow-500',
+        'info' => 'text-blue-500',
     ]
 ];
