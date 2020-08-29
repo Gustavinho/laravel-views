@@ -10,6 +10,7 @@ This view creates a dynamic data table with some features like filters, paginati
     - [Rows](#rows)
     - [Searching data](#searching-data)
     - [Pagination](#pagination)
+    - [Sorting data](#sorting-data)
 - [Filters](#filters)
     - [Select filter](#select-filter)
     - [Boolean filter](#boolean-filter)
@@ -110,6 +111,21 @@ The data is paginated by default showing 20 elements per page, you can customize
 
 ```php
 protected $paginate = 50;
+```
+
+## Sorting data
+You could create a complex header instead so you can set it as a sortable, just use the `Header` facade instead of a string in the `headers()` method. This will add sort icons on this header.
+
+```php
+use LaravelViews\Facades\Header;
+
+public function headers(): array
+{
+    return [
+        Header::title('Name')->sortBy('name'),
+        'Email',
+    ];
+}
 ```
 
 # Filters

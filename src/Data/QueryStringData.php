@@ -38,4 +38,14 @@ class QueryStringData
             return $filter;
         })->toArray();
     }
+
+    /**
+     * Get a value from the query string
+     * @param string $field query param name
+     * @param string $currentValue Default value
+     */
+    public function getValue($field, $currentValue)
+    {
+        return $this->request->query($field, $currentValue);
+    }
 }

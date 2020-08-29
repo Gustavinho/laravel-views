@@ -19,10 +19,7 @@ class TableViewSearchData implements Searchable
      */
     public function searchItems(Builder $query, $fields, $value): Builder
     {
-
-
         if ($value) {
-
             $relationalFields = array_filter($fields, static function ($item) {
                 return str_contains($item, '.');
             });
@@ -30,14 +27,9 @@ class TableViewSearchData implements Searchable
             $regularFields = array_diff($fields, $relationalFields);
 
             $query->where(function ($query) use ($value, $regularFields, $relationalFields) {
-
                 $this->applyRegularFields($regularFields, $query, $value);
-
                 $this->applyRelationalFields($relationalFields, $query, $value);
-
             });
-
-
         }
 
         return $query;

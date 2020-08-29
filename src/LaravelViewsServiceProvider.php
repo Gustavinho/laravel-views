@@ -11,9 +11,12 @@ use LaravelViews\Data\TableViewFilterData;
 use LaravelViews\Data\TableViewSearchData;
 use LaravelViews\UI\UI;
 use LaravelViews\UI\Variants;
+use LaravelViews\UI\Header;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use LaravelViews\Console\GridViewMakeCommand;
+use LaravelViews\Data\Contracts\Sortable;
+use LaravelViews\Data\TableViewSortData;
 
 class LaravelViewsServiceProvider extends ServiceProvider
 {
@@ -39,6 +42,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         $this->app->bind(Searchable::class, TableViewSearchData::class);
         $this->app->bind(Filterable::class, TableViewFilterData::class);
+        $this->app->bind(Sortable::class, TableViewSortData::class);
         $this->app->bind('laravel-views', function () {
             return new LaravelViews();
         });
@@ -47,6 +51,9 @@ class LaravelViewsServiceProvider extends ServiceProvider
         });
         $this->app->bind('ui', function () {
             return new UI;
+        });
+        $this->app->bind('header', function () {
+            return new Header();
         });
 
         $this->loadViews()
