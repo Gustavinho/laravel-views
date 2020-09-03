@@ -45,7 +45,7 @@ public function card($item)
     return [
         'image' => $item->photo,
         'title' => $item->name,
-        'subtitle' => $food->email,
+        'subtitle' => $item->email,
         'description' => $item->description
     ];
 }
@@ -55,7 +55,7 @@ These are the fields by default but you can add more if you want to customize yo
 
 ## Customizing card data
 
-The grid view has a card component by default with some data but you can either create your own card and use as much data as you need or just use your own card implementation, you just need to specify a blade file
+The grid view has a card component by default with some data but you can either create your own card and use as much data as you need in the `card` mthod and just use your own card implementation, you just need to specify a blade file.
 
 ```php
 public $cardComponent = 'components.my-card';
