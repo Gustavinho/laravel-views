@@ -1,8 +1,8 @@
 # Changelog
 
-## [1.1] - NOR RELEASED
+## [1.1] - 2020-09-03
 ### Added
-- New `GridView` class to render items as a grid.
+- New `GridView` class.
 - Confirmation message on actions.
 - Search input with support for relational fields.
 - Sort table view columns
@@ -10,7 +10,7 @@
   - Link
   - Icons
 
-## [1.0.6] - 2010-08-22
+## [1.0.6] - 2020-08-22
 - Fixed typos
 - Fixed filter stub file name
 
