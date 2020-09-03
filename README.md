@@ -40,6 +40,8 @@ or you can specify the provider
 php artisan vendor:publish --tag=public --provider='LaravelViews\LaravelViewsServiceProvider' --force
 ```
 
+If you are updating this package you might need to republish these assets.
+
 ## Including assets
 Add the following Blade directives in the *head* tag, and before the end *body* tag in your template
 
@@ -182,7 +184,7 @@ or you can specify the provider
 php artisan vendor:publish --tag=config --provider='LaravelViews\LaravelViewsServiceProvider'
 ```
 
-Inside this config file you can change the colors for each component variant
+Inside this config file you can change the colors for each component variant. If you are updating this package you might need to republish this config file.
 
 ## Components full customization
 
@@ -195,6 +197,8 @@ or you can specify the provider
 ```bash
 php artisan vendor:publish --tag=views --provider='LaravelViews\LaravelViewsServiceProvider'
 ```
+
+If you are updating this package you might need to republish these views.
 
 ## Contributing
 

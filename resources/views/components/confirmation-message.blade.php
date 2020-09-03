@@ -20,7 +20,7 @@
         </span>
       </div>
     </div>
-    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+    <div wire:loading.remove class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
       <span class="flex w-full sm sm:ml-3 sm:w-auto">
         @component('laravel-views::components.button', [
           'variant' => 'danger',
@@ -35,7 +35,6 @@
           'variant' => 'light',
           'title' => 'Cancel',
           'onWireClick' => 'closeConfirmationMessage',
-          'block' => true
         ])
         @endcomponent
       </span>

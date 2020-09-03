@@ -2,7 +2,7 @@
 
 ## [1.1] - NOR RELEASED
 ### Added
-- New `GridView` class.
+- New `GridView` class to render items as a grid.
 - Confirmation message on actions.
 - Search input with support for relational fields.
 - Sort table view columns
