@@ -3,8 +3,11 @@
 namespace LaravelViews\Views;
 
 use Exception;
+use LaravelViews\Actions\Action;
+use LaravelViews\Actions\ExecuteAction;
 use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
+use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\QueryStringData;
 use Livewire\WithPagination;
 
@@ -14,7 +17,9 @@ abstract class TableView extends View
 
     protected $updatesQueryString = [
         'search' => ['except' => ''],
-        'filters'
+        'filters',
+        'sortBy',
+        'sortOrder'
     ];
 
     /** Component name */
@@ -41,6 +46,16 @@ abstract class TableView extends View
     /** @var Array<String> $searchBy All fields to search */
     public $searchBy;
 
+    /** @var String $confirmationMessage sets the confirmation message to be shown when an action requires it */
+    public $confirmationMessage = null;
+
+    /** @var Action $actionToBeConfirmed sets a temporal action to be executed once it will be confirmed */
+    public $actionToBeConfirmed = null;
+
+    public $sortBy = null;
+
+    public $sortOrder = 'asc';
+
     public function hydrate()
     {
         $this->filtersViews = $this->filters();
@@ -51,6 +66,8 @@ abstract class TableView extends View
         $this->filtersViews = $this->filters();
         $this->search = $queryStringData->getSearchValue($this->search);
         $this->filters = $queryStringData->getFilterValues($this->filters);
+        $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
+        $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
     }
 
     /**
@@ -76,9 +93,11 @@ abstract class TableView extends View
         $query = $this->repository();
         $searchable = app(Searchable::class);
         $filterable = app(Filterable::class);
+        $sortable = app(Sortable::class);
 
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
+        $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
 
         /** Updates the total items found with the correct query */
         $this->total = $query->count();
@@ -101,18 +120,38 @@ abstract class TableView extends View
      * All these actions are executed from the UI and those aren't for internal use
      */
 
-    public function executeAction($action, $id)
+    /**
+     * Sets the filed the table view data will be sort by
+     * @param string $field Field to sort by
+     */
+    public function sort($field)
     {
-        $actionToExecute = collect($this->actionsByRow())->first(
-            function ($actionToFind) use ($action) {
-                return $actionToFind->id === $action;
-            }
-        );
+        if ($this->sortBy === $field) {
+            $this->sortOrder = $this->sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $field;
+            $this->sortOrder = 'asc';
+        }
+    }
 
-        if ($actionToExecute) {
-            $item = $this->repository()->find($id);
+    public function executeAction($action, $id, $shouldVerifyConfirmation, ExecuteAction $executeAction)
+    {
+        $item = $this->repository()->find($id);
 
-            return $actionToExecute->handle($item);
+        /** Executes the action, if it needs to be confirmed it will return the action to be confirmed  */
+        $actionToBeConfirmed = $executeAction
+            ->shouldVerifyConfirmation($shouldVerifyConfirmation)
+            ->callByActionName($action, $item, $this->actionsByRow());
+
+        /** If the action need to be confirmed */
+        if ($actionToBeConfirmed) {
+            $this->fill([
+                /** Stores action id and item id to be executed before, this is needed on the confirmation message component */
+                'actionToBeConfirmed' => [$actionToBeConfirmed->id, $item->id,],
+                'confirmationMessage' => $actionToBeConfirmed->getConfirmationMessage($item)
+            ]);
+        } else {
+            $this->closeConfirmationMessage();
         }
     }
 
@@ -133,5 +172,11 @@ abstract class TableView extends View
     public function clearSearch()
     {
         $this->search = '';
+    }
+
+    public function closeConfirmationMessage()
+    {
+        $this->confirmationMessage = null;
+        $this->actionToBeConfirmed = null;
     }
 }

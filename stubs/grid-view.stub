@@ -1,0 +1,34 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelViews\Views\GridView;
+use Illuminate\Database\Eloquent\Builder;
+
+class DummyClass extends GridView
+{
+    /**
+     * Sets a initial query with the data to fill the grid view
+     *
+     * @return Builder Eloquent query
+     */
+    public function repository(): Builder
+    {
+        // return User::query();
+    }
+
+    /**
+     * Sets the data to every card on the view
+     *
+     * @param $item Current model for each card
+     */
+    public function card($item)
+    {
+        return [
+            'image' => $item->photo,
+            'title' => $item->name,
+            'subtitle' => $food->email,
+            'description' => $item->description
+        ];
+    }
+}

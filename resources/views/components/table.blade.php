@@ -15,7 +15,23 @@ props:
       {{-- Renders all the headers --}}
       @foreach ($headers as $header)
         <th class="px-3 py-3">
-          {{ $header }}
+          @if (is_string($header))
+            {{ $header }}
+          @else
+            @if ($header->isSortable())
+              <div class="flex">
+                <a href="#!" wire:click.prevent="sort('{{ $header->sortBy }}')" class="flex-1">
+                  {{ $header->title }}
+                </a>
+                <a href="#!" wire:click.prevent="sort('{{ $header->sortBy }}')" class="flex">
+                  <i data-feather="chevron-up" class="{{ $sortBy === $header->sortBy && $sortOrder === 'asc' ? 'text-gray-900' : 'text-gray-400'}} h-4 w-4"></i>
+                  <i data-feather="chevron-down" class="{{ $sortBy === $header->sortBy && $sortOrder === 'desc' ? 'text-gray-900' : 'text-gray-400'}} h-4 w-4"></i>
+                </a>
+              </div>
+            @else
+              {{ $header->title }}
+            @endif
+          @endif
         </th>
       @endforeach
 
@@ -42,12 +58,9 @@ props:
           <td>
             <div class="px-3 py-2 flex justify-end">
               @foreach ($actionsByRow as $action)
-                {{-- This renderIf method is implemented in every action --}}
-                @if ($action->renderIf($item))
-                  <a href="#" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $item->id }}')">
-                    <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
-                  </a>
-                @endif
+                @component('laravel-views::components.action', ['action' => $action, 'item' => $item])
+                  <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
+                @endcomponent
               @endforeach
             </div>
           </td>

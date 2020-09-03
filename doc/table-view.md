@@ -10,6 +10,7 @@ This view creates a dynamic data table with some features like filters, paginati
     - [Rows](#rows)
     - [Searching data](#searching-data)
     - [Pagination](#pagination)
+    - [Sorting data](#sorting-data)
 - [Filters](#filters)
     - [Select filter](#select-filter)
     - [Boolean filter](#boolean-filter)
@@ -19,8 +20,9 @@ This view creates a dynamic data table with some features like filters, paginati
 - [Actions](#actions)
     - [Registering actions](#registering-actions)
     - [Redirect action](#redirect-action)
-    - [Showing alert messages](#showing-alert-messages)
+    - [Showing feedback messages](#showing-alert-messages)
     - [Hiding actions](#hiding-actions)
+    - [Confirmation message](#confirmation-message)
 - [Showing UI components](#showing-ui-components)
     - [Avatar](#avatar)
     - [Badges](#badges)
@@ -78,13 +80,52 @@ You can enable a search input specifying a class property with the fields you wa
 public $searchBy = ['name', 'email'];
 ```
 
-When this property is configured, a search input is shown at the top left of the table
+When this property is configured, a search input is shown at the top left of the table.
+
+You can also search with relational properties, by specifying the key in the format of `$relationship.$column`.
+
+Ex . When your `$model` has a relationship called `user`.
+
+```php
+
+class Review extends Model
+{
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+}
+```
+
+You can search with any of the properties in the relationship instance
+
+```php
+public $searchBy = ['id', 'user.email'];
+```
+
 
 ## Pagination
 The data is paginated by default showing 20 elements per page, you can customize this behavior with a class property
 
 ```php
 protected $paginate = 50;
+```
+
+## Sorting data
+You could create a complex header instead so you can set it as a sortable, just use the `Header` facade instead of a string in the `headers()` method. This will add sort icons on this header.
+
+```php
+use LaravelViews\Facades\Header;
+
+public function headers(): array
+{
+    return [
+        Header::title('Name')->sortBy('name'),
+        'Email',
+    ];
+}
 ```
 
 # Filters
@@ -258,7 +299,7 @@ protected function actionsByRow()
 
 The first param is the name of the route to be redirected, it is important to be a named route, the `RedirectAction` will inject the model id to that route
 
-## Showing alert messages
+## Showing feedback messages
 To display a success alert message you can execute the `$this->succes()` at the end of the handle method, a default message will be displayed once the action is executed
 
 ![](success.png)
@@ -297,8 +338,31 @@ public function renderIf($model)
 }
 ```
 
+## Confirmation message
+Some actions might need to be confirmed before the its execution, just add the `Confirmable` trait.
+
+```php
+use LaravelViews\Actions\Confirmable;
+
+class ActivateUserAction extends Action
+{
+    use Confirmable;
+}
+```
+
+![](confirmation-message.png)
+
+To customize the message just overwrite the `getConfirmationMessage` method returning your custom message. You also have access to the model the action will be executed with.
+
+```php
+public function getConfirmationMessage($item = null)
+{
+    return 'My custom confirmation message';
+}
+```
+
 # Showing UI components
-You can display some UI components instead of plain text like avateres or badges
+You can display some UI components instead of plain text like avateres, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
 
 ## Avatar
 Shows an 32x32 rounded image
@@ -323,4 +387,21 @@ UI::badge('My title', 'info');
 UI::badge('My title', 'success');
 UI::badge('My title', 'warning');
 UI::badge('My title', 'danger');
+```
+
+## Link
+Shows a simple link to navigate to another route.
+
+```php
+UI::link('My link title', 'my-route-to-navigate');
+```
+
+## Icons
+Shows a feather icon with a custom variant, it is important to set valid [feather icon.](https://feathericons.com/)
+
+```php
+UI::icon('check');
+UI::icon('check', 'success');
+UI::icon('check', 'danger');
+UI::icon('check', 'warning');
 ```

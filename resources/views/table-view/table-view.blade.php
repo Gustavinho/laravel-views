@@ -17,7 +17,7 @@ UI components used:
     @include('laravel-views::table-view.filters')
   </div>
 
-  {{-- Success feedback --}}
+  {{-- Success/Error feedback --}}
   @if (session()->has('message'))
     @component('laravel-views::components.alert', [
       'message' => session('message'),
@@ -35,7 +35,9 @@ UI components used:
         'headers' => $headers,
         'actionsByRow' => $actionsByRow,
         'items' => $items,
-        'view' => $view
+        'view' => $view,
+        'sortBy' => $sortBy,
+        'sortOrder' => $sortOrder
       ])
       @endcomponent
     </div>
@@ -63,5 +65,7 @@ UI components used:
       </div>
     </div>
   </div>
+
+  @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
 </div>
 

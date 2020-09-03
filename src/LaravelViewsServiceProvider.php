@@ -11,8 +11,12 @@ use LaravelViews\Data\TableViewFilterData;
 use LaravelViews\Data\TableViewSearchData;
 use LaravelViews\UI\UI;
 use LaravelViews\UI\Variants;
+use LaravelViews\UI\Header;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use LaravelViews\Console\GridViewMakeCommand;
+use LaravelViews\Data\Contracts\Sortable;
+use LaravelViews\Data\TableViewSortData;
 
 class LaravelViewsServiceProvider extends ServiceProvider
 {
@@ -38,6 +42,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         $this->app->bind(Searchable::class, TableViewSearchData::class);
         $this->app->bind(Filterable::class, TableViewFilterData::class);
+        $this->app->bind(Sortable::class, TableViewSortData::class);
         $this->app->bind('laravel-views', function () {
             return new LaravelViews();
         });
@@ -46,6 +51,9 @@ class LaravelViewsServiceProvider extends ServiceProvider
         });
         $this->app->bind('ui', function () {
             return new UI;
+        });
+        $this->app->bind('header', function () {
+            return new Header();
         });
 
         $this->loadViews()
@@ -58,17 +66,17 @@ class LaravelViewsServiceProvider extends ServiceProvider
     private function publish()
     {
         $this->publishes([
-            __DIR__.'/../public/laravel-views.js' => public_path('vendor/laravel-views.js'),
-            __DIR__.'/../public/laravel-views.css' => public_path('vendor/laravel-views.css'),
+            __DIR__ . '/../public/laravel-views.js' => public_path('vendor/laravel-views.js'),
+            __DIR__ . '/../public/laravel-views.css' => public_path('vendor/laravel-views.css'),
         ], 'public');
 
         $this->publishes([
-            __DIR__.'/config/laravel-views.php' => config_path('laravel-views.php'),
+            __DIR__ . '/config/laravel-views.php' => config_path('laravel-views.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../resources/views/components' => resource_path('views/vendor/laravel-views/components'),
-            __DIR__.'/../resources/views/table-view' => resource_path('views/vendor/laravel-views/table-view'),
+            __DIR__ . '/../resources/views/components' => resource_path('views/vendor/laravel-views/components'),
+            __DIR__ . '/../resources/views/table-view' => resource_path('views/vendor/laravel-views/table-view'),
         ], 'views');
 
         return $this;
@@ -76,7 +84,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
 
     private function loadViews()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-views');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-views');
 
         return $this;
     }
@@ -87,7 +95,8 @@ class LaravelViewsServiceProvider extends ServiceProvider
             $this->commands([
                 FilterMakeCommand::class,
                 ActionMakeCommand::class,
-                TableViewMakeCommand::class
+                TableViewMakeCommand::class,
+                GridViewMakeCommand::class
             ]);
         }
 

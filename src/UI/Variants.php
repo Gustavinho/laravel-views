@@ -76,6 +76,19 @@ class Variants
     }
 
     /**
+     * Uses the icon component
+     *
+     * @param String $variant component variant
+     */
+    public function featherIcon($variant = '')
+    {
+        $this->component = 'icons';
+        $this->variant = $variant;
+
+        return $this;
+    }
+
+    /**
      * Get the class string for the component and variant selected
      *
      * @param String $element Set the internal element of the component if there are any

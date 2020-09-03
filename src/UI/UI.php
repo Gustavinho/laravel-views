@@ -19,4 +19,21 @@ class UI
             'variant' => 'avatar'
         ])->render();
     }
+
+    public function link($title, $to)
+    {
+        return view('laravel-views::components.link', compact(
+            'to',
+            'title'
+        ))->render();
+    }
+
+    public function icon($icon, $type = 'default', $class = "")
+    {
+        return view('laravel-views::components.icon', compact(
+            'icon',
+            'type',
+            'class'
+        ))->render();
+    }
 }

@@ -7,8 +7,10 @@ return [
      */
 
     "buttons" => [
+        "light" => "hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 active:bg-gray-100 active:text-gray-900",
         "primary" => "text-white bg-blue-600 hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500",
-        "primary-light" => "text-blue-700 bg-blue-200 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white active:bg-blue-600 active:text-white"
+        "primary-light" => "text-blue-700 border border-blue-600 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white active:bg-blue-600 active:text-white",
+        "danger" => "text-white bg-red-600 hover:bg-red-500 focus:bg-red-500 active:bg-red-500",
     ],
 
     "paginator" => [
@@ -43,5 +45,12 @@ return [
 
     "images" => [
         'avatar' => 'h-8 w-8 object-cover rounded-full shadow-inner'
+    ],
+
+    "icons" => [
+        'success' => 'text-green-500',
+        'danger' => 'text-red-500',
+        'warning' => 'text-yellow-500',
+        'info' => 'text-blue-500',
     ]
 ];

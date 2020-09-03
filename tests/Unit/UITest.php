@@ -36,6 +36,32 @@ class UITest extends TestCase
         $this->assertHtmlEquals($avatar, $expected);
     }
 
+    public function testLinkHelper()
+    {
+        $link = UI::link('title', '/');
+        $expected = '<a href="/" class="hover:text-blue-500 hover:underline">
+                        title
+                    </a>';
+
+        $this->assertHtmlEquals($link, $expected);
+    }
+
+    public function testDefaultIconHelper()
+    {
+        $icon = UI::icon('activity');
+        $expected = '<i data-feather="activity" class=" "></i>';
+
+        $this->assertHtmlEquals($icon, $expected);
+    }
+
+    public function testIconHelperWithVariant()
+    {
+        $icon = UI::icon('activity', 'success');
+        $expected = '<i data-feather="activity" class="text-green-500 "></i>';
+
+        $this->assertHtmlEquals($icon, $expected);
+    }
+
     private function assertHtmlEquals($html, $expected)
     {
         $this->assertEquals(

@@ -2,8 +2,8 @@
 
 namespace LaravelViews\Data;
 
-use LaravelViews\Data\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelViews\Data\Contracts\Searchable;
 
 class TableViewSearchData implements Searchable
 {
@@ -20,13 +20,47 @@ class TableViewSearchData implements Searchable
     public function searchItems(Builder $query, $fields, $value): Builder
     {
         if ($value) {
-            $query->where(function ($query) use ($fields, $value) {
-                foreach ($fields as $field) {
-                    $query->orWhere($field, 'like', "%{$value}%");
-                }
+            $relationalFields = array_filter($fields, static function ($item) {
+                return str_contains($item, '.');
+            });
+
+            $regularFields = array_diff($fields, $relationalFields);
+
+            $query->where(function ($query) use ($value, $regularFields, $relationalFields) {
+                $this->applyRegularFields($regularFields, $query, $value);
+                $this->applyRelationalFields($relationalFields, $query, $value);
             });
         }
 
         return $query;
+    }
+
+    /**
+     * @param $relationalFields
+     * @param $query
+     * @param String $value
+     */
+    private static function applyRelationalFields($relationalFields, $query, string $value): void
+    {
+        foreach ($relationalFields as $relationalValue) {
+
+            [$relationship, $field] = explode('.', $relationalValue);
+
+            $query->orWhereHas($relationship, static function ($query) use ($value, $field) {
+                $query->where($field, 'like', "%{$value}%");
+            });
+        }
+    }
+
+    /**
+     * @param array $regularFields
+     * @param $query
+     * @param String $value
+     */
+    private function applyRegularFields(array $regularFields, $query, string $value): void
+    {
+        foreach ($regularFields as $field) {
+            $query->orWhere($field, 'like', "%{$value}%");
+        }
     }
 }

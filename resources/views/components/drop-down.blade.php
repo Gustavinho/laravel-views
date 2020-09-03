@@ -23,8 +23,8 @@ UI components used:
   @endcomponent
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left pt-4"
-    x-show="open" @click.away="open = false"
+    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left pt-4 z-50"
+    x-show.transition="open" @click.away="open = false"
   >
     {{ $slot }}
   </div>
