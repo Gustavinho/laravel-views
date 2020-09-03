@@ -7,6 +7,7 @@ use LaravelViews\Actions\Action;
 use LaravelViews\Actions\ExecuteAction;
 use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
+use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\QueryStringData;
 use Livewire\WithPagination;
 
@@ -16,7 +17,9 @@ abstract class TableView extends View
 
     protected $updatesQueryString = [
         'search' => ['except' => ''],
-        'filters'
+        'filters',
+        'sortBy',
+        'sortOrder'
     ];
 
     /** Component name */
@@ -49,6 +52,10 @@ abstract class TableView extends View
     /** @var Action $actionToBeConfirmed sets a temporal action to be executed once it will be confirmed */
     public $actionToBeConfirmed = null;
 
+    public $sortBy = null;
+
+    public $sortOrder = 'asc';
+
     public function hydrate()
     {
         $this->filtersViews = $this->filters();
@@ -59,6 +66,8 @@ abstract class TableView extends View
         $this->filtersViews = $this->filters();
         $this->search = $queryStringData->getSearchValue($this->search);
         $this->filters = $queryStringData->getFilterValues($this->filters);
+        $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
+        $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
     }
 
     /**
@@ -84,9 +93,11 @@ abstract class TableView extends View
         $query = $this->repository();
         $searchable = app(Searchable::class);
         $filterable = app(Filterable::class);
+        $sortable = app(Sortable::class);
 
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
+        $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
 
         /** Updates the total items found with the correct query */
         $this->total = $query->count();
@@ -108,6 +119,20 @@ abstract class TableView extends View
      * LIVEWIERE ACTIONS ARE HERE
      * All these actions are executed from the UI and those aren't for internal use
      */
+
+    /**
+     * Sets the filed the table view data will be sort by
+     * @param string $field Field to sort by
+     */
+    public function sort($field)
+    {
+        if ($this->sortBy === $field) {
+            $this->sortOrder = $this->sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $field;
+            $this->sortOrder = 'asc';
+        }
+    }
 
     public function executeAction($action, $id, $shouldVerifyConfirmation, ExecuteAction $executeAction)
     {
