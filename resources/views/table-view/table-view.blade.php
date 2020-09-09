@@ -54,7 +54,7 @@ UI components used:
   {{-- Paginator, loading indicator and totals --}}
   <div class="p-4 flex items-center">
     <div class="flex-1">
-      {{ $items->links('laravel-views::components.paginator') }}
+      {{ $items->links() }}
     </div>
     <div class="flex items-center">
       <span wire:loading class="mr-4">

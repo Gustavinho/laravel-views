@@ -38,7 +38,7 @@ try {
   });
 
   $(document).on("livewire:load", () => {
-    window.livewire.hook('afterDomUpdate', () => {
+    window.livewire.hook('message.processed', () => {
       setUpUiLibraries()
     })
   })
