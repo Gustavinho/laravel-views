@@ -37,5 +37,6 @@ before_install:
 install:
   - travis_retry composer install --prefer-dist --no-interaction --no-suggest
 script:
+  - php artisan --version
   - phpunit --testdox
 
