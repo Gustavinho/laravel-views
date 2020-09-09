@@ -101,7 +101,7 @@ class TableViewTest extends TestCase
     public function testSeeSuccessAlert()
     {
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-success-action', 1)
+            ->call('executeAction', 'test-success-action', 1, true)
             ->assertSee('Action was executed successfully')
             ->assertSee('Success');
     }
@@ -109,7 +109,7 @@ class TableViewTest extends TestCase
     public function testSeeErrorAlert()
     {
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-error-action', 1)
+            ->call('executeAction', 'test-error-action', 1, true)
             ->assertSee('There was an error executing this action')
             ->assertSee('Error!');
     }
@@ -117,7 +117,7 @@ class TableViewTest extends TestCase
     public function testClearAlert()
     {
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-success-action', 1)
+            ->call('executeAction', 'test-success-action', 1, true)
             ->assertSee('Action was executed successfully')
             ->call('flushMessage')
             ->assertDontSee('Action was executed successfully');
