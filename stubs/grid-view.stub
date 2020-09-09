@@ -27,7 +27,7 @@ class DummyClass extends GridView
         return [
             'image' => $item->photo,
             'title' => $item->name,
-            'subtitle' => $food->email,
+            'subtitle' => $item->email,
             'description' => $item->description
         ];
     }
