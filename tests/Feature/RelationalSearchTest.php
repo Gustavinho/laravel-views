@@ -62,10 +62,6 @@ class RelationalSearchTest extends TestCase
                 ->$assert($review->user->email);
         }
 
-        if ($assert === 'assertSee') {
-            $livewire->assertSee("{$reviews->count()} items");
-        }
-
         return $this;
     }
 
