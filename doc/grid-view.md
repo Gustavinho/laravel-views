@@ -1,6 +1,6 @@
 # Grid view
 
-This view creates a dynamic grid view using card data, same as a TableView this view has features like filters, pagination and a searach input, you can also customize the card data as you need
+This view creates a dynamic grid view using card data, same as a TableView this view has features like filters, pagination and a search input, you can also customize the card data as you need
 
 - [Laravel views](../README.md)
 - [Grid view](#grid-view)
