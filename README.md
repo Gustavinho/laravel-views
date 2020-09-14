@@ -6,6 +6,7 @@ Laravel package to create beautiful common views like tables using only PHP code
 
 ![](doc/laravel-views.png)
 
+- [Version compatibility](#version-compatibility)
 - [Installation and basic usage](#installation-and-basic-usage)
     - [Installing laravel views](#installing-laravel-views)
     - [Publishing assets](#publishing-assets)
@@ -23,6 +24,12 @@ Laravel package to create beautiful common views like tables using only PHP code
 - [Grid view](doc/grid-view.md)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
+
+# Version compatibility
+|Laravel views|Livewire|Laravel|
+|-|-|-|
+|2.x|2.x|7.x, 8.x|
+|1.x|1.x|5.x, 6.x|
 
 # Installation and basic usage
 

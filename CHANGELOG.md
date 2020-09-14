@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.0] - 2020-09-13
+### Added
+- Added compatibility for Laravel Livewire 2.x
+
 ## [1.1] - 2020-09-03
 ### Added
 - New `GridView` class.
