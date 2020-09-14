@@ -15,7 +15,7 @@ abstract class TableView extends View
 {
     use WithPagination;
 
-    protected $updatesQueryString = [
+    protected $queryString = [
         'search' => ['except' => ''],
         'filters',
         'sortBy',

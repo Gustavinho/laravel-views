@@ -63,18 +63,8 @@ UI components used:
   </div>
 
   {{-- Paginator, loading indicator and totals --}}
-  <div class="mt-8 flex items-center">
-    <div class="flex-1">
-      {{ $items->links('laravel-views::components.paginator') }}
-    </div>
-    <div class="flex items-center">
-      <span wire:loading class="mr-4">
-        Loading
-      </span>
-      <div>
-        <b>Showing</b> {{ $total }} items
-      </div>
-    </div>
+  <div class="mt-8">
+    {{ $items->links() }}
   </div>
 
   @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])

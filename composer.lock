@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47d278a03ab9126c36411639ec8cd7ea",
+    "content-hash": "99abac477afe7c489568cb49d4ef9c42",
     "packages": [
         {
             "name": "brick/math",
@@ -615,30 +615,32 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v1.3.1",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "abca3b56975b2d6f7e482f2b65c1556ff1bd7e65"
+                "reference": "977532ecd68929aaa10e4315253c633b02104ad1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/abca3b56975b2d6f7e482f2b65c1556ff1bd7e65",
-                "reference": "abca3b56975b2d6f7e482f2b65c1556ff1bd7e65",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/977532ecd68929aaa10e4315253c633b02104ad1",
+                "reference": "977532ecd68929aaa10e4315253c633b02104ad1",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
-                "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
-                "illuminate/validation": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
-                "php": "^7.1.3",
-                "symfony/http-kernel": "^4.0|^5.0"
+                "illuminate/database": "^7.0|^8.0",
+                "illuminate/support": "^7.0|^8.0",
+                "illuminate/validation": "^7.0|^8.0",
+                "php": "^7.2.5",
+                "symfony/http-kernel": "^5.0"
             },
             "require-dev": {
-                "laravel/framework": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+                "calebporzio/sushi": "^2.1",
+                "laravel/framework": "^7.0|^8.0",
                 "mockery/mockery": "^1.3.1",
-                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0|^4.0|^5.0",
-                "phpunit/phpunit": "^7.5.15|^8.4|^9.0",
+                "orchestra/testbench": "^5.0",
+                "orchestra/testbench-dusk": "^5.2",
+                "phpunit/phpunit": "^8.4|^9.0",
                 "psy/psysh": "@stable"
             },
             "type": "library",
@@ -668,7 +670,7 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2020-07-08T14:40:56+00:00"
+            "time": "2020-09-08T19:44:08+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4136,6 +4138,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
