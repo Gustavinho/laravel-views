@@ -46,7 +46,7 @@ UI components used:
 
     {{-- Empty data message --}}
     <div class="flex justify-center items-center p-4">
-      <h1>There are not items in this table</h1>
+      <h1>There are no items in this table</h1>
     </div>
 
   @endif
