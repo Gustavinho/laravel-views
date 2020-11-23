@@ -11,6 +11,7 @@ env:
     - LARAVEL='5.8.*' TESTBENCH='3.8.*'
     - LARAVEL='6.*' TESTBENCH='4.*'
     - LARAVEL='7.*' TESTBENCH='5.*'
+    - LARAVEL='8.*' TESTBENCH='6.*'
 
 php:
   - 7.2
@@ -23,6 +24,7 @@ branches:
   only:
   - master
   - dev
+  - /^release-.*$/
 
 before_script:
   - composer config discard-changes true
@@ -30,7 +32,8 @@ before_script:
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
 before_install:
   - travis_retry composer self-update
-  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-interaction --no-update
+  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-interaction --no-update --dev
+  - cat composer.json
 install:
   - travis_retry composer install --prefer-dist --no-interaction --no-suggest
 script:

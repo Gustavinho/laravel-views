@@ -4,8 +4,9 @@ Laravel package to create beautiful common views like tables using only PHP code
 
 ## Table View example
 
-![](doc/table.png)
+![](doc/laravel-views.png)
 
+- [Version compatibility](#version-compatibility)
 - [Installation and basic usage](#installation-and-basic-usage)
     - [Installing laravel views](#installing-laravel-views)
     - [Publishing assets](#publishing-assets)
@@ -17,8 +18,18 @@ Laravel package to create beautiful common views like tables using only PHP code
     - [Specifying a layout and section](#specifying-a-layout-and-section)
     - [Send extra data](send-extra-data)
 - [Components customization](#components-customization)
-    - [Component variants using tailwindcss](#using-tailwindcss)
-    - [Components full customization](#using-tailwindcss)
+    - [Component variants using tailwindcss](#component-variants-using-tailwindcss)
+    - [Components full customization](#components-full-customization)
+- [Table view](doc/table-view.md)
+- [Grid view](doc/grid-view.md)
+- [Contributing](#contributing)
+- [Roadmap](#roadmap)
+
+# Version compatibility
+|Laravel views|Livewire|Laravel|
+|-|-|-|
+|2.x|2.x|7.x, 8.x|
+|1.x|1.x|5.x, 6.x|
 
 # Installation and basic usage
 
@@ -35,6 +46,8 @@ or you can specify the provider
 ```bash
 php artisan vendor:publish --tag=public --provider='LaravelViews\LaravelViewsServiceProvider' --force
 ```
+
+If you are updating this package you might need to republish these assets.
 
 ## Including assets
 Add the following Blade directives in the *head* tag, and before the end *body* tag in your template
@@ -86,7 +99,7 @@ class UsersTableView extends TableView
 
     public function headers(): array
     {
-        return ['Name', 'Email' 'Created', 'Updated'];
+        return ['Name', 'Email', 'Created', 'Updated'];
     }
 
     public function row($model)
@@ -102,7 +115,7 @@ The easiest way to render the view is using the facade directly with a blade fil
 {!! LaravelViews::create(App\Http\Livewire\UsersTableView::class)->render() !!}
 ```
 
-At this point, you would be able to see a table with some data
+At this point, you would be able to see a table with some data, the table view doesn't have any styled container or title as the image example, you can render the table view inside any container you want.
 
 In the example above the view is using the User model created by default in every Laravel project, feel free to use any model you have, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model.
 
@@ -178,7 +191,7 @@ or you can specify the provider
 php artisan vendor:publish --tag=config --provider='LaravelViews\LaravelViewsServiceProvider'
 ```
 
-Inside this config file you can change the colors for each component variant
+Inside this config file you can change the colors for each component variant. If you are updating this package you might need to republish this config file.
 
 ## Components full customization
 
@@ -191,3 +204,23 @@ or you can specify the provider
 ```bash
 php artisan vendor:publish --tag=views --provider='LaravelViews\LaravelViewsServiceProvider'
 ```
+
+If you are updating this package you might need to republish these views.
+
+## Contributing
+
+Check the [contribution guide](CONTRIBUTING.md)
+
+## Roadmap
+
+Laravel Views is still under heavy development so I will be adding more awesome features and views.
+
+Here's the plan for what's coming:
+
+- *New grid view* to display data as a grid instead of as a table
+- Add tooltips to actions buttons
+- Add confirmation message on actions
+- Add a download action
+- Add translations
+- Add sortable columns
+- Add links as a UI helpers

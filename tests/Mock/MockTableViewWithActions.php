@@ -3,6 +3,7 @@
 namespace LaravelViews\Test\Mock;
 
 use LaravelViews\Actions\Action;
+use LaravelViews\Actions\Confirmable;
 use LaravelViews\Filters\Filter;
 
 class TestSuccessAction extends Action
@@ -21,6 +22,15 @@ class TestErrorAction extends Action
     }
 }
 
+class TestConfirmedAction extends Action
+{
+    use Confirmable;
+
+    public function handle($model) {
+        $this->success();
+    }
+}
+
 class MockTableViewWithActions extends MockTableView
 {
     protected function actionsByRow()
@@ -28,6 +38,7 @@ class MockTableViewWithActions extends MockTableView
         return [
             new TestSuccessAction,
             new TestErrorAction,
+            new TestConfirmedAction
         ];
     }
 }

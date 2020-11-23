@@ -2,8 +2,8 @@
 
 namespace LaravelViews\Test\Mock;
 
-use LaravelViews\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelViews\Filters\Filter;
 
 class ActiveUsersFilter extends Filter
 {
@@ -12,7 +12,7 @@ class ActiveUsersFilter extends Filter
         return $query->where('active', $value);
     }
 
-    public function options(): Array
+    public function options(): array
     {
         return [
             'Active' => 1,

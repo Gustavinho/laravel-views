@@ -18,7 +18,9 @@ function attributes($attributes = null)
     return $attributesStr;
 }
 
-function variants()
-{
-    return new Variants;
+if (!function_exists('variants')) {
+    function variants()
+    {
+        return new Variants;
+    }
 }

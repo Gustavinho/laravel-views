@@ -2,9 +2,8 @@
 
 namespace LaravelViews\Test\Database;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class UserTest extends Authenticatable
 {
@@ -38,4 +37,10 @@ class UserTest extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ReviewTest::class, 'user_id', 'id');
+    }
 }

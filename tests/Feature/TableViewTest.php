@@ -8,6 +8,7 @@ use LaravelViews\Test\Mock\MockTableViewWithActions;
 use LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
 use LaravelViews\Test\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelViews\Test\Mock\MockTableViewWithRedirectActions;
 use Livewire\Livewire;
 
 class TableViewTest extends TestCase
@@ -48,7 +49,7 @@ class TableViewTest extends TestCase
     public function testDontSeeFiltersButton()
     {
         Livewire::test(MockTableView::class)
-            ->assertDontSee('Fiters');
+            ->assertDontSee('Filters');
     }
 
     public function testSeeAllDataFoundBySearchInput()
@@ -100,7 +101,7 @@ class TableViewTest extends TestCase
     public function testSeeSuccessAlert()
     {
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-success-action', 1)
+            ->call('executeAction', 'test-success-action', 1, true)
             ->assertSee('Action was executed successfully')
             ->assertSee('Success');
     }
@@ -108,7 +109,7 @@ class TableViewTest extends TestCase
     public function testSeeErrorAlert()
     {
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-error-action', 1)
+            ->call('executeAction', 'test-error-action', 1, true)
             ->assertSee('There was an error executing this action')
             ->assertSee('Error!');
     }
@@ -116,10 +117,61 @@ class TableViewTest extends TestCase
     public function testClearAlert()
     {
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-success-action', 1)
+            ->call('executeAction', 'test-success-action', 1, true)
             ->assertSee('Action was executed successfully')
             ->call('flushMessage')
             ->assertDontSee('Action was executed successfully');
+    }
+
+    public function testSeeMultipleRedirectActions()
+    {
+        $icons = ['eye', 'pencil'];
+        $class = 'mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600';
+
+        factory(UserTest::class)->create();
+
+        $table = Livewire::test(MockTableViewWithRedirectActions::class);
+
+        foreach ($icons as $icon) {
+            $table->assertSeeHtml('<i data-feather="' . $icon . '" class="' . $class . '"></i>');
+        }
+    }
+
+    public function testSeeConfirmationMessage()
+    {
+        $message = 'This is the confirmation message';
+        $livewire = Livewire::test(MockTableView::class);
+        $livewire->set('confirmationMessage', $message)
+            ->assertSee($message);
+    }
+
+    public function testCallActionAfterConfirmationMessage()
+    {
+        $user = factory(UserTest::class)->create();
+        Livewire::test(MockTableViewWithActions::class)
+            ->call('executeAction', 'test-confirmed-action', $user->id, true)
+            ->assertSee('Do you really want to perform this action?')
+            ->call('executeAction', 'test-confirmed-action', $user->id, false)
+            ->assertSee('Action was executed successfully');
+    }
+
+    public function testSeeUsersBySortedColumn()
+    {
+        $firstUsers = factory(UserTest::class, 20)->create();
+        $lastUsers = factory(UserTest::class, 20)->create();
+
+        // first clic to the sortable header
+        $livewire = LiveWire::test(MockTableView::class)
+            ->call('sort', 'id');
+
+        $this->assertSeeUsers($livewire, $firstUsers);
+        $this->assertDontSeeUsers($livewire, $lastUsers);
+
+        // second clic to the sortable header
+        $livewire->call('sort', 'id');
+
+        $this->assertSeeUsers($livewire, $lastUsers);
+        $this->assertDontSeeUsers($livewire, $firstUsers);
     }
 
     private function assertSeeUsers($livewire, $users, $assert = 'assertSee')
@@ -129,9 +181,10 @@ class TableViewTest extends TestCase
                 ->$assert($user->email);
         }
 
-        if ($assert == 'assertSee') {
+        // TODO: Get a param to disable this
+        /* if ($assert == 'assertSee') {
             $livewire->assertSee("{$users->count()} items");
-        }
+        } */
 
         return $this;
     }
