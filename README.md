@@ -110,9 +110,15 @@ class UsersTableView extends TableView
 ```
 
 ## Rendering the table view
-The easiest way to render the view is using the facade directly with a blade file
+You can render this view in the same way as you would do it for a livewire component ([Rendering components](https://laravel-livewire.com/docs/2.x/rendering-components)).
+The easiest way to render the view is using the livewire tag syntax:
 ```blade
-{!! LaravelViews::create(App\Http\Livewire\UsersTableView::class)->render() !!}
+<livewire:users-table-view />
+```
+
+You could also use the `@livewire` blade directive.
+```blade
+@livewire('users-table-view')
 ```
 
 At this point, you would be able to see a table with some data, the table view doesn't have any styled container or title as the image example, you can render the table view inside any container you want.
@@ -123,12 +129,9 @@ This is the basic usage of the table view, but you can customize it with more fe
 
 [Read the full table view documentation ](doc/table-view.md)
 
-# Rendering a view
+# Rendering a view from a controller
 
-## From a controller
-
-The easiest way to render a view is using the facade directly on the blade file as the example above,
-but it is a better practice if you inject a `LaravelViews` instance as a dependency in your controller.
+You can render a view manually in a controller creating a `LaravelViews` instance and executing the `render` method on a `blade` file.
 
 ```php
 use use LaravelViews\LaravelViews;
@@ -161,7 +164,7 @@ public function index(LaravelViews $laravelViews)
 }
 ```
 
-## Send extra data
+## Send extra data to the layout
 In the same way that you would send data to your views, you can send more data to the layout file
 ```php
 use use LaravelViews\LaravelViews;
