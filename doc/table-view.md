@@ -59,7 +59,7 @@ Return an array with all the headers you need
 ```php
 public function headers(): array
 {
-    return ['Name', 'Email' 'Created', 'Updated'];
+    return ['Name', 'Email', 'Created', 'Updated'];
 }
 ```
 
