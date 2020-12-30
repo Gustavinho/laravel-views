@@ -1,4 +1,5 @@
 {
     "/laravel-views.js": "/laravel-views.js",
-    "/laravel-views.css": "/laravel-views.css"
+    "/laravel-views.css": "/laravel-views.css",
+    "/tailwind.css": "/tailwind.css"
 }

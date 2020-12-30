@@ -68,6 +68,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../public/laravel-views.js' => public_path('vendor/laravel-views.js'),
             __DIR__ . '/../public/laravel-views.css' => public_path('vendor/laravel-views.css'),
+            __DIR__ . '/../public/tailwind.css' => public_path('vendor/tailwind.css'),
         ], 'public');
 
         $this->publishes([
@@ -106,12 +107,12 @@ class LaravelViewsServiceProvider extends ServiceProvider
     private function bladeDirectives()
     {
         $laravelViews = new LaravelViews;
-        Blade::directive('laravelViewsStyles', function () use ($laravelViews) {
-            return $laravelViews->css();
+        Blade::directive('laravelViewsStyles', function ($options) use ($laravelViews) {
+            return $laravelViews->css($options);
         });
 
-        Blade::directive('laravelViewsScripts', function () use ($laravelViews) {
-            return $laravelViews->js();
+        Blade::directive('laravelViewsScripts', function ($options) use ($laravelViews) {
+            return $laravelViews->js($options);
         });
 
         return $this;

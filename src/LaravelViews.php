@@ -41,16 +41,25 @@ class LaravelViews
         return $this;
     }
 
-    public function css()
+    public function css($options = '')
     {
-        return Livewire::styles()."\n"
-            .'<link rel="stylesheet" href="' . asset('/vendor/laravel-views.css') . '" />';
+        $assets = [
+            'livewire' => Livewire::styles(),
+            'tailwindcss' => '<link rel="stylesheet" href="' . asset('/vendor/tailwind.css') . '" />',
+            'laravel-views' => '<link rel="stylesheet" href="' . asset('/vendor/laravel-views.css') . '" />'
+        ];
+
+        return $this->getCustomizedLinks($assets, $options);
     }
 
-    public function js()
+    public function js($options = '')
     {
-        return Livewire::scripts()."\n".
-            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript"></script>';
+        $assets = [
+            'livewire' => Livewire::scripts(),
+            'laravel-views' => '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript"></script>'
+        ];
+
+        return $this->getCustomizedLinks($assets, $options);
     }
 
     public function render()
@@ -65,5 +74,24 @@ class LaravelViews
             ],
             $this->data
         ))->render();
+    }
+
+    private function getCustomizedLinks($assets = [], $options = '')
+    {
+        if ($options) {
+            $options = explode(',', $options);
+            $options[] = 'laravel-views';
+            $links = [];
+
+            foreach ($assets as $asset => $link) {
+                if (in_array($asset, $options)) {
+                    $links[] = $link;
+                }
+            }
+        } else {
+            $links = $assets;
+        }
+
+        return implode("\n", $links);
     }
 }
