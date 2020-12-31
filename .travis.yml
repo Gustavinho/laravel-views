@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - 7.2
   - 7.3
   - 7.4
 
@@ -38,7 +39,7 @@ before_install:
   - cat composer.json
 
 install:
-  - travis_retry composer install --prefer-dist --no-interaction --no-suggest --no-dev
+  - travis_retry composer install --prefer-dist --no-interaction --no-suggest
 
 script:
   - phpunit --testdox
