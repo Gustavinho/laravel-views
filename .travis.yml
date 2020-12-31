@@ -36,7 +36,7 @@ before_install:
   - travis_retry composer self-update
   - rm -rf composer.lock
   - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update
-  - if [ "$LARAVEL" != "8.0.*" ]; then composer require --dev "laravel/legacy-factories" --no-update; fi;
+  - if [ "$LARAVEL" == "8.0.*" ]; then composer require --dev "laravel/legacy-factories" --no-update; fi;
   - cat composer.json
 
 install:
