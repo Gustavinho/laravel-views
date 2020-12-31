@@ -34,10 +34,9 @@ before_script:
 before_install:
   - travis_retry composer self-update
   - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update
-  - ls vendor
   - cat composer.json
 install:
-  - travis_retry composer install --prefer-dist --no-interaction --no-suggest
+  - travis_retry composer install --prefer-dist --no-interaction --no-suggest --no-dev
 script:
   - phpunit --testdox
 
