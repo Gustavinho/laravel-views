@@ -8,7 +8,7 @@ use LaravelViews\Views\View;
 class ExecuteAction
 {
     private $shouldVerifyConfirmation = null;
-    private View $view;
+    private $view;
 
     public function setView(View $view)
     {
