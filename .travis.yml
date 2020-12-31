@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 7.2
   - 7.3
   - 7.4
 
@@ -36,7 +35,7 @@ before_install:
   - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update
   - cat composer.json
 install:
-  - travis_retry composer install --prefer-dist --no-interaction --no-suggest --no-dev --no-update
+  - travis_retry composer install --prefer-dist --no-interaction --no-suggest --no-dev
 script:
   - phpunit --testdox
 
