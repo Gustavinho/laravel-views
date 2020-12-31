@@ -7,7 +7,6 @@ php:
 
 env:
   jobs:
-    - LARAVEL=6.0.* TESTBENCH=4.*
     - LARAVEL=7.0.* TESTBENCH=5.*
     - LARAVEL=8.0.* TESTBENCH=6.*
   global:
