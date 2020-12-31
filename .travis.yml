@@ -6,12 +6,13 @@ php:
   - 7.4
 
 env:
+  jobs:
+    - LARAVEL='7.*' TESTBENCH='5.*'
+    - LARAVEL='8.*' TESTBENCH='6.*'
   global:
     - DB_CONNECTION=sqlite
     - DB_DATABASE=":memory:"
     - APP_ENV=testing
-  - LARAVEL='7.*' TESTBENCH='5.*'
-  - LARAVEL='8.*' TESTBENCH='6.*'
 
 matrix:
   fast_finish: true
