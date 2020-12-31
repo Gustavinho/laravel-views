@@ -29,10 +29,11 @@ branches:
   - /^release/.*$/
 
 before_script:
+  - composer config discard-changes true
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
 before_install:
   - travis_retry composer self-update
-  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --dev
+  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update
   - cat composer.json
 install:
   - travis_retry composer install --prefer-dist --no-interaction --no-suggest
