@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 7.2
   - 7.3
   - 7.4
 
@@ -32,7 +31,7 @@ before_script:
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
 before_install:
   - travis_retry composer self-update
-  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}"
+  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --prefer-dist
   - cat composer.json
 install:
   - travis_retry composer install --prefer-dist --no-interaction --no-suggest
