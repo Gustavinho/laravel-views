@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - 7.2
   - 7.3
   - 7.4
 
@@ -30,12 +31,12 @@ branches:
 before_script:
   - composer config discard-changes true
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
-before_install:
   - travis_retry composer self-update
-  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update
-  - cat composer.json
-install:
-  - travis_retry composer install --prefer-dist --no-interaction --no-suggest --no-dev
+  - travis_retry composer install --prefer-source --no-interaction
+  - if [ "$LARAVEL" != "" ]; then composer require --dev "laravel/laravel:${LARAVEL}" --no-update; fi;
+  - if [ "$TESTBENCH" != "" ]; then composer require --dev "orchestra/testbench:${TESTBENCH}" --no-update; fi;
+  - composer update
+
 script:
   - phpunit --testdox
 
