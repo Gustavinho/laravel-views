@@ -33,6 +33,7 @@ before_script:
 
 before_install:
   - travis_retry composer self-update
+  - rm -rf composer.lock
   - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update
   - cat composer.json
 
