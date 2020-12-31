@@ -3,6 +3,7 @@
 namespace DummyNamespace;
 
 use LaravelViews\Actions\Action;
+use LaravelViews\Views\View;
 
 class DummyClass extends Action
 {
@@ -22,8 +23,9 @@ class DummyClass extends Action
      * Execute the action when the user clicked on the button
      *
      * @param $model Model object of the list where the user has clicked
+     * @param $view Current view where the action was executed from
      */
-    public function handle($model)
+    public function handle($model, View $view)
     {
         // Your code here
     }

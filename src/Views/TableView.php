@@ -121,7 +121,7 @@ abstract class TableView extends View
      */
 
     /**
-     * Sets the filed the table view data will be sort by
+     * Sets the field the table view data will be sort by
      * @param string $field Field to sort by
      */
     public function sort($field)
@@ -140,6 +140,7 @@ abstract class TableView extends View
 
         /** Executes the action, if it needs to be confirmed it will return the action to be confirmed  */
         $actionToBeConfirmed = $executeAction
+            ->setView($this)
             ->shouldVerifyConfirmation($shouldVerifyConfirmation)
             ->callByActionName($action, $item, $this->actionsByRow());
 

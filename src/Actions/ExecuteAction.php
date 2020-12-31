@@ -3,15 +3,22 @@
 namespace LaravelViews\Actions;
 
 use LaravelViews\Actions\Action;
+use LaravelViews\Views\View;
 
 class ExecuteAction
 {
     private $shouldVerifyConfirmation = null;
+    private View $view;
+
+    public function setView(View $view)
+    {
+        $this->view = $view;
+        return $this;
+    }
 
     public function shouldVerifyConfirmation($value)
     {
         $this->shouldVerifyConfirmation = $value;
-
         return $this;
     }
 
@@ -23,7 +30,7 @@ class ExecuteAction
             if ($this->shouldVerifyConfirmation && $action->shouldBeConfirmed()) {
                 return $action;
             } else {
-                $action->handle($item);
+                $action->handle($item, $this->view);
             }
         }
 

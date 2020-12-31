@@ -69,6 +69,4 @@ abstract class Action
 
         return false;
     }
-
-    abstract public function handle($item);
 }

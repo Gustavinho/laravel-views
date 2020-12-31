@@ -5,11 +5,13 @@ namespace LaravelViews\Test\Mock;
 use LaravelViews\Actions\Action;
 use LaravelViews\Actions\Confirmable;
 use LaravelViews\Filters\Filter;
+use LaravelViews\Views\View;
 
 class TestSuccessAction extends Action
 {
-    public function handle($model)
+    public function handle($model, View $view)
     {
+        $view->emit('test-event');
         $this->success();
     }
 }
