@@ -14,21 +14,21 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "laravel-mix": "^5.0.1",
-    "resolve-url-loader": "^3.1.0",
-    "sass": "^1.26.5",
+    "laravel-mix": "^5.0.9",
+    "resolve-url-loader": "^3.1.2",
+    "sass": "^1.32.0",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12"
   },
   "dependencies": {
-    "alpinejs": "^2.3.3",
+    "alpinejs": "^2.8.0",
     "axios": "^0.19.2",
     "feather-icons": "^4.28.0",
     "jquery": "^3.5.1",
-    "moment": "^2.25.3",
-    "pikaday": "^1.8.0",
+    "moment": "^2.29.1",
+    "pikaday": "^1.8.2",
     "popper.js": "^1.16.1",
-    "tailwindcss": "^1.5.2",
+    "tailwindcss": "^1.9.6",
     "tailwindcss-plugins": "^0.3.0"
   }
 }
