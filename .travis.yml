@@ -27,7 +27,6 @@ branches:
   - /^release/.*$/
 
 before_script:
-  - mkdir vendor/orchestra/testbench-core/laravel/app/Http
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
 before_install:
   - travis_retry composer self-update
