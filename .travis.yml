@@ -1,21 +1,23 @@
-anguage: php
-
-env:
-  global:
-    - DB_CONNECTION=sqlite
-    - DB_DATABASE=":memory:"
-    - APP_ENV=testing
-  matrix:
-    - LARAVEL='7.*' TESTBENCH='5.*'
-    - LARAVEL='8.*' TESTBENCH='6.*'
+language: php
 
 php:
   - 7.2
   - 7.3
   - 7.4
 
+env:
+  global:
+    - DB_CONNECTION=sqlite
+    - DB_DATABASE=":memory:"
+    - APP_ENV=testing
+  - LARAVEL='7.*' TESTBENCH='5.*'
+  - LARAVEL='8.*' TESTBENCH='6.*'
+
 matrix:
   fast_finish: true
+  exclude:
+    - php: 7.2
+      env: LARAVEL='8.*' TESTBENCH='6.*'
 
 branches:
   only:
@@ -25,7 +27,6 @@ branches:
   - /^release/.*$/
 
 before_script:
-  - composer config discard-changes true
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
 before_install:
