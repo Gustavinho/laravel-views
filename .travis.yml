@@ -36,7 +36,7 @@ before_install:
   - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update
   - cat composer.json
 install:
-  - travis_retry composer install --prefer-dist --no-interaction --no-suggest --no-dev
+  - travis_retry composer install --prefer-dist --no-interaction --no-suggest --no-dev --no-update
 script:
   - phpunit --testdox
 
