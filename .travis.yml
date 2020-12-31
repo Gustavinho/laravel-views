@@ -19,7 +19,7 @@ matrix:
   fast_finish: true
   exclude:
     - php: 7.2
-      env: LARAVEL='8.*' TESTBENCH='6.*'
+      env: LARAVEL=8.0.* TESTBENCH=6.*
 
 branches:
   only:
