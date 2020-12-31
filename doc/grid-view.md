@@ -61,6 +61,23 @@ The grid view has a card component by default with some data but you can either 
 public $cardComponent = 'components.my-card';
 ```
 
+## Max columns
+
+The maximun number of colums by default is 5 for xl displays, you can customize this value with a public property.
+
+```php
+public $maxCols = 3;
+```
+
+## With background
+The default card for each item doesn't have a background by default, you can customize this behavior with public property.
+
+```php
+public $withBackground = true
+```
+
+This will render the item with a white background.
+
 ## More features
 This grid view is based on a table view, so you could use some of the table view features as:
 
