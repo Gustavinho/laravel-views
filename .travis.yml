@@ -30,13 +30,13 @@ branches:
 
 before_script:
   - composer config discard-changes true
-  - mkdir vendor/orchestra/testbench-core/laravel/app/Http
-  - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction
   - if [ "$LARAVEL" != "" ]; then composer require --dev "laravel/laravel:${LARAVEL}" --no-update; fi;
   - if [ "$TESTBENCH" != "" ]; then composer require --dev "orchestra/testbench:${TESTBENCH}" --no-update; fi;
   - composer update
+  - mkdir vendor/orchestra/testbench-core/laravel/app/Http
+  - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
 
 script:
   - phpunit --testdox
