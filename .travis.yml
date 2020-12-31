@@ -1,11 +1,13 @@
 language: php
 
 php:
+  - 7.2
   - 7.3
   - 7.4
 
 env:
   jobs:
+    - LARAVEL='6.*' TESTBENCH='4.*'
     - LARAVEL='7.*' TESTBENCH='5.*'
     - LARAVEL='8.*' TESTBENCH='6.*'
   global:
