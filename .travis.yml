@@ -32,7 +32,7 @@ before_script:
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
 before_install:
   - travis_retry composer self-update
-  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --no-update --dev
+  - travis_retry composer require "laravel/framework:${LARAVEL}" "orchestra/testbench:${TESTBENCH}" --dev
   - cat composer.json
 install:
   - travis_retry composer install --prefer-dist --no-interaction --no-suggest
