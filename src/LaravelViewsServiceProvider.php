@@ -87,6 +87,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-views');
 
+        $laravelViews = new LaravelViews;
+        foreach ($laravelViews->components() as $path => $component) {
+            Blade::component('laravel-views::components.' . $path, $component);
+        }
+
         return $this;
     }
 

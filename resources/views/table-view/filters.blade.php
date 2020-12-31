@@ -22,10 +22,10 @@ UI components used:
 
   {{-- Filters dropdown --}}
   @if (isset($filtersViews) && $filtersViews)
-    @component('laravel-views::components.drop-down', [
-      'title' => "Filters " . (count($filters) ? "(" . count($filters) . ")" : ''),
-    ])
-
+    @component('laravel-views::components.drop-down')
+      @slot('trigger')
+        <x-icon-button icon="filter" />
+      @endslot
       {{-- Each filter view --}}
       @foreach ($filtersViews as $filter)
         {{-- Filter title --}}

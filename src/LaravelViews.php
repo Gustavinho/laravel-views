@@ -11,6 +11,13 @@ class LaravelViews
     private $section = null;
     private $data = [];
 
+    public function components()
+    {
+        return [
+            'buttons.icon' => 'icon-button'
+        ];
+    }
+
     public function create($view)
     {
         $this->view = $view;
