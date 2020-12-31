@@ -30,6 +30,7 @@ branches:
 
 before_script:
   - composer config discard-changes true
+  - mkdir vendor/orchestra/testbench-core/laravel/app/Http
   - mkdir vendor/orchestra/testbench-core/laravel/app/Http/Livewire
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction
