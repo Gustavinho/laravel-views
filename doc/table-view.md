@@ -128,6 +128,19 @@ public function headers(): array
 }
 ```
 
+## Aligning columns
+To align columns, first ensure you that you have published the assets. Then use Laravel's built-in [`$loop->index`](https://laravel.com/docs/blade#the-loop-variable) variable to add the correct style tag in `/resources/views/vendor/laravel-views/components/table.blade.php`. In the example below we align a currency column at index 5 to the right:
+
+```php
+...
+{{-- Renders all the content cells --}}
+@foreach ($view->row($item) as $column)
+    <td class="px-3 py-2 whitespace-no-wrap"  @if($loop->index == 5) style="text-align: right"@endif>
+        {!! $column !!}
+    </td>
+...
+@endforeach```
+
 # Filters
 You can add features to filter the table data, when a filter is configured a button is shown at the top right of the table. These filters are created inside `app` directory and you can use any namespace you want.
 
