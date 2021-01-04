@@ -57,9 +57,21 @@ Add the following Blade directives in the *head* tag, and before the end *body* 
 </html>
 ```
 
-These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) styles and scripts, after that you may need to clear the view cache
+These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) and [Tailwindcss](https://tailwindcss.com/) styles and scripts, after that you may need to clear the view cache
 ```bash
 php artisan view:clear
+```
+
+You can specify which assets you want to include passing a string to those directives with a list of the assets you want to include.
+
+```php
+@laravelViewsStyles('laravel-views,tailwindcss,livewire')
+```
+
+If you dont need to include `Tailwindcss` or `Livewire` assets you can just set the `laravel-views` assets in the list.
+
+```php
+@laravelViewsStyles('laravel-views')
 ```
 
 # First table view
