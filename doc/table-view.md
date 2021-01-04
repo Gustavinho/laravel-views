@@ -2,7 +2,7 @@
 
 This view creates a dynamic data table with some features like filters, pagination and search input, you can customize the headers, the data to be displayed for each row.
 
-- [Laravel views](../README.md)
+- [Home](../README.md)
 - [Table view](#table-view)
     - [Create new table view](#create-new-table-view)
     - [Defining initial data](#defining-initial-data)

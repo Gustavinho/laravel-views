@@ -8,20 +8,16 @@ Laravel package to create beautiful common views like tables using only PHP code
 
 - [Version compatibility](#version-compatibility)
 - [Installation and basic usage](#installation-and-basic-usage)
-    - [Installing laravel views](#installing-laravel-views)
-    - [Publishing assets](#publishing-assets)
-    - [Including assets](#including-assets)
+  - [Installing laravel views](#installing-laravel-views)
+  - [Publishing assets](#publishing-assets)
+  - [Including assets](#including-assets)
 - [First table view](#first-table-view)
-    - [Rendering the table view](#rendering-the-table-view)
+  - [Rendering the table view](#rendering-the-table-view)
 - [Rendering a view](#rendering-a-view)
-    - [From a controller](#from-a-controller)
-    - [Specifying a layout and section](#specifying-a-layout-and-section)
-    - [Send extra data](send-extra-data)
-- [Components customization](#components-customization)
-    - [Component variants using tailwindcss](#component-variants-using-tailwindcss)
-    - [Components full customization](#components-full-customization)
-- [Table view](doc/table-view.md)
-- [Grid view](doc/grid-view.md)
+- [Advanced usage](doc/laravel-views.md)
+- [Views available](#views-available)
+  - [Table view](#table-view)
+  - [Grid view](#grid-view)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 
@@ -40,14 +36,8 @@ composer require laravel-views/laravel-views
 
 ## Publishing assets
 ```bash
-php artisan vendor:publish --tag=public --force
-```
-or you can specify the provider
-```bash
 php artisan vendor:publish --tag=public --provider='LaravelViews\LaravelViewsServiceProvider' --force
 ```
-
-If you are updating this package you might need to republish these assets.
 
 ## Including assets
 Add the following Blade directives in the *head* tag, and before the end *body* tag in your template
@@ -65,10 +55,11 @@ Add the following Blade directives in the *head* tag, and before the end *body* 
 </html>
 ```
 
-These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) styles and scripts, after that you may need to clear the view cache
+These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) and [Tailwindcss](https://tailwindcss.com/) styles and scripts, after that you may need to clear the view cache
 ```bash
 php artisan view:clear
 ```
+If you are already using your own Tailwindcss setup you can set `laravel-views` to not importing Tailwindcss by default. ([Importing assets](./doc/laravel-views#including-assets))
 
 # First table view
 This is a basic usage of a table view, you can [read the full table view documentation ](doc/table-view.md)
@@ -78,7 +69,7 @@ Once you have installed the package and included the assets you can start to cre
 ```bash
 php artisan make:table-view UsersTableView
 ```
-With this artisan command a UsersTableView.php file will be created inside `app/Http/Livewire` directory.
+With this artisan command a UsersTableView.php file will be created inside the `app/Http/Livewire` directory.
 
 The basic usage needs a data repository (Eloquent query), headers and rows, you can customize the items to be shown, and the headers and data for each row like this example
 ```php
@@ -99,12 +90,22 @@ class UsersTableView extends TableView
 
     public function headers(): array
     {
-        return ['Name', 'Email', 'Created', 'Updated'];
+        return [
+            'Name',
+            'Email',
+            'Created',
+            'Updated'
+        ];
     }
 
     public function row($model)
     {
-        return [$model->name, $model->email, $model->created_at, $model->updated_at];
+        return [
+            $model->name,
+            $model->email,
+            $model->created_at,
+            $model->updated_at
+        ];
     }
 }
 ```
@@ -129,86 +130,22 @@ This is the basic usage of the table view, but you can customize it with more fe
 
 [Read the full table view documentation ](doc/table-view.md)
 
-# Rendering a view from a controller
+## Advanced usage
 
-You can render a view manually in a controller creating a `LaravelViews` instance and executing the `render` method on a `blade` file.
+[Read the advanced laravel-views documentation ](doc/laravel-views.md)
 
-```php
-use use LaravelViews\LaravelViews;
+## Views available
+### [Table view](doc/table-view.md)
 
-public function index(LaravelViews $laravelViews)
-{
-    $laravelViews->create(App\Http\Livewire\UsersTableView::class);
+Dynamic data table with some features like filters, pagination and search input, you can customize the headers, the data to be displayed for each row
 
-    return view('my-view', [
-      'view' => $laravelViews
-    ]);
-}
-```
-And render it in your blade file
-```blade
-{!! $view->render() !!}
-```
+![](doc/table.png)
 
-## Specifying a layout and section
-You can also return the view directly from your controller and specify the layout and section of your layout
-```php
-use use LaravelViews\LaravelViews;
+### [Grid view](doc/grid-view.md)
 
-public function index(LaravelViews $laravelViews)
-{
-    $laravelViews->create(App\Http\Livewire\UsersTableView::class)
-      ->layout('layout', 'section-name');
+Dynamic grid view using card data, same as a TableView this view has features like filters, pagination and a search input, you can also customize the card data as you need
 
-    return $laravelViews->render();
-}
-```
-
-## Send extra data to the layout
-In the same way that you would send data to your views, you can send more data to the layout file
-```php
-use use LaravelViews\LaravelViews;
-
-public function index(LaravelViews $laravelViews)
-{
-    $laravelViews->create(App\Http\Livewire\UsersTableView::class)
-      ->layout('layout', 'section-name', [
-        'title' => 'My layout title'
-      ]);
-
-    return $laravelViews->render();
-}
-```
-
-# Components customization
-These views are build with [Tailwind CSS](https://tailwindcss.com/) and you can either change the colors of the components following tailwindcss utilities or fully customize all the html of the components
-
-## Component variants using tailwindcss
-If you are using [Tailwind CSS](https://tailwindcss.com/) or if you don't have issues  using Tailwindcss and your own css styles, you can customize some utilities to change the color for each variant of the components publishing a config file
-
-```bash
-php artisan vendor:publish --tag=config
-```
-or you can specify the provider
-```bash
-php artisan vendor:publish --tag=config --provider='LaravelViews\LaravelViewsServiceProvider'
-```
-
-Inside this config file you can change the colors for each component variant. If you are updating this package you might need to republish this config file.
-
-## Components full customization
-
-If you are not using taildwindcss, or if you want to have a full customization over the html components, you can publish all the blade files used for these views.
-
-```bash
-php artisan vendor:publish --tag=views
-```
-or you can specify the provider
-```bash
-php artisan vendor:publish --tag=views --provider='LaravelViews\LaravelViewsServiceProvider'
-```
-
-If you are updating this package you might need to republish these views.
+![](doc/grid.png)
 
 ## Contributing
 
@@ -220,10 +157,11 @@ Laravel Views is still under heavy development so I will be adding more awesome 
 
 Here's the plan for what's coming:
 
-- *New grid view* to display data as a grid instead of as a table
+- **New list view**
+- **New detail view**
+- **New form view**
+- **New layout view**
 - Add tooltips to actions buttons
-- Add confirmation message on actions
 - Add a download action
 - Add translations
-- Add sortable columns
 - Add links as a UI helpers
