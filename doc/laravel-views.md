@@ -5,6 +5,7 @@
     - [Installing laravel views](#installing-laravel-views)
     - [Publishing assets](#publishing-assets)
     - [Including assets](#including-assets)
+    - [Purge Tailwindcss styles](#purge-tailwindcss-styles)
 - [First table view](#first-table-view)
     - [Rendering the table view](#rendering-the-table-view)
 - [Rendering a view](#rendering-a-view)
@@ -72,6 +73,18 @@ If you dont need to include `Tailwindcss` or `Livewire` assets you can just set 
 
 ```php
 @laravelViewsStyles('laravel-views')
+```
+
+## Purge Tailwindcss styles
+If you're using your own Tailwindcss setup you must consider `laravel-views` in your `purge` configuration, for that just add this path to the `purge` array on the `tailwind.config.js`file.
+
+```js
+purge: {
+  content: [
+    //...Rest of your paths
+    "./vendor/laravel-views/**/*.php",
+  ],
+},
 ```
 
 # First table view
