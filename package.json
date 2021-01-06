@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "alpinejs": "^2.3.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "feather-icons": "^4.28.0",
     "jquery": "^3.5.1",
     "moment": "^2.25.3",
