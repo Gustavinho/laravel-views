@@ -10,6 +10,9 @@ class Header
     /** @var string Field the table view will be sort by */
     public $sortBy;
 
+    /** @var string Width the width of the table column */
+    public $width;
+
     /**
      * Sets the header's title
      * @param string $title Header's title to be shown
@@ -42,5 +45,16 @@ class Header
     public function isSortable(): bool
     {
         return !empty($this->sortBy);
+    }
+
+    /**
+     * Sets a fixed width of the column
+     * @return Header
+     */
+    public function width(string $width)
+    {
+        $this->width = $width;
+
+        return $this;
     }
 }

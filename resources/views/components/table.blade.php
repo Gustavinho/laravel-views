@@ -14,7 +14,7 @@ props:
     <tr>
       {{-- Renders all the headers --}}
       @foreach ($headers as $header)
-        <th class="px-3 py-3">
+        <th class="px-3 py-3" width="{{ is_object($header) ? $header->width : '' }}">
           @if (is_string($header))
             {{ $header }}
           @else
