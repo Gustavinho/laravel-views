@@ -19,4 +19,10 @@ class HeaderTest extends TestCase
         $this->assertEquals($header->sortBy, 'title');
         $this->assertTrue($header->isSortable());
     }
+
+    public function testSetWidth()
+    {
+        $header = Header::width('100px');
+        $this->assertEquals($header->wdith, '100px');
+    }
 }
