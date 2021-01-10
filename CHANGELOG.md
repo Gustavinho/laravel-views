@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1] - 2021-01-10
+### Added
+- Option to customize which assets will be imported
+- The current view instance is passed as a param to the action to be executed
+
+### Changed
+- The filter button was changed by an icon button
+- Updated documentation
+  - Added how to purge `laravel-views` styles
+  - Added how to render components using `Livewire`
+
+
 ## [2.0] - 2020-09-13
 ### Added
 - Added compatibility for Laravel Livewire 2.x
