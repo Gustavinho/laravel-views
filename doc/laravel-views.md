@@ -66,13 +66,13 @@ php artisan view:clear
 You can specify which assets you want to include passing a string to those directives with a list of the assets you want to include.
 
 ```php
-@laravelViewsStyles('laravel-views,tailwindcss,livewire')
+@laravelViewsStyles(laravel-views,tailwindcss,livewire)
 ```
 
 If you dont need to include `Tailwindcss` or `Livewire` assets you can just set the `laravel-views` assets in the list.
 
 ```php
-@laravelViewsStyles('laravel-views')
+@laravelViewsStyles(laravel-views)
 ```
 
 ## Purge Tailwindcss styles
