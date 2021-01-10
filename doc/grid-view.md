@@ -1,5 +1,7 @@
 # Grid view
 
+[See live example](http://laravel-views.herokuapp.com/grid-view)
+
 This view creates a dynamic grid view using card data, same as a TableView this view has features like filters, pagination and a search input, you can also customize the card data as you need
 
 - [Home](../README.md)

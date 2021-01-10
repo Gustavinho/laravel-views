@@ -1,5 +1,7 @@
 # Table view
 
+[See live example](http://laravel-views.herokuapp.com/table-view)
+
 This view creates a dynamic data table with some features like filters, pagination and search input, you can customize the headers, the data to be displayed for each row.
 
 - [Home](../README.md)

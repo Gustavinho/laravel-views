@@ -1,5 +1,7 @@
 # Laravel views
 
+[See live example](http://laravel-views.herokuapp.com)
+
 - [Home](../README.md)
 - [Installation and basic usage](#installation-and-basic-usage)
     - [Installing laravel views](#installing-laravel-views)
