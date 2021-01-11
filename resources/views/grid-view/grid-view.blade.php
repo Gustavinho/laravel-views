@@ -27,7 +27,7 @@ UI components used:
     @endcomponent
   @endif
 
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-gap-8 row-gap-12">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-{{ $maxCols }} gap-4 md:gap-8">
     @foreach ($items as $item)
       <div x-data='{ overlay: false }' class="relative">
         <div x-on:mouseover='overlay = true' x-on:mouseleave='overlay = false'>

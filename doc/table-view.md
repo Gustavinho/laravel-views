@@ -1,8 +1,10 @@
 # Table view
 
+[See live example](http://laravel-views.herokuapp.com/table-view)
+
 This view creates a dynamic data table with some features like filters, pagination and search input, you can customize the headers, the data to be displayed for each row.
 
-- [Laravel views](../README.md)
+- [Home](../README.md)
 - [Table view](#table-view)
     - [Create new table view](#create-new-table-view)
     - [Defining initial data](#defining-initial-data)
@@ -255,7 +257,7 @@ You can define actions to be executed in every row when a user clicks on a butto
 php artisan make:action Actions/ActivateUserAction
 ```
 
-With this artisan command a `ActivateUserAction.php` file will be created inside `app/Actions` directory, you can use any namespace you want. With this class you can customize how the action should behave, it has 2 public properties to customize the title and the icon, it is important specify a valid [Feather icon](https://feathericons.com/) name, the `handle` method receives the model corresponding to the row where the action was executed, you can write your own business login inside this method
+With this artisan command a `ActivateUserAction.php` file will be created inside `app/Actions` directory, you can use any namespace you want. With this class you can customize how the action should behave, it has 2 public properties to customize the title and the icon, it is important specify a valid [Feather icon](https://feathericons.com/) name, the `handle` method receives the model corresponding to the row where the action was executed, and the current view where the action was executed from, you can write your own business login inside this method.
 
 ```php
 class ActivateUserAction extends Action
@@ -264,7 +266,7 @@ class ActivateUserAction extends Action
 
     public $icon = "unlock";
 
-    public function handle($model)
+    public function handle($model, View $view)
     {
         $model->active = true;
         $model->save();

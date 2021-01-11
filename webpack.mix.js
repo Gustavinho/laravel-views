@@ -14,6 +14,7 @@ const tailwindcss = require('tailwindcss')
 
 mix.js('resources/js/app.js', 'public/laravel-views.js')
   .sass('resources/scss/app.scss', 'public/laravel-views.css')
+  .sass('resources/scss/tailwindcss.scss', 'public/tailwind.css')
   .options({
     processCssUrls: false,
     postCss: [ tailwindcss('./tailwind.config.js') ],
