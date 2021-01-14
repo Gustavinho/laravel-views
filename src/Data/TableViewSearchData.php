@@ -43,7 +43,6 @@ class TableViewSearchData implements Searchable
     private static function applyRelationalFields($relationalFields, $query, string $value): void
     {
         foreach ($relationalFields as $relationalValue) {
-
             [$relationship, $field] = explode('.', $relationalValue);
 
             $query->orWhereHas($relationship, static function ($query) use ($value, $field) {
