@@ -39,7 +39,7 @@ before_install:
   - cat composer.json
 
 install:
-  - travis_retry composer install --prefer-dist --no-interaction --no-dev --ignore-platform-reqs
+  - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
 
 script:
   - phpunit --testdox
