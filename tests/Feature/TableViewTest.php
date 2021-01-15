@@ -18,12 +18,11 @@ class TableViewTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->livewire = Livewire::test(MockTableView::class);
     }
 
     public function testSeeAllHeaders()
     {
-        factory(UserTest::class, 10)->create();
+        factory(UserTest::class, 1)->create();
         $livewire = Livewire::test(MockTableView::class);
         $headers = ['name', 'email'];
 
