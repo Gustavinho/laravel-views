@@ -27,7 +27,6 @@ class TestCase extends TestbenchTestCase
         return [
             LivewireServiceProvider::class,
             LaravelViewsServiceProvider::class,
-            RayServiceProvider::class
         ];
     }
 }
