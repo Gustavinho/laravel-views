@@ -180,4 +180,18 @@ abstract class TableView extends View
         $this->confirmationMessage = null;
         $this->actionToBeConfirmed = null;
     }
+    
+    /**
+     * Reset pagination
+     */
+    
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingFilters()
+    {
+        $this->resetPage();
+    }
 }
