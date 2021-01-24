@@ -96,6 +96,19 @@ abstract class DataView extends View
         return $query->paginate($this->paginate);
     }
 
+    /**
+     * Reset pagination
+     */
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingFilters()
+    {
+        $this->resetPage();
+    }
+
     protected function filters()
     {
         return [];

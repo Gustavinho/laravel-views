@@ -18,18 +18,4 @@ abstract class TableView extends DataView
 
         return $data;
     }
-    
-    /**
-     * Reset pagination
-     */
-    
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
-    public function updatingFilters()
-    {
-        $this->resetPage();
-    }
 }
