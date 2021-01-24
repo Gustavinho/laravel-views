@@ -12,7 +12,7 @@ UI components used:
  - button --}}
 
 <div
-  class="flex-1 text-right relative"
+  class="text-right relative"
   x-data="{ open: false }"
 >
   @isset($trigger)
