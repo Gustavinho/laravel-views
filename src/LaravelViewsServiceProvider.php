@@ -17,9 +17,21 @@ use Illuminate\Support\Facades\Blade;
 use LaravelViews\Console\GridViewMakeCommand;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\TableViewSortData;
+use LaravelViews\Views\Components\DynamicComponent;
 
 class LaravelViewsServiceProvider extends ServiceProvider
 {
+    /**
+     * All of the container bindings that should be registered.
+     *
+     * @var array
+     */
+    public $bindings = [
+        Searchable::class => TableViewSearchData::class,
+        Filterable::class => TableViewFilterData::class,
+        Sortable::class => TableViewSortData::class,
+    ];
+
     /**
      * Register services.
      *
@@ -31,18 +43,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
         if (file_exists($file)) {
             require_once($file);
         }
-    }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->app->bind(Searchable::class, TableViewSearchData::class);
-        $this->app->bind(Filterable::class, TableViewFilterData::class);
-        $this->app->bind(Sortable::class, TableViewSortData::class);
         $this->app->bind('laravel-views', function () {
             return new LaravelViews();
         });
@@ -55,7 +56,15 @@ class LaravelViewsServiceProvider extends ServiceProvider
         $this->app->bind('header', function () {
             return new Header();
         });
+    }
 
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
         $this->loadViews()
             ->loadCommands()
             ->publish()
@@ -87,11 +96,6 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-views');
 
-        $laravelViews = new LaravelViews;
-        foreach ($laravelViews->components() as $path => $component) {
-            Blade::component('laravel-views::components.' . $path, $component);
-        }
-
         return $this;
     }
 
@@ -112,6 +116,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
     private function bladeDirectives()
     {
         $laravelViews = new LaravelViews;
+
         Blade::directive('laravelViewsStyles', function ($options) use ($laravelViews) {
             return $laravelViews->css($options);
         });
@@ -119,6 +124,17 @@ class LaravelViewsServiceProvider extends ServiceProvider
         Blade::directive('laravelViewsScripts', function ($options) use ($laravelViews) {
             return $laravelViews->js($options);
         });
+
+        // Registers anonymous components
+        foreach ($laravelViews->components() as $path => $component) {
+            Blade::component('laravel-views::components.' . $path, 'lv::' . $component);
+        }
+
+        // Registering class components
+        Blade::component('lv::dynamic-component', DynamicComponent::class);
+
+        // This is only for laravel 8
+        // Blade::componentNamespace('LaravelViews\\Views\\Components', 'lv');
 
         return $this;
     }
