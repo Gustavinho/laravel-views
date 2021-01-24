@@ -14,7 +14,9 @@ class LaravelViews
     public function components()
     {
         return [
-            'buttons.icon' => 'icon-button'
+            'buttons.icon' => 'icon-button',
+            'drop-down' => 'drop-down',
+            'actions' => 'actions'
         ];
     }
 

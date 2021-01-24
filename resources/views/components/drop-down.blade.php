@@ -29,7 +29,7 @@ UI components used:
   @endisset
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left pt-4 z-50"
+    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-10"
     x-show.transition="open"
     @click.away="open = false"
     x-cloak

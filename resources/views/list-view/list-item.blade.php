@@ -1,4 +1,4 @@
-@props(['avatar', 'title', 'subtitle'])
+@props(['avatar', 'title', 'subtitle', 'actions', 'item'])
 
 <div>
   <div class="flex items-center space-x-4 ">
@@ -11,8 +11,6 @@
         {{ $subtitle }}
       </div>
     </div>
-    <div class="flex justify-end">
-      <x-lv::icon-button icon="chevron-right" />
-    </div>
+    <x-lv::actions :actions="$actions" :item="$item" />
   </div>
 </div>
