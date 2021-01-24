@@ -25,7 +25,7 @@ class TestCase extends TestbenchTestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Spatie\LaravelRay\RayServiceProvider::class,
+            // \Spatie\LaravelRay\RayServiceProvider::class,
             LivewireServiceProvider::class,
             LaravelViewsServiceProvider::class,
         ];
