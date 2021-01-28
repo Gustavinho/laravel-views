@@ -23,6 +23,6 @@ class HeaderTest extends TestCase
     public function testSetWidth()
     {
         $header = Header::width('100px');
-        $this->assertEquals($header->wdith, '100px');
+        $this->assertEquals($header->width, '100px');
     }
 }
