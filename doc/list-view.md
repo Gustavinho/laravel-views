@@ -4,7 +4,7 @@ This view creates a dynamic list view with filters, pagination, search input, an
 
 - [Home](../README.md)
 - [List view](#list-view)
-  - [Create new list view](#create-new-list-view)
+  - [Creating a new list view](#creating-a-new-list-view)
   - [Defining initial data](#defining-initial-data)
   - [Defining data for each list item](#defining-data-for-each-list-item)
   - [Customizing the list item component](#customizing-the-list-item-component)
@@ -18,7 +18,7 @@ This view creates a dynamic list view with filters, pagination, search input, an
 
 ![](./list.png)
 
-## Create new list view
+## Creating a new list view
 
 ```bash
 php artisan make:list-view ExampleListView
