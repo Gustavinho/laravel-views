@@ -1,4 +1,4 @@
-# Grid view
+# List view
 
 This view creates a dynamic list view with filters, pagination, search input, and actions by each item, it is useful for small screens, you can also customize the item compoment for each row as you need.
 
@@ -28,7 +28,7 @@ With this artisan command an `ExampleListView.php` file will be created inside t
 
 ## Defining initial data
 
-You should return an `Eloquent` query with the initial data to be displayed on the grid view, it is important to return the query, not the data collection.
+You should return an `Eloquent` query with the initial data to be displayed on the list view, it is important to return the query, not the data collection.
 
 ```php
 use App\User;
@@ -95,7 +95,7 @@ Don't forget to include the actions for each list item, there is a component out
 ```
 
 ## More features
-This grid view is based on a table view, so you could use some of the table view features as:
+This list view is based on a table view, so you could use some of the table view features as:
 
 - [Searching data](./table-view#searching-data)
 - [Pagination](./table-view#pagination)
