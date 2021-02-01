@@ -18,11 +18,11 @@ class DummyClass extends ListView
     }
 
     /**
-     * Sets the data to every list item
+     * Sets the properties to every list item component
      *
-     * @param $item Current model for each card
+     * @param $model Current model for each card
      */
-    public function data($item)
+    public function data($model)
     {
         return [
             'avatar' => '',

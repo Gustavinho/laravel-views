@@ -16,7 +16,7 @@ This view creates a dynamic grid view using card data, same as a TableView this 
 
 ![](./grid.png)
 
-## Create new table view
+## Create new grid view
 
 ```bash
 php artisan make:grid-view ExampleGridView
@@ -39,7 +39,7 @@ public function repository(): Builder
 
 ## Defining card data
 
-You have to define a public function returning an array with the data which will be displayed on each card, this array has to include `photo`, `title`, `subtitle` and the `description`.
+You have to define a public function returning an array with the data that will be displayed on each card, this array has to include `photo`, `title`, `subtitle` and the `description`.
 
 ```php
 public function card($item)

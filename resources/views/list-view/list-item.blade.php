@@ -1,4 +1,4 @@
-@props(['avatar', 'title', 'subtitle', 'actions', 'item'])
+@props(['avatar', 'title', 'subtitle', 'actions', 'model'])
 
 <div>
   <div class="flex items-center space-x-4 ">
@@ -11,6 +11,6 @@
         {{ $subtitle }}
       </div>
     </div>
-    <x-lv::actions :actions="$actions" :item="$item" />
+    <x-lv::actions :actions="$actions" :item="$model" />
   </div>
 </div>
