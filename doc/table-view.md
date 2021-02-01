@@ -65,6 +65,21 @@ public function headers(): array
 }
 ```
 
+You could create a complex header instead so you can set a fixed with the the column, just use the `Header` facade instead of a string in the `headers()` method.
+
+```php
+use LaravelViews\Facades\Header;
+
+public function headers(): array
+{
+    return [
+        Header::title('Name')->width('20%'),
+        Header::title('Email')->width('100px'),
+        'Created',
+    ];
+}
+```
+
 ## Rows
 Return an array with all the data you need for each row, this method receives an model instance for every row in the database according with the initial query and the filters activated.
 
