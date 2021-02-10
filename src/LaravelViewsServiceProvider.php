@@ -51,9 +51,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
         $this->app->bind('variants', function () {
             return new Variants;
         });
-        $this->app->bind('ui', function () {
-            return new UI;
-        });
+        $this->app->bind('ui', UI::class);
         $this->app->bind('header', function () {
             return new Header();
         });

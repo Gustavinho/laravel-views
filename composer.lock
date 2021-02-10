@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e2a10e9fed1c7b530cad195f2244c9e",
+    "content-hash": "43866e3bb91af1c88ece09a6f9dd678b",
     "packages": [
         {
             "name": "brick/math",
@@ -6640,32 +6640,34 @@
         },
         {
             "name": "spatie/laravel-ray",
-            "version": "1.7.1",
+            "version": "1.12.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ray.git",
-                "reference": "3f0a23f085e96238420746a25c776f2b98fc2610"
+                "reference": "9774088a826cc5aaa2710720667047852b2a5538"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/3f0a23f085e96238420746a25c776f2b98fc2610",
-                "reference": "3f0a23f085e96238420746a25c776f2b98fc2610",
+                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/9774088a826cc5aaa2710720667047852b2a5538",
+                "reference": "9774088a826cc5aaa2710720667047852b2a5538",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^7.0|^8.0",
-                "illuminate/database": "^7.0|^8.13",
-                "illuminate/support": "^7.0|^8.13",
-                "php": "^7.4|^8.0",
+                "ext-json": "*",
+                "illuminate/contracts": "^7.20|^8.0",
+                "illuminate/database": "^7.20|^8.13",
+                "illuminate/queue": "^7.20|^8.13",
+                "illuminate/support": "^7.20|^8.13",
+                "php": "^7.3|^8.0",
                 "spatie/backtrace": "^1.0",
-                "spatie/ray": "^1.7.2",
+                "spatie/ray": "^1.19",
                 "symfony/stopwatch": "4.2|^5.1",
-                "zbateson/mail-mime-parser": "^1.3"
+                "zbateson/mail-mime-parser": "^1.3.1"
             },
             "require-dev": {
-                "illuminate/mail": "^7.0|^8.19",
-                "illuminate/view": "^7.0|^8.19",
-                "orchestra/testbench": "^5.0|^6.0",
+                "facade/ignition": "^2.5",
+                "laravel/framework": "^7.20|^8.19",
+                "orchestra/testbench-core": "^5.0|^6.0",
                 "phpunit/phpunit": "^9.3",
                 "spatie/phpunit-snapshot-assertions": "^4.2"
             },
@@ -6702,7 +6704,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-ray/issues",
-                "source": "https://github.com/spatie/laravel-ray/tree/1.7.1"
+                "source": "https://github.com/spatie/laravel-ray/tree/1.12.6"
             },
             "funding": [
                 {
@@ -6714,7 +6716,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-01-17T12:15:02+00:00"
+            "time": "2021-02-10T19:13:17+00:00"
         },
         {
             "name": "spatie/macroable",
@@ -6768,32 +6770,35 @@
         },
         {
             "name": "spatie/ray",
-            "version": "1.8.0",
+            "version": "1.19.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ray.git",
-                "reference": "d229fd4ccd8f4ed39ddb628d3d788812cc6c1851"
+                "reference": "932ba405337bbe530da1d3b1c5746a16192be2ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ray/zipball/d229fd4ccd8f4ed39ddb628d3d788812cc6c1851",
-                "reference": "d229fd4ccd8f4ed39ddb628d3d788812cc6c1851",
+                "url": "https://api.github.com/repos/spatie/ray/zipball/932ba405337bbe530da1d3b1c5746a16192be2ed",
+                "reference": "932ba405337bbe530da1d3b1c5746a16192be2ed",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
-                "php": "^7.4|^8.0",
+                "php": "^7.3|^8.0",
                 "ramsey/uuid": "^3.0|^4.1",
                 "spatie/backtrace": "^1.0",
                 "spatie/macroable": "^1.0",
-                "symfony/stopwatch": "^4.2|^5.2",
-                "symfony/var-dumper": "^4.2|^5.2"
+                "symfony/stopwatch": "^4.0|^5.1",
+                "symfony/var-dumper": "^4.2|^5.1"
             },
             "require-dev": {
                 "illuminate/support": "6.x|^8.18",
+                "nesbot/carbon": "^2.43",
                 "phpunit/phpunit": "^9.5",
-                "spatie/phpunit-snapshot-assertions": "^4.2"
+                "rector/rector": "^0.9.16",
+                "spatie/phpunit-snapshot-assertions": "^4.2",
+                "spatie/test-time": "^1.2"
             },
             "type": "library",
             "autoload": {
@@ -6824,7 +6829,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/ray/issues",
-                "source": "https://github.com/spatie/ray/tree/1.8.0"
+                "source": "https://github.com/spatie/ray/tree/1.19.3"
             },
             "funding": [
                 {
@@ -6836,7 +6841,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-01-14T12:19:54+00:00"
+            "time": "2021-02-09T12:35:00+00:00"
         },
         {
             "name": "symfony/stopwatch",
