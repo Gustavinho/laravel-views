@@ -25,7 +25,7 @@ UI components used:
     @if (isset($filtersViews) && $filtersViews)
     @component('laravel-views::components.drop-down')
       @slot('trigger')
-        <x-lv::icon-button icon="filter" />
+        <x-lv-icon-button icon="filter" />
       @endslot
       {{-- Each filter view --}}
       @foreach ($filtersViews as $filter)

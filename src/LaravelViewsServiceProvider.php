@@ -129,11 +129,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
 
         // Registers anonymous components
         foreach ($laravelViews->components() as $path => $component) {
-            Blade::component('laravel-views::components.' . $path, 'lv::' . $component);
+            Blade::component('laravel-views::components.' . $path, 'lv-' . $component);
         }
 
         // Registering class components
-        Blade::component('lv::dynamic-component', DynamicComponent::class);
+        Blade::component('lv-dynamic-component', DynamicComponent::class);
 
         // This is only for laravel 8
         // Blade::componentNamespace('LaravelViews\\Views\\Components', 'lv');

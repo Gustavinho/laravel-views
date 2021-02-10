@@ -20,6 +20,7 @@ Laravel package to create beautiful common views like tables using only PHP code
 - [Views available](#views-available)
   - [Table view](#table-view)
   - [Grid view](#grid-view)
+  - [List view](#list-view)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 
@@ -148,6 +149,12 @@ Dynamic data table with some features like filters, pagination and search input,
 Dynamic grid view using card data, same as a TableView this view has features like filters, pagination and a search input, you can also customize the card data as you need
 
 ![](doc/grid.png)
+
+### [List view](doc/list-view.md)
+
+Dynamic list view with filters, pagination, search input, and actions by each item, it is useful for small screens, you can also customize the item compoment for each row as you need.
+
+![](doc/list.png)
 
 ## Contributing
 

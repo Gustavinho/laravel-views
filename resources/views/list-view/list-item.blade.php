@@ -6,11 +6,13 @@
       <img src="{{ $avatar }}" alt="" class="w-12 h-12 rounded-full shadow-inner bg-white">
     </div>
     <div class="flex-1">
-      {{ $title }}
+      <div class="font-medium">
+        {{ $title }}
+      </div>
       <div class="text-gray-600 text-sm">
         {{ $subtitle }}
       </div>
     </div>
-    <x-lv::actions :actions="$actions" :item="$model" />
+    <x-lv-actions :actions="$actions" :item="$model" />
   </div>
 </div>
