@@ -64,7 +64,7 @@ The list view uses its own blade component by default with some data but you can
 The customized component will allways get two properties by default, `actions` and `model`, *actions* is an array with all the actions defined in the list view class, and *model* is an instance of the current model for that list item.
 
 ```php
-public $itemComponent = 'my-custom-list-item-component';
+public $itemComponent = 'components.my-custom-list-item-component';
 
 public function data($model)
 {
@@ -90,7 +90,7 @@ Don't forget to include the actions for each list item, there is a component out
 
 <div>
   <p>My custom content for each list item</p>
-  <x-lv::actions :actions="$actions" :item="$item" />
+  <x-lv-actions :actions="$actions" :item="$model" />
 </div>
 ```
 
