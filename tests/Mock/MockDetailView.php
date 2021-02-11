@@ -2,7 +2,6 @@
 
 namespace LaravelViews\Test\Mock;
 
-use LaravelViews\Facades\UI;
 use LaravelViews\Test\Database\UserTest;
 use LaravelViews\Views\DetailView;
 

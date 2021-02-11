@@ -90,7 +90,7 @@ Don't forget to include the actions for each list item, there is a component out
 
 <div>
   <p>My custom content for each list item</p>
-  <x-lv-actions :actions="$actions" :item="$model" />
+  <x-lv-actions :actions="$actions" :model="$model" />
 </div>
 ```
 

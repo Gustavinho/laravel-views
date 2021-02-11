@@ -68,6 +68,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
             ->loadCommands()
             ->publish()
             ->bladeDirectives()
+            ->loadComponents()
             ->configFiles();
     }
 
@@ -117,18 +118,26 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         $laravelViews = new LaravelViews;
 
+        Blade::directive('laravelViewsScripts', function ($options) use ($laravelViews) {
+            return $laravelViews->js($options);
+        });
+
         Blade::directive('laravelViewsStyles', function ($options) use ($laravelViews) {
             return $laravelViews->css($options);
         });
 
-        Blade::directive('laravelViewsScripts', function ($options) use ($laravelViews) {
-            return $laravelViews->js($options);
-        });
+        return $this;
+    }
+
+    private function loadComponents()
+    {
+        $laravelViews = new LaravelViews;
 
         // Registers anonymous components
         foreach ($laravelViews->components() as $path => $component) {
             Blade::component('laravel-views::components.' . $path, 'lv-' . $component);
         }
+        Blade::component('laravel-views::view.layout', 'lv-layout');
 
         // Registering class components
         Blade::component('lv-dynamic-component', DynamicComponent::class);

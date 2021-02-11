@@ -2,8 +2,7 @@
 
 namespace LaravelViews\Views;
 
-use LaravelViews\Actions\Action;
-use LaravelViews\Actions\ExecuteAction;
+use LaravelViews\Actions\WithActions;
 use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\Contracts\Sortable;
@@ -12,7 +11,7 @@ use Livewire\WithPagination;
 
 abstract class DataView extends View
 {
-    use WithPagination;
+    use WithPagination, WithActions;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -41,12 +40,6 @@ abstract class DataView extends View
 
     /** @var Array<String> $searchBy All fields to search */
     public $searchBy;
-
-    /** @var String $confirmationMessage sets the confirmation message to be shown when an action requires it */
-    public $confirmationMessage = null;
-
-    /** @var Action $actionToBeConfirmed sets a temporal action to be executed once it will be confirmed */
-    public $actionToBeConfirmed = null;
 
     public $sortBy = null;
 
@@ -119,6 +112,16 @@ abstract class DataView extends View
         return [];
     }
 
+    public function getActions()
+    {
+        return $this->actionsByRow();
+    }
+
+    public function getModelWhoFiredAction($id)
+    {
+        return $this->repository()->find($id);
+    }
+
     /**
      * LIVEWIERE ACTIONS ARE HERE
      * All these actions are executed from the UI and those aren't for internal use
@@ -138,37 +141,6 @@ abstract class DataView extends View
         }
     }
 
-    public function executeAction($action, $id, $shouldVerifyConfirmation, ExecuteAction $executeAction)
-    {
-        $item = $this->repository()->find($id);
-
-        /** @var {ExecuteAction} Executes the action, if it needs to be confirmed it will return the action to be confirmed  */
-        $actionToBeConfirmed = $executeAction
-            ->setView($this)
-            ->shouldVerifyConfirmation($shouldVerifyConfirmation)
-            ->callByActionName($action, $item, $this->actionsByRow());
-
-        /** If the action need to be confirmed */
-        if ($actionToBeConfirmed) {
-            $this->fill([
-                /** Stores action id and item id to be executed before, this is needed on the confirmation message component */
-                'actionToBeConfirmed' => [$actionToBeConfirmed->id, $item->id,],
-                'confirmationMessage' => $actionToBeConfirmed->getConfirmationMessage($item)
-            ]);
-        } else {
-            $this->closeConfirmationMessage();
-        }
-    }
-
-    /**
-     * Flushes all session messages about success and error statuses
-     */
-    public function flushMessage()
-    {
-        session()->forget('message');
-        session()->forget('messageType');
-    }
-
     public function clearFilters()
     {
         $this->filters = [];
@@ -177,11 +149,5 @@ abstract class DataView extends View
     public function clearSearch()
     {
         $this->search = '';
-    }
-
-    public function closeConfirmationMessage()
-    {
-        $this->confirmationMessage = null;
-        $this->actionToBeConfirmed = null;
     }
 }

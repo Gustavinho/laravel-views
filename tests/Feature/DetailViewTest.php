@@ -6,13 +6,21 @@ use LaravelViews\Test\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelViews\Test\Database\UserTest;
 use LaravelViews\Test\Mock\MockDetailView;
+use LaravelViews\Test\Mock\MockDetailViewWithActions;
 use LaravelViews\Test\Mock\MockDetailViewWithComponents;
 use LaravelViews\Test\Mock\MockDetailViewWithMultipleComponents;
+use LaravelViews\Test\Traits\WithActions;
 use Livewire\Livewire;
 
 class DetailViewTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithActions;
+
+    public function getViewWithActions()
+    {
+        $user = factory(UserTest::class)->create();
+        return Livewire::test(MockDetailViewWithActions::class, ['model' => $user]);
+    }
 
     public function testCreateViewUsingId()
     {

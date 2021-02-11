@@ -4,10 +4,13 @@ namespace LaravelViews\Views;
 
 use Exception;
 use Illuminate\Support\Arr;
+use LaravelViews\Actions\WithActions;
 use LaravelViews\Facades\UI;
 
 class DetailView extends View
 {
+    use WithActions;
+
     protected $view = 'detail-view.detail-view';
     protected $modelClass;
 
@@ -22,6 +25,11 @@ class DetailView extends View
 
             $this->model = $this->modelClass::find($this->model);
         }
+    }
+
+    protected function actions()
+    {
+        return [];
     }
 
     protected function getRenderData()
@@ -44,5 +52,15 @@ class DetailView extends View
         return [
             'components' => $components,
         ];
+    }
+
+    public function getActions()
+    {
+        return $this->actions();
+    }
+
+    public function getModelWhoFiredAction()
+    {
+        return $this->model;
     }
 }
