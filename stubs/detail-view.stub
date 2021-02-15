@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use LaravelViews\Views\DetailView;
+
+class UserDetailView extends DetailView
+{
+    public $title = "Title";
+    public $subtitle = "Subtitle or description";
+
+    /**
+     * @param $model Model instance
+     * @return Array Array with all the detail data or the components
+     */
+    public function detail($model)
+    {
+        return [
+            'Name' => $model->name,
+            'Email' => $model->email,
+        ];
+    }
+}

@@ -16,6 +16,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use LaravelViews\Console\GridViewMakeCommand;
 use LaravelViews\Console\ListViewMakeCommand;
+use LaravelViews\Console\MakeViewCommand;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\TableViewSortData;
 use LaravelViews\Views\Components\DynamicComponent;
@@ -107,7 +108,8 @@ class LaravelViewsServiceProvider extends ServiceProvider
                 ActionMakeCommand::class,
                 TableViewMakeCommand::class,
                 GridViewMakeCommand::class,
-                ListViewMakeCommand::class
+                ListViewMakeCommand::class,
+                MakeViewCommand::class
             ]);
         }
 
