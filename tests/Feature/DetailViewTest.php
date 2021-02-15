@@ -37,7 +37,7 @@ class DetailViewTest extends TestCase
         Livewire::test(MockDetailView::class, ['model' => $user])
             ->assertSee($user->name)
             ->assertSee($user->email)
-            ->assertSeeHtml(htmlentities($user->avatar))
+            ->assertSeeHtml($user->avatar)
             ->assertSee('Name')
             ->assertSee('Email')
             ->assertSee('Avatar');
@@ -58,5 +58,14 @@ class DetailViewTest extends TestCase
         Livewire::test(MockDetailViewWithMultipleComponents::class, ['model' => $user])
             ->assertSeeHtml($user->email)
             ->assertSeeHtml($user->name);
+    }
+
+    public function testSeeHeading()
+    {
+        $user = factory(UserTest::class)->create();
+
+        Livewire::test(MockDetailView::class, ['model' => $user->id])
+            ->assertSee('Detail view title ' . $user->name)
+            ->assertSee('Detail view subtitle ' . $user->email);
     }
 }

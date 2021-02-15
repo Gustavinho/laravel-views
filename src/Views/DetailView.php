@@ -14,22 +14,16 @@ class DetailView extends View
     protected $view = 'detail-view.detail-view';
     protected $modelClass;
 
+    public $title = '';
+    public $subtitle = '';
+    public $stripe = false;
+
     public $model;
 
     public function mount()
     {
-        if (is_numeric($this->model)) {
-            if (!$this->modelClass) {
-                throw new Exception('A modelClass should be declared when the initial model value is an ID');
-            }
-
-            $this->model = $this->modelClass::find($this->model);
-        }
-    }
-
-    protected function actions()
-    {
-        return [];
+        $this->setModel();
+        $this->setHeading();
     }
 
     protected function getRenderData()
@@ -42,7 +36,7 @@ class DetailView extends View
             // If there is an array of data insted of a component
             // then creates a new attributes component
             if (Arr::isAssoc($components)) {
-                $components = [UI::attributes($components)];
+                $components = [UI::attributes($components, ['stripe' => $this->stripe])];
             }
         // If there is only one component
         } else {
@@ -54,9 +48,36 @@ class DetailView extends View
         ];
     }
 
+    private function setModel()
+    {
+        if (is_numeric($this->model)) {
+            if (!$this->modelClass) {
+                throw new Exception('A $modelClass should be declared when the initial model value is an ID');
+            }
+
+            $this->model = $this->modelClass::find($this->model);
+        }
+    }
+
+    private function setHeading()
+    {
+        if (method_exists($this, 'heading')) {
+            $heading = app()->call([$this, 'heading'], ['model' => $this->model]);
+            [$this->title, $this->subtitle] = $heading;
+        }
+
+        if (!$this->title) {
+            $this->title = $this->getClassName();
+        }
+    }
+
     public function getActions()
     {
-        return $this->actions();
+        if (method_exists($this, 'actions')) {
+            return $this->actions();
+        }
+
+        return [];
     }
 
     public function getModelWhoFiredAction()

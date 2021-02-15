@@ -39,11 +39,12 @@ class UI
         ))->render();
     }
 
-    public function attributes($attributes)
+    public function attributes($attributes, $options = [])
     {
-        return $this->component('laravel-views::components.attributes-list', [
-            'data' => $attributes
-        ]);
+        return $this->component('laravel-views::components.attributes-list', array_merge(
+            ['data' => $attributes],
+            $options
+        ));
     }
 
     public function component($view, $data)
