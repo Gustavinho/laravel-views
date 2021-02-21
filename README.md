@@ -21,6 +21,7 @@ Laravel package to create beautiful common views like tables using only PHP code
   - [Table view](#table-view)
   - [Grid view](#grid-view)
   - [List view](#list-view)
+  - [Detail view](#detail-view)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 
@@ -156,6 +157,11 @@ Dynamic list view with filters, pagination, search input, and actions by each it
 
 ![](doc/list.png)
 
+### [Detail view](doc/detail-view.md)
+Dynamic detail view to render a model attributes list with all the data you need, you can also customize the default component to create complex detail views and execute actions over the model is being used.
+
+![](doc/detail.png)
+
 ## Contributing
 
 Check the [contribution guide](CONTRIBUTING.md)
@@ -166,8 +172,6 @@ Laravel Views is still under heavy development so I will be adding more awesome 
 
 Here's the plan for what's coming:
 
-- **New list view**
-- **New detail view**
 - **New form view**
 - **New layout view**
 - Add tooltips to actions buttons

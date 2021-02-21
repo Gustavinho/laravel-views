@@ -6,10 +6,10 @@
       <img src="{{ $avatar }}" alt="" class="w-12 h-12 rounded-full shadow-inner bg-white">
     </div>
     <div class="flex-1">
-      <div class="font-medium">
+      <div class="text-sm font-medium text-gray-900">
         {{ $title }}
       </div>
-      <div class="text-gray-600 text-sm">
+      <div class="text-sm">
         {{ $subtitle }}
       </div>
     </div>

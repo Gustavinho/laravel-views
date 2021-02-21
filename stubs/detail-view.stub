@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace DummyNamespace;
 
 use LaravelViews\Views\DetailView;
 
-class UserDetailView extends DetailView
+class DummyClass extends DetailView
 {
     public $title = "Title";
     public $subtitle = "Subtitle or description";
@@ -16,8 +16,8 @@ class UserDetailView extends DetailView
     public function detail($model)
     {
         return [
-            'Name' => $model->name,
-            'Email' => $model->email,
+            'Name' => '',
+            'Email' => '',
         ];
     }
 }

@@ -13,6 +13,7 @@ class DetailView extends View
 
     protected $view = 'detail-view.detail-view';
     protected $modelClass;
+    protected $detailComponent = null;
 
     public $title = '';
     public $subtitle = '';
@@ -28,19 +29,25 @@ class DetailView extends View
 
     protected function getRenderData()
     {
-        $components = app()->call([$this, 'detail'], [
+        $detailData = app()->call([$this, 'detail'], [
             'model' => $this->model,
         ]);
 
-        if (is_array($components)) {
+        if (is_array($detailData)) {
             // If there is an array of data insted of a component
             // then creates a new attributes component
-            if (Arr::isAssoc($components)) {
-                $components = [UI::attributes($components, ['stripe' => $this->stripe])];
+            if (Arr::isAssoc($detailData)) {
+                if ($this->detailComponent) {
+                    $components = [UI::component($this->detailComponent, $detailData)];
+                } else {
+                    $components = [UI::attributes($detailData, ['stripe' => $this->stripe])];
+                }
+            } else {
+                $components = $detailData;
             }
         // If there is only one component
         } else {
-            $components = [$components];
+            $components = [$detailData];
         }
 
         return [
