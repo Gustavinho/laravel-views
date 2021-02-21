@@ -6,11 +6,15 @@ This view creates a dynamic grid view using card data, same as a TableView this 
 
 - [Home](../README.md)
 - [Grid view](#grid-view)
-  - [Create new grid view](#create-new-grid-view)
-  - [Defining initial data](#defining-initial-data)
-  - [Defining card data](#defining-card-data)
-  - [Customizing card data](#customizing-card-data)
-  - [More features](#more-features)
+- [Create new grid view](#create-new-grid-view)
+- [Defining initial data](#defining-initial-data)
+- [Defining card data](#defining-card-data)
+- [Customizing card data](#customizing-card-data)
+- [More features](#more-features)
+  - [Searching data](./table-view#searching-data)
+  - [Pagination](./table-view#pagination)
+  - [Filters](./table-view#filters)
+  - [Actions](./table-view#actions)
 
 ## Grid view example
 

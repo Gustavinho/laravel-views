@@ -4,15 +4,15 @@ This view creates a dynamic list view with filters, pagination, search input, an
 
 - [Home](../README.md)
 - [List view](#list-view)
-  - [Creating a new list view](#creating-a-new-list-view)
-  - [Defining initial data](#defining-initial-data)
-  - [Defining data for each list item](#defining-data-for-each-list-item)
-  - [Customizing the list item component](#customizing-the-list-item-component)
-  - [More features](#more-features)
-    - [Searching data](./table-view#searching-data)
-    - [Pagination](./table-view#pagination)
-    - [Filters](./table-view#filters)
-    - [Actions](./table-view#actions)
+- [Creating a new list view](#creating-a-new-list-view)
+- [Defining initial data](#defining-initial-data)
+- [Defining data for each list item](#defining-data-for-each-list-item)
+- [Customizing the list item component](#customizing-the-list-item-component)
+- [More features](#more-features)
+  - [Searching data](./table-view#searching-data)
+  - [Pagination](./table-view#pagination)
+  - [Filters](./table-view#filters)
+  - [Actions](./table-view#actions)
 
 ## List view example
 
@@ -90,7 +90,7 @@ Don't forget to include the actions for each list item, there is a component out
 
 <div>
   <p>My custom content for each list item</p>
-  <x-lv-actions :actions="$actions" :item="$model" />
+  <x-lv-actions :actions="$actions" :model="$model" />
 </div>
 ```
 

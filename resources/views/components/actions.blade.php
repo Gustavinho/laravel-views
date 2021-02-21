@@ -1,4 +1,4 @@
-@props(['actions', 'item'])
+@props(['actions', 'model'])
 
 <div>
   @if (count($actions))
@@ -10,8 +10,8 @@
         </x-slot>
 
         @foreach ($actions as $action)
-          @if ($action->renderIf($item))
-            <a href="#!" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $item->id }}', true)" title="{{ $action->title}}" class="group flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+          @if ($action->renderIf($model))
+            <a href="#!" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $model->id }}', true)" title="{{ $action->title}}" class="group flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
               <i data-feather="{{ $action->icon }}" class="mr-3 h-4 w-4 text-gray-600 group-hover:text-gray-700"></i>
               {{ $action->title }}
             </a>
@@ -23,8 +23,8 @@
     {{-- Desktop action buttons --}}
     <div class="hidden lg:flex justify-items-end">
       @foreach ($actions as $action)
-        @if ($action->renderIf($item))
-          <x-lv-icon-button :icon="$action->icon" size="sm" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $item->id }}', true)" />
+        @if ($action->renderIf($model))
+          <x-lv-icon-button :icon="$action->icon" size="sm" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $model->id }}', true)" />
         @endif
       @endforeach
     </div>

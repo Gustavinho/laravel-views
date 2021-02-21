@@ -7,9 +7,9 @@ use LaravelViews\Test\Mock\Actions\TestConfirmedAction;
 use LaravelViews\Test\Mock\Actions\TestErrorAction;
 use LaravelViews\Test\Mock\Actions\TestSuccessAction;
 
-class MockTableViewWithActions extends MockTableView
+class MockDetailViewWithActions extends MockDetailView
 {
-    protected function actionsByRow()
+    protected function actions()
     {
         return [
             new TestSuccessAction,

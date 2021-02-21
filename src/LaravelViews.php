@@ -16,7 +16,8 @@ class LaravelViews
         return [
             'buttons.icon' => 'icon-button',
             'drop-down' => 'drop-down',
-            'actions' => 'actions'
+            'actions' => 'actions',
+            'attributes-list' => 'attributes-list',
         ];
     }
 
