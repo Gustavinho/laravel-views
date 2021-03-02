@@ -1,5 +1,7 @@
 # Detail view
 
+[See live example](http://laravel-views.herokuapp.com/detail-view)
+
 This view creates a dynamic detail view to render a model attributes list with all the data you need, you can also customize the default component to create complex detail views and execute actions over the model is being used.
 
 - [Home](../README.md)
@@ -43,8 +45,8 @@ class ExampleDetailView extends DetailView
     public function detail($model)
     {
         return [
-            'Name' => $model->name,
-            'Email' => $model->email,
+            'Name' => '',
+            'Email' => '',
         ];
     }
 }

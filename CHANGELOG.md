@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.2] - 2021-03-01
+### Added
+- New list view
+- New detail view with
+  - Default component
+  - Default component customization
+  - Multiple components
+  - Actions
+- Feature to set the width for each column in the TableView
+- Documentation for the new detail view
+- New `attributes-list` component
+- New `layout` component
+
+### Changed
+- The `title` action now is included as an attribute in the `a` tag for each action.
+- Internal refactors
+  - Base `DataView` class with all the features to manage the data (filters, search, actions, pagination etc) on the table, grid, and list view.
+- Refactored actions feature to be reused as a trait
+- Refactored actions test to be reused as a trait
+
+### Fixed
+- Bug with pagination and filters, the pagination was not being reset after a new search
+
 ## [2.1] - 2021-01-10
 ### Added
 - Option to customize which assets will be imported
