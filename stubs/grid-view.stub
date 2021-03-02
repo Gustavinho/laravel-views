@@ -25,10 +25,10 @@ class DummyClass extends GridView
     public function card($item)
     {
         return [
-            'image' => $item->photo,
-            'title' => $item->name,
-            'subtitle' => $item->email,
-            'description' => $item->description
+            'image' => '',
+            'title' => '',
+            'subtitle' => '',
+            'description' => ''
         ];
     }
 }

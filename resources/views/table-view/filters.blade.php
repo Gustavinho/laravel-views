@@ -20,11 +20,12 @@ UI components used:
     </div>
   @endif
 
-  {{-- Filters dropdown --}}
-  @if (isset($filtersViews) && $filtersViews)
+  <div class="lg:flex-1 ml-4 lg:ml-0">
+    {{-- Filters dropdown --}}
+    @if (isset($filtersViews) && $filtersViews)
     @component('laravel-views::components.drop-down')
       @slot('trigger')
-        <x-icon-button icon="filter" />
+        <x-lv-icon-button icon="filter" />
       @endslot
       {{-- Each filter view --}}
       @foreach ($filtersViews as $filter)
@@ -51,5 +52,6 @@ UI components used:
         </div>
       @endif
     @endcomponent
-  @endif
+    @endif
+  </div>
 </div>

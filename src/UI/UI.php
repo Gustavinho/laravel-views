@@ -2,6 +2,8 @@
 
 namespace LaravelViews\UI;
 
+use Illuminate\Support\Facades\View;
+
 class UI
 {
     public function badge($title, $type = 'default')
@@ -35,5 +37,23 @@ class UI
             'type',
             'class'
         ))->render();
+    }
+
+    public function attributes($attributes, $options = [])
+    {
+        return $this->component('laravel-views::components.attributes-list', array_merge(
+            ['data' => $attributes],
+            $options
+        ));
+    }
+
+    public function component($view, $data)
+    {
+        return View::make('laravel-views::core.dynamic-component')
+            ->with([
+                'view' => $view,
+                'data' => $data,
+            ])
+            ->render();
     }
 }

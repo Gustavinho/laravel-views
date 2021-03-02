@@ -20,6 +20,8 @@ Laravel package to create beautiful common views like tables using only PHP code
 - [Views available](#views-available)
   - [Table view](#table-view)
   - [Grid view](#grid-view)
+  - [List view](#list-view)
+  - [Detail view](#detail-view)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 
@@ -149,6 +151,17 @@ Dynamic grid view using card data, same as a TableView this view has features li
 
 ![](doc/grid.png)
 
+### [List view](doc/list-view.md)
+
+Dynamic list view with filters, pagination, search input, and actions by each item, it is useful for small screens, you can also customize the item compoment for each row as you need.
+
+![](doc/list.png)
+
+### [Detail view](doc/detail-view.md)
+Dynamic detail view to render a model attributes list with all the data you need, you can also customize the default component to create complex detail views and execute actions over the model is being used.
+
+![](doc/detail.png)
+
 ## Contributing
 
 Check the [contribution guide](CONTRIBUTING.md)
@@ -159,8 +172,6 @@ Laravel Views is still under heavy development so I will be adding more awesome 
 
 Here's the plan for what's coming:
 
-- **New list view**
-- **New detail view**
 - **New form view**
 - **New layout view**
 - Add tooltips to actions buttons

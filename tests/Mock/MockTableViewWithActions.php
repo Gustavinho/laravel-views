@@ -2,36 +2,10 @@
 
 namespace LaravelViews\Test\Mock;
 
-use LaravelViews\Actions\Action;
-use LaravelViews\Actions\Confirmable;
-use LaravelViews\Filters\Filter;
-use LaravelViews\Views\View;
-
-class TestSuccessAction extends Action
-{
-    public function handle($model, View $view)
-    {
-        $view->emit('test-event');
-        $this->success();
-    }
-}
-
-class TestErrorAction extends Action
-{
-    public function handle($model)
-    {
-        $this->error();
-    }
-}
-
-class TestConfirmedAction extends Action
-{
-    use Confirmable;
-
-    public function handle($model) {
-        $this->success();
-    }
-}
+use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Test\Mock\Actions\TestConfirmedAction;
+use LaravelViews\Test\Mock\Actions\TestErrorAction;
+use LaravelViews\Test\Mock\Actions\TestSuccessAction;
 
 class MockTableViewWithActions extends MockTableView
 {
@@ -40,7 +14,9 @@ class MockTableViewWithActions extends MockTableView
         return [
             new TestSuccessAction,
             new TestErrorAction,
-            new TestConfirmedAction
+            new TestConfirmedAction,
+            new RedirectAction('user', 'See user', 'eye'),
+            new RedirectAction('user.edit', 'Edit user', 'pencil'),
         ];
     }
 }

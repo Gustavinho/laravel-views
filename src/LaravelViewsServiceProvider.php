@@ -15,11 +15,25 @@ use LaravelViews\UI\Header;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use LaravelViews\Console\GridViewMakeCommand;
+use LaravelViews\Console\ListViewMakeCommand;
+use LaravelViews\Console\MakeViewCommand;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\TableViewSortData;
+use LaravelViews\Views\Components\DynamicComponent;
 
 class LaravelViewsServiceProvider extends ServiceProvider
 {
+    /**
+     * All of the container bindings that should be registered.
+     *
+     * @var array
+     */
+    public $bindings = [
+        Searchable::class => TableViewSearchData::class,
+        Filterable::class => TableViewFilterData::class,
+        Sortable::class => TableViewSortData::class,
+    ];
+
     /**
      * Register services.
      *
@@ -31,6 +45,17 @@ class LaravelViewsServiceProvider extends ServiceProvider
         if (file_exists($file)) {
             require_once($file);
         }
+
+        $this->app->bind('laravel-views', function () {
+            return new LaravelViews();
+        });
+        $this->app->bind('variants', function () {
+            return new Variants;
+        });
+        $this->app->bind('ui', UI::class);
+        $this->app->bind('header', function () {
+            return new Header();
+        });
     }
 
     /**
@@ -40,26 +65,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(Searchable::class, TableViewSearchData::class);
-        $this->app->bind(Filterable::class, TableViewFilterData::class);
-        $this->app->bind(Sortable::class, TableViewSortData::class);
-        $this->app->bind('laravel-views', function () {
-            return new LaravelViews();
-        });
-        $this->app->bind('variants', function () {
-            return new Variants;
-        });
-        $this->app->bind('ui', function () {
-            return new UI;
-        });
-        $this->app->bind('header', function () {
-            return new Header();
-        });
-
         $this->loadViews()
             ->loadCommands()
             ->publish()
             ->bladeDirectives()
+            ->loadComponents()
             ->configFiles();
     }
 
@@ -87,11 +97,6 @@ class LaravelViewsServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-views');
 
-        $laravelViews = new LaravelViews;
-        foreach ($laravelViews->components() as $path => $component) {
-            Blade::component('laravel-views::components.' . $path, $component);
-        }
-
         return $this;
     }
 
@@ -102,7 +107,9 @@ class LaravelViewsServiceProvider extends ServiceProvider
                 FilterMakeCommand::class,
                 ActionMakeCommand::class,
                 TableViewMakeCommand::class,
-                GridViewMakeCommand::class
+                GridViewMakeCommand::class,
+                ListViewMakeCommand::class,
+                MakeViewCommand::class
             ]);
         }
 
@@ -112,13 +119,33 @@ class LaravelViewsServiceProvider extends ServiceProvider
     private function bladeDirectives()
     {
         $laravelViews = new LaravelViews;
-        Blade::directive('laravelViewsStyles', function ($options) use ($laravelViews) {
-            return $laravelViews->css($options);
-        });
 
         Blade::directive('laravelViewsScripts', function ($options) use ($laravelViews) {
             return $laravelViews->js($options);
         });
+
+        Blade::directive('laravelViewsStyles', function ($options) use ($laravelViews) {
+            return $laravelViews->css($options);
+        });
+
+        return $this;
+    }
+
+    private function loadComponents()
+    {
+        $laravelViews = new LaravelViews;
+
+        // Registers anonymous components
+        foreach ($laravelViews->components() as $path => $component) {
+            Blade::component('laravel-views::components.' . $path, 'lv-' . $component);
+        }
+        Blade::component('laravel-views::view.layout', 'lv-layout');
+
+        // Registering class components
+        Blade::component('lv-dynamic-component', DynamicComponent::class);
+
+        // This is only for laravel 8
+        // Blade::componentNamespace('LaravelViews\\Views\\Components', 'lv');
 
         return $this;
     }

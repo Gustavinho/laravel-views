@@ -5,7 +5,7 @@ namespace LaravelViews\Test;
 use LaravelViews\LaravelViewsServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
-use PHPUnit\Framework\TestCase as FrameworkTestCase;
+use Spatie\LaravelRay\RayServiceProvider;
 
 class TestCase extends TestbenchTestCase
 {
@@ -25,8 +25,9 @@ class TestCase extends TestbenchTestCase
     protected function getPackageProviders($app)
     {
         return [
+//            \Spatie\LaravelRay\RayServiceProvider::class,
             LivewireServiceProvider::class,
-            LaravelViewsServiceProvider::class
+            LaravelViewsServiceProvider::class,
         ];
     }
 }

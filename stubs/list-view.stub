@@ -1,0 +1,33 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelViews\Views\ListView;
+use Illuminate\Database\Eloquent\Builder;
+
+class DummyClass extends ListView
+{
+    /**
+     * Sets a initial query with the data to fill the table
+     *
+     * @return Builder Eloquent query
+     */
+    public function repository(): Builder
+    {
+        // return User::query();
+    }
+
+    /**
+     * Sets the properties to every list item component
+     *
+     * @param $model Current model for each card
+     */
+    public function data($model)
+    {
+        return [
+            'avatar' => '',
+            'title' => '',
+            'subtitle' => '',
+        ];
+    }
+}

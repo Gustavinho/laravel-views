@@ -1,0 +1,23 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelViews\Views\DetailView;
+
+class DummyClass extends DetailView
+{
+    public $title = "Title";
+    public $subtitle = "Subtitle or description";
+
+    /**
+     * @param $model Model instance
+     * @return Array Array with all the detail data or the components
+     */
+    public function detail($model)
+    {
+        return [
+            'Name' => '',
+            'Email' => '',
+        ];
+    }
+}

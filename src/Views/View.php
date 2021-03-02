@@ -8,6 +8,7 @@ use Livewire\Component;
 abstract class View extends Component
 {
     protected $view;
+    public $viewName;
 
     public function render()
     {
@@ -22,4 +23,9 @@ abstract class View extends Component
     }
 
     abstract protected function getRenderData();
+
+    public function getClassName()
+    {
+        return $this->viewName;
+    }
 }
