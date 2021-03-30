@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.2.1] - 2021-03-29
+### Fixed
+- Added `detail-view`, `grid-view` and `list-view` to the views to be published.
+
 ## [2.2] - 2021-03-01
 ### Added
 - New list view
