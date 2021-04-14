@@ -5,14 +5,14 @@
   </div>
 
   {{-- Success/Error feedback --}}
-  @if (session()->has('message'))
-    @component('laravel-views::components.alert', [
-      'message' => session('message'),
-      'onClose' => 'flushMessage',
-      'type' => session('messageType')
-    ])
-    @endcomponent
-  @endif
+  <div x-data='{ open: false, message: "", type: "danger" }' x-show="open" x-init="$wire.on('display-alert', (alertMessage) => {
+    open = true;
+    message = alertMessage;
+  })">
+    <x-lv-alert onClose='open = false' x-bind:type="type">
+      <div x-text='message'></div>
+    </x-lv-alert>
+  </div>
 
   <div>
     @foreach ($items as $item)

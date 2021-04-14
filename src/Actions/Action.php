@@ -15,6 +15,9 @@ abstract class Action
     /** Item the action will be executed with */
     public $item;
 
+    /** Currect view that executed the action */
+    private $action;
+
     private $messages = [
         'success' => 'Action was executed successfully',
         'danger' => 'There was an error executing this action',
@@ -57,6 +60,7 @@ abstract class Action
 
     private function setMessage($type = 'success', $message = null)
     {
+        $this->view->emit('display-alert', $message);
         session()->flash('messageType', $type);
         session()->flash('message', $message ? $message : $this->messages[$type]);
     }
