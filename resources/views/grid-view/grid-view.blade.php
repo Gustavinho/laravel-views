@@ -11,21 +11,11 @@ UI components used:
   - components.card
   - components.paginator --}}
 
-<div>
+<x-lv-layout>
   {{-- Search input and filters --}}
   <div class="mb-2">
     @include('laravel-views::table-view.filters')
   </div>
-
-  {{-- Success/Error feedback --}}
-  @if (session()->has('message'))
-    @component('laravel-views::components.alert', [
-      'message' => session('message'),
-      'onClose' => 'flushMessage',
-      'type' => session('messageType')
-    ])
-    @endcomponent
-  @endif
 
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-{{ $maxCols }} gap-4 md:gap-8">
     @foreach ($items as $item)
@@ -68,4 +58,4 @@ UI components used:
   </div>
 
   @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
-</div>
+</x-lv-layout>

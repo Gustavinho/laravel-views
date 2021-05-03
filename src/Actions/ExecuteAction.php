@@ -26,6 +26,8 @@ class ExecuteAction
     {
         /** @var Action */
         $action = $this->findAction($actionId, $actions);
+        $action->view = $this->view;
+
         if ($action) {
             if ($this->shouldVerifyConfirmation && $action->shouldBeConfirmed()) {
                 return $action;

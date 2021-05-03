@@ -18,6 +18,8 @@ class LaravelViews
             'drop-down' => 'drop-down',
             'actions' => 'actions',
             'attributes-list' => 'attributes-list',
+            'alert' => 'alert',
+            'alerts-handler' => 'alerts-handler',
         ];
     }
 
