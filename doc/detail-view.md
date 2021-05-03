@@ -1,6 +1,6 @@
 # Detail view
 
-[See live example](http://laravel-views.herokuapp.com/detail-view)
+[See live example](https://laravelviews.com/detail-view)
 
 This view creates a dynamic detail view to render a model attributes list with all the data you need, you can also customize the default component to create complex detail views and execute actions over the model is being used.
 

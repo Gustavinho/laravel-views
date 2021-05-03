@@ -87,6 +87,9 @@ class LaravelViewsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../resources/views/components' => resource_path('views/vendor/laravel-views/components'),
+            __DIR__ . '/../resources/views/detail-view' => resource_path('views/vendor/laravel-views/detail-view'),
+            __DIR__ . '/../resources/views/grid-view' => resource_path('views/vendor/laravel-views/grid-view'),
+            __DIR__ . '/../resources/views/list-view' => resource_path('views/vendor/laravel-views/list-view'),
             __DIR__ . '/../resources/views/table-view' => resource_path('views/vendor/laravel-views/table-view'),
         ], 'views');
 

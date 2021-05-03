@@ -1,6 +1,6 @@
 # List view
 
-[See live example](http://laravel-views.herokuapp.com/list-view)
+[See live example](https://laravelviews.com/list-view)
 
 This view creates a dynamic list view with filters, pagination, search input, and actions by each item, it is useful for small screens, you can also customize the item compoment for each row as you need.
 
