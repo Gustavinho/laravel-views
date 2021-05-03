@@ -1,17 +1,7 @@
-<div>
+<x-lv-layout>
   {{-- Search input and filters --}}
   <div class="px-4">
     @include('laravel-views::table-view.filters')
-  </div>
-
-  {{-- Success/Error feedback --}}
-  <div x-data='{ open: false, message: "", type: "danger" }' x-show="open" x-init="$wire.on('display-alert', (alertMessage) => {
-    open = true;
-    message = alertMessage;
-  })">
-    <x-lv-alert onClose='open = false' x-bind:type="type">
-      <div x-text='message'></div>
-    </x-lv-alert>
   </div>
 
   <div>
@@ -28,4 +18,4 @@
   </div>
 
   @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
-</div>
+</x-lv-layout>

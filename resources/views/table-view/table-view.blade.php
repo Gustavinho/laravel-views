@@ -11,21 +11,11 @@ UI components used:
   - components.table
   - components.paginator --}}
 
-<div>
+<x-lv-layout>
   {{-- Search input and filters --}}
   <div class="p-4 pb-0">
     @include('laravel-views::table-view.filters')
   </div>
-
-  {{-- Success/Error feedback --}}
-  @if (session()->has('message'))
-    @component('laravel-views::components.alert', [
-      'message' => session('message'),
-      'onClose' => 'flushMessage',
-      'type' => session('messageType')
-    ])
-    @endcomponent
-  @endif
 
   @if (count($items))
 
@@ -57,5 +47,5 @@ UI components used:
   </div>
 
   @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
-</div>
+</x-lv-layout>
 

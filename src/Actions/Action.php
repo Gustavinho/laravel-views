@@ -2,6 +2,8 @@
 
 namespace LaravelViews\Actions;
 
+use LaravelViews\Views\View;
+
 abstract class Action
 {
     /** @var String $title Title of the action */
@@ -15,8 +17,11 @@ abstract class Action
     /** Item the action will be executed with */
     public $item;
 
-    /** Currect view that executed the action */
-    private $action;
+    /**
+     * Current view that executed the action
+     * @var View $view
+     */
+    public $view;
 
     private $messages = [
         'success' => 'Action was executed successfully',
@@ -60,9 +65,10 @@ abstract class Action
 
     private function setMessage($type = 'success', $message = null)
     {
-        $this->view->emit('display-alert', $message);
-        session()->flash('messageType', $type);
-        session()->flash('message', $message ? $message : $this->messages[$type]);
+        $this->view->emitSelf('notify', [
+            'message' => $message ? $message : $this->messages[$type],
+            'type' => $type
+        ]);
     }
 
     public function shouldBeConfirmed()

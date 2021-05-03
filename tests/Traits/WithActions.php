@@ -10,26 +10,23 @@ trait WithActions
     {
         $this->getViewWithActions()
             ->call('executeAction', 'test-success-action', 1, true)
-            ->assertSee('Action was executed successfully')
-            ->assertSee('Success');
+            ->assertEmitted('notify', [
+                'message' => 'Action was executed successfully',
+                'type' => 'success'
+            ]);
     }
 
     public function testSeeErrorAlert()
     {
         $this->getViewWithActions()
             ->call('executeAction', 'test-error-action', 1, true)
-            ->assertSee('There was an error executing this action')
-            ->assertSee('Error!');
+            ->assertEmitted('notify', [
+                'message' => 'There was an error executing this action',
+                'type' => 'danger'
+            ]);
     }
 
-    public function testClearAlert()
-    {
-        $this->getViewWithActions()
-            ->call('executeAction', 'test-success-action', 1, true)
-            ->assertSee('Action was executed successfully')
-            ->call('flushMessage')
-            ->assertDontSee('Action was executed successfully');
-    }
+    // TODO: Test custom error message
 
     public function testSeeMultipleRedirectActions()
     {
@@ -58,6 +55,9 @@ trait WithActions
             ->call('executeAction', 'test-confirmed-action', $user->id, true)
             ->assertSee('Do you really want to perform this action?')
             ->call('executeAction', 'test-confirmed-action', $user->id, false)
-            ->assertSee('Action was executed successfully');
+            ->assertEmitted('notify', [
+                'message' => 'Action was executed successfully',
+                'type' => 'success'
+            ]);
     }
 }
