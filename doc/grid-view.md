@@ -11,10 +11,10 @@ This view creates a dynamic grid view using card data, same as a TableView this 
 - [Defining card data](#defining-card-data)
 - [Customizing card data](#customizing-card-data)
 - [More features](#more-features)
-  - [Searching data](./table-view#searching-data)
-  - [Pagination](./table-view#pagination)
-  - [Filters](./table-view#filters)
-  - [Actions](./table-view#actions)
+  - [Searching data](./table-view.md#searching-data)
+  - [Pagination](./table-view.md#pagination)
+  - [Filters](./table-view.md#filters)
+  - [Actions](./table-view.md#actions)
 
 ## Grid view example
 
