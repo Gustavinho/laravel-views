@@ -20,6 +20,10 @@ class VariantsTest extends TestCase
             'text-white bg-blue-600 hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500'
         );
         $this->assertEquals(
+            variants('buttons.primary'),
+            'text-white bg-blue-600 hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500'
+        );
+        $this->assertEquals(
             Variants::button('primary-light')->class(),
             'text-blue-700 border border-blue-600 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white active:bg-blue-600 active:text-white'
         );
