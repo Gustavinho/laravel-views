@@ -11,10 +11,10 @@ This view creates a dynamic list view with filters, pagination, search input, an
 - [Defining data for each list item](#defining-data-for-each-list-item)
 - [Customizing the list item component](#customizing-the-list-item-component)
 - [More features](#more-features)
-  - [Searching data](./table-view#searching-data)
-  - [Pagination](./table-view#pagination)
-  - [Filters](./table-view#filters)
-  - [Actions](./table-view#actions)
+  - [Searching data](./table-view.md#searching-data)
+  - [Pagination](./table-view.md#pagination)
+  - [Filters](./table-view.md#filters)
+  - [Actions](./table-view.md#actions)
 
 ## List view example
 
