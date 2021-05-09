@@ -25,7 +25,7 @@ UI components used:
             'withBackground' => $withBackground,
             'model' => $item,
             'actions' => $actionsByRow
-          ],
+          ]
         ))
       @endcomponent
     @endforeach
