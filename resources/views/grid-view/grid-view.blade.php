@@ -17,38 +17,17 @@ UI components used:
     @include('laravel-views::table-view.filters')
   </div>
 
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-{{ $maxCols }} gap-4 md:gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-{{ $maxCols }} gap-8 md:gap-8">
     @foreach ($items as $item)
-      <div x-data='{ overlay: false }' class="relative">
-        <div x-on:mouseover='overlay = true' x-on:mouseleave='overlay = false'>
-          {{-- Renders all the actions row --}}
-          @if (count($actionsByRow) > 0)
-            <div x-show.transition='overlay' class="p-2 absolute top-0 right-0">
-              @component('laravel-views::components.drop-down', ['title' => 'Actions'])
-                <ul class="mb-4">
-                  @foreach ($actionsByRow as $action)
-                    {{-- This renderIf method is implemented in every action --}}
-                    @if ($action->renderIf($item))
-                      <li class="py-2 px-4">
-                        @component('laravel-views::components.action', ['action' => $action, 'item' => $item])
-                          <i data-feather="{{ $action->icon }}" class="mr-4"></i>
-                          <span>{{ $action->title }}</span>
-                        @endcomponent
-                      </li>
-                    @endif
-                  @endforeach
-                </ul>
-              @endcomponent
-            </div>
-          @endif
-
-          @component($cardComponent, array_merge(
-              $view->card($item),
-              ['withBackground' => $withBackground]
-            ))
-          @endcomponent
-        </div>
-      </div>
+      @component($cardComponent, array_merge(
+          $view->card($item),
+          [
+            'withBackground' => $withBackground,
+            'model' => $item,
+            'actions' => $actionsByRow
+          ],
+        ))
+      @endcomponent
     @endforeach
   </div>
 

@@ -13,12 +13,12 @@ UI components used:
 
 <div
   class="text-right relative"
-  x-data="{ open: false }"
+  x-data="{ openDropDown: false }"
 >
   @isset($trigger)
-    <span @click="open = true" class=" cursor-pointer">
+    <div @click="openDropDown = true; console.log('hola')" class="cursor-pointer">
       {{ $trigger }}
-    </span>
+    </div>
   @else
     @component('laravel-views::components.button', [
       'title' => $title,
@@ -29,9 +29,9 @@ UI components used:
   @endisset
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-10"
-    x-show.transition="open"
-    @click.away="open = false"
+    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-40"
+    x-show.transition="openDropDown"
+    @click.away="openDropDown = false"
     x-cloak
   >
     {{ $slot }}
