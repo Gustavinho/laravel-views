@@ -182,3 +182,4 @@ Here's the plan for what's coming:
 ## Upgrade guide
 ### From 2.2 to 2.3
 - Clear your cached views `php artisan view:clear` since some of the internal components changed.
+- Update components
