@@ -3,8 +3,13 @@
 use LaravelViews\UI\Variants;
 
 if (!function_exists('variants')) {
-    function variants()
+    function variants($path = null)
     {
-        return new Variants;
+        $variants = new Variants($path);
+        if ($path) {
+            return $variants->class();
+        }
+
+        return $variants;
     }
 }

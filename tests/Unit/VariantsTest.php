@@ -15,12 +15,8 @@ class VariantsTest extends TestCase
 
     public function testButtonVariants()
     {
-        $this->assertEquals(
-            Variants::button('primary')->class(),
-            'text-white bg-blue-600 hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500'
-        );
-        $this->assertEquals(
-            variants('buttons.primary'),
+        $this->assertTrue(
+            Variants::button('primary')->class() ===
             'text-white bg-blue-600 hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500'
         );
         $this->assertEquals(
@@ -70,6 +66,24 @@ class VariantsTest extends TestCase
         $this->assertEquals(
             Variants::img()->class(),
             ''
+        );
+    }
+
+    public function testVarianstHelperUsingVariantPaths()
+    {
+        $this->assertEquals(
+            variants('images.avatar'),
+            'h-8 w-8 object-cover rounded-full shadow-inner'
+        );
+
+        $this->assertEquals(
+            variants('alerts.warning.title'),
+            'text-green-900'
+        );
+
+        $this->assertInstanceOf(
+            UIVariants::class,
+            variants()
         );
     }
 }

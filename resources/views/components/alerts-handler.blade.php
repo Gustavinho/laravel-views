@@ -3,7 +3,7 @@
   x-init="@this.on('notify', (notification) => {
     open = true;
     message = notification.message;
-    setTimeout(() => { open = false }, 2500)
+    {{-- setTimeout(() => { open = false }, 2500) --}}
   })"
 >
   <div x-show='open'>
