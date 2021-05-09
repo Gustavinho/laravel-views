@@ -13,10 +13,10 @@ UI components used:
 
 <div
   class="text-right relative"
-  x-data="{ openDropDown: false }"
+  x-data="{ open: false }"
 >
   @isset($trigger)
-    <div @click="openDropDown = true; console.log('hola')" class="cursor-pointer">
+    <div @click="open = true;" class="cursor-pointer">
       {{ $trigger }}
     </div>
   @else
@@ -30,8 +30,8 @@ UI components used:
 
   <div
     class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-40"
-    x-show.transition="openDropDown"
-    @click.away="openDropDown = false"
+    x-show.transition="open"
+    @click.away="open = false"
     x-cloak
   >
     {{ $slot }}
