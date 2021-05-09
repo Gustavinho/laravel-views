@@ -16,7 +16,7 @@ UI components used:
   x-data="{ open: false }"
 >
   @isset($trigger)
-    <span @click="open = true" class=" cursor-pointer">
+    <span @click="open = true" class="cursor-pointer">
       {{ $trigger }}
     </span>
   @else
