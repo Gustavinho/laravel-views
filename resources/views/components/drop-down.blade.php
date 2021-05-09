@@ -16,9 +16,9 @@ UI components used:
   x-data="{ open: false }"
 >
   @isset($trigger)
-    <div @click="open = true;" class="cursor-pointer">
+    <span @click="open = true" class="cursor-pointer">
       {{ $trigger }}
-    </div>
+    </span>
   @else
     @component('laravel-views::components.button', [
       'title' => $title,
@@ -29,7 +29,7 @@ UI components used:
   @endisset
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-40"
+    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-10"
     x-show.transition="open"
     @click.away="open = false"
     x-cloak
