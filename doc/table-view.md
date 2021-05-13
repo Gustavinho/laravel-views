@@ -349,7 +349,7 @@ $this->error();
 You can choose if the action will be shown or hidden for an specific row defining a `renderIf` method and returning a boolean value, if you don't define this method the action will be shown aways.
 
 ```php
-public function renderIf($model)
+public function renderIf($model, View $view)
 {
     return !$model->active;
 }
