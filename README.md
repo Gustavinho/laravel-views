@@ -183,3 +183,20 @@ Here's the plan for what's coming:
 ### From 2.2 to 2.3
 - Clear your cached views `php artisan view:clear` since some of the internal components changed.
 - Update components
+- Update the renderIf() function in your action classes as follows: 
+  ```php
+  <?php
+
+  namespace App\Actions;
+
+  use LaravelViews\Actions\Action;
+  use LaravelViews\Views\View;          // new line
+
+  class YourAction extends Action
+  {
+      public function renderIf($item, View $view)       // add the view parameter
+      {
+          // your content
+      }
+  }
+  ```
