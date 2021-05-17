@@ -48,7 +48,7 @@ abstract class Action
         return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $camelStr));
     }
 
-    public function renderIf($item)
+    public function renderIf($item, View $view)
     {
         return true;
     }
