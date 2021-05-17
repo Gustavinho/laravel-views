@@ -22,7 +22,7 @@ This view creates a dynamic data table with some features like filters, paginati
 - [Actions](#actions)
     - [Registering actions](#registering-actions)
     - [Redirect action](#redirect-action)
-    - [Showing feedback messages](#showing-alert-messages)
+    - [Showing feedback messages](#showing-feedback-messages)
     - [Hiding actions](#hiding-actions)
     - [Confirmation message](#confirmation-message)
 - [Showing UI components](#showing-ui-components)
