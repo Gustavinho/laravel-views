@@ -13,7 +13,7 @@ UI components used:
 
 <div>
   {{-- Search input and filters --}}
-  <div class="p-4 pb-0">
+  <div class="py-4 px-3 pb-0">
     @include('laravel-views::table-view.filters')
   </div>
 

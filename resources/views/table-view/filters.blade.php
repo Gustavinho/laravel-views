@@ -6,7 +6,7 @@ UI components used:
   - form/input-group
   - dropdown --}}
 
-<div class="flex flex-row">
+<div class="flex justify-end">
   {{-- Search input --}}
   @if ($searchBy)
     <div class="flex-1">
