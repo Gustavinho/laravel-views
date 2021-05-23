@@ -1,16 +1,21 @@
+@props([
+  'image',
+  'title',
+  'subtitle',
+  'description',
+  'withBackground',
+  'model',
+  'actions',
+  'hasDefaultAction'
+])
+
 <div class="{{ $withBackground ? 'rounded-md shadow-md' : '' }}">
   @if ($hasDefaultAction)
     <a href="#!" wire:click.prevent="onCardClick({{ $model->id }})">
-      <img
-        src="{{ $image }}"
-        alt="{{ $image }}"
-        class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
+      <img src="{{ $image }}" alt="{{ $image }}" class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
     </a>
   @else
-    <img
-      src="{{ $image }}"
-      alt="{{ $image }}"
-      class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
+    <img src="{{ $image }}" alt="{{ $image }}" class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
   @endif
 
   <div class="pt-4 {{ $withBackground ? 'bg-white rounded-b-md p-4' : '' }}">
@@ -38,7 +43,6 @@
             <x-lv-icon-button icon="more-horizontal" size="sm"/>
           </x-slot>
 
-          <x-lv-actions.icon-and-title :actions="$actions" :model="$model" />
         </x-lv-drop-down>
       </div>
     </div>

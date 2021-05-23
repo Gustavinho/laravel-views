@@ -62,11 +62,34 @@ These are the fields by default but you can add more if you want to customize yo
 
 ## Customizing card data
 
-The grid view has a card component by default with some data but you can either create your own card and use as much data as you need in the `card` mthod and just use your own card implementation, you just need to specify a blade file.
+The grid view has a card component by default with some data, however, you can create your own card component and use as much data as you need in the `card` method, you just need to specify a blade file with your Grid View and return the data that you need in the `card` method.
 
 ```php
 public $cardComponent = 'components.my-card';
+
+public function card($model) {
+    return [
+        'name' => $model->name,
+        'email' => $model->email,
+        'model' => $model
+    ];
+}
 ```
+
+All the data returned in the `card` method will be received as a prop in your blade component alog with these other default props that you can use based on your needs.
+
+Name|Description|Type|Value
+--|--|--|--|
+model|Model instance for this card|||
+actions|Actions defined in this view class|Array
+hasDefaultAction|Checks if the Grid View has defined a `onCardClick` method|Boolean|true,false
+
+With all this data you can build your own card component as you need, remember to include the `actions` component.
+
+```html
+<x-lv-actions :actions="$actions" :model="$model" />
+```
+
 
 ## Default card item action
 You can define a default action that will be fired clicking on the card image or the card title, this action gets the model instance that fired it.
