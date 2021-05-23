@@ -10,6 +10,7 @@ This view creates a dynamic grid view using card data, same as a TableView this 
 - [Defining initial data](#defining-initial-data)
 - [Defining card data](#defining-card-data)
 - [Customizing card data](#customizing-card-data)
+- [Default card item action](#default-card-item-action)
 - [More features](#more-features)
   - [Searching data](./table-view.md#searching-data)
   - [Pagination](./table-view.md#pagination)
@@ -65,6 +66,15 @@ The grid view has a card component by default with some data but you can either 
 
 ```php
 public $cardComponent = 'components.my-card';
+```
+
+## Default card item action
+You can define a default action that will be fired clicking on the card image or the card title, this action gets the model instance that fired it.
+
+```php
+public function onCardClick(User $model)
+{
+}
 ```
 
 ## Max columns

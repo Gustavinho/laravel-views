@@ -1,11 +1,29 @@
 <div class="{{ $withBackground ? 'rounded-md shadow-md' : '' }}">
-  <img src="{{ $image }}" alt="" class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
+  @if ($hasDefaultAction)
+    <a href="#!" wire:click.prevent="onCardClick({{ $model->id }})">
+      <img
+        src="{{ $image }}"
+        alt="{{ $image }}"
+        class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
+    </a>
+  @else
+    <img
+      src="{{ $image }}"
+      alt="{{ $image }}"
+      class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
+  @endif
 
   <div class="pt-4 {{ $withBackground ? 'bg-white rounded-b-md p-4' : '' }}">
     <div class="flex items-start">
       <div class="flex-1">
         <h3 class="font-bold leading-6">
-          {{ $title }}
+          @if ($hasDefaultAction)
+            <a href="#!" class="hover:underline" wire:click.prevent="onCardClick({{ $model->getKey() }})">
+              {{ $title }}
+            </a>
+          @else
+            {{ $title }}
+          @endif
         </h3>
         @if ($subtitle)
           <span class="text-sm text-gray-600">

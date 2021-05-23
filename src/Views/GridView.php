@@ -14,4 +14,9 @@ class GridView extends DataView
 
     /** Max cols to be render on xl */
     public $maxCols = 5;
+
+    public function getHasDefaultActionProperty()
+    {
+        return method_exists($this, 'onCardClick');
+    }
 }

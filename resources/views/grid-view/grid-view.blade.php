@@ -24,7 +24,8 @@ UI components used:
           [
             'withBackground' => $withBackground,
             'model' => $item,
-            'actions' => $actionsByRow
+            'actions' => $actionsByRow,
+            'hasDefaultAction' => $this->hasDefaultAction
           ]
         ))
       @endcomponent
