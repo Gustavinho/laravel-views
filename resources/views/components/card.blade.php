@@ -15,19 +15,17 @@
       </div>
 
       <div class="flex justify-end items-center">
-        <div>
-          <x-lv-drop-down>
-            <x-slot name="trigger">
-              <x-lv-icon-button icon="more-horizontal" size="sm"/>
-            </x-slot>
+        <x-lv-drop-down>
+          <x-slot name="trigger">
+            <x-lv-icon-button icon="more-horizontal" size="sm"/>
+          </x-slot>
 
-            <x-lv-actions.icon-and-title :actions="$actions" :model="$model" />
-          </x-lv-drop-down>
-        </div>
+          <x-lv-actions.icon-and-title :actions="$actions" :model="$model" />
+        </x-lv-drop-down>
       </div>
     </div>
 
-    @if ($description)
+    @if (isset($description))
       <p class="line-clamp-3 mt-2">
         {{ $description }}
       </p>
