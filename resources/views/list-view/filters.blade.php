@@ -6,21 +6,21 @@ UI components used:
   - form/input-group
   - dropdown --}}
 
-<div class="grid grid-cols-12 gap-x-4">
+<div class="flex flex-wrap">
   {{-- Search input --}}
-  <div class="col-span-12 sm:col-span-8">
+  <div class="flex-grow {{ isset($sortableBy) && $sortableBy->isNotEmpty() ? 'w-full lg:w-auto' : '' }}">
     @include('laravel-views::components.filters.search')
   </div>
 
-  <div class="col-span-12 sm:col-span-4">
-    <div class="flex">
-      {{-- Sorting --}}
-      <div class="flex-grow min-w-0">
-        @include('laravel-views::list-view.sorting')
-      </div>
-
-      {{-- Filters --}}
-      @include('laravel-views::components.filters.filters')
+  {{-- Sorting --}}
+  @if (isset($sortableBy) && $sortableBy->isNotEmpty())
+    <div class="flex-1 lg:ml-4">
+      @include('laravel-views::list-view.sorting')
     </div>
+  @endif
+
+  {{-- Filters --}}
+  <div class="text-right {{ isset($sortableBy) && $sortableBy->isNotEmpty() ? '' : 'lg:flex-1 ml-4 lg:ml-0' }}">
+    @include('laravel-views::components.filters.filters')
   </div>
 </div>
