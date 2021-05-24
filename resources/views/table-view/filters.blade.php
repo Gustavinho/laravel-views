@@ -6,7 +6,7 @@ UI components used:
   - form/input-group
   - dropdown --}}
 
-<div class="flex flex-row">
+<div class="flex justify-end">
   {{-- Search input --}}
   @include('laravel-views::components.filters.search')
 
