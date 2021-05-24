@@ -1,5 +1,6 @@
 <div class="{{ $withBackground ? 'rounded-md shadow-md' : '' }}">
-  <img src="{{ $image }}" alt="" class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
+  <img src="{{ $image }}" alt=""
+    class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}">
 
   <div class="pt-4 {{ $withBackground ? 'bg-white rounded-b-md p-4' : '' }}">
     <div class="flex items-start">
@@ -15,10 +16,10 @@
       </div>
 
       <div class="flex justify-end items-center">
-        <div>
-          <x-lv-drop-down>
+        <div class="text-right">
+          <x-lv-drop-down :dropDownClasses="'w-64'">
             <x-slot name="trigger">
-              <x-lv-icon-button icon="more-horizontal" size="sm"/>
+              <x-lv-icon-button icon="more-horizontal" size="sm" />
             </x-slot>
 
             <x-lv-actions.icon-and-title :actions="$actions" :model="$model" />

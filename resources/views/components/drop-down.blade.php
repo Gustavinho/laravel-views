@@ -5,16 +5,13 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
 
 props:
  - $title
- - $varian
+ - $variant
  - $slot
 
 UI components used:
  - button --}}
 
-<div
-  class="text-right relative"
-  x-data="{ open: false }"
->
+<div class="relative" x-data="{ open: false }">
   @isset($trigger)
     <span @click="open = true" class="cursor-pointer">
       {{ $trigger }}
@@ -22,18 +19,15 @@ UI components used:
   @else
     @component('laravel-views::components.button', [
       'title' => $title,
-      "onClick" => "open = true",
-      "variant" => $variant ?? 'primary'
-    ])
+      'onClick' => 'open = true',
+      'variant' => $variant ?? 'primary',
+      ])
     @endcomponent
   @endisset
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-10"
-    x-show.transition="open"
-    @click.away="open = false"
-    x-cloak
-  >
+    class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 {{ isset($dropDownClasses) ? $dropDownClasses : 'w-full' }}"
+    x-show.transition="open" @click.away="open = false" x-cloak>
     {{ $slot }}
   </div>
 </div>

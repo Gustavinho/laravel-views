@@ -9,5 +9,5 @@ UI components used:
   'name' => "filters[{$view->id}]",
   'model' => "filters.{$view->id}",
   'options' => array_merge(['--' => ''], $view->options()),
-])
+  ])
 @endcomponent
