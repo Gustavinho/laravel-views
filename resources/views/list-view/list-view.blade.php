@@ -1,7 +1,6 @@
 <x-lv-layout>
   {{-- Search input and filters --}}
   <div class="pl-4">
-    {{-- Filters --}}
     @include('laravel-views::list-view.filters')
   </div>
 

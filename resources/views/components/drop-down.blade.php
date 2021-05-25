@@ -7,7 +7,7 @@ props:
  - $title
  - $variant
  - $slot
- - $dropDownClasses
+ - $dropDownWidth
 
 UI components used:
  - button --}}
@@ -17,10 +17,7 @@ UI components used:
   x-data="{ open: false }"
 >
   @isset($trigger)
-    <span
-      @click="open = true"
-      class="cursor-pointer"
-    >
+    <span @click="open = true" class="cursor-pointer">
       {{ $trigger }}
     </span>
   @else
@@ -33,7 +30,7 @@ UI components used:
   @endisset
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 {{ isset($dropDownClasses) ? $dropDownClasses : 'w-full' }}"
+    class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 w-{{ isset($dropDownWidth) ? $dropDownWidth : 'full' }}"
     x-show.transition="open"
     @click.away="open = false"
     x-cloak
