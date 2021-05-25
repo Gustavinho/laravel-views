@@ -15,7 +15,7 @@
 
     {{-- Desktop action buttons --}}
     <div class="hidden lg:flex justify-items-end">
-      <x-lv-actions.icon :actions="$actions" :model="$model" />
+        <x-lv-actions.icon :actions="$actions" :model="$model" />
     </div>
   @endif
 </div>

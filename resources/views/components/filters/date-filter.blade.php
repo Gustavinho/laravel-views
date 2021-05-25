@@ -10,5 +10,5 @@ UI components used:
   'model' => "filters.{$view->id}",
   'value' => $view->selected()['selected'],
   'id' => $view->getId(),
-  ])
+])
 @endcomponent

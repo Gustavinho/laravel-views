@@ -8,8 +8,7 @@
   <div>
     @foreach ($items as $item)
       <div class="border-b border-gray-200 py-2 px-4">
-        <x-lv-dynamic-component :view="$itemComponent"
-          :data="array_merge($this->data($item), ['actions' => $actionsByRow, 'model' => $item])" />
+        <x-lv-dynamic-component :view="$itemComponent" :data="array_merge($this->data($item), ['actions' => $actionsByRow, 'model' => $item])" />
       </div>
     @endforeach
   </div>
