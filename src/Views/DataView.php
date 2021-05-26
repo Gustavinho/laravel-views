@@ -20,6 +20,11 @@ abstract class DataView extends View
         'sortOrder'
     ];
 
+    protected $listeners = [
+        'laravel-views:refresh' => 'refresh',
+        'laravel-views:eventChangeInput' => 'eventChangeInput',
+    ];
+
     /**
      * (Override) int Number of items to be showed,
      * @var int $paginate
@@ -44,6 +49,15 @@ abstract class DataView extends View
     public $sortBy = null;
 
     public $sortOrder = 'asc';
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function update(array $data): bool
+    {
+        return false;
+    }
 
     public function hydrate()
     {

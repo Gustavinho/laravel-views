@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\View;
 
 class UI
 {
+    public function editable($model, $field)
+    {
+        return view('laravel-views::components.editable', [
+            'model' => $model,
+            'field' => $field,
+        ])->render();
+    }
+
     public function badge($title, $type = 'default')
     {
         return view('laravel-views::components.badge', [
