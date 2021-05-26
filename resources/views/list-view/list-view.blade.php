@@ -1,4 +1,4 @@
-<div>
+<div class="min-h-screen">
   {{-- Search input and filters --}}
   <div class="px-4">
     @include('laravel-views::table-view.filters')
