@@ -20,11 +20,6 @@ abstract class DataView extends View
         'sortOrder'
     ];
 
-    protected $listeners = [
-        'laravel-views:refresh' => 'refresh',
-        'laravel-views:eventChangeInput' => 'eventChangeInput',
-    ];
-
     /**
      * (Override) int Number of items to be showed,
      * @var int $paginate
