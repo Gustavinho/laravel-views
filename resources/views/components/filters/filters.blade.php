@@ -1,6 +1,6 @@
 {{-- Filters dropdown --}}
 @if (isset($filtersViews) && $filtersViews)
-  @component('laravel-views::components.drop-down', ['dropDownWidth' => '64'])
+  <x-lv-drop-down :dropDownWidth="64">
     @slot('trigger')
       <x-lv-icon-button icon="filter" />
     @endslot
@@ -29,5 +29,5 @@
         </a>
       </div>
     @endif
-  @endcomponent
+    </x-lv-drop-down>
 @endif

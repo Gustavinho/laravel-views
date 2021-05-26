@@ -23,6 +23,8 @@ class LaravelViews
             'attributes-list' => 'attributes-list',
             'alert' => 'alert',
             'alerts-handler' => 'alerts-handler',
+            'form.input-group' => 'form.input-group',
+            'drop-down' => 'drop-down',
         ];
     }
 
