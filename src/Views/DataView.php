@@ -80,6 +80,9 @@ abstract class DataView extends View
         $query = $this->repository();
 
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
+
+        $this->applyDefaultFilters();
+
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
         $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
 
@@ -87,6 +90,20 @@ abstract class DataView extends View
         $this->total = $query->count();
 
         return $query->paginate($this->paginate);
+    }
+
+    public function applyDefaultFilters()
+    {
+        if(empty($this->filters))
+        {
+            foreach($this->filters() as $filter)
+            {
+                if($filter->defaultValue)
+                {
+                    $this->filters[$filter->id] = $filter->defaultValue;
+                }
+            }
+        }
     }
 
     /**

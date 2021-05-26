@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class BaseFilter
 {
     protected $title;
+    public $defaultValue;
     public $id;
 
     public function __construct()
