@@ -52,5 +52,9 @@ return [
         'danger' => 'text-red-500',
         'warning' => 'text-yellow-500',
         'info' => 'text-blue-500',
+    ],
+
+    'links' => [
+        'default' => 'hover:text-blue-600 hover:underline'
     ]
 ];

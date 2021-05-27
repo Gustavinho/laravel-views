@@ -2,7 +2,6 @@
 
 namespace LaravelViews\Test\Unit;
 
-use DOMDocument;
 use LaravelViews\Facades\UI;
 use LaravelViews\Test\TestCase;
 
@@ -11,39 +10,31 @@ class UITest extends TestCase
     public function testBagdeDefaultHelper()
     {
         $badge = UI::badge('active');
-        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">
-                        active
-                    </span>';
-
-        $this->assertHtmlEquals($badge, $expected);
+        $this->blade($badge)
+            ->assertSeeText('active');
     }
 
     public function testBagdeSuccesstHelper()
     {
         $badge = UI::badge('active', 'success');
-        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
-                        active
-                    </span>';
-
-        $this->assertHtmlEquals($badge, $expected);
+        $this->blade($badge)
+            ->assertSeeText('active')
+            ->assertSee(variants('badges.success'));
     }
 
     public function testAvatarHelper()
     {
         $avatar = UI::avatar('my-avatar-url');
-        $expected = '<img src="my-avatar-url" alt="my-avatar-url" class="h-8 w-8 object-cover rounded-full shadow-inner">';
-
-        $this->assertHtmlEquals($avatar, $expected);
+        $this->blade($avatar)
+            ->assertSee(variants('images.avatar'));
     }
 
     public function testLinkHelper()
     {
         $link = UI::link('title', '/');
-        $expected = '<a href="/" class="hover:text-blue-500 hover:underline">
-                        title
-                    </a>';
-
-        $this->assertHtmlEquals($link, $expected);
+        $this->blade($link)
+            ->assertSee(variants('links.default'))
+            ->assertSeeText('title');
     }
 
     public function testDefaultIconHelper()

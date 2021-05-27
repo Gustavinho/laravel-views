@@ -8,26 +8,26 @@ class UI
 {
     public function badge($title, $type = 'default')
     {
-        return view('laravel-views::components.badge', [
+        return $this->component('laravel-views::components.badge', [
             'title' => $title,
             'type' => $type
-        ])->render();
+        ]);
     }
 
     public function avatar($src)
     {
-        return view('laravel-views::components.img', [
+        return $this->component('laravel-views::components.img', [
             'src' => $src,
             'variant' => 'avatar'
-        ])->render();
+        ]);
     }
 
     public function link($title, $to)
     {
-        return view('laravel-views::components.link', compact(
+        return $this->component('laravel-views::components.link', compact(
             'to',
             'title'
-        ))->render();
+        ));
     }
 
     public function icon($icon, $type = 'default', $class = "")
@@ -47,7 +47,7 @@ class UI
         ));
     }
 
-    public function component($view, $data)
+    public function component($view, $data = [])
     {
         return View::make('laravel-views::core.dynamic-component')
             ->with([
