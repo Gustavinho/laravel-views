@@ -15,7 +15,7 @@ UI components used:
   {{-- Sorting --}}
   @if (isset($sortableBy) && $sortableBy->isNotEmpty())
     <div class="flex-1 lg:ml-4">
-      @include('laravel-views::list-view.sorting')
+      @include('laravel-views::components.filters.sorting')
     </div>
   @endif
 

@@ -2,8 +2,12 @@
 
 namespace LaravelViews\Views;
 
+use LaravelViews\Views\Traits\WithSortableDropdown;
+
 class GridView extends DataView
 {
+    use WithSortableDropdown;
+
     /** Component name */
     protected $view = 'grid-view.grid-view';
 
