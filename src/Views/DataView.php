@@ -29,9 +29,6 @@ abstract class DataView extends View
     /** @var int $total Total of items found */
     public $total = 0;
 
-    /** @var bool $columnUpdated A column was updated using editable UI */
-    protected $columnUpdated = false;
-
     /** @var String $search Current query string with the search value */
     public $search;
 
@@ -54,7 +51,6 @@ abstract class DataView extends View
      */
     public function update(array $data): void
     {
-
     }
 
     public function hydrate()
