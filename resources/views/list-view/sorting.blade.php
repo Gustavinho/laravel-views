@@ -6,19 +6,21 @@ UI components used:
   - form/select --}}
 <div class="leading-tight">
   {{-- Sorting dropdown --}}
-  @component('laravel-views::components.drop-down')
-    @slot('trigger')
-      @include('laravel-views::components.buttons.select', [
-      'title'=> $sortableBy->flip()->get($sortBy) ?? __('Sort By'),
-      ])
-    @endslot
+  <x-lv-drop-down>
+    <x-slot name="trigger">
+      <x-laravel-views::buttons.select>
+        <x-slot name="title">
+          {{ __('Sort By') }}@if ($sortableByName = $sortableBy->flip()->get($sortBy)): <i data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}" class="inline-block align-bottom text-gray-900 h-4 w-4"></i> {{ $sortableByName }}@endif
+        </x-slot>
+      </x-laravel-views::buttons.select>
+    </x-slot>
     {{-- Each sortable item --}}
     <div class="p-2 text-sm">
       {{ __('Sort By') }}
     </div>
     @foreach ($sortableBy as $title => $column)
       <div class="hover:bg-gray-200">
-        <a href="#!" wire:click.prevent="sort('{{ $column }}')" title="{{ $title }}">
+        <a href="#!" wire:click.prevent="sort('{{ $column }}')" title="{{__('Sort by')}} {{ $title }} {{__($sortOrder == 'asc' ? 'descending' : 'ascending')}}">
           <div class="flex items-center px-2 py-2">
             <div class="w-4">
               @if ($sortBy === $column)
@@ -32,5 +34,5 @@ UI components used:
         </a>
       </div>
     @endforeach
-  @endcomponent
+  </x-lv-drop-down>
 </div>
