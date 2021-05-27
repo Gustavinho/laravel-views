@@ -7,6 +7,9 @@ abstract class Action
     /** @var String $title Title of the action */
     public $title;
 
+    /** @var String $tooltip Tooltip of the action */
+    public $tooltip;
+
     /** @var String $icon Feather icon name*/
     public $icon;
 
