@@ -16,7 +16,7 @@
           {{ $message }}
         </div>
         <span wire:loading class="mr-4">
-          Executing action
+          {{ __('Executing action') }}
         </span>
       </div>
     </div>
