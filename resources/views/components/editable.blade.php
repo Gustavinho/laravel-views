@@ -7,7 +7,6 @@ Render an editable input field
 <div
         x-data="{
             field: '{{ $field }}',
-            type: '{{ $type }}',
             id: {{ $model->id }},
             value: {{ json_encode($model->$field) }},
             original: {{ json_encode($model->$field) }},
