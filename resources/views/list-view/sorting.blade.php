@@ -10,7 +10,9 @@ UI components used:
     <x-slot name="trigger">
       <x-laravel-views::buttons.select>
         <x-slot name="title">
-          {{ __('Sort By') }}@if ($sortableByName = $sortableBy->flip()->get($sortBy)): <i data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}" class="inline-block align-bottom text-gray-900 h-4 w-4"></i> {{ $sortableByName }}@endif
+          {{ __('Sort By') }}@if ($sortableByName = $sortableBy->flip()->get($sortBy)): <i
+              data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}"
+              class="inline-block align-bottom text-gray-900 h-4 w-4"></i> {{ $sortableByName }}@endif
         </x-slot>
       </x-laravel-views::buttons.select>
     </x-slot>
@@ -19,20 +21,18 @@ UI components used:
       {{ __('Sort By') }}
     </div>
     @foreach ($sortableBy as $title => $column)
-      <div class="hover:bg-gray-200">
-        <a href="#!" wire:click.prevent="sort('{{ $column }}')" title="{{__('Sort by')}} {{ $title }} {{__($sortOrder == 'asc' ? 'descending' : 'ascending')}}">
-          <div class="flex items-center px-2 py-2">
-            <div class="w-4">
-              @if ($sortBy === $column)
-                <i data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}" class="text-gray-900 h-4 w-4"></i>
-              @else
-                <svg class="h-4 w-4"></svg>
-              @endif
-            </div>
-            <div class="truncate ml-1">{{ $title }}</div>
-          </div>
-        </a>
-      </div>
+      <a href="#!"
+        wire:click.prevent="sort('{{ $column }}')"
+        title="{{ __('Sort by') }} {{ $title }} {{ __($sortOrder == 'asc' ? 'descending' : 'ascending') }}"
+        class="group flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+        @if ($sortBy === $column)
+          <i data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}"
+            class="text-gray-900 h-4 w-4"></i>
+        @else
+          <i class="text-gray-900 h-4 w-4"></i>
+        @endif
+        <div class="truncate ml-1">{{ $title }}</div>
+      </a>
     @endforeach
   </x-lv-drop-down>
 </div>
