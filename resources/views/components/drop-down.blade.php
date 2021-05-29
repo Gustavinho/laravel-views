@@ -5,14 +5,15 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
 
 props:
  - $title
- - $varian
+ - $variant
  - $slot
+ - $dropDownWidth
 
 UI components used:
  - button --}}
 
 <div
-  class="text-right relative"
+  class="relative"
   x-data="{ open: false }"
 >
   @isset($trigger)
@@ -29,7 +30,7 @@ UI components used:
   @endisset
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 w-64 border text-left z-10"
+    class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 w-{{ isset($dropDownWidth) ? $dropDownWidth : 'full' }}"
     x-show.transition="open"
     @click.away="open = false"
     x-cloak

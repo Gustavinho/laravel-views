@@ -1,0 +1,4 @@
+{
+    "bladeFormatter.format.indentSize": 2,
+    "bladeFormatter.format.wrapAttributes": "force"
+}

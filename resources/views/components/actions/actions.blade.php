@@ -3,7 +3,7 @@
 <div>
   @if (count($actions))
     {{-- Mobile actions dropdown --}}
-    <div class="lg:hidden">
+    <div class="lg:hidden text-right relative">
       <x-lv-drop-down>
         <x-slot name="trigger">
           <x-lv-icon-button icon="more-horizontal" size="sm" />

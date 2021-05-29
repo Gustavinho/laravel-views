@@ -1,4 +1,4 @@
-{{-- table-view.select.blade
+{{-- components.form.input-group.blade
 
 Renders a input group component
 You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIERE DIRECTIVES
