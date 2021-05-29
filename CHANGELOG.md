@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.2.5] - 2021-05-29
+
+### Fixed
+- Added a `min-h-screen` to all the views to avoid the filters menu cutting off when thre are not so much data.
 ## [2.2.4] - 2021-05-16
 ### Fixed
 - Fixed alert container to avoid blocking the UI elements.
