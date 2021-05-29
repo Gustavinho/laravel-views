@@ -11,7 +11,7 @@ UI components used:
   - components.card
   - components.paginator --}}
 
-<div>
+<div class="min-h-screen">
   {{-- Search input and filters --}}
   <div class="mb-2">
     @include('laravel-views::table-view.filters')
