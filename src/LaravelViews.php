@@ -16,6 +16,7 @@ class LaravelViews
         // path => name
         return [
             'buttons.icon' => 'icon-button',
+            'buttons.select' => 'select-button',
             'drop-down' => 'drop-down',
             'actions.actions' => 'actions',
             'actions.icon-and-title' => 'actions.icon-and-title',

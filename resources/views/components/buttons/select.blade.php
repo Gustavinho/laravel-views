@@ -8,14 +8,11 @@ it could be primary, primary-light
 You can customize the variants classes in config/laravel-views.php
 
 props
- - title
  - icon --}}
 @props(['icon' => 'chevron-down'])
 <button
-  class="w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none text-left">
-  <div class="truncate overflow-x-hidden">{{ $title }}</div>
-  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-    <i data-feather="{{ $icon }}"
-      class="w-4 h-4"></i>
-  </div>
+  class="border border-transparent hover:border-gray-300 focus:border-gray-300 focus:outline-none flex items-center gap-1 text-xs px-3 py-2 rounded hover:shadow-sm font-medium"
+>
+  {{ $slot }}
+  <i data-feather="{{ $icon }}" class="w-4 h-4"></i>
 </button>

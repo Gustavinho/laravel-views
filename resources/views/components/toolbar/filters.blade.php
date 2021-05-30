@@ -2,7 +2,9 @@
 @if (isset($filtersViews) && $filtersViews)
   <x-lv-drop-down :dropDownWidth="64">
     @slot('trigger')
-      <x-lv-icon-button icon="filter" />
+      <x-lv-select-button>
+        Filters
+      </x-lv-select-button>
     @endslot
     {{-- Each filter view --}}
     @foreach ($filtersViews as $filter)
@@ -13,8 +15,8 @@
       <div class="px-4">
         {{-- Filter view --}}
         @include('laravel-views::components.filters.' . $filter->view, [
-        'view' => $filter,
-        'filter' => $filter,
+          'view' => $filter,
+          'filter' => $filter,
         ])
       </div>
     @endforeach

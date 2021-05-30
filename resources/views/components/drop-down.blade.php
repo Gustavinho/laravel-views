@@ -3,14 +3,11 @@
 Renders the a dropdown button with its different variants
 You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIRE DIRECTIVES,
 
-props:
- - $title
- - $variant
- - $slot
- - $dropDownWidth
+- slots:
+ - trigger
+--}}
 
-UI components used:
- - button --}}
+@props(['dropDownWidth' => 64])
 
 <div
   class="relative"

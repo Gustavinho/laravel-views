@@ -10,7 +10,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
 <x-lv-layout>
   {{-- Search input and filters --}}
   <div class="mb-2">
-    @include('laravel-views::list-view.filters')
+    @include('laravel-views::components.toolbar.toolbar')
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-{{ $maxCols }} gap-8 md:gap-8">

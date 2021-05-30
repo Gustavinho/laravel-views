@@ -98,7 +98,7 @@ Don't forget to include the actions for each list item, there is a component out
 ```
 
 ## Sorting Data
-You can provide your list view with a sorting drop down by overriding the sortablyBy function on your list view. You may assign the $sortBy property to choose the column that the list view is sorted by when the page first loads. 
+You can provide your list view with a sorting drop down by overriding the sortablyBy function on your list view. You may assign the $sortBy property to choose the column that the list view is sorted by when the page first loads.
 
 ```php
 public $sortBy = 'name';

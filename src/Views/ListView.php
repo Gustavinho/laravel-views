@@ -12,5 +12,4 @@ class ListView extends DataView
     protected $view = 'list-view.list-view';
 
     public $itemComponent = 'laravel-views::list-view.list-item';
- 
 }
