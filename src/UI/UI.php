@@ -32,11 +32,11 @@ class UI
 
     public function icon($icon, $type = 'default', $class = "")
     {
-        return view('laravel-views::components.icon', compact(
+        return $this->component('laravel-views::components.icon', compact(
             'icon',
             'type',
             'class'
-        ))->render();
+        ));
     }
 
     public function attributes($attributes, $options = [])

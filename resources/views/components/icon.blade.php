@@ -11,5 +11,5 @@ props
  - icon
 
 --}}
-
+@props(['icon', 'class'])
 <i data-feather="{{ $icon }}" class="{{ variants()->featherIcon($type)->class() }} {{ $class }}"></i>

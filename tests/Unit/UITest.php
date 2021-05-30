@@ -40,24 +40,15 @@ class UITest extends TestCase
     public function testDefaultIconHelper()
     {
         $icon = UI::icon('activity');
-        $expected = '<i data-feather="activity" class=" "></i>';
-
-        $this->assertHtmlEquals($icon, $expected);
+        $this->blade($icon)
+            ->assertSee('activity');
     }
 
     public function testIconHelperWithVariant()
     {
         $icon = UI::icon('activity', 'success');
-        $expected = '<i data-feather="activity" class="text-green-500 "></i>';
-
-        $this->assertHtmlEquals($icon, $expected);
-    }
-
-    private function assertHtmlEquals($html, $expected)
-    {
-        $this->assertEquals(
-            preg_replace('/^\s+|\n|\r|\s+$/m', '', $html),
-            preg_replace('/^\s+|\n|\r|\s+$/m', '', $expected)
-        );
+        $this->blade($icon)
+            ->assertSee(variants('icons.success'))
+            ->assertSee('activity');
     }
 }
