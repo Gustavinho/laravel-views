@@ -93,7 +93,11 @@ abstract class DataView extends View
      */
     public function getItems(Searchable $searchable, Filterable $filterable, Sortable $sortable)
     {
-        $query = $this->repository();
+        if (method_exists($this, 'repository')) {
+            $query = $this->repository();
+        } else {
+            $query = $this->model::query();
+        }
 
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
 

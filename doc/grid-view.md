@@ -31,16 +31,32 @@ With this artisan command a `ExampleGridView.php` file will be created inside `a
 
 ## Defining initial data
 
-Return an `Eloquent` query with the initial data to be displayed on the grid view, it is important to return the query, not the data collection.
+The GridView class needs a model class to get the initial data to be displayed on the table, you can define it in the `$model` property.
 
 ```php
 use App\User;
 
+protected $model = User::class;
+```
+
+If you need an specific query as initial data you can define a `repository` method  returning an `Eloquent` query with the initial data to be displayed on the grid view, it is important to return the query, not the data collection.
+
+```php
+use App\User;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Sets a initial query with the data to fill the table
+ *
+ * @return Builder Eloquent query
+ */
 public function repository(): Builder
 {
     return User::query();
 }
 ```
+
+If you define this method, the `$model` property is not needed anymore.
 
 ## Defining card data
 

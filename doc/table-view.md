@@ -44,16 +44,32 @@ php artisan make:table-view UsersTableView
 With this artisan command a `UsersTableView.php` file will be created inside `app/Http/Livewire` directory, with this class you can customize the behavior of the table view.
 
 ## Defining initial data
-Return an `Eloquent` query with the initial data to be displayed on the table, it is important to return the query, not the data collection.
+The TableView class needs a model class to get the initial data to be displayed on the table, you can define it in the `$model` property.
 
 ```php
 use App\User;
 
+protected $model = User::class;
+```
+
+If you need an specific query as initial data you can define a `repository` method  returning an `Eloquent` query with the initial data to be displayed on the table, it is important to return the query, not the data collection.
+
+```php
+use App\User;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Sets a initial query with the data to fill the table
+ *
+ * @return Builder Eloquent query
+ */
 public function repository(): Builder
 {
     return User::query();
 }
 ```
+
+If you define this method, the `$model` property is not needed anymore.
 
 ## Headers
 Return an array with all the headers you need
