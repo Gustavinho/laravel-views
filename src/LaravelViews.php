@@ -25,6 +25,7 @@ class LaravelViews
             'alert' => 'alert',
             'alerts-handler' => 'alerts-handler',
             'form.input-group' => 'form.input-group',
+            'icon' => 'icon'
         ];
     }
 
