@@ -2,7 +2,6 @@
 
 namespace LaravelViews\Test;
 
-use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use LaravelViews\LaravelViewsServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
@@ -10,7 +9,6 @@ use Spatie\LaravelRay\RayServiceProvider;
 
 class TestCase extends TestbenchTestCase
 {
-    use InteractsWithViews;
     /**
      * Setup the test environment.
      */
