@@ -23,9 +23,4 @@ class ReviewTest extends Model
     {
         return $this->belongsTo(UserTest::class, 'user_id', 'id');
     }
-
-    public function food(): BelongsTo
-    {
-        return $this->belongsTo(FoodTest::class, 'food_id', 'id');
-    }
 }
