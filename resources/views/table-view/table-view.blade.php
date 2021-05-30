@@ -14,7 +14,7 @@ UI components used:
 <x-lv-layout>
   {{-- Search input and filters --}}
   <div class="py-4 px-3 pb-0">
-    @include('laravel-views::table-view.filters')
+    @include('laravel-views::components.toolbar.toolbar')
   </div>
 
   @if (count($items))

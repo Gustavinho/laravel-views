@@ -1,4 +1,4 @@
-{{-- table-view.select.blade
+{{-- components.filters.select.blade
 
 Renders the dropdown for the select filter
 To customize it you should shange the UI component used, YOU SHOULD NOT CUSTOMIZE ANYHING HERE

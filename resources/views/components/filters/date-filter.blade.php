@@ -1,4 +1,4 @@
-{{-- table-view.date.blade
+{{-- components.filters.date.blade
 
 Renders the datepicker for the date filter
 To customize it you should shange the UI component used, YOU SHOULD NOT CUSTOMIZE ANYHING HERE
