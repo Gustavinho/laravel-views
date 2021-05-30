@@ -8,6 +8,7 @@ use LaravelViews\Test\Mock\MockTableViewWithSearchAndFilters;
 use LaravelViews\Test\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelViews\Test\Mock\MockTableViewWithActions;
+use LaravelViews\Test\Mock\MockTableViewWithDefaultFilterValue;
 use LaravelViews\Test\Traits\WithActions;
 use Livewire\Livewire;
 
@@ -80,6 +81,16 @@ class TableViewTest extends TestCase
         $livewire->set('filters', [
             'active-users-filter' => 1
         ]);
+
+        $this->assertSeeUsers($livewire, $activeUsers)
+            ->assertDontSeeUsers($livewire, $inactiveUsers);
+    }
+
+    public function testSeeAllDataFoundByAFilterWithADefaultValue()
+    {
+        $activeUsers = factory(UserTest::class, 5)->create(['active' => true]);
+        $inactiveUsers = factory(UserTest::class, 5)->create(['active' => false]);
+        $livewire = Livewire::test(MockTableViewWithDefaultFilterValue::class);
 
         $this->assertSeeUsers($livewire, $activeUsers)
             ->assertDontSeeUsers($livewire, $inactiveUsers);
