@@ -8,14 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 class DummyClass extends GridView
 {
     /**
-     * Sets a initial query with the data to fill the grid view
-     *
-     * @return Builder Eloquent query
+     * Sets a model class to get the initial data
      */
-    public function repository(): Builder
-    {
-        // return User::query();
-    }
+    protected $model = User::class;
 
     /**
      * Sets the data to every card on the view

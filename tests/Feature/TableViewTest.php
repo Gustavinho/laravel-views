@@ -6,6 +6,7 @@ use LaravelViews\Test\Database\UserTest;
 use LaravelViews\Test\Mock\MockTableView;
 use LaravelViews\Test\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelViews\Test\Mock\MockTableViewWithModelClass;
 use Livewire\Livewire;
 
 class TableViewTest extends TestCase
@@ -28,6 +29,14 @@ class TableViewTest extends TestCase
         $users = factory(UserTest::class, 7)->create();
 
         Livewire::test(MockTableView::class)
+            ->assertSeeUsers($users);
+    }
+
+    public function testSeeAllDataSettingAModelClass()
+    {
+        $users = factory(UserTest::class, 7)->create();
+
+        Livewire::test(MockTableViewWithModelClass::class)
             ->assertSeeUsers($users);
     }
 }
