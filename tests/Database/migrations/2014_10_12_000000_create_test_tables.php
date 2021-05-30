@@ -32,14 +32,6 @@ class CreateTestTables extends Migration
             $table->text('message');
             $table->timestamps();
         });
-
-        Schema::create('foods', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->text('description');
-            $table->string('photo');
-            $table->timestamps();
-        });
     }
 
     /**

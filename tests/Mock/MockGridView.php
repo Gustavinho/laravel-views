@@ -3,7 +3,7 @@
 namespace LaravelViews\Test\Mock;
 
 use Illuminate\Database\Eloquent\Builder;
-use LaravelViews\Test\Database\FoodTest;
+use LaravelViews\Test\Database\UserTest;
 use LaravelViews\Views\GridView;
 
 class MockGridView extends GridView
@@ -12,16 +12,16 @@ class MockGridView extends GridView
 
     public function repository(): Builder
     {
-        return FoodTest::query();
+        return UserTest::query();
     }
 
-    public function card(FoodTest $food)
+    public function card(UserTest $user)
     {
         return [
-            'image' => $food->photo,
-            'title' => $food->name,
-            'subtitle' => $food->name,
-            'description' => $food->description
+            'image' => '',
+            'title' => $user->name,
+            'subtitle' => $user->email,
+            'description' => $user->email
         ];
     }
 }
