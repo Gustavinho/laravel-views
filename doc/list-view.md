@@ -10,6 +10,7 @@ This view creates a dynamic list view with filters, pagination, search input, an
 - [Defining initial data](#defining-initial-data)
 - [Defining data for each list item](#defining-data-for-each-list-item)
 - [Customizing the list item component](#customizing-the-list-item-component)
+- [Sorting Data](#sorting-data)
 - [More features](#more-features)
   - [Searching data](./table-view.md#searching-data)
   - [Pagination](./table-view.md#pagination)
@@ -94,6 +95,21 @@ Don't forget to include the actions for each list item, there is a component out
   <p>My custom content for each list item</p>
   <x-lv-actions :actions="$actions" :model="$model" />
 </div>
+```
+
+## Sorting Data
+You can provide your list view with a sorting drop down by overriding the sortablyBy function on your list view. You may assign the $sortBy property to choose the column that the list view is sorted by when the page first loads.
+
+```php
+public $sortBy = 'name';
+
+public function sortableBy()
+    {
+        return [
+            'Name' => 'name',
+            'Email' => 'email'
+        ];
+    }
 ```
 
 ## More features

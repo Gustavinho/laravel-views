@@ -1,5 +1,4 @@
-{{-- table-view.boolean.blade
-
+{{-- components.filters.boolean.blade
 Renders the input radius for the boolean filter
 You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIERE DIRECTIVES
 --}}

@@ -1,7 +1,7 @@
 <x-lv-layout>
   {{-- Search input and filters --}}
   <div class="px-4">
-    @include('laravel-views::table-view.filters')
+    @include('laravel-views::components.toolbar.toolbar')
   </div>
 
   <div>
