@@ -9,6 +9,7 @@ use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\TableViewFilterData;
 use LaravelViews\Data\TableViewSearchData;
+use LaravelViews\Http\Livewire\CKEditor;
 use LaravelViews\UI\UI;
 use LaravelViews\UI\Variants;
 use LaravelViews\UI\Header;
@@ -20,6 +21,7 @@ use LaravelViews\Console\MakeViewCommand;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\TableViewSortData;
 use LaravelViews\Views\Components\DynamicComponent;
+use Livewire\Livewire;
 
 class LaravelViewsServiceProvider extends ServiceProvider
 {
@@ -66,6 +68,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViews()
+            ->loadLivewireComponents()
             ->loadCommands()
             ->publish()
             ->bladeDirectives()
@@ -99,6 +102,13 @@ class LaravelViewsServiceProvider extends ServiceProvider
     private function loadViews()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-views');
+
+        return $this;
+    }
+
+    private function loadLivewireComponents()
+    {
+        Livewire::component('laravel-views-ckeditor', CKEditor::class);
 
         return $this;
     }

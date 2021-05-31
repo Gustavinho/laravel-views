@@ -20,6 +20,13 @@ abstract class DataView extends View
         'sortOrder'
     ];
 
+    public function getListeners(): array
+    {
+        return [
+            'refreshView' => '$refresh',
+        ];
+    }
+
     /**
      * (Override) int Number of items to be showed,
      * @var int $paginate

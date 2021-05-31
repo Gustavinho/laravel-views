@@ -36,7 +36,7 @@ props:
         @endforeach
 
         {{-- This is a empty cell just in case there are action rows --}}
-        @if (count($actionsByRow) > 0)
+        @if (!empty($actionsByRow))
             <th></th>
         @endif
     </tr>
@@ -54,7 +54,7 @@ props:
             @endforeach
 
             {{-- Renders all the actions row --}}
-            @if (count($actionsByRow) > 0)
+            @if (!empty($actionsByRow))
                 <td>
                     <div class="px-3 py-2 flex justify-end">
                         @foreach ($actionsByRow as $action)

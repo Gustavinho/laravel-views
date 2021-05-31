@@ -13,10 +13,11 @@ UI components used:
 
 <div
   class="text-right relative"
+  wire:loading.class="hidden"
   x-data="{ open: false }"
 >
   @isset($trigger)
-    <span @click="open = true" class=" cursor-pointer">
+    <span @click="open = true" class="cursor-pointer">
       {{ $trigger }}
     </span>
   @else
