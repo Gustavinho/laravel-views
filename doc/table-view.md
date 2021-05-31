@@ -44,16 +44,32 @@ php artisan make:table-view UsersTableView
 With this artisan command a `UsersTableView.php` file will be created inside `app/Http/Livewire` directory, with this class you can customize the behavior of the table view.
 
 ## Defining initial data
-Return an `Eloquent` query with the initial data to be displayed on the table, it is important to return the query, not the data collection.
+The TableView class needs a model class to get the initial data to be displayed on the table, you can define it in the `$model` property.
 
 ```php
 use App\User;
 
+protected $model = User::class;
+```
+
+If you need an specific query as initial data you can define a `repository` method  returning an `Eloquent` query with the initial data to be displayed on the table, it is important to return the query, not the data collection.
+
+```php
+use App\User;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Sets a initial query with the data to fill the table
+ *
+ * @return Builder Eloquent query
+ */
 public function repository(): Builder
 {
     return User::query();
 }
 ```
+
+If you define this method, the `$model` property is not needed anymore.
 
 ## Headers
 Return an array with all the headers you need
@@ -322,7 +338,7 @@ To display a success alert message you can execute the `$this->succes()` at the 
 ![](success.png)
 
 ```php
-public function handle($model)
+public function handle($model, View $view)
 {
     $model->active = true;
     $model->save();
@@ -346,10 +362,10 @@ $this->error();
 ![](error.png)
 
 ## Hiding actions
-You can choose if the action will be shown or hidden for an specific row defining a `renderIf` method and returning a boolean value, if you don't define this method the action will be shown aways.
+You can choose if the action will be shown or hidden for an specific row defining a `renderIf` method and returning a boolean value, if you don't define this method the action will be shown aways. The `handle` method receives the model corresponding to the row where the action was executed, and the current view where the action was executed from.
 
 ```php
-public function renderIf($model)
+public function renderIf($model, View $view)
 {
     return !$model->active;
 }

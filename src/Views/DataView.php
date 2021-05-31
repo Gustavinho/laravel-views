@@ -69,9 +69,25 @@ abstract class DataView extends View
     {
         $this->filtersViews = $this->filters();
         $this->search = $queryStringData->getSearchValue($this->search);
+
         $this->filters = $queryStringData->getFilterValues($this->filters);
+
+        $this->applyDefaultFilters();
+
         $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
         $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
+    }
+
+    /**
+     * Check if each of the filters has a default value and it's not already set
+     */
+    public function applyDefaultFilters()
+    {
+        foreach ($this->filters() as $filter) {
+            if (empty($this->filters[$filter->id]) && $filter->defaultValue) {
+                $this->filters[$filter->id] = $filter->defaultValue;
+            }
+        }
     }
 
     /**
@@ -92,9 +108,14 @@ abstract class DataView extends View
      */
     public function getItems(Searchable $searchable, Filterable $filterable, Sortable $sortable)
     {
-        $query = $this->repository();
+        if (method_exists($this, 'repository')) {
+            $query = $this->repository();
+        } else {
+            $query = $this->model::query();
+        }
 
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
+
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
         $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
 

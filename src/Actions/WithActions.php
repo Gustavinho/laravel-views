@@ -39,15 +39,6 @@ trait WithActions
         }
     }
 
-    /**
-     * Flushes all session messages about success and error statuses
-     */
-    public function flushMessage()
-    {
-        session()->forget('message');
-        session()->forget('messageType');
-    }
-
     public function closeConfirmationMessage()
     {
         $this->confirmationMessage = null;

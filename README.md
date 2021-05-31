@@ -75,7 +75,7 @@ php artisan make:table-view UsersTableView
 ```
 With this artisan command a UsersTableView.php file will be created inside the `app/Http/Livewire` directory.
 
-The basic usage needs a data repository (Eloquent query), headers and rows, you can customize the items to be shown, and the headers and data for each row like this example
+The basic usage needs a model class, headers and rows, you can customize the items to be shown, and the headers and data for each row like this example
 ```php
 <?php
 
@@ -87,10 +87,7 @@ use App\User;
 
 class UsersTableView extends TableView
 {
-    public function repository(): Builder
-    {
-        return User::query();
-    }
+    protected $model = User::class;
 
     public function headers(): array
     {
@@ -128,7 +125,7 @@ You could also use the `@livewire` blade directive.
 
 At this point, you would be able to see a table with some data, the table view doesn't have any styled container or title as the image example, you can render the table view inside any container you want.
 
-In the example above the view is using the User model created by default in every Laravel project, feel free to use any model you have, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model.
+In the example above the view is using the User model created by default in every Laravel project, feel free to use any model you want, the method `row` is receiving a sinlge model object and you can use any property or public method you have difined inside your model.
 
 This is the basic usage of the table view, but you can customize it with more features.
 
@@ -178,3 +175,26 @@ Here's the plan for what's coming:
 - Add a download action
 - Add translations
 - Add links as a UI helpers
+
+## Upgrade guide
+### From 2.2 to 2.3
+- Clear your cached views `php artisan view:clear` since some of the internal components changed.
+- Update components
+- Update the renderIf() function in your action classes as follows:
+  ```php
+  <?php
+
+  namespace App\Actions;
+
+  use LaravelViews\Actions\Action;
+  use LaravelViews\Views\View;          // new line
+
+  class YourAction extends Action
+  {
+      public function renderIf($item, View $view)       // add the view parameter
+      {
+          // your content
+      }
+  }
+  ```
+- **(Optional)**, if your `repository` methods are returning the query object without any query applied like `User::query()`, you can define a `protected $model = User::class;` instead, this is the default behavior now, the `repository` method is still working so you don't need to change anything if you don't want to.
