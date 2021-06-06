@@ -17,7 +17,8 @@ class LaravelViews
         return [
             'buttons.icon' => 'icon-button',
             'buttons.select' => 'select-button',
-            'drop-down' => 'drop-down',
+            'dropdown.drop-down' => 'drop-down',
+            'dropdown.header' => 'drop-down.header',
             'actions.actions' => 'actions',
             'actions.icon-and-title' => 'actions.icon-and-title',
             'actions.icon' => 'actions.icon',

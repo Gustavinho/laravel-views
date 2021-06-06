@@ -22,17 +22,22 @@ class ExecuteAction
         return $this;
     }
 
-    public function callByActionName(string $actionId, $item, $actions = [])
+    /**
+     * Finds an action inside an array by its name and executes it
+     * @param {String} $actionId Action's name, this is the unique identifier of the action
+     * @param {Model|Array} $actionableItems Model instance or array of the model id's to execute the actions
+     * @param {Array} $actions Array of the actions defined in the view
+     */
+    public function callByActionName(string $actionId, $actionableItems, $actions = [])
     {
         /** @var Action */
         $action = $this->findAction($actionId, $actions);
-        $action->view = $this->view;
-
         if ($action) {
+            $action->view = $this->view;
             if ($this->shouldVerifyConfirmation && $action->shouldBeConfirmed()) {
                 return $action;
             } else {
-                $action->handle($item, $this->view);
+                $action->handle($actionableItems, $this->view);
             }
         }
 

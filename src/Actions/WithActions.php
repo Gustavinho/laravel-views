@@ -39,6 +39,13 @@ trait WithActions
         }
     }
 
+    public function executeBulkAction($action, ExecuteAction $executeAction)
+    {
+        $actionableItems = $this->selected;
+        $executeAction->setView($this)
+            ->callByActionName($action, $actionableItems, $this->bulkActions);
+    }
+
     public function closeConfirmationMessage()
     {
         $this->confirmationMessage = null;
@@ -48,5 +55,14 @@ trait WithActions
     public function getActionsProperty()
     {
         return $this->getActions();
+    }
+
+    public function getBulkActionsProperty()
+    {
+        if (method_exists($this, 'bulkActions')) {
+            return $this->bulkActions();
+        }
+
+        return [];
     }
 }

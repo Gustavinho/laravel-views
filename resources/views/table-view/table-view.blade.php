@@ -18,18 +18,9 @@ UI components used:
   </div>
 
   @if (count($items))
-
     {{-- Content table --}}
     <div class="overflow-x-auto">
-      @component('laravel-views::components.table', [
-        'headers' => $headers,
-        'actionsByRow' => $actionsByRow,
-        'items' => $items,
-        'view' => $view,
-        'sortBy' => $sortBy,
-        'sortOrder' => $sortOrder
-      ])
-      @endcomponent
+      @include('laravel-views::components.table')
     </div>
 
   @else
