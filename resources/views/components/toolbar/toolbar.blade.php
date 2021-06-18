@@ -19,12 +19,7 @@ UI components used:
       <div>
         <x-lv-drop-down label='Actions'>
           <x-lv-drop-down.header label='{{ count($selected) }} Selected' />
-          @foreach ($this->bulkActions as $action)
-            <a href="#!" wire:click.prevent="executeBulkAction('{{ $action->id }}', true)" title="{{ $action->title}}" class="group flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900" wire:loading.class.remove="hover:text-gray-900 text-gray-700" wire:loading.class='text-gray-400 hover:text-gray-400' wire:target="executeBulkAction">
-              <i data-feather="{{ $action->icon }}" class="mr-3 h-4 w-4"></i>
-              {{ $action->title }}
-            </a>
-          @endforeach
+          <x-lv-actions.icon-and-title :actions="$this->bulkActions" />
         </x-lv-drop-down>
       </div>
     @endif

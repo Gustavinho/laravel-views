@@ -2,58 +2,71 @@
 
 namespace LaravelViews\Actions;
 
+use Exception;
 use LaravelViews\Actions\Action;
 use LaravelViews\Actions\ExecuteAction;
 
 trait WithActions
 {
-    public $confirmationMessage = null;
-
-    /** @var Action $actionToBeConfirmed sets a temporal action to be executed once it will be confirmed */
-    public $actionToBeConfirmed = null;
+    private $shouldVerifyConfirmation = true;
 
     /**
      * @param string $action Action's name
      * @param string $id Model's id
-     * @param boolean $shouldVerifyConfirmation
      */
-    public function executeAction($action, $id, $shouldVerifyConfirmation, ExecuteAction $executeAction)
+    public function executeAction($actionId, $actionableItemId)
     {
-        $item = $this->getModelWhoFiredAction($id);
+        $this->shouldVerifyConfirmation = true;
+        $this->executeActionHandler($actionId, $actionableItemId);
+    }
 
-        /** @var {ExecuteAction} Executes the action, if it needs to be confirmed it will return the action to be confirmed  */
-        $actionToBeConfirmed = $executeAction
-            ->setView($this)
-            ->shouldVerifyConfirmation($shouldVerifyConfirmation)
-            ->callByActionName($action, $item, $this->actions);
+    public function confirmAndExecuteAction($actionId, $actionableItemId)
+    {
+        $this->shouldVerifyConfirmation = false;
+        $this->executeActionHandler($actionId, $actionableItemId);
+    }
 
-        /** If the action need to be confirmed */
-        if ($actionToBeConfirmed) {
-            $this->fill([
-                /** Stores action id and item id to be executed before, this is needed on the confirmation message component */
-                'actionToBeConfirmed' => [$actionToBeConfirmed->id, $item->id,],
-                'confirmationMessage' => $actionToBeConfirmed->getConfirmationMessage($item)
-            ]);
+    public function executeBulkAction($action)
+    {
+        $this->shouldVerifyConfirmation = true;
+        $this->executeActionHandler($action);
+    }
+
+    public function confirmAndExecuteBulkAction($action)
+    {
+        $this->shouldVerifyConfirmation = false;
+        $this->executeActionHandler($action);
+    }
+
+    private function executeActionHandler($actionId, $actionableItemId = null)
+    {
+        /** @var Action  */
+        $action = $this->findAction($actionId);
+
+        if ($action) {
+            /** If the action needs confirmation */
+            if ($this->shouldVerifyConfirmation && $action->shouldBeConfirmed()) {
+                $this->confirmAction($action, $actionableItemId);
+            } else {
+                /**
+                 * If $actionableItemId is null then it is a bulk action
+                 * and it uses the current selection
+                 */
+                $actionableItems = $actionableItemId ? $this->getModelWhoFiredAction($actionableItemId) : $this->selected;
+                $action->view = $this;
+                $action->handle($actionableItems, $this);
+            }
         } else {
-            $this->closeConfirmationMessage();
+            throw new Exception("Unable to find the {$actionId} action");
         }
-    }
-
-    public function executeBulkAction($action, ExecuteAction $executeAction)
-    {
-        $actionableItems = $this->selected;
-        $executeAction->setView($this)
-            ->callByActionName($action, $actionableItems, $this->bulkActions);
-    }
-
-    public function closeConfirmationMessage()
-    {
-        $this->confirmationMessage = null;
-        $this->actionToBeConfirmed = null;
     }
 
     public function getActionsProperty()
     {
+        /**
+         * This `getActions()` function needs to be defined by the
+         * view that is using actions
+         */
         return $this->getActions();
     }
 
@@ -64,5 +77,36 @@ trait WithActions
         }
 
         return [];
+    }
+
+    /**
+     * Opens confirmation modal for a specific action
+     * @param Action $action
+     */
+    private function confirmAction($action, $modelId = null)
+    {
+        $actionData = [
+            'message' => $action->getConfirmationMessage(),
+            'id' => $action->getId()
+        ];
+
+        if ($modelId) {
+            $actionData['modelId'] = $modelId;
+        }
+        $this->emitSelf('openConfirmationModal', $actionData);
+    }
+
+    /**
+     * Finds an action by its id
+     */
+    private function findAction(string $actionId)
+    {
+        $actions = collect($this->actions)->merge($this->bulkActions);
+
+        return $actions->first(
+            function ($actionToFind) use ($actionId) {
+                return $actionToFind->id === $actionId;
+            }
+        );
     }
 }

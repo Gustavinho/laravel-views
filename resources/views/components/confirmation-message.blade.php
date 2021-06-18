@@ -1,4 +1,4 @@
-@php
+{{-- @php
   [$action, $itemId] = $actionToBeConfirmed
 @endphp
 @if ($message)
@@ -41,4 +41,28 @@
     </div>
   </div>
 </div>
-@endif
+@endif --}}
+<div
+  x-data='{ open: false, action: null, id: null, message: ""}'
+  x-init="@this.on('openConfirmationModal', (actionObject) => {
+    console.log(actionObject)
+    open = true;
+    action = actionObject.id;
+    id = actionObject.modelId;
+    message = actionObject.message;
+  })"
+>
+  <div x-show="open" class="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50">
+    <div class="fixed inset-0 transition-opacity">
+      <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+    </div>
+    <div class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+      <div x-text='message'></div>
+      <button @click="await $wire.call('confirmAndExecuteAction', action, id, false); open = false">Execute action</button>
+      <span x-text="action"></span>
+      <span x-text="id"></span>
+      <button @click="open = false">Close</button>
+      <span wire:loading>Loading</span>
+    </div>
+  </div>
+</div>

@@ -31,5 +31,5 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
     {{ $items->links() }}
   </div>
 
-  @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
+  @include('laravel-views::components.confirmation-message')
 </x-lv-layout>

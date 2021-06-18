@@ -37,6 +37,6 @@ UI components used:
     {{ $items->links() }}
   </div>
 
-  @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
+  @include('laravel-views::components.confirmation-message')
 </x-lv-layout>
 

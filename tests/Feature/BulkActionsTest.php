@@ -35,6 +35,17 @@ class BulkActionsTest extends TestCase
             ->assertSee('Actions');
     }
 
+    public function testSelectUnselectAll()
+    {
+        $users = factory(UserTest::class, 7)->create();
+
+        Livewire::test(MockTableViewWithBulkActions::class)
+            ->set('allSelected', true)
+            ->assertSet('selected', $users->pluck('id'))
+            ->set('allSelected', false)
+            ->assertSet('selected', []);
+    }
+
     public function testExecuteActionToSelectedRows()
     {
         $users = factory(UserTest::class, 7)->create();
@@ -52,14 +63,30 @@ class BulkActionsTest extends TestCase
         }
     }
 
-    public function testSelectUnselectAll()
+    public function testExecuteBulkActionsWithConfirmationMessage()
     {
         $users = factory(UserTest::class, 7)->create();
 
         Livewire::test(MockTableViewWithBulkActions::class)
             ->set('allSelected', true)
-            ->assertSet('selected', $users->pluck('id'))
-            ->set('allSelected', false)
-            ->assertSet('selected', []);
+            ->call('executeBulkAction', 'test-confirmed-delete-users-action')
+            ->assertEmitted('openConfirmationModal', [
+                'message' => 'Do you really want to perform this action?',
+                'id' => 'test-confirmed-delete-users-action',
+            ])
+
+            // Second time with false to avoid validating if the action needs to be confirmed
+            ->call('confirmAndExecuteBulkAction', 'test-confirmed-delete-users-action')
+            ->assertEmitted('notify', [
+                'message' => 'Action was executed successfully',
+                'type' => 'success'
+            ])
+            ->assertDontSeeUsers($users);
+
+        foreach ($users as $user) {
+            $this->assertDatabaseMissing('users', $user->toArray());
+        }
     }
+
+    // Execute bulk actions with confirmation
 }

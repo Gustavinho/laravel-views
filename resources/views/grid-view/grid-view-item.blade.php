@@ -21,7 +21,7 @@
   <div class="pt-4 {{ $withBackground ? 'bg-white rounded-b-md p-4' : '' }}">
     <div class="flex items-start">
       <div class="flex-1">
-        <h3 class="font-bold leading-6">
+        <h3 class="font-bold leading-6 text-gray-900">
           @if ($hasDefaultAction)
             <a href="#!" class="hover:underline" wire:click.prevent="onCardClick({{ $model->getKey() }})">
               {{ $title }}
