@@ -6,6 +6,6 @@ trait Confirmable
 {
     public function getConfirmationMessage($item = null)
     {
-        return 'Do you really want to perform this action?';
+        return __('Do you really want to perform this action?');
     }
 }

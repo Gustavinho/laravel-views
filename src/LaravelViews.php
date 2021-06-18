@@ -17,6 +17,7 @@ class LaravelViews
         return [
             'buttons.icon' => 'icon-button',
             'buttons.select' => 'select-button',
+            'buttons.button' => 'button',
             'dropdown.drop-down' => 'drop-down',
             'dropdown.header' => 'drop-down.header',
             'actions.actions' => 'actions',
@@ -26,7 +27,8 @@ class LaravelViews
             'alert' => 'alert',
             'alerts-handler' => 'alerts-handler',
             'form.input-group' => 'form.input-group',
-            'icon' => 'icon'
+            'icon' => 'icon',
+            'modal' => 'modal'
         ];
     }
 
