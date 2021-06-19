@@ -20,7 +20,8 @@ class LaravelViews
             'buttons.button' => 'button',
             'dropdown.drop-down' => 'drop-down',
             'dropdown.header' => 'drop-down.header',
-            'actions.actions' => 'actions',
+            'actions.responsive' => 'actions',
+            'actions.drop-down' => 'actions.drop-down',
             'actions.icon-and-title' => 'actions.icon-and-title',
             'actions.icon' => 'actions.icon',
             'attributes-list' => 'attributes-list',
@@ -28,7 +29,8 @@ class LaravelViews
             'alerts-handler' => 'alerts-handler',
             'form.input-group' => 'form.input-group',
             'icon' => 'icon',
-            'modal' => 'modal'
+            'modal' => 'modal',
+            'form.checkbox' => 'checkbox'
         ];
     }
 

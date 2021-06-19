@@ -1,10 +1,9 @@
 <?php
 
-namespace LaravelViews\Actions;
+namespace LaravelViews\Views\Traits;
 
 use Exception;
 use LaravelViews\Actions\Action;
-use LaravelViews\Actions\ExecuteAction;
 
 trait WithActions
 {
@@ -44,14 +43,12 @@ trait WithActions
         $action = $this->findAction($actionId);
 
         if ($action) {
-            /** If the action needs confirmation */
+            // If the action needs confirmation
             if ($this->shouldVerifyConfirmation && $action->shouldBeConfirmed()) {
                 $this->confirmAction($action, $actionableItemId);
             } else {
-                /**
-                 * If $actionableItemId is null then it is a bulk action
-                 * and it uses the current selection
-                 */
+                // If $actionableItemId is null then it is a bulk action
+                // and it uses the current selection
                 $actionableItems = $actionableItemId ? $this->getModelWhoFiredAction($actionableItemId) : $this->selected;
                 $action->view = $this;
                 $action->handle($actionableItems, $this);
@@ -59,24 +56,6 @@ trait WithActions
         } else {
             throw new Exception("Unable to find the {$actionId} action");
         }
-    }
-
-    public function getActionsProperty()
-    {
-        /**
-         * This `getActions()` function needs to be defined by the
-         * view that is using actions
-         */
-        return $this->getActions();
-    }
-
-    public function getBulkActionsProperty()
-    {
-        if (method_exists($this, 'bulkActions')) {
-            return $this->bulkActions();
-        }
-
-        return [];
     }
 
     /**
@@ -108,5 +87,29 @@ trait WithActions
                 return $actionToFind->id === $actionId;
             }
         );
+    }
+
+    /**
+     * Computed properties
+     */
+    public function getActionsProperty()
+    {
+         // This `getActions()` function needs to be defined by the
+         // view that is using actions
+        return $this->getActions();
+    }
+
+    public function getBulkActionsProperty()
+    {
+        if (method_exists($this, 'bulkActions')) {
+            return $this->bulkActions();
+        }
+
+        return [];
+    }
+
+    public function getHasBulkActionsProperty()
+    {
+        return method_exists($this, 'bulkActions') && count($this->bulkActions) > 0;
     }
 }

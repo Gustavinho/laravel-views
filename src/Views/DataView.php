@@ -2,11 +2,11 @@
 
 namespace LaravelViews\Views;
 
-use LaravelViews\Actions\WithActions;
 use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\QueryStringData;
+use LaravelViews\Views\Traits\WithActions;
 use Livewire\WithPagination;
 
 abstract class DataView extends View
@@ -129,14 +129,6 @@ abstract class DataView extends View
         $this->selected = $value ? $this->query->pluck('id')->map(function ($id) {
             return (string)$id;
         }) : [];
-    }
-
-    /**
-     * Computed properties
-     */
-    public function getHasBulkActionsProperty()
-    {
-        return method_exists($this, 'bulkActions') && count($this->bulkActions) > 0;
     }
 
     /**
