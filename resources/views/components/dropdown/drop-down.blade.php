@@ -7,24 +7,23 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
  - trigger
 --}}
 
-@props(['dropDownWidth' => 64])
+@props(['dropDownWidth' => 64, 'label' => ''])
 
 <div
   class="relative"
   x-data="{ open: false }"
 >
-  @isset($trigger)
-    <span @click="open = true" class="cursor-pointer">
-      {{ $trigger }}
-    </span>
-  @else
-    @component('laravel-views::components.button', [
-      'title' => $title,
-      "onClick" => "open = true",
-      "variant" => $variant ?? 'primary'
-    ])
-    @endcomponent
-  @endisset
+  <span @click="open = true" class="cursor-pointer">
+    @if ($label)
+      <x-lv-select-button>
+        {{ __($label) }}
+      </x-lv-select-button>
+    @else
+      @isset($trigger)
+        {{ $trigger }}
+      @endisset
+    @endif
+  </span>
 
   <div
     class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 w-{{ isset($dropDownWidth) ? $dropDownWidth : 'full' }}"

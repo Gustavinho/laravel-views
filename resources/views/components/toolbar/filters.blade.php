@@ -1,18 +1,11 @@
 {{-- Filters dropdown --}}
 @if (isset($filtersViews) && $filtersViews)
-  <x-lv-drop-down :dropDownWidth="64">
-    @slot('trigger')
-      <x-lv-select-button>
-        Filters
-      </x-lv-select-button>
-    @endslot
+  <x-lv-drop-down :dropDownWidth="64" label="Filters">
     {{-- Each filter view --}}
     @foreach ($filtersViews as $filter)
       {{-- Filter title --}}
-      <div class="border-b border-t border-gray-200 bg-gray-100 text-xs font-semibold uppercase text-left px-4 py-2 mb-4">
-        {{ $filter->getTitle() }}
-      </div>
-      <div class="px-4">
+      <x-lv-drop-down.header :label="$filter->getTitle()" />
+      <div class="px-4 mt-4">
         {{-- Filter view --}}
         @include('laravel-views::components.filters.' . $filter->view, [
           'view' => $filter,
@@ -27,7 +20,7 @@
         <a wire:click="clearFilters" @click="open = false" href="#"
           class="text-gray-600 flex items-center hover:text-gray-700">
           <i data-feather="x-circle" class="mr-2 w-5 h-5"></i>
-          Clear filters
+          {{__('Clear filters')}}
         </a>
       </div>
     @endif

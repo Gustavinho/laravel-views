@@ -52,12 +52,16 @@ class ExecuteActionsTest extends TestCase
 
     public function testSeeConfirmationMessage()
     {
-        factory(UserTest::class)->create();
-        $message = 'This is the confirmation message';
+        $user = factory(UserTest::class)->create();
+        $message = 'Do you really want to perform this action?';
 
         Livewire::test(MockTableViewWithActions::class)
-            ->set('confirmationMessage', $message)
-            ->assertSee($message);
+            ->call('executeAction', 'test-confirmed-action', $user->id)
+            ->assertEmitted('openConfirmationModal', [
+                'message' => $message,
+                'id' => 'test-confirmed-action',
+                'modelId' => $user->id
+            ]);
     }
 
     public function testCallActionAfterConfirmationMessage()
@@ -65,9 +69,13 @@ class ExecuteActionsTest extends TestCase
         $user = factory(UserTest::class)->create();
 
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-confirmed-action', $user->id, true)
-            ->assertSee('Do you really want to perform this action?')
-            ->call('executeAction', 'test-confirmed-action', $user->id, false)
+            ->call('executeAction', 'test-confirmed-action', $user->id)
+            ->assertEmitted('openConfirmationModal', [
+                'message' => 'Do you really want to perform this action?',
+                'id' => 'test-confirmed-action',
+                'modelId' => $user->id
+            ])
+            ->call('confirmAndExecuteAction', 'test-confirmed-action', $user->id)
             ->assertEmitted('notify', [
                 'message' => 'Action was executed successfully',
                 'type' => 'success'

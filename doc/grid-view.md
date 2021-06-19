@@ -99,11 +99,14 @@ Name|Description|Type|Value
 model|Model instance for this card|||
 actions|Actions defined in this view class|Array
 hasDefaultAction|Checks if the Grid View has defined a `onCardClick` method|Boolean|true,false
+selected|Defines if the item was selected when the grid view has bulk actions|Boolean|true,false
 
-With all this data you can build your own card component as you need, remember to include the `actions` component.
+With all this data you can build your own card component as you need, remember to include an `actions` component.
 
 ```html
 <x-lv-actions :actions="$actions" :model="$model" />
+<!-- Or -->
+<x-lv-actions.drop-down :actions="$actions" :model="$model" />
 ```
 
 

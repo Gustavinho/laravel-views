@@ -13,7 +13,12 @@ UI components used:
   </div>
 
   {{-- Actions on the left --}}
-  <div class="flex gap-2 flex-1 justify-end items-center mb-4">
+  <div class="flex space-x-1 flex-1 justify-end items-center mb-4">
+    {{-- Bulk actions --}}
+    <div>
+      @include('laravel-views::components.toolbar.bulk-actions')
+    </div>
+
     {{-- Sorting --}}
     @if (isset($sortableBy) && $sortableBy->isNotEmpty())
       <div>

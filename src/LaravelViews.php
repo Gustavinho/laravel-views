@@ -17,15 +17,20 @@ class LaravelViews
         return [
             'buttons.icon' => 'icon-button',
             'buttons.select' => 'select-button',
-            'drop-down' => 'drop-down',
-            'actions.actions' => 'actions',
+            'buttons.button' => 'button',
+            'dropdown.drop-down' => 'drop-down',
+            'dropdown.header' => 'drop-down.header',
+            'actions.responsive' => 'actions',
+            'actions.drop-down' => 'actions.drop-down',
             'actions.icon-and-title' => 'actions.icon-and-title',
             'actions.icon' => 'actions.icon',
             'attributes-list' => 'attributes-list',
             'alert' => 'alert',
             'alerts-handler' => 'alerts-handler',
             'form.input-group' => 'form.input-group',
-            'icon' => 'icon'
+            'icon' => 'icon',
+            'modal' => 'modal',
+            'form.checkbox' => 'checkbox'
         ];
     }
 

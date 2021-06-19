@@ -14,6 +14,7 @@ use LaravelViews\UI\Variants;
 use LaravelViews\UI\Header;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Str;
 use LaravelViews\Console\GridViewMakeCommand;
 use LaravelViews\Console\ListViewMakeCommand;
 use LaravelViews\Console\MakeViewCommand;
@@ -70,7 +71,8 @@ class LaravelViewsServiceProvider extends ServiceProvider
             ->publish()
             ->bladeDirectives()
             ->loadComponents()
-            ->configFiles();
+            ->configFiles()
+            ->macros();
     }
 
     private function publish()
@@ -156,6 +158,22 @@ class LaravelViewsServiceProvider extends ServiceProvider
     private function configFiles()
     {
         $this->mergeConfigFrom(__DIR__ . '/config/laravel-views.php', 'laravel-views');
+
+        return $this;
+    }
+
+    private function macros()
+    {
+        Str::macro('classNameAsSentence', function ($className) {
+            $intermediate = preg_replace('/(?!^)([[:upper:]][[:lower:]]+)/', ' $0', $className);
+            $titleStr = preg_replace('/(?!^)([[:lower:]])([[:upper:]])/', '$1 $2', $intermediate);
+
+            return $titleStr;
+        });
+
+        Str::macro('camelToDash', function ($str) {
+            return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $str));
+        });
 
         return $this;
     }

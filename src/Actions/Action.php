@@ -3,6 +3,7 @@
 namespace LaravelViews\Actions;
 
 use LaravelViews\Views\View;
+use Illuminate\Support\Str;
 
 abstract class Action
 {
@@ -23,11 +24,6 @@ abstract class Action
      */
     public $view;
 
-    private $messages = [
-        'success' => 'Action was executed successfully',
-        'danger' => 'There was an error executing this action',
-    ];
-
     public function __construct()
     {
         $this->id = $this->getId();
@@ -40,12 +36,7 @@ abstract class Action
 
     public function getId()
     {
-        return $this->camelToDashCase((new \ReflectionClass($this))->getShortName());
-    }
-
-    private function camelToDashCase($camelStr)
-    {
-        return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $camelStr));
+        return Str::camelToDash((new \ReflectionClass($this))->getShortName());
     }
 
     public function renderIf($item, View $view)
@@ -65,8 +56,13 @@ abstract class Action
 
     private function setMessage($type = 'success', $message = null)
     {
+        $messages = [
+            'success' => __('Action was executed successfully'),
+            'danger' => __('There was an error executing this action'),
+        ];
+
         $this->view->emitSelf('notify', [
-            'message' => $message ? $message : $this->messages[$type],
+            'message' => $message ? $message : $messages[$type],
             'type' => $type
         ]);
     }

@@ -2,8 +2,7 @@
 
 namespace LaravelViews\Filters;
 
-use LaravelViews\Views\View;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BaseFilter
 {
@@ -52,7 +51,7 @@ class BaseFilter
     public function getTitle()
     {
         if (!$this->title) {
-            return $this->camelToTitle((new \ReflectionClass($this))->getShortName());
+            return Str::classNameAsSentence((new \ReflectionClass($this))->getShortName());
         }
 
         return $this->title;
@@ -60,20 +59,7 @@ class BaseFilter
 
     public function getId()
     {
-        return $this->camelToDashCase((new \ReflectionClass($this))->getShortName());
-    }
-
-    private function camelToTitle($camelStr)
-    {
-        $intermediate = preg_replace('/(?!^)([[:upper:]][[:lower:]]+)/', ' $0', $camelStr);
-        $titleStr = preg_replace('/(?!^)([[:lower:]])([[:upper:]])/', '$1 $2', $intermediate);
-
-        return $titleStr;
-    }
-
-    private function camelToDashCase($camelStr)
-    {
-        return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $camelStr));
+        return Str::camelToDash((new \ReflectionClass($this))->getShortName());
     }
 
     public function passValuesFromRequestToFilter($values)

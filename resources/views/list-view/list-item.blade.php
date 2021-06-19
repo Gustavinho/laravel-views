@@ -3,7 +3,7 @@
 <div>
   <div class="flex items-center space-x-4 ">
     <div>
-      <img src="{{ $avatar }}" alt="" class="w-12 h-12 rounded-full shadow-inner bg-white">
+      <img src="{{ $avatar }}" alt="" class="w-12 h-12 rounded-full shadow-inner bg-white object-cover">
     </div>
     <div class="flex-1">
       <div class="text-sm font-medium text-gray-900">
