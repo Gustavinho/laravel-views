@@ -413,7 +413,7 @@ public function getConfirmationMessage($item = null)
 ```
 
 # Showing UI components
-You can display some UI components instead of plain text like avaters, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
+You can display some UI components instead of plain text like avatars, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
 
 ## Avatar
 Shows an 32x32 rounded image

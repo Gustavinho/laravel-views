@@ -16,7 +16,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
   <span @click="open = true" class="cursor-pointer">
     @if ($label)
       <x-lv-select-button>
-        {{ $label }}
+        {{ __($label) }}
       </x-lv-select-button>
     @else
       @isset($trigger)
