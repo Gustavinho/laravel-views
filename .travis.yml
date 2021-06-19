@@ -26,6 +26,7 @@ branches:
   - dev
   - /^release-.*$/
   - /^release/.*$/
+  - /^feature/.*$/
 
 before_script:
   - composer config discard-changes true
