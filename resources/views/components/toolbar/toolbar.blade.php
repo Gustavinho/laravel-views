@@ -13,16 +13,11 @@ UI components used:
   </div>
 
   {{-- Actions on the left --}}
-  <div class="flex gap-2 flex-1 justify-end items-center mb-4">
+  <div class="flex space-x-1 flex-1 justify-end items-center mb-4">
     {{-- Bulk actions --}}
-    @if (count($selected) > 0)
-      <div>
-        <x-lv-drop-down label='Actions'>
-          <x-lv-drop-down.header label='{{ count($selected) }} Selected' />
-          <x-lv-actions.icon-and-title :actions="$this->bulkActions" />
-        </x-lv-drop-down>
-      </div>
-    @endif
+    <div>
+      @include('laravel-views::components.toolbar.bulk-actions')
+    </div>
 
     {{-- Sorting --}}
     @if (isset($sortableBy) && $sortableBy->isNotEmpty())

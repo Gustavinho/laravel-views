@@ -128,7 +128,7 @@ abstract class DataView extends View
     {
         $this->selected = $value ? $this->query->pluck('id')->map(function ($id) {
             return (string)$id;
-        }) : [];
+        })->toArray() : [];
     }
 
     /**

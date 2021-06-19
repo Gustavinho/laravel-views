@@ -13,7 +13,7 @@ props:
   <thead class="border-b border-t border-gray-200 bg-gray-100 text-xs leading-4 font-semibold uppercase tracking-wider text-left">
     <tr>
       @if ($this->hasBulkActions)
-        <th class="px-3 pr-0">
+        <th class="pl-3">
           <span class="flex items-center justify-center">
             <x-lv-checkbox wire:model="allSelected" />
           </span>
@@ -53,7 +53,7 @@ props:
     @foreach ($items as $item)
       <tr class="border-b border-gray-200 text-sm" wire:key="{{ $item->getKey() }}">
         @if ($this->hasBulkActions)
-          <td class="pr-0 px-3">
+          <td class="pl-3">
             <span class="flex items-center justify-center">
               <x-lv-checkbox value="{{ $item->getKey() }}" wire:model="selected" />
             </span>

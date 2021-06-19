@@ -41,7 +41,7 @@ class BulkActionsTest extends TestCase
 
         Livewire::test(MockTableViewWithBulkActions::class)
             ->set('allSelected', true)
-            ->assertSet('selected', $users->pluck('id'))
+            ->assertSet('selected', $users->pluck('id')->toArray())
             ->set('allSelected', false)
             ->assertSet('selected', []);
     }
@@ -51,7 +51,7 @@ class BulkActionsTest extends TestCase
         $users = factory(UserTest::class, 7)->create();
 
         Livewire::test(MockTableViewWithBulkActions::class)
-            ->set('selected', $users->pluck('id'))
+            ->set('allSelected', true)
             ->call('executeBulkAction', 'test-delete-users-action', true)
             ->assertEmitted('notify', [
                 'message' => 'Action was executed successfully',
@@ -87,6 +87,4 @@ class BulkActionsTest extends TestCase
             $this->assertDatabaseMissing('users', $user->toArray());
         }
     }
-
-    // Execute bulk actions with confirmation
 }

@@ -13,10 +13,10 @@
 <div class="{{ $withBackground ? 'rounded-md shadow-md' : '' }}">
   @if ($hasDefaultAction)
     <a href="#!" wire:click.prevent="onCardClick({{ $model->id }})">
-      <img src="{{ $image }}" alt="{{ $image }}" class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }} {{ $selected ? "border-2 border-blue-500" : "" }}">
+      <img src="{{ $image }}" alt="{{ $image }}" class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }} {{ $selected ? variants('gridView.selected') : "" }}">
     </a>
   @else
-    <img src="{{ $image }}" alt="{{ $image }}" class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? "border-2 border-blue-500" : "" }}">
+    <img src="{{ $image }}" alt="{{ $image }}" class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? variants('gridView.selected') : "" }}">
   @endif
 
   <div class="pt-4 {{ $withBackground ? 'bg-white rounded-b-md p-4' : '' }}">

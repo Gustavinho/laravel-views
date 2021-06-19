@@ -14,10 +14,6 @@ return [
         "primary-light" => "text-blue-700 border border-blue-600 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white active:bg-blue-600 active:text-white",
     ],
 
-    "paginator" => [
-        "primary" => "bg-blue-600 border-blue-600"
-    ],
-
     "alerts" => [
         "success" => [
             "base" => "bg-green-100 border-green-300 text-green-700",
@@ -57,5 +53,9 @@ return [
 
     'links' => [
         'default' => 'hover:text-blue-600 hover:underline'
+    ],
+
+    'gridView' => [
+        'selected' => 'border-2 border-blue-500'
     ]
 ];
