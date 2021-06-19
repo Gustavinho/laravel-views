@@ -3,6 +3,7 @@
 namespace LaravelViews\Actions;
 
 use LaravelViews\Views\View;
+use Illuminate\Support\Str;
 
 abstract class Action
 {
@@ -35,12 +36,7 @@ abstract class Action
 
     public function getId()
     {
-        return $this->camelToDashCase((new \ReflectionClass($this))->getShortName());
-    }
-
-    private function camelToDashCase($camelStr)
-    {
-        return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $camelStr));
+        return Str::camelToDash((new \ReflectionClass($this))->getShortName());
     }
 
     public function renderIf($item, View $view)

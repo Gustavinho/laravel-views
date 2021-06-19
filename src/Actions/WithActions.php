@@ -86,7 +86,7 @@ trait WithActions
     private function confirmAction($action, $modelId = null)
     {
         $actionData = [
-            'message' => $action->getConfirmationMessage(),
+            'message' => $action->getConfirmationMessage($modelId ? $this->getModelWhoFiredAction($modelId) : null),
             'id' => $action->getId()
         ];
 

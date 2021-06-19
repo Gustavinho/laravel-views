@@ -2,8 +2,9 @@
 
 namespace LaravelViews\Test;
 
+use Illuminate\Translation\TranslationServiceProvider;
+use LaravelViews\Facades\UI;
 use LaravelViews\LaravelViewsServiceProvider;
-use Livewire\Livewire;
 use Livewire\LivewireServiceProvider;
 use Livewire\Testing\TestableLivewire;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
@@ -47,8 +48,16 @@ class TestCase extends TestbenchTestCase
     {
         return [
 //            \Spatie\LaravelRay\RayServiceProvider::class,
+            TranslationServiceProvider::class,
             LivewireServiceProvider::class,
             LaravelViewsServiceProvider::class,
+        ];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'UI' => UI::class
         ];
     }
 }
