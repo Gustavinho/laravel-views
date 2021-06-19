@@ -21,6 +21,7 @@ This view creates a dynamic data table with some features like filters, paginati
     - [Changing title](#changing-title)
 - [Actions](#actions)
     - [Registering actions](#registering-actions)
+    - [Bulk actions](#bulk-actions)
     - [Redirect action](#redirect-action)
     - [Showing feedback messages](#showing-feedback-messages)
     - [Hiding actions](#hiding-actions)
@@ -317,6 +318,23 @@ protected function actionsByRow()
 }
 ```
 
+## Bulk actions
+You can execute bulk actions selecting items on the UI defining a `bulkActions` method with all the actions you want to use. If you define this method, a checkbox input will be displayed for each item to select or unselect it.
+
+```php
+protected function bulkActions()
+{
+    return [
+        new ActivateUsersAction,
+    ];
+}
+```
+You can creat a bulk action by an artisan command just using the `--bulk` option.
+
+```bash
+php artisan make:action Actions/ActivateUserAction --bulk
+```
+
 ## Redirect action
 This package has a defined action to redirect the user to a named route related to your model inside your project when the button is clicked, you can use it directly on the `actionsByRow` method
 
@@ -395,7 +413,7 @@ public function getConfirmationMessage($item = null)
 ```
 
 # Showing UI components
-You can display some UI components instead of plain text like avateres, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
+You can display some UI components instead of plain text like avaters, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
 
 ## Avatar
 Shows an 32x32 rounded image
