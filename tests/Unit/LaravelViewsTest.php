@@ -24,11 +24,11 @@ class LaravelViewsTest extends TestCase
     public function testRenderJsLinks()
     {
         $js = LaravelViews::js();
-
         $this->assertEquals(
             $js,
             \Livewire\Livewire::scripts()."\n".
-            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript"></script>'
+            '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>'."\n".
+            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
         );
     }
 
@@ -49,7 +49,15 @@ class LaravelViewsTest extends TestCase
 
         $this->assertEquals(
             $js,
-            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript"></script>'
+            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
+        );
+
+        $js = LaravelViews::js('laravel-views,alpine');
+
+        $this->assertEquals(
+            $js,
+            '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>'."\n".
+            '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
         );
     }
 }

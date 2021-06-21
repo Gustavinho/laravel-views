@@ -127,6 +127,19 @@ public function sortableBy()
     }
 ```
 
+## Sorting data
+You can add an option to sort the items on the list view by an specific field defining a `sortableBy` method with an array of the fields to sort by, as the list view desn't have headers, a `Sort by` button will be displayed with a drop down with all the fields defined in this method.
+
+```php
+public function sortableBy()
+{
+    return [
+        'Name' => 'name',
+        'Email' => 'email'
+    ];
+}
+```
+
 ## More features
 This list view is based on a table view, so you could use some of the table view features as:
 

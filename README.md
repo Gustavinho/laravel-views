@@ -59,12 +59,13 @@ Add the following Blade directives in the *head* tag, and before the end *body* 
 </html>
 ```
 
-These blade directives are also including [Laravel livewire](https://laravel-livewire.com/) and [Tailwindcss](https://tailwindcss.com/) styles and scripts, after that you may need to clear the view cache
+Laravel Views includes by default a set up using different parts of the TALL stack assets like the [Laravel livewire](https://laravel-livewire.com/) and [Tailwindcss](https://tailwindcss.com/) styles and scripts, it alsoincludes the [Alpine.js](https://laravel-livewire.com/docs/2.x/alpine-js) script, after adding these directives you may need to clear the view cache
+
 ```bash
 php artisan view:clear
 ```
-If you are already using your own Tailwindcss setup you can set `laravel-views` to not importing Tailwindcss by default. ([Importing assets](./doc/laravel-views#including-assets))
 
+These directives are fine for a dev environment, however, if you want to use your own Tailwindcss or Alpinde.js setup, you can [disable these assets](./doc/laravel-views#including-assets) from being loaded with the Laravel views directive.
 # First table view
 This is a basic usage of a table view, you can [read the full table view documentation ](doc/table-view.md)
 
@@ -179,6 +180,7 @@ Here's the plan for what's coming:
 ## Upgrade guide
 ### From 2.2 to 2.3
 - Clear your cached views `php artisan view:clear` since some of the internal components changed.
+- Update assets
 - Update components.
 - Update config-file.
 - Update the renderIf() function in your action classes as follows:

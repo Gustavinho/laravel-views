@@ -1,13 +1,7 @@
-import $ from 'jquery'
 import feather from 'feather-icons'
 import Pikaday from 'pikaday'
-import moment from 'moment'
-import alpine from 'alpinejs'
 
 try {
-  window.Alpine = alpine
-  // window.$ = window.jQuery = require('jquery')
-
   const setUpUiLibraries = () => {
     feather.replace()
   }
@@ -33,12 +27,10 @@ try {
   }
 
   // require('bootstrap')
-  $(document).ready(function() {
+  document.addEventListener("DOMContentLoaded", () => {
     setUpUiLibraries()
-  });
 
-  $(document).on("livewire:load", () => {
-    window.livewire.hook('message.processed', () => {
+    Livewire.hook('message.processed', () => {
       setUpUiLibraries()
     })
   })

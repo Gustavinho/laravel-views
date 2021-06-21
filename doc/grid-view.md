@@ -11,6 +11,7 @@ This view creates a dynamic grid view using card data, same as a TableView this 
 - [Defining card data](#defining-card-data)
 - [Customizing card data](#customizing-card-data)
 - [Default card item action](#default-card-item-action)
+- [Sorting Data](#sorting-data)
 - [More features](#more-features)
   - [Searching data](./table-view.md#searching-data)
   - [Pagination](./table-view.md#pagination)
@@ -135,6 +136,19 @@ public $withBackground = true
 ```
 
 This will render the item with a white background.
+
+## Sorting data
+You can add an option to sort the items on the grid view by an specific field defining a `sortableBy` method with an array of the fields to sort by, as the grid view desn't have headers, a `Sort by` button will be displayed with a drop down with all the fields defined in this method.
+
+```php
+public function sortableBy()
+{
+    return [
+        'Name' => 'name',
+        'Email' => 'email'
+    ];
+}
+```
 
 ## More features
 This grid view is based on a table view, so you could use some of the table view features as:

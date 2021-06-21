@@ -79,7 +79,8 @@ class LaravelViews
     {
         $assets = [
             'livewire' => Livewire::scripts(),
-            'laravel-views' => '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript"></script>'
+            'alpine' => '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>',
+            'laravel-views' => '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
         ];
 
         return $this->getCustomizedLinks($assets, $options);
