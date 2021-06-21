@@ -7,7 +7,7 @@
     message = actionObject.message;
   })"
 >
-  <div x-show="open">
+  <div x-show="open" x-cloak>
     <x-lv-modal>
       <div x-text='message' class="text-gray-900 text-lg font-medium" ></div>
       <div class="mt-4 flex flex-col space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-row sm:items-center">

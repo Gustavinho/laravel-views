@@ -21,10 +21,10 @@
 - [Grid view](doc/grid-view.md)
 
 # Version compatibility
-|Laravel views|Livewire|Laravel|
-|-|-|-|
-|2.x|2.x|7.x, 8.x|
-|1.x|1.x|5.x, 6.x|
+|Laravel views|Alpine|Livewire|Laravel|
+|-|-|-|-|
+|2.x|2.8.x|2.x|7.x, 8.x|
+|1.x|2.8.x|1.x|5.x, 6.x|
 
 # Installation and basic usage
 
@@ -69,24 +69,26 @@ You can specify which assets you want to include passing a string to those direc
 
 ```php
 @laravelViewsStyles(laravel-views,tailwindcss,livewire)
+@laravelViewsScripts(laravel-views,livewire,alpine)
 ```
 
-If you dont need to include `Tailwindcss` or `Livewire` assets you can just set the `laravel-views` assets in the list.
+If you dont need to include `Tailwindcss`, `Livewire` or `Alpine` assets you can just set the `laravel-views` assets in the list.
 
 ```php
 @laravelViewsStyles(laravel-views)
+@laravelViewsScripts(laravel-views)
 ```
+
+This is recomended for a production environment where you surely have a compile assets pipeline, like Laravel Mix, or you want to include the assets from a CDN on your own.
 
 ## Purge Tailwindcss styles
 If you're using your own Tailwindcss setup you must consider `laravel-views` in your `purge` configuration, for that just add this path to the `purge` array on the `tailwind.config.js`file.
 
 ```js
-purge: {
-  content: [
-    //...Rest of your paths
-    "./vendor/laravel-views/**/*.php",
-  ],
-},
+purge: [
+  //...Rest of your paths
+  "./vendor/laravel-views/**/*.php",
+],
 ```
 
 # First table view
@@ -147,63 +149,11 @@ In the example above the view is using the User model created by default in ever
 This is the basic usage of the table view, but you can customize it with more features.
 
 [Read the full table view documentation ](doc/table-view.md)
-
-# Rendering a view from a controller
-
-You can render a view manually in a controller creating a `LaravelViews` instance and executing the `render` method on a `blade` file.
-
-```php
-use use LaravelViews\LaravelViews;
-
-public function index(LaravelViews $laravelViews)
-{
-    $laravelViews->create(App\Http\Livewire\UsersTableView::class);
-
-    return view('my-view', [
-      'view' => $laravelViews
-    ]);
-}
-```
-And render it in your blade file
-```blade
-{!! $view->render() !!}
-```
-
-## Specifying a layout and section
-You can also return the view directly from your controller and specify the layout and section of your layout
-```php
-use use LaravelViews\LaravelViews;
-
-public function index(LaravelViews $laravelViews)
-{
-    $laravelViews->create(App\Http\Livewire\UsersTableView::class)
-      ->layout('layout', 'section-name');
-
-    return $laravelViews->render();
-}
-```
-
-## Send extra data to the layout
-In the same way that you would send data to your views, you can send more data to the layout file
-```php
-use use LaravelViews\LaravelViews;
-
-public function index(LaravelViews $laravelViews)
-{
-    $laravelViews->create(App\Http\Livewire\UsersTableView::class)
-      ->layout('layout', 'section-name', [
-        'title' => 'My layout title'
-      ]);
-
-    return $laravelViews->render();
-}
-```
-
 # Components customization
 These views are build with [Tailwind CSS](https://tailwindcss.com/) and you can either change the colors of the components following tailwindcss utilities or fully customize all the html of the components
 
 ## Component variants using tailwindcss
-If you are using [Tailwind CSS](https://tailwindcss.com/) or if you don't have issues  using Tailwindcss and your own css styles, you can customize some utilities to change the color for each variant of the components publishing a config file
+You can customize some of the components styles (like the color) for each one of the variants with a config file.
 
 ```bash
 php artisan vendor:publish --tag=config
