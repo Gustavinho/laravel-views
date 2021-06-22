@@ -30,7 +30,8 @@ class LaravelViews
             'form.input-group' => 'form.input-group',
             'icon' => 'icon',
             'modal' => 'modal',
-            'form.checkbox' => 'checkbox'
+            'form.checkbox' => 'checkbox',
+            'form.input' => 'input',
         ];
     }
 
@@ -80,7 +81,9 @@ class LaravelViews
         $assets = [
             'livewire' => Livewire::scripts(),
             'alpine' => '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>',
-            'laravel-views' => '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
+            'laravel-views' => '<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
         ];
 
         return $this->getCustomizedLinks($assets, $options);
@@ -116,6 +119,9 @@ class LaravelViews
             $links = $assets;
         }
 
-        return implode("\n", $links);
+        $linksStr = implode(PHP_EOL, $links);
+        return <<<HTML
+{$linksStr}
+HTML;
     }
 }

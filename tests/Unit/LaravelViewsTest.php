@@ -26,8 +26,10 @@ class LaravelViewsTest extends TestCase
         $js = LaravelViews::js();
         $this->assertEquals(
             $js,
-            \Livewire\Livewire::scripts()."\n".
-            '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>'."\n".
+            \Livewire\Livewire::scripts().PHP_EOL.
+            '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>'.PHP_EOL.
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>'.PHP_EOL.
+            '<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>'.PHP_EOL.
             '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
         );
     }
@@ -49,6 +51,8 @@ class LaravelViewsTest extends TestCase
 
         $this->assertEquals(
             $js,
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>'.PHP_EOL.
+            '<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>'.PHP_EOL.
             '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
         );
 
@@ -56,7 +60,9 @@ class LaravelViewsTest extends TestCase
 
         $this->assertEquals(
             $js,
-            '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>'."\n".
+            '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>'.PHP_EOL.
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>'.PHP_EOL.
+            '<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>'.PHP_EOL.
             '<script src="' . asset('/vendor/laravel-views.js') . '" type="text/javascript" defer></script>'
         );
     }
