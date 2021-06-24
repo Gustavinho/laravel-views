@@ -69,10 +69,6 @@ abstract class Action
 
     public function shouldBeConfirmed()
     {
-        if (method_exists($this, 'getConfirmationMessage')) {
-            return !empty($this->getConfirmationMessage(null));
-        }
-
-        return false;
+        return method_exists($this, 'getConfirmationMessage');
     }
 }
