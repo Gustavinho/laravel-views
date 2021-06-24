@@ -121,7 +121,7 @@ abstract class DataView extends View
 
     public function getModelWhoFiredAction($id)
     {
-        return $this->repository()->find($id);
+        return $this->initialQuery->find($id);
     }
 
     public function updatedAllSelected($value)
@@ -131,18 +131,21 @@ abstract class DataView extends View
         })->toArray() : [];
     }
 
+    public function getInitialQueryProperty()
+    {
+        if (method_exists($this, 'repository')) {
+            return $this->repository();
+        }
+        return $this->model::query();
+    }
+
     /**
      * Returns the items from the database regarding to the filters selected by the user
      * applies the search query, the filters used and the total of items found
      */
     public function getQueryProperty(Searchable $searchable, Filterable $filterable, Sortable $sortable)
     {
-        if (method_exists($this, 'repository')) {
-            $query = $this->repository();
-        } else {
-            $query = $this->model::query();
-        }
-
+        $query = $this->initialQuery;
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
         $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
