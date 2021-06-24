@@ -38,9 +38,11 @@
         @endif
       </div>
 
-      <div class="flex justify-end items-center">
-        <x-lv-actions.drop-down :actions="$actions" :model="$model" />
-      </div>
+      @if (count($actions))
+        <div class="flex justify-end items-center">
+          <x-lv-actions.drop-down :actions="$actions" :model="$model" />
+        </div>
+      @endif
     </div>
 
     @if (isset($description))
