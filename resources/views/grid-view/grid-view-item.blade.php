@@ -25,15 +25,15 @@
         <h3 class="font-bold leading-6 text-gray-900">
           @if ($hasDefaultAction)
             <a href="#!" class="hover:underline" wire:click.prevent="onCardClick({{ $model->getKey() }})">
-              {{ $title }}
+              {!! $title !!}
             </a>
           @else
-            {{ $title }}
+            {!! $title !!}
           @endif
         </h3>
         @if ($subtitle)
           <span class="text-sm text-gray-600">
-            {{ $subtitle }}
+            {!! $subtitle !!}
           </span>
         @endif
       </div>
@@ -45,7 +45,7 @@
 
     @if (isset($description))
       <p class="line-clamp-3 mt-2">
-        {{ $description }}
+        {!! $description !!}
       </p>
     @endif
   </div>
