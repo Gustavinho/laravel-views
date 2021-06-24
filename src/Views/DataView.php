@@ -119,9 +119,13 @@ abstract class DataView extends View
         return $this->actionsByRow();
     }
 
+    /**
+     * Clones the initial query (to avoid modifying it)
+     * and get a model by an Id
+     */
     public function getModelWhoFiredAction($id)
     {
-        return $this->initialQuery->find($id);
+        return (clone $this->initialQuery)->find($id);
     }
 
     public function updatedAllSelected($value)
@@ -145,7 +149,7 @@ abstract class DataView extends View
      */
     public function getQueryProperty(Searchable $searchable, Filterable $filterable, Sortable $sortable)
     {
-        $query = $this->initialQuery;
+        $query = clone $this->initialQuery;
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
         $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
