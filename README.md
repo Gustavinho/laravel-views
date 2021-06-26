@@ -9,6 +9,7 @@ Laravel package to create beautiful common views like tables using only PHP code
 ![](doc/laravel-views.png)
 
 - [Version compatibility](#version-compatibility)
+- [Upgrade guide](#upgrade-guide)
 - [Installation and basic usage](#installation-and-basic-usage)
   - [Installing laravel views](#installing-laravel-views)
   - [Publishing assets](#publishing-assets)
@@ -26,10 +27,10 @@ Laravel package to create beautiful common views like tables using only PHP code
 - [Roadmap](#roadmap)
 
 # Version compatibility
-|Laravel views|Livewire|Laravel|
-|-|-|-|
-|2.x|2.x|7.x, 8.x|
-|1.x|1.x|5.x, 6.x|
+|Laravel views|Alpine|Livewire|Laravel|
+|-|-|-|-|
+|2.x|2.8.x, 3.x.x|2.x|7.x, 8.x|
+|1.x|2.8.x|1.x|5.x, 6.x|
 
 # Installation and basic usage
 
@@ -179,11 +180,21 @@ Here's the plan for what's coming:
 
 ## Upgrade guide
 ### From 2.2 to 2.3
-- Clear your cached views `php artisan view:clear` since some of the internal components changed.
-- Update assets
-- Update components.
-- Update config-file.
-- Update the renderIf() function in your action classes as follows:
+**Cached views**
+
+The blade directives have changed, you need to clear the cached views with `php artisan view:clear`
+
+**Public assets**
+
+The main assets (JS and CSS files) have changed, you need to publish the public assets again with `php artisan vendor:publish --tag=public --provider='LaravelViews\LaravelViewsServiceProvider' --force`
+
+**Publish blade componentes**
+
+Some of the internal components have changed, if you have published these components before to customize them, you will not have them up to date, unfourtunately you need to publish them again with `php artisan vendor:publish --tag=views --provider='LaravelViews\LaravelViewsServiceProvider'` and customize them as you need.
+
+**Method `renderIf()` in actions**
+
+Update the renderIf() function in your action classes adding a new `$view` parameter as follows:
   ```php
   <?php
 
@@ -200,4 +211,21 @@ Here's the plan for what's coming:
       }
   }
   ```
-- **(Optional)**, if your `repository` methods are returning the query object without any query applied like `User::query()`, you can define a `protected $model = User::class;` instead, this is the default behavior now, the `repository` method is still working so you don't need to change anything if you don't want to.
+**Publish config file (Optional)**
+
+Some new variants have been added to the config file, if you have published the config file before, you could publish it again so you can customize the new variants, this doesn't affect anything at all since the new variants will be taken from the default config file.
+
+**Remove `repository` method from your views (Optional)**
+If your `repository` methods are returning a query object without any query applied like `User::query()`, you can define a `protected $model = User::class;` instead, this is the default behavior now, the `repository` method is still working so you don't need to change anything if you don't want to.
+
+```php
+/* Before */
+public function repository(): Builder
+{
+    // You are using a single query
+    return User::query();
+}
+
+/** After */
+protected $model = User::class;
+```
