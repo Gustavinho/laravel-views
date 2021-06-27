@@ -216,7 +216,8 @@ Update the renderIf() function in your action classes adding a new `$view` param
 Some new variants have been added to the config file, if you have published the config file before, you could publish it again so you can customize the new variants, this doesn't affect anything at all since the new variants will be taken from the default config file.
 
 **Remove `repository` method from your views (Optional)**
-If your `repository` methods are returning a query object without any query applied like `User::query()`, you can define a `protected $model = User::class;` instead, this is the default behavior now, the `repository` method is still working so you don't need to change anything if you don't want to.
+
+If your `repository()` methods are returning a query object without any other query applied like `User::query()`, you can define a `protected $model = User::class;` instead, this is the default behavior now, the `repository()` method is still working so you don't need to change anything if you don't want to.
 
 ```php
 /* Before */
