@@ -11,42 +11,23 @@ UI components used:
   - components.table
   - components.paginator --}}
 
-<div class="min-h-screen">
+<x-lv-layout>
   {{-- Search input and filters --}}
   <div class="py-4 px-3 pb-0">
-    @include('laravel-views::table-view.filters')
+    @include('laravel-views::components.toolbar.toolbar')
   </div>
 
-  {{-- Success/Error feedback --}}
-  @if (session()->has('message'))
-    @component('laravel-views::components.alert', [
-      'message' => session('message'),
-      'onClose' => 'flushMessage',
-      'type' => session('messageType')
-    ])
-    @endcomponent
-  @endif
-
   @if (count($items))
-
     {{-- Content table --}}
     <div class="overflow-x-auto">
-      @component('laravel-views::components.table', [
-        'headers' => $headers,
-        'actionsByRow' => $actionsByRow,
-        'items' => $items,
-        'view' => $view,
-        'sortBy' => $sortBy,
-        'sortOrder' => $sortOrder
-      ])
-      @endcomponent
+      @include('laravel-views::components.table')
     </div>
 
   @else
 
     {{-- Empty data message --}}
     <div class="flex justify-center items-center p-4">
-      <h1>There are no items in this table</h1>
+      <h3>{{ __('There are no items in this table') }}</h3>
     </div>
 
   @endif
@@ -56,6 +37,6 @@ UI components used:
     {{ $items->links() }}
   </div>
 
-  @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
-</div>
+  @include('laravel-views::components.confirmation-message')
+</x-lv-layout>
 

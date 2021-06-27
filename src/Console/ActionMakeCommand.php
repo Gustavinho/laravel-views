@@ -18,7 +18,7 @@ class ActionMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'make:action {name}';
+    protected $signature = 'make:action {name} {--bulk}';
 
     /**
      * The console command description.
@@ -34,6 +34,11 @@ class ActionMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
+        $isBulk = $this->option('bulk');
+        if ($isBulk) {
+            return __DIR__ . "/../../stubs/bulk-action.stub";
+        }
+
         return __DIR__ . "/../../stubs/action.stub";
     }
 

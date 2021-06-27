@@ -12,9 +12,16 @@ props:
 
   <thead class="border-b border-t border-gray-200 bg-gray-100 text-xs leading-4 font-semibold uppercase tracking-wider text-left">
     <tr>
+      @if ($this->hasBulkActions)
+        <th class="pl-3">
+          <span class="flex items-center justify-center">
+            <x-lv-checkbox wire:model="allSelected" />
+          </span>
+        </th>
+      @endif
       {{-- Renders all the headers --}}
       @foreach ($headers as $header)
-        <th class="px-3 py-3" {{ is_object($header) && ! empty($header->with) ? 'width="' . $header->width . '"' : '' }}>
+        <th class="px-3 py-3" {{ is_object($header) && ! empty($header->width) ? 'width=' . $header->width . '' : '' }}>
           @if (is_string($header))
             {{ $header }}
           @else
@@ -44,8 +51,14 @@ props:
 
   <tbody>
     @foreach ($items as $item)
-      <tr class="border-b border-gray-200 text-sm">
-
+      <tr class="border-b border-gray-200 text-sm" wire:key="{{ $item->getKey() }}">
+        @if ($this->hasBulkActions)
+          <td class="pl-3">
+            <span class="flex items-center justify-center">
+              <x-lv-checkbox value="{{ $item->getKey() }}" wire:model="selected" />
+            </span>
+          </td>
+        @endif
         {{-- Renders all the content cells --}}
         @foreach ($view->row($item) as $column)
           <td class="px-3 py-2 whitespace-no-wrap">
@@ -57,11 +70,7 @@ props:
         @if (count($actionsByRow) > 0)
           <td>
             <div class="px-3 py-2 flex justify-end">
-              @foreach ($actionsByRow as $action)
-                @component('laravel-views::components.action', ['action' => $action, 'item' => $item])
-                  <i data-feather="{{ $action->icon }}" class="mr-2 text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out focus:text-blue-600 active:text-blue-600"></i>
-                @endcomponent
-              @endforeach
+              <x-lv-actions :actions="$actionsByRow" :model="$item" />
             </div>
           </td>
         @endif

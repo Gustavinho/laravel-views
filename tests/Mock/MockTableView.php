@@ -9,11 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 class MockTableView extends TableView
 {
     // public $searchBy = ['email'];
-
-    public function repository(): Builder
-    {
-        return UserTest::query();
-    }
+    protected $model = UserTest::class;
 
     public function headers()
     {

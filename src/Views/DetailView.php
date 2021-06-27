@@ -4,8 +4,8 @@ namespace LaravelViews\Views;
 
 use Exception;
 use Illuminate\Support\Arr;
-use LaravelViews\Actions\WithActions;
 use LaravelViews\Facades\UI;
+use LaravelViews\Views\Traits\WithActions;
 
 class DetailView extends View
 {

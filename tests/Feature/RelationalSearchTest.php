@@ -3,7 +3,6 @@
 namespace LaravelViews\Test\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelViews\Test\Database\FoodTest;
 use LaravelViews\Test\Database\ReviewTest;
 use LaravelViews\Test\Database\UserTest;
 use LaravelViews\Test\Mock\MockReviewTableView;
@@ -23,7 +22,6 @@ class RelationalSearchTest extends TestCase
     {
         parent::setUp();
 
-        factory(FoodTest::class, 10)->create();
         $this->users = factory(UserTest::class, 10)
             ->create()
             ->each(function (UserTest $user) {
@@ -31,8 +29,6 @@ class RelationalSearchTest extends TestCase
             });
 
         $this->reviews = ReviewTest::all();
-
-        $this->livewire = Livewire::test(MockReviewTableView::class);
     }
 
 

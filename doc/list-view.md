@@ -10,6 +10,7 @@ This view creates a dynamic list view with filters, pagination, search input, an
 - [Defining initial data](#defining-initial-data)
 - [Defining data for each list item](#defining-data-for-each-list-item)
 - [Customizing the list item component](#customizing-the-list-item-component)
+- [Sorting Data](#sorting-data)
 - [More features](#more-features)
   - [Searching data](./table-view.md#searching-data)
   - [Pagination](./table-view.md#pagination)
@@ -30,16 +31,31 @@ With this artisan command an `ExampleListView.php` file will be created inside t
 
 ## Defining initial data
 
-You should return an `Eloquent` query with the initial data to be displayed on the list view, it is important to return the query, not the data collection.
+The ListView class needs a model class to get the initial data to be displayed on the table, you can define it in the `$model` property.
 
 ```php
 use App\User;
 
+protected $model = User::class;
+```
+
+If you need an specific query as initial data you can define a `repository` method  returning an `Eloquent` query with the initial data to be displayed on the list view, it is important to return the query, not the data collection.
+
+```php
+use App\User;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Sets a initial query with the data to fill the table
+ *
+ * @return Builder Eloquent query
+ */
 public function repository(): Builder
 {
     return User::query();
 }
 ```
+If you define this method, the `$model` property is not needed anymore.
 
 ## Defining data for each list item
 
@@ -94,6 +110,34 @@ Don't forget to include the actions for each list item, there is a component out
   <p>My custom content for each list item</p>
   <x-lv-actions :actions="$actions" :model="$model" />
 </div>
+```
+
+## Sorting Data
+You can provide your list view with a sorting drop down by overriding the sortablyBy function on your list view. You may assign the $sortBy property to choose the column that the list view is sorted by when the page first loads.
+
+```php
+public $sortBy = 'name';
+
+public function sortableBy()
+    {
+        return [
+            'Name' => 'name',
+            'Email' => 'email'
+        ];
+    }
+```
+
+## Sorting data
+You can add an option to sort the items on the list view by an specific field defining a `sortableBy` method with an array of the fields to sort by, as the list view desn't have headers, a `Sort by` button will be displayed with a drop down with all the fields defined in this method.
+
+```php
+public function sortableBy()
+{
+    return [
+        'Name' => 'name',
+        'Email' => 'email'
+    ];
+}
 ```
 
 ## More features

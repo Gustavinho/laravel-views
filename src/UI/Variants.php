@@ -10,6 +10,13 @@ class Variants
     /** @var String component's variant */
     private $variant;
 
+    private $path = null;
+
+    public function __construct($path = null)
+    {
+        $this->path = $path;
+    }
+
     /**
      * Uses the button component
      *
@@ -95,12 +102,17 @@ class Variants
      */
     public function class($element = '')
     {
-        $config = "laravel-views.{$this->component}.{$this->variant}";
-        if ($element) {
-            return config("{$config}.{$element}");
-        }
+        // Returns the config path directly it it was set in the constructor
+        if ($this->path) {
+            return config("laravel-views.{$this->path}");
+        } else {
+            $config = "laravel-views.{$this->component}.{$this->variant}";
+            if ($element) {
+                return config("{$config}.{$element}");
+            }
 
-        return config($config);
+            return config($config);
+        }
     }
 
     /**

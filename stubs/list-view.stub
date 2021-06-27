@@ -8,14 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 class DummyClass extends ListView
 {
     /**
-     * Sets a initial query with the data to fill the table
-     *
-     * @return Builder Eloquent query
+     * Sets a model class to get the initial data
      */
-    public function repository(): Builder
-    {
-        // return User::query();
-    }
+    protected $model = User::class;
 
     /**
      * Sets the properties to every list item component
