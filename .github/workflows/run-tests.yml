@@ -57,4 +57,4 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: composer run-script test
+        run: vendor/bin/phpunit
