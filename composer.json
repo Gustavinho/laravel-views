@@ -22,7 +22,13 @@
         "phpunit/phpunit": "7.0.*|8.5.*|9.5.*",
         "orchestra/testbench": "4.*|5.*|6.*",
         "laravel/legacy-factories": "^1.1",
-        "spatie/laravel-ray": "^1.12"
+        "spatie/laravel-ray": "^1.12",
+        "brianium/paratest": "^6.3",
+        "nunomaduro/collision": "^5.3"
+    },
+    "scripts": {
+        "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "extra": {
         "laravel": {

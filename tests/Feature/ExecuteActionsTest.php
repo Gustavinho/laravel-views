@@ -4,6 +4,8 @@ namespace LaravelViews\Test\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelViews\Test\Database\UserTest;
+use LaravelViews\Test\Mock\Actions\TestConfirmedAction;
+use LaravelViews\Test\Mock\Actions\TestSuccessAction;
 use LaravelViews\Test\Mock\MockTableViewWithActions;
 use LaravelViews\Test\TestCase;
 use Livewire\Livewire;
@@ -56,7 +58,7 @@ class ExecuteActionsTest extends TestCase
         $message = 'Do you really want to perform this action?';
 
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-confirmed-action', $user->id)
+            ->executeAction(TestConfirmedAction::class, $user)
             ->assertEmitted('openConfirmationModal', [
                 'message' => $message,
                 'id' => 'test-confirmed-action',
@@ -71,13 +73,13 @@ class ExecuteActionsTest extends TestCase
         $user = factory(UserTest::class)->create();
 
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-confirmed-action', $user->id)
+            ->executeAction(TestConfirmedAction::class, $user)
             ->assertEmitted('openConfirmationModal', [
                 'message' => 'Do you really want to perform this action?',
                 'id' => 'test-confirmed-action',
                 'modelId' => $user->id
             ])
-            ->call('confirmAndExecuteAction', 'test-confirmed-action', $user->id)
+            ->confirmAction(TestConfirmedAction::class, $user)
             ->assertEmitted('notify', [
                 'message' => 'Action was executed successfully',
                 'type' => 'success'
@@ -87,7 +89,7 @@ class ExecuteActionsTest extends TestCase
     public function testEmitedEventFromAction()
     {
         Livewire::test(MockTableViewWithActions::class)
-            ->call('executeAction', 'test-success-action', 1, true)
+            ->executeAction(TestSuccessAction::class, 1)
             ->assertEmitted('test-event');
     }
 }

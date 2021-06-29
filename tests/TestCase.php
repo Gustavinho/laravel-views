@@ -42,6 +42,22 @@ class TestCase extends TestbenchTestCase
         TestableLivewire::macro('assertDontSeeUsers', function ($users) {
             return TestableLivewire::assertSeeUsers($users, 'assertDontSee');
         });
+
+        TestableLivewire::macro('executeAction', function ($actionClass, $model) {
+            $action = new $actionClass;
+            $id = is_numeric($model) ? $model : $model->getKey();
+            $this->call('executeAction', $action->getId(), $id);
+
+            return $this;
+        });
+
+        TestableLivewire::macro('confirmAction', function ($actionClass, $model) {
+            $action = new $actionClass;
+            $id = is_numeric($model) ? $model : $model->getKey();
+            $this->call('confirmAndExecuteAction', $action->getId(), $id);
+
+            return $this;
+        });
     }
 
     protected function getPackageProviders($app)
