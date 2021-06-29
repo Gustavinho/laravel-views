@@ -2,9 +2,21 @@ name: run-tests
 
 on:
   push:
-    branches: [main]
+    branches:
+     - master
+     - dev
+     - /^release-.*$/
+     - /^release/.*$/
+     - /^feature/.*$/
+     - /^tests/.*$/
   pull_request:
-    branches: [main]
+    branches:
+     - master
+     - dev
+     - /^release-.*$/
+     - /^release/.*$/
+     - /^feature/.*$/
+     - /^tests/.*$/
 
 jobs:
   test:
