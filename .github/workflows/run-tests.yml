@@ -5,10 +5,9 @@ on:
     branches:
      - master
      - dev
-     - /^release-.*$/
-     - /^release/.*$/
-     - /^feature/.*$/
-     - /^tests/.*$/
+     - release/**
+     - feature/**
+     - tests/**
   pull_request:
     branches:
      - master
