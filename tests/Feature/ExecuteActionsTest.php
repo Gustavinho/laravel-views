@@ -20,10 +20,7 @@ class ExecuteActionsTest extends TestCase
 
         Livewire::test(MockTableViewWithActions::class)
             ->call('executeAction', 'test-success-action', 1, true)
-            ->assertEmitted('notify', [
-                'message' => 'Action was executed successfully',
-                'type' => 'success'
-            ]);
+            ->assertShowSuccessAlert();
     }
 
     public function testSeeErrorAlert()
@@ -32,10 +29,7 @@ class ExecuteActionsTest extends TestCase
 
         Livewire::test(MockTableViewWithActions::class)
             ->call('executeAction', 'test-error-action', 1, true)
-            ->assertEmitted('notify', [
-                'message' => 'There was an error executing this action',
-                'type' => 'danger'
-            ]);
+            ->assertShowErrorAlert();
     }
 
     // TODO: Test custom error message
@@ -80,10 +74,7 @@ class ExecuteActionsTest extends TestCase
                 'modelId' => $user->id
             ])
             ->confirmAction(TestConfirmedAction::class, $user)
-            ->assertEmitted('notify', [
-                'message' => 'Action was executed successfully',
-                'type' => 'success'
-            ]);
+            ->assertShowSuccessAlert();
     }
 
     public function testEmitedEventFromAction()

@@ -4,6 +4,8 @@ namespace LaravelViews\Test\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelViews\Test\Database\UserTest;
+use LaravelViews\Test\Mock\Actions\TestConfirmedDeleteUsersAction;
+use LaravelViews\Test\Mock\Actions\TestDeleteUsersAction;
 use LaravelViews\Test\Mock\MockTableViewWithActions;
 use LaravelViews\Test\Mock\MockTableViewWithBulkActions;
 use LaravelViews\Test\TestCase;
@@ -40,7 +42,7 @@ class BulkActionsTest extends TestCase
         $users = factory(UserTest::class, 7)->create();
 
         Livewire::test(MockTableViewWithBulkActions::class)
-            ->set('allSelected', true)
+            ->selectAll()
             ->assertSet('selected', $users->pluck('id')->toArray())
             ->set('allSelected', false)
             ->assertSet('selected', []);
@@ -51,12 +53,10 @@ class BulkActionsTest extends TestCase
         $users = factory(UserTest::class, 7)->create();
 
         Livewire::test(MockTableViewWithBulkActions::class)
-            ->set('allSelected', true)
-            ->call('executeBulkAction', 'test-delete-users-action', true)
-            ->assertEmitted('notify', [
-                'message' => 'Action was executed successfully',
-                'type' => 'success'
-            ])->assertDontSeeUsers($users);
+            ->selectAll()
+            ->executeBulkAction(TestDeleteUsersAction::class)
+            ->assertShowSuccessAlert()
+            ->assertDontSeeUsers($users);
 
         foreach ($users as $user) {
             $this->assertDatabaseMissing('users', $user->toArray());
@@ -68,19 +68,14 @@ class BulkActionsTest extends TestCase
         $users = factory(UserTest::class, 7)->create();
 
         Livewire::test(MockTableViewWithBulkActions::class)
-            ->set('allSelected', true)
-            ->call('executeBulkAction', 'test-confirmed-delete-users-action')
+            ->selectAll()
+            ->executeBulkAction(TestConfirmedDeleteUsersAction::class)
             ->assertEmitted('openConfirmationModal', [
                 'message' => 'Do you really want to perform this action?',
                 'id' => 'test-confirmed-delete-users-action',
             ])
-
-            // Second time with false to avoid validating if the action needs to be confirmed
-            ->call('confirmAndExecuteBulkAction', 'test-confirmed-delete-users-action')
-            ->assertEmitted('notify', [
-                'message' => 'Action was executed successfully',
-                'type' => 'success'
-            ])
+            ->confirmAction(TestConfirmedDeleteUsersAction::class)
+            ->assertShowSuccessAlert()
             ->assertDontSeeUsers($users);
 
         foreach ($users as $user) {
