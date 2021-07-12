@@ -2,6 +2,8 @@
 
 namespace LaravelViews\Views\Traits;
 
+use LaravelViews\Views\View;
+
 trait WithAlerts
 {
     public function success($message = null)
@@ -16,7 +18,7 @@ trait WithAlerts
 
     private function setMessage($type = 'success', $message = null)
     {
-        $view = $this->view ? $this->view : $view;
+        $view = $this->view && $this->view instanceof View ? $this->view : $this;
 
         $messages = [
             'success' => __('Action was executed successfully'),

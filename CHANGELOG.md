@@ -1,6 +1,10 @@
 # Changelog
 
-## [2.2.3] - 2021-06-26
+## [2.4.0] - Not released
+
+### Added
+- Inline editing component
+## [2.3.0] - 2021-06-26
 ### Added
 - Default value for filters
 - Sortable list and grid views

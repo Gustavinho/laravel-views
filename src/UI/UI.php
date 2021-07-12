@@ -8,10 +8,10 @@ class UI
 {
     public function editable($model, $field)
     {
-        return view('laravel-views::components.editable', [
+        return $this->component('laravel-views::components.editable', [
             'model' => $model,
             'field' => $field
-        ])->render();
+        ]);
     }
 
     public function badge($title, $type = 'default')
