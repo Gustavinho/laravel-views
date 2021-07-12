@@ -4,9 +4,12 @@ namespace LaravelViews\Actions;
 
 use LaravelViews\Views\View;
 use Illuminate\Support\Str;
+use LaravelViews\Views\Traits\WithAlerts;
 
 abstract class Action
 {
+    use WithAlerts;
+
     /** @var String $title Title of the action */
     public $title;
 
@@ -42,29 +45,6 @@ abstract class Action
     public function renderIf($item, View $view)
     {
         return true;
-    }
-
-    public function success($message = null)
-    {
-        $this->setMessage('success', $message);
-    }
-
-    public function error($message = null)
-    {
-        $this->setMessage('danger', $message);
-    }
-
-    private function setMessage($type = 'success', $message = null)
-    {
-        $messages = [
-            'success' => __('Action was executed successfully'),
-            'danger' => __('There was an error executing this action'),
-        ];
-
-        $this->view->emitSelf('notify', [
-            'message' => $message ? $message : $messages[$type],
-            'type' => $type
-        ]);
     }
 
     public function shouldBeConfirmed()
