@@ -13,13 +13,12 @@ props:
  - $id
 --}}
 
-@component('laravel-views::components.form.input', [
-  'label' => $label ?? '',
-  'name' => $name ?? '',
-  'placeholder' => $placeholder ?? '',
-  'value' => $value ?? '',
-  'model' => $model ?? '',
-  'id' => $id,
-  'attributes' => 'x-data="window.laravelViews.datePicker()" x-ref="'.$id.'" x-init="init(\'' . $id . '\', $dispatch)"',
-])
-@endcomponent
+<x-lv-input
+  :value="$value"
+  :id="$id"
+  wire:model="{{ $model }}"
+  x-data="{ picker: null }"
+  x-ref="{{ $id }}"
+  x-init="picker = new Pikaday({ field: $refs['{{ $id }}'], format: 'YYYY-MM-DD', onSelect: () => $dispatch('input', picker.toString('YYYY-MM-DD')) })"
+>
+</x-lv-input>

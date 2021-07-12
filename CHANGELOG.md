@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.2.3] - 2021-06-26
+### Added
+- Default value for filters
+- Sortable list and grid views
+- Bulk actions to the table, list, and grid views on the current page
+- Customized JS scripts
+- Model class property to the table, list, and grid views
+
+### Changed
+- Internal refactors
+- UI improvements
+
+## [2.2.5] - 2021-05-29
+### Fixed
+- Added a `min-h-screen` to all the views to avoid the filters menu cutting off when thre are not so much data.
 ## [2.2.4] - 2021-05-16
 ### Fixed
 - Fixed alert container to avoid blocking the UI elements.

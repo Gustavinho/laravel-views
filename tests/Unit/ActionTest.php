@@ -4,9 +4,9 @@ namespace LaravelViews\Test\Unit;
 
 use LaravelViews\Actions\Action;
 use LaravelViews\Actions\Confirmable;
-use PHPUnit\Framework\TestCase as FrameworkTestCase;
+use LaravelViews\Test\TestCase;
 
-class ActionTest extends FrameworkTestCase
+class ActionTest extends TestCase
 {
     public function testShouldBeConfirmed()
     {

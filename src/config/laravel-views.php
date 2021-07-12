@@ -8,13 +8,10 @@ return [
 
     "buttons" => [
         "light" => "hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 active:bg-gray-100 active:text-gray-900",
-        "primary" => "text-white bg-blue-600 hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500",
+        "primary" => "text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500",
+        "danger" => "text-white bg-red-600 hover:bg-red-700 focus:ring-red-500",
+        "white" => "hover:bg-gray-100 focus:ring-gray-200 border border-gray-400",
         "primary-light" => "text-blue-700 border border-blue-600 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white active:bg-blue-600 active:text-white",
-        "danger" => "text-white bg-red-600 hover:bg-red-500 focus:bg-red-500 active:bg-red-500",
-    ],
-
-    "paginator" => [
-        "primary" => "bg-blue-600 border-blue-600"
     ],
 
     "alerts" => [
@@ -52,5 +49,13 @@ return [
         'danger' => 'text-red-500',
         'warning' => 'text-yellow-500',
         'info' => 'text-blue-500',
+    ],
+
+    'links' => [
+        'default' => 'hover:text-blue-600 hover:underline'
+    ],
+
+    'gridView' => [
+        'selected' => 'border-2 border-blue-500'
     ]
 ];

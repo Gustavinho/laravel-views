@@ -11,4 +11,6 @@ props:
  - src
  - variant
  --}}
-<img src="{{ $src }}" alt="{{ $src }}" class="{{ variants()->img($variant ?? '')->class() }}">
+ @props(['src', 'variant' => ''])
+
+<img src="{{ $src }}" alt="{{ $src }}" class="{{ variants('images.'.$variant) }}">

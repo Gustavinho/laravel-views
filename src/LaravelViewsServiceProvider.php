@@ -19,6 +19,8 @@ use LaravelViews\Console\ListViewMakeCommand;
 use LaravelViews\Console\MakeViewCommand;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\TableViewSortData;
+use LaravelViews\Macros\LaravelViewsTestMacros;
+use LaravelViews\Macros\StrMacros;
 use LaravelViews\Views\Components\DynamicComponent;
 
 class LaravelViewsServiceProvider extends ServiceProvider
@@ -70,7 +72,8 @@ class LaravelViewsServiceProvider extends ServiceProvider
             ->publish()
             ->bladeDirectives()
             ->loadComponents()
-            ->configFiles();
+            ->configFiles()
+            ->macros();
     }
 
     private function publish()
@@ -156,6 +159,21 @@ class LaravelViewsServiceProvider extends ServiceProvider
     private function configFiles()
     {
         $this->mergeConfigFrom(__DIR__ . '/config/laravel-views.php', 'laravel-views');
+
+        return $this;
+    }
+
+    private function macros()
+    {
+        $macros = [
+            LaravelViewsTestMacros::class,
+            StrMacros::class
+        ];
+
+        foreach ($macros as $macroClass) {
+            $macro = new $macroClass;
+            $macro->register();
+        }
 
         return $this;
     }

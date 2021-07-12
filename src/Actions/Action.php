@@ -2,6 +2,9 @@
 
 namespace LaravelViews\Actions;
 
+use LaravelViews\Views\View;
+use Illuminate\Support\Str;
+
 abstract class Action
 {
     /** @var String $title Title of the action */
@@ -15,10 +18,11 @@ abstract class Action
     /** Item the action will be executed with */
     public $item;
 
-    private $messages = [
-        'success' => 'Action was executed successfully',
-        'danger' => 'There was an error executing this action',
-    ];
+    /**
+     * Current view that executed the action
+     * @var View $view
+     */
+    public $view;
 
     public function __construct()
     {
@@ -32,15 +36,10 @@ abstract class Action
 
     public function getId()
     {
-        return $this->camelToDashCase((new \ReflectionClass($this))->getShortName());
+        return Str::camelToDash((new \ReflectionClass($this))->getShortName());
     }
 
-    private function camelToDashCase($camelStr)
-    {
-        return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $camelStr));
-    }
-
-    public function renderIf($item)
+    public function renderIf($item, View $view)
     {
         return true;
     }
@@ -57,16 +56,19 @@ abstract class Action
 
     private function setMessage($type = 'success', $message = null)
     {
-        session()->flash('messageType', $type);
-        session()->flash('message', $message ? $message : $this->messages[$type]);
+        $messages = [
+            'success' => __('Action was executed successfully'),
+            'danger' => __('There was an error executing this action'),
+        ];
+
+        $this->view->emitSelf('notify', [
+            'message' => $message ? $message : $messages[$type],
+            'type' => $type
+        ]);
     }
 
     public function shouldBeConfirmed()
     {
-        if (method_exists($this, 'getConfirmationMessage')) {
-            return !empty($this->getConfirmationMessage(null));
-        }
-
-        return false;
+        return method_exists($this, 'getConfirmationMessage');
     }
 }

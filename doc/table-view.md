@@ -21,6 +21,7 @@ This view creates a dynamic data table with some features like filters, paginati
     - [Changing title](#changing-title)
 - [Actions](#actions)
     - [Registering actions](#registering-actions)
+    - [Bulk actions](#bulk-actions)
     - [Redirect action](#redirect-action)
     - [Showing feedback messages](#showing-feedback-messages)
     - [Hiding actions](#hiding-actions)
@@ -44,16 +45,32 @@ php artisan make:table-view UsersTableView
 With this artisan command a `UsersTableView.php` file will be created inside `app/Http/Livewire` directory, with this class you can customize the behavior of the table view.
 
 ## Defining initial data
-Return an `Eloquent` query with the initial data to be displayed on the table, it is important to return the query, not the data collection.
+The TableView class needs a model class to get the initial data to be displayed on the table, you can define it in the `$model` property.
 
 ```php
 use App\User;
 
+protected $model = User::class;
+```
+
+If you need an specific query as initial data you can define a `repository` method  returning an `Eloquent` query with the initial data to be displayed on the table, it is important to return the query, not the data collection.
+
+```php
+use App\User;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Sets a initial query with the data to fill the table
+ *
+ * @return Builder Eloquent query
+ */
 public function repository(): Builder
 {
     return User::query();
 }
 ```
+
+If you define this method, the `$model` property is not needed anymore.
 
 ## Headers
 Return an array with all the headers you need
@@ -301,6 +318,23 @@ protected function actionsByRow()
 }
 ```
 
+## Bulk actions
+You can execute bulk actions selecting items on the UI defining a `bulkActions` method with all the actions you want to use. If you define this method, a checkbox input will be displayed for each item to select or unselect it.
+
+```php
+protected function bulkActions()
+{
+    return [
+        new ActivateUsersAction,
+    ];
+}
+```
+You can creat a bulk action by an artisan command just using the `--bulk` option.
+
+```bash
+php artisan make:action Actions/ActivateUserAction --bulk
+```
+
 ## Redirect action
 This package has a defined action to redirect the user to a named route related to your model inside your project when the button is clicked, you can use it directly on the `actionsByRow` method
 
@@ -322,7 +356,7 @@ To display a success alert message you can execute the `$this->succes()` at the 
 ![](success.png)
 
 ```php
-public function handle($model)
+public function handle($model, View $view)
 {
     $model->active = true;
     $model->save();
@@ -346,10 +380,10 @@ $this->error();
 ![](error.png)
 
 ## Hiding actions
-You can choose if the action will be shown or hidden for an specific row defining a `renderIf` method and returning a boolean value, if you don't define this method the action will be shown aways.
+You can choose if the action will be shown or hidden for an specific row defining a `renderIf` method and returning a boolean value, if you don't define this method the action will be shown aways. The `handle` method receives the model corresponding to the row where the action was executed, and the current view where the action was executed from.
 
 ```php
-public function renderIf($model)
+public function renderIf($model, View $view)
 {
     return !$model->active;
 }
@@ -379,7 +413,7 @@ public function getConfirmationMessage($item = null)
 ```
 
 # Showing UI components
-You can display some UI components instead of plain text like avateres, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
+You can display some UI components instead of plain text like avatars, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.
 
 ## Avatar
 Shows an 32x32 rounded image

@@ -1,23 +1,20 @@
-<div>
+<x-lv-layout>
   {{-- Search input and filters --}}
   <div class="px-4">
-    @include('laravel-views::table-view.filters')
+    @include('laravel-views::components.toolbar.toolbar')
   </div>
-
-  {{-- Success/Error feedback --}}
-  @if (session()->has('message'))
-    @component('laravel-views::components.alert', [
-      'message' => session('message'),
-      'onClose' => 'flushMessage',
-      'type' => session('messageType')
-    ])
-    @endcomponent
-  @endif
 
   <div>
     @foreach ($items as $item)
-      <div class="border-b border-gray-200 py-2 px-4">
-        <x-lv-dynamic-component :view="$itemComponent" :data="array_merge($this->data($item), ['actions' => $actionsByRow, 'model' => $item])" />
+      <div class="flex items-center border-b border-gray-200 ">
+        @if ($this->hasBulkActions)
+          <div class="h-full flex items-center pl-3 md:pl-4">
+            <x-lv-checkbox wire:model="selected" value="{{ $item->getKey() }}" />
+          </div>
+        @endif
+        <div class="py-2 px-3 md:px-4 flex-1">
+          <x-lv-dynamic-component :view="$itemComponent" :data="array_merge($this->data($item), ['actions' => $actionsByRow, 'model' => $item])" />
+        </div>
       </div>
     @endforeach
   </div>
@@ -27,5 +24,5 @@
     {{ $items->links() }}
   </div>
 
-  @include('laravel-views::components.confirmation-message', ['message' => $confirmationMessage])
-</div>
+  @include('laravel-views::components.confirmation-message')
+</x-lv-layout>

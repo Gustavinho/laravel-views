@@ -11,7 +11,7 @@ class UITest extends TestCase
     public function testBagdeDefaultHelper()
     {
         $badge = UI::badge('active');
-        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">
+        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full '.variants('badges.default').'">
                         active
                     </span>';
 
@@ -21,7 +21,7 @@ class UITest extends TestCase
     public function testBagdeSuccesstHelper()
     {
         $badge = UI::badge('active', 'success');
-        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
+        $expected = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full '.variants('badges.success').'">
                         active
                     </span>';
 
@@ -31,7 +31,7 @@ class UITest extends TestCase
     public function testAvatarHelper()
     {
         $avatar = UI::avatar('my-avatar-url');
-        $expected = '<img src="my-avatar-url" alt="my-avatar-url" class="h-8 w-8 object-cover rounded-full shadow-inner">';
+        $expected = '<img src="my-avatar-url" alt="my-avatar-url" class="'.variants('images.avatar').'">';
 
         $this->assertHtmlEquals($avatar, $expected);
     }
@@ -39,7 +39,7 @@ class UITest extends TestCase
     public function testLinkHelper()
     {
         $link = UI::link('title', '/');
-        $expected = '<a href="/" class="hover:text-blue-500 hover:underline">
+        $expected = '<a href="/" class="'.(variants('links.default')).'">
                         title
                     </a>';
 
@@ -57,7 +57,7 @@ class UITest extends TestCase
     public function testIconHelperWithVariant()
     {
         $icon = UI::icon('activity', 'success');
-        $expected = '<i data-feather="activity" class="text-green-500 "></i>';
+        $expected = '<i data-feather="activity" class="'.variants('icons.success').' "></i>';
 
         $this->assertHtmlEquals($icon, $expected);
     }
