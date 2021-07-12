@@ -66,7 +66,7 @@ Laravel Views includes by default a set up using different parts of the TALL sta
 php artisan view:clear
 ```
 
-These directives are fine for a dev environment, however, if you want to use your own Tailwindcss or Alpinde.js setup, you can [disable these assets](./doc/laravel-views#including-assets) from being loaded with the Laravel views directive.
+These directives are fine for a dev environment, however, if you want to use your own Tailwindcss or Alpinde.js setup, you can [disable these assets](./doc/laravel-views.md#including-assets) from being loaded with the Laravel views directive.
 # First table view
 This is a basic usage of a table view, you can [read the full table view documentation ](doc/table-view.md)
 
