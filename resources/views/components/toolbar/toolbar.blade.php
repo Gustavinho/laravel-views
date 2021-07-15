@@ -14,6 +14,8 @@ UI components used:
 
   {{-- Actions on the left --}}
   <div class="flex space-x-1 flex-1 justify-end items-center mb-4">
+    <x-lv-loading class="mb-0" wire:loading />
+
     {{-- Bulk actions --}}
     <div>
       @include('laravel-views::components.toolbar.bulk-actions')

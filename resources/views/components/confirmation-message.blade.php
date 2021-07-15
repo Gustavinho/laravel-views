@@ -17,9 +17,8 @@
         <x-lv-button variant="danger" @click="await $wire.call('confirmAndExecuteAction', action, id, false); open = false" wire:loading.attr="disabled">
           {{ __("Yes, I'm sure") }}
         </x-lv-button>
-        <span wire:loading class="animate-spin">
-          {!! UI::icon('loader') !!}
-        </span>
+
+        <x-lv-loading wire:loading />
       </div>
     </x-lv-modal>
   </div>

@@ -16,7 +16,7 @@ UI components used:
       </x-lv-select-button>
     </x-slot>
 
-    <x-lv-drop-down.header label="Sort by" />
+    <x-lv-drop-down.header label="{{ __('Sort by') }}" />
 
     {{-- Each sortable item --}}
     @foreach ($sortableBy as $title => $column)
