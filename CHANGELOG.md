@@ -1,9 +1,10 @@
 # Changelog
-
 ## [2.4.0] - Not released
-
 ### Added
 - Inline editing component
+- New tooltip component
+## Changed
+- Added tooltips to the icon actions.
 ## [2.3.0] - 2021-06-26
 ### Added
 - Default value for filters

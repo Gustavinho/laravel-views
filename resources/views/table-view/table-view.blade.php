@@ -19,17 +19,15 @@ UI components used:
 
   @if (count($items))
     {{-- Content table --}}
-    <div class="overflow-x-auto">
+    <div class="overflow-x-scroll lg:overflow-x-visible">
       @include('laravel-views::components.table')
     </div>
 
   @else
-
     {{-- Empty data message --}}
     <div class="flex justify-center items-center p-4">
       <h3>{{ __('There are no items in this table') }}</h3>
     </div>
-
   @endif
 
   {{-- Paginator, loading indicator and totals --}}
