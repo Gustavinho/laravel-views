@@ -3,6 +3,7 @@
 ### Added
 - Inline editing component
 - New tooltip component
+- Added new loading indicator next to the toolbar
 ## Changed
 - Added tooltips to the icon actions.
 ## [2.3.0] - 2021-06-26
