@@ -85,7 +85,7 @@ abstract class DataView extends View
     protected function getRenderData()
     {
         return [
-            'items' => $this->query,
+            'items' => $this->paginatedQuery,
             'actionsByRow' => $this->actionsByRow()
         ];
     }
@@ -130,7 +130,7 @@ abstract class DataView extends View
 
     public function updatedAllSelected($value)
     {
-        $this->selected = $value ? $this->query->pluck('id')->map(function ($id) {
+        $this->selected = $value ? $this->paginatedQuery->pluck('id')->map(function ($id) {
             return (string)$id;
         })->toArray() : [];
     }
@@ -154,7 +154,12 @@ abstract class DataView extends View
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
         $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
 
-        return $query->paginate($this->paginate);
+        return $query;
+    }
+
+    public function getPaginatedQueryProperty()
+    {
+        return $this->query->paginate($this->paginate);
     }
 
 
