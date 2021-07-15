@@ -23,10 +23,10 @@ UI components used:
       <a href="#!"
         wire:click.prevent="sort('{{ $column }}')"
         title="{{ __('Sort by') }} {{ $title }} {{ __($sortOrder == 'asc' ? 'descending' : 'ascending') }}"
-        class="group flex items-center px-4 py-2 hover:bg-gray-100 hover:text-gray-900 text-sm gap-3">
+        class="group flex items-center px-4 py-2 hover:bg-gray-100 hover:text-gray-900 text-sm gap-3"
+      >
         @if ($sortBy === $column)
-          <i data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}"
-            class="text-gray-900 h-4 w-4"></i>
+          <i data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}" class="text-gray-900 h-4 w-4"></i>
         @else
           <i class="text-gray-900 h-4 w-4"></i>
         @endif

@@ -22,14 +22,14 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
           </div>
         @endif
         <x-lv-dynamic-component
-        :view="$cardComponent"
-        :data="array_merge($this->card($item), [
-            'withBackground' => $withBackground,
-            'model' => $item,
-            'actions' => $actionsByRow,
-            'hasDefaultAction' => $this->hasDefaultAction,
-            'selected' => in_array($item->getKey(), $selected)
-          ])"
+          :view="$cardComponent"
+          :data="array_merge($this->card($item), [
+              'withBackground' => $withBackground,
+              'model' => $item,
+              'actions' => $actionsByRow,
+              'hasDefaultAction' => $this->hasDefaultAction,
+              'selected' => in_array($item->getKey(), $selected)
+            ])"
         />
       </div>
     @endforeach
@@ -39,6 +39,4 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
   <div class="mt-8">
     {{ $items->links() }}
   </div>
-
-  @include('laravel-views::components.confirmation-message')
 </x-lv-layout>

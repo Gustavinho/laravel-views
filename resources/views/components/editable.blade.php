@@ -1,6 +1,7 @@
 {{-- components.editable
 
 Render an editable input field --}}
+@props(['model', 'field' => ''])
 
 <div x-data="{
     field: '{{ $field }}',
