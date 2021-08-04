@@ -40,7 +40,7 @@
 
       @if (count($actions))
         <div class="flex justify-end items-center">
-          <x-dynamic-component :component="$this->getComponent('actions')" :actions="$this->actions" :model="$model"/>
+          <x-dynamic-component :component="$this->getComponent('actions')" :actions="$this->actions" :model="$model" :desktop="false"/>
         </div>
       @endif
     </div>

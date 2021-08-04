@@ -1,9 +1,14 @@
-@props(['actions' => [], 'model' => null])
+@props(['actions' => [], 'model' => null, 'desktop' => true, 'mobile' => true])
 
 <div>
   @if (count($actions))
     {{-- Mobile actions dropdown --}}
-    <div class="lg:hidden text-right relative">
+    @if ($mobile)
+    
+    <div @class([
+      'text-right relative',
+      'lg:hidden' => $desktop
+      ])>
       <x-dynamic-component :component="$this->getComponent('dropdown')">
         <x-slot name="trigger">
           <x-lv-icon-button icon="more-horizontal" size="sm"/>
@@ -15,14 +20,20 @@
         @endforeach
       </x-dynamic-component>
     </div>
+    @endif
 
     {{-- Desktop action buttons --}}
-    <div class="hidden lg:flex justify-items-end">
+    @if ($desktop)
+    <div @class([
+      'lg:flex justify-items-end',
+      'hidden' => $mobile
+      ])>
       @foreach ($actions as $action)
         @if ($action->renderIf($model, $this))
         <x-dynamic-component :component="$action->getComponent('action-desktop')" :action="$action" wire:click.prevent="executeAction('{{ $action->id }}', '{{ $model->getKey() }}')" type="submit"/>
         @endif
       @endforeach
     </div>
+    @endif
   @endif
 </div>
