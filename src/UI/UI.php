@@ -42,18 +42,16 @@ class UI
     public function attributes($attributes, $options = [])
     {
         return $this->component('laravel-views::components.attributes-list', array_merge(
-            ['data' => $attributes],
+            ['modelAttributes' => $attributes],
             $options
         ));
     }
 
-    public function component($view, $data = [])
+    public function component($view, $props = [])
     {
-        return View::make('laravel-views::core.dynamic-component')
-            ->with([
-                'view' => $view,
-                'data' => $data,
-            ])
-            ->render();
+        return view('laravel-views::core.dynamic-component-view', [
+            'view' => $view,
+            'props' => $props,
+        ]);
     }
 }

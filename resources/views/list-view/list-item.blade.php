@@ -13,6 +13,6 @@
         {{ $subtitle }}
       </div>
     </div>
-    <x-lv-actions :actions="$actions" :model="$model" />
+    <x-dynamic-component :component="$this->getComponent('actions')" :actions="$actions" :model="$model"/>
   </div>
 </div>

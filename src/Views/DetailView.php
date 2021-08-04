@@ -13,46 +13,12 @@ class DetailView extends View
 
     protected $view = 'detail-view.detail-view';
     protected $modelClass;
-    protected $detailComponent = null;
-
-    public $title = '';
-    public $subtitle = '';
-    public $stripe = false;
 
     public $model;
 
     public function mount()
     {
         $this->setModel();
-        $this->setHeading();
-    }
-
-    protected function getRenderData()
-    {
-        $detailData = app()->call([$this, 'detail'], [
-            'model' => $this->model,
-        ]);
-
-        if (is_array($detailData)) {
-            // If there is an array of data insted of a component
-            // then creates a new attributes component
-            if (Arr::isAssoc($detailData)) {
-                if ($this->detailComponent) {
-                    $components = [UI::component($this->detailComponent, $detailData)];
-                } else {
-                    $components = [UI::attributes($detailData, ['stripe' => $this->stripe])];
-                }
-            } else {
-                $components = $detailData;
-            }
-        // If there is only one component
-        } else {
-            $components = [$detailData];
-        }
-
-        return [
-            'components' => $components,
-        ];
     }
 
     private function setModel()
@@ -66,29 +32,48 @@ class DetailView extends View
         }
     }
 
-    private function setHeading()
+    public function getDetailsProperty()
+    {
+        $details = app()->call([$this, 'details'], [
+            'model' => $this->model,
+        ]);
+
+        if (is_array($details)) {
+            // If there is an array of data insted of a component
+            // then creates a new attributes component
+            if (Arr::isAssoc($details)) {
+                $details = [UI::attributes($details)];
+            }
+            // If there is only one component
+        } else {
+            $details = [$details];
+        }
+
+        return $details;
+    }
+
+    public function getTitleProperty()
+    {
+        if (method_exists($this, 'title')) {
+            return app()->call([$this, 'title'], ['model' => $this->model]);
+        }
+
+        return $this->heading[0];
+    }
+
+    public function getSubtitleProperty()
+    {
+        if (method_exists($this, 'subtitle')) {
+            return app()->call([$this, 'subtitle'], ['model' => $this->model]);
+        }
+
+        return $this->heading[1];
+    }
+
+    public function getheadingProperty()
     {
         if (method_exists($this, 'heading')) {
-            $heading = app()->call([$this, 'heading'], ['model' => $this->model]);
-            [$this->title, $this->subtitle] = $heading;
+            return app()->call([$this, 'heading'], ['model' => $this->model]);
         }
-
-        if (!$this->title) {
-            $this->title = $this->getClassName();
-        }
-    }
-
-    public function getActions()
-    {
-        if (method_exists($this, 'actions')) {
-            return $this->actions();
-        }
-
-        return [];
-    }
-
-    public function getModelWhoFiredAction()
-    {
-        return $this->model;
     }
 }

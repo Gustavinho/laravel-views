@@ -4,9 +4,13 @@ namespace LaravelViews\Actions;
 
 use LaravelViews\Views\View;
 use Illuminate\Support\Str;
+use LaravelViews\Views\Traits\WithDynamicComponents;
+use Livewire\Exceptions\PropertyNotFoundException;
 
 abstract class Action
 {
+    use WithDynamicComponents;
+
     /** @var String $title Title of the action */
     public $title;
 
@@ -70,5 +74,10 @@ abstract class Action
     public function shouldBeConfirmed()
     {
         return method_exists($this, 'getConfirmationMessage');
+    }
+
+    protected function getView()
+    {
+        return $this->view;
     }
 }

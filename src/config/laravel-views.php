@@ -57,5 +57,30 @@ return [
 
     'gridView' => [
         'selected' => 'border-2 border-blue-500'
-    ]
+    ],
+
+    'components' => [
+        'layout' => 'lv-layout',
+        'alerts-handler' => 'lv-alerts-handler',
+        'alert' => 'lv-alert',
+        'confirmation-message' => 'laravel-views::confirmation-message',
+        'modal' => 'lv-modal',
+        'dropdown' => 'lv-drop-down',
+        'actions' => 'lv-actions',
+        'action-desktop' => 'laravel-views::actions.action-desktop',
+        'action-mobile' => 'laravel-views::actions.action-mobile',
+        'icon-button' => 'lv-icon-button',
+        'icon-text-button' => 'laravel-views::buttons.icon-and-text',
+        'toolbar' => 'laravel-views::toolbar.toolbar',
+        'toolbar-search' => 'laravel-views::toolbar.search',
+        'toolbar-bulk' => 'laravel-views::toolbar.bulk-actions',
+        'toolbar-sorting' => 'laravel-views::toolbar.sorting',
+        'toolbar-filters' => 'laravel-views::toolbar.filters',
+        'heading' => 'laravel-views::heading',
+        'checkbox' => 'laravel-views::form.checkbox',
+        'table' => 'laravel-views::table',
+        'table-cell' => 'laravel-views::table-cell',
+        'table-cell-header' => 'laravel-views::table-cell-header',
+        'grid-view-item' => 'laravel-views::grid-view-item',
+    ],
 ];

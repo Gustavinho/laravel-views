@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 trait WithSortableDropdown
 {
+    public $sortableBy;
+
     /**
      * Collects all data to be passed to the view, this includes the items searched on the database
      * through the filters, this data will be passed to livewire render method
@@ -13,7 +15,7 @@ trait WithSortableDropdown
     protected function getRenderData()
     {
         $data = parent::getRenderData();
-        $data['sortableBy'] =  ($sortableBy = $this->sortableBy()) instanceof Collection
+        $this->sortableBy = $data['sortableBy'] =  ($sortableBy = $this->sortableBy()) instanceof Collection
             ? $sortableBy
             : collect($sortableBy);
 

@@ -1,24 +1,15 @@
-<x-lv-layout>
+<x-dynamic-component :component="$this->getComponent('layout')">
   <div class="flex items-center mb-4 px-4">
-    <div class="flex-1">
-      <div class="font-bold text-2xl text-gray-900">
-        {{ $title }}
-      </div>
-      @isset ($subtitle)
-        <span class="text-sm">{{ $subtitle }}</span>
-      @endisset
-    </div>
+    <x-dynamic-component :component="$this->getComponent('heading')" :title="$this->title" :subtitle="$this->subtitle"/>
 
     <div class="flex justify-end">
-      <x-lv-actions :actions="$this->actions" :model="$model" />
+      <x-dynamic-component :component="$this->getComponent('actions')" :actions="$this->actions" :model="$this->model"/>
     </div>
   </div>
 
-  @foreach ($components as $component)
+  @foreach ($this->details as $detail)
     <div class="mb-4">
-      {!! $component !!}
+      {!! $detail->render() !!}
     </div>
   @endforeach
-
-  @include('laravel-views::components.confirmation-message')
-</x-lv-layout>
+</x-dynamic-component>

@@ -78,18 +78,10 @@ abstract class DataView extends View
         }
     }
 
-    /**
-     * Collects all data to be passed to the view, this includes the items searched on the database
-     * through the filters, this data will be passed to livewire render method
-     */
-    protected function getRenderData()
+    public function getItemsProperty()
     {
-        return [
-            'items' => $this->query,
-            'actionsByRow' => $this->actionsByRow()
-        ];
+        return $this->query;
     }
-
 
     /**
      * Reset pagination
@@ -107,16 +99,6 @@ abstract class DataView extends View
     protected function filters()
     {
         return [];
-    }
-
-    protected function actionsByRow()
-    {
-        return [];
-    }
-
-    public function getActions()
-    {
-        return $this->actionsByRow();
     }
 
     /**

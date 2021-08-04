@@ -40,7 +40,7 @@
 
       @if (count($actions))
         <div class="flex justify-end items-center">
-          <x-lv-actions.drop-down :actions="$actions" :model="$model" />
+          <x-dynamic-component :component="$this->getComponent('actions')" :actions="$this->actions" :model="$model"/>
         </div>
       @endif
     </div>

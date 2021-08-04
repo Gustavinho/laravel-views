@@ -8,7 +8,7 @@
   })"
 >
   <div x-show="open" x-cloak>
-    <x-lv-modal>
+    <x-dynamic-component :component="$this->getComponent('modal')">
       <div x-text='message' class="text-gray-900 text-lg font-medium" ></div>
       <div class="mt-4 flex flex-col space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-row sm:items-center">
         <x-lv-button @click="open = false" variant="white" wire:loading.attr="disabled">
@@ -21,6 +21,6 @@
           {!! UI::icon('loader') !!}
         </span>
       </div>
-    </x-lv-modal>
+    </x-dynamic-component>
   </div>
 </div>

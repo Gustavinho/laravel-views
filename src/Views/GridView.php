@@ -2,16 +2,10 @@
 
 namespace LaravelViews\Views;
 
-use LaravelViews\Views\Traits\WithSortableDropdown;
-
-class GridView extends DataView
+class GridView extends ItemView
 {
-    use WithSortableDropdown;
-
     /** Component name */
     protected $view = 'grid-view.grid-view';
-
-    public $cardComponent = 'laravel-views::grid-view.grid-view-item';
 
     /** Add a white background on each card */
     public $withBackground = false;
@@ -19,8 +13,18 @@ class GridView extends DataView
     /** Max cols to be render on xl */
     public $maxCols = 5;
 
-    public function getHasDefaultActionProperty()
+    protected $itemComponent = 'laravel-views::grid-view.grid-view-item';
+
+    protected $itemDefinition = 'card';
+
+    protected function extraItemProps($item)
     {
-        return method_exists($this, 'onCardClick');
+        return [
+            'withBackground' => $this->withBackground,
+            'model' => $item,
+            'actions' => $this->actions,
+            'hasDefaultAction' => $this->hasDefaultAction,
+            'selected' => in_array($item->getKey(), $this->selected)
+        ];
     }
 }

@@ -8,14 +8,14 @@
 >
   <div x-show='open'>
     <template x-if="type === 'danger'">
-      <x-lv-alert type='danger' onClose='open = false'>
+      <x-dynamic-component :component="$this->getComponent('alert')" type='danger' onClose='open = false'>
         <div x-text='message'></div>
-      </x-lv-alert>
+      </x-dynamic-component>
     </template>
     <template x-if="type === 'success'">
-      <x-lv-alert onClose='open = false'>
+      <x-dynamic-component :component="$this->getComponent('alert')" onClose='open = false'>
         <div x-text='message'></div>
-      </x-lv-alert>
+      </x-dynamic-component>
     </template>
   </div>
 </div>

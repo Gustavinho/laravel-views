@@ -1,8 +1,8 @@
 {{-- Filters dropdown --}}
-@if (isset($filtersViews) && $filtersViews)
+@if (isset($this->filtersViews) && $this->filtersViews)
   <x-lv-drop-down :dropDownWidth="64" label="Filters">
     {{-- Each filter view --}}
-    @foreach ($filtersViews as $filter)
+    @foreach ($this->filtersViews as $filter)
       {{-- Filter title --}}
       <x-lv-drop-down.header :label="$filter->getTitle()" />
       <div class="px-4 mt-4">
@@ -14,7 +14,7 @@
       </div>
     @endforeach
 
-    @if (count($filters) > 0)
+    @if (count($this->filters) > 0)
       {{-- Clear filters button --}}
       <div class="p-4 bg-gray-100 text-right flex justify-end">
         <button wire:click.prevent="clearFilters" @click="open = false" class="text-gray-600 flex items-center hover:text-gray-700 focus:outline-none text-sm">

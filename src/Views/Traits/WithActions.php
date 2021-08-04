@@ -50,7 +50,6 @@ trait WithActions
                 // If $actionableItemId is null then it is a bulk action
                 // and it uses the current selection
                 $actionableItems = $actionableItemId ? $this->getModelWhoFiredAction($actionableItemId) : $this->selected;
-                $action->view = $this;
                 $action->handle($actionableItems, $this);
             }
         } else {
@@ -80,13 +79,15 @@ trait WithActions
      */
     private function findAction(string $actionId)
     {
-        $actions = collect($this->actions)->merge($this->bulkActions);
-
-        return $actions->first(
+        $action = collect($this->actions)->merge($this->bulkActions)->first(
             function ($actionToFind) use ($actionId) {
                 return $actionToFind->id === $actionId;
             }
         );
+
+        $action->view = $this;
+
+        return $action;
     }
 
     /**
@@ -94,9 +95,11 @@ trait WithActions
      */
     public function getActionsProperty()
     {
-         // This `getActions()` function needs to be defined by the
-         // view that is using actions
-        return $this->getActions();
+        if (method_exists($this, 'actions')) {
+            return $this->actions();
+        }
+
+        return [];
     }
 
     public function getBulkActionsProperty()

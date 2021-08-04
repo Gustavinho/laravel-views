@@ -4,7 +4,7 @@ namespace LaravelViews\Views;
 
 use LaravelViews\Views\Traits\WithSortableDropdown;
 
-class ListView extends DataView
+class ListView extends ItemView
 {
     use WithSortableDropdown;
 
@@ -12,4 +12,15 @@ class ListView extends DataView
     protected $view = 'list-view.list-view';
 
     public $itemComponent = 'laravel-views::list-view.list-item';
+
+    protected $itemDefinition = 'listItem';
+
+    protected function extraItemProps($item)
+    {
+        return [
+            'model' => $item,
+            'actions' => $this->actions,
+            'hasDefaultAction' => $this->hasDefaultAction,
+        ];
+    }
 }

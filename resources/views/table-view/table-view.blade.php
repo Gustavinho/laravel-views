@@ -10,17 +10,16 @@ UI components used:
   - components.alert
   - components.table
   - components.paginator --}}
-
-<x-lv-layout>
+<x-dynamic-component :component="$this->getComponent('layout')">
   {{-- Search input and filters --}}
   <div class="py-4 px-3 pb-0">
-    @include('laravel-views::components.toolbar.toolbar')
+    <x-dynamic-component :component="$this->getComponent('toolbar')"/>
   </div>
 
-  @if (count($items))
+  @if (count($this->items))
     {{-- Content table --}}
     <div class="overflow-x-auto">
-      @include('laravel-views::components.table')
+      <x-dynamic-component :component="$this->getComponent('table')" :headers="$this->headers" :items="$this->items" :hasBulkActions="$this->hasBulkActions" :actions="$this->actions" :sortBy="$this->sortBy" :sortOrder="$this->sortOrder"/>
     </div>
 
   @else
@@ -34,9 +33,7 @@ UI components used:
 
   {{-- Paginator, loading indicator and totals --}}
   <div class="p-4">
-    {{ $items->links() }}
+    {{ $this->items->links() }}
   </div>
-
-  @include('laravel-views::components.confirmation-message')
-</x-lv-layout>
+</x-dynamic-component>
 

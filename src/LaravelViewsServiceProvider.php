@@ -133,6 +133,10 @@ class LaravelViewsServiceProvider extends ServiceProvider
             return $laravelViews->css($options);
         });
 
+        Blade::directive('decodeWireAttributes', function () {
+            return '<?php foreach ($attributes->whereStartsWith(\'wire:\') as $key => $value) {$attributes[$key] = html_entity_decode($value, ENT_QUOTES); } ?>';
+        });
+
         return $this;
     }
 
@@ -150,7 +154,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
         Blade::component('lv-dynamic-component', DynamicComponent::class);
 
         // This is only for laravel 8
-        // Blade::componentNamespace('LaravelViews\\Views\\Components', 'lv');
+        Blade::componentNamespace('LaravelViews\\Views\\Components', 'lv');
 
         return $this;
     }
