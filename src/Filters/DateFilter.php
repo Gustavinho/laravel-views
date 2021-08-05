@@ -8,7 +8,7 @@ class DateFilter extends BaseFilter
 {
     public $type = 'date';
 
-    public $view = 'date-filter';
+    public $view = 'date';
 
     public function passValuesFromRequestToFilter($value)
     {

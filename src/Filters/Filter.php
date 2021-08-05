@@ -6,5 +6,5 @@ class Filter extends BaseFilter
 {
     public $type = 'select';
 
-    public $view = 'select-filter';
+    public $view = 'select';
 }

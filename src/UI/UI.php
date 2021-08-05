@@ -2,8 +2,6 @@
 
 namespace LaravelViews\UI;
 
-use Illuminate\Support\Facades\View;
-
 class UI
 {
     public function badge($title, $type = 'default')
@@ -39,10 +37,10 @@ class UI
         ));
     }
 
-    public function attributes($attributes, $options = [])
+    public function propertyList($properties, $options = [])
     {
-        return $this->component('laravel-views::components.attributes-list', array_merge(
-            ['modelAttributes' => $attributes],
+        return $this->component('laravel-views::components.property-list', array_merge(
+            ['properties' => $properties],
             $options
         ));
     }

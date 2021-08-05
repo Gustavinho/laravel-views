@@ -96,7 +96,11 @@ trait WithActions
     public function getActionsProperty()
     {
         if (method_exists($this, 'actions')) {
-            return $this->actions();
+            $actions = $this->actions();
+            foreach ($actions as $action) {
+                $action->view = $this;
+            }
+            return $actions;
         }
 
         return [];

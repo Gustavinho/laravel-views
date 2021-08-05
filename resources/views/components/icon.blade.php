@@ -8,8 +8,6 @@ You can customize the variants classes in config/laravel-views.php
 
 props
  - type
- - icon
-
---}}
-@props(['icon', 'class'])
-<i data-feather="{{ $icon }}" class="{{ variants()->featherIcon($type)->class() }} {{ $class }}"></i>
+ - icon --}}
+@props(['icon'])
+<i data-feather="{{ $icon }}" {{ $attributes }}></i>

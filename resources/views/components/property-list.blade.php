@@ -1,8 +1,9 @@
-@props(['modelAttributes', 'stripe' => false])
+@props(['properties', 'stripe' => false])
 
 <ul>
-  @foreach ($modelAttributes as $title => $value)
-    <li class="{{ $stripe && $loop->index %2 === 0 ? 'bg-gray-100' : '' }} px-4 py-5 border-b border-gray-200 sm:flex sm:items-center">
+  @foreach ($properties as $title => $value)
+    <li
+      class="{{ $stripe && $loop->index % 2 === 0 ? 'bg-gray-100' : '' }} px-4 py-5 border-b border-gray-200 sm:flex sm:items-center">
       <div class="text-xs leading-4 font-semibold uppercase tracking-wider text-gray-900 sm:w-3/12">
         {!! $title !!}
       </div>

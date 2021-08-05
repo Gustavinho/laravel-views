@@ -42,7 +42,7 @@ class DetailView extends View
             // If there is an array of data insted of a component
             // then creates a new attributes component
             if (Arr::isAssoc($details)) {
-                $details = [UI::attributes($details)];
+                $details = [UI::propertyList($details)];
             }
             // If there is only one component
         } else {
@@ -73,7 +73,29 @@ class DetailView extends View
     public function getheadingProperty()
     {
         if (method_exists($this, 'heading')) {
-            return app()->call([$this, 'heading'], ['model' => $this->model]);
+            $heading = app()->call([$this, 'heading'], [
+                'model' => $this->model,
+            ]);
+
+
+            if (is_array($heading)) {
+                // If there is an array of data insted of a component
+                // then creates a new attributes component
+                if (!Arr::isAssoc($heading)) {
+                    $heading = array_combine(['title', 'subtitle'], $heading);
+                }
+
+                $heading = UI::component('laravel-views::detail-view.heading', $heading);
+            }
+
+            return $heading;
         }
+
+        return null;
+    }
+
+    public function getModelWhoFiredAction()
+    {
+        return $this->model;
     }
 }

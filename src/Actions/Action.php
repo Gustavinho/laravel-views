@@ -5,7 +5,6 @@ namespace LaravelViews\Actions;
 use LaravelViews\Views\View;
 use Illuminate\Support\Str;
 use LaravelViews\Views\Traits\WithDynamicComponents;
-use Livewire\Exceptions\PropertyNotFoundException;
 
 abstract class Action
 {
@@ -76,7 +75,7 @@ abstract class Action
         return method_exists($this, 'getConfirmationMessage');
     }
 
-    protected function getView()
+    protected function componentParent()
     {
         return $this->view;
     }

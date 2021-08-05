@@ -6,7 +6,7 @@ class BooleanFilter extends BaseFilter
 {
     public $type = 'boolean';
 
-    public $view = 'boolean-filter';
+    public $view = 'boolean';
 
     public function passValuesFromRequestToFilter($values)
     {

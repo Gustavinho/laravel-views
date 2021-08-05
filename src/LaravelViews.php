@@ -20,7 +20,7 @@ class LaravelViews
             'buttons.button' => 'button',
             'dropdown.drop-down' => 'drop-down',
             'dropdown.header' => 'drop-down.header',
-            'actions.responsive' => 'actions',
+            'actions.actions' => 'actions',
             'actions.drop-down' => 'actions.drop-down',
             'actions.icon-and-title' => 'actions.icon-and-title',
             'actions.icon' => 'actions.icon',
