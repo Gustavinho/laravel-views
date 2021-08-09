@@ -83,6 +83,11 @@ abstract class DataView extends View
         return $this->query;
     }
 
+    protected function appCallData()
+    {
+        return ['items' => $this->items];
+    }
+
     /**
      * Reset pagination
      */

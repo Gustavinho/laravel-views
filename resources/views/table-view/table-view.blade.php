@@ -1,20 +1,16 @@
-{{-- table-view.table-view
-
-Base layout to render all the UI componentes related to the table view, this is the main file for this view,
-the rest of the files are included from here
-
-You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND LIVEWIERE DIRECTIVES
-
-UI components used:
-  - table-view.filters
-  - components.alert
-  - components.table
-  - components.paginator --}}
 <x-dynamic-component :component="$this->getComponent('layout')">
-  {{-- Search input and filters --}}
-  <div class="py-4 px-3 pb-0">
-    <x-dynamic-component :component="$this->getComponent('toolbar')" :showSelectAll="false" />
-  </div>
+  <x-slot name="header">
+    <div class="pr-3">
+      @if ($this->header)
+        <div class="mb-4">
+          {!! $this->header !!}
+        </div>
+      @endif
+      
+      {{-- Search input and filters --}}
+      <x-dynamic-component :component="$this->getComponent('toolbar')" :showSelectAll="false" />
+    </div>
+  </x-slot>
 
   @if (count($this->items))
     {{-- Content table --}}

@@ -6,7 +6,7 @@ UI components used:
   - form/select --}}
 <div class="leading-tight">
   {{-- Sorting dropdown --}}
-  <x-lv-drop-down :dropDownWidth="64">
+  <x-lv-drop-down>
     <x-slot name="trigger">
       <x-lv-select-button>
         {{ __('Sort By') }}@if ($sortableByName = $this->sortableBy->flip()->get($this->sortBy)):
@@ -20,13 +20,11 @@ UI components used:
 
     {{-- Each sortable item --}}
     @foreach ($this->sortableBy as $title => $column)
-      <a href="#!"
-        wire:click.prevent="sort('{{ $column }}')"
+      <a href="#!" wire:click.prevent="sort('{{ $column }}')"
         title="{{ __('Sort by') }} {{ $title }} {{ __($this->sortOrder == 'asc' ? 'descending' : 'ascending') }}"
         class="group flex items-center px-4 py-2 hover:bg-gray-100 hover:text-gray-900 text-sm gap-3">
         @if ($this->sortBy === $column)
-          <i data-feather="arrow-{{ $this->sortOrder === 'asc' ? 'up' : 'down' }}"
-            class="text-gray-900 h-4 w-4"></i>
+          <i data-feather="arrow-{{ $this->sortOrder === 'asc' ? 'up' : 'down' }}" class="text-gray-900 h-4 w-4"></i>
         @else
           <i class="text-gray-900 h-4 w-4"></i>
         @endif

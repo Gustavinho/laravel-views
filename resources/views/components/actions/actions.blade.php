@@ -5,8 +5,7 @@
     {{-- Mobile actions dropdown --}}
     @if ($mobile)
 
-      <div @class([ 'text-right relative' , 'lg:hidden'=> $desktop
-        ])>
+      <div class="{{ 'text-right relative ' . ($desktop ? 'lg:hidden' : '') }}">
         <x-dynamic-component :component="$this->getComponent('actions-dropdown', 'dropdown')">
           <x-slot name="trigger">
             <x-lv-icon-button icon="more-horizontal" size="sm" />
@@ -25,11 +24,11 @@
 
     {{-- Desktop action buttons --}}
     @if ($desktop)
-      <div @class([ 'lg:flex justify-items-end' , 'hidden'=> $mobile])>
+      <div class="{{ 'lg:flex justify-items-end ' . ($mobile ? 'hidden' : '') }}">
         @foreach ($actions as $action)
           @if ($action->renderIf($model, $this))
             <x-dynamic-component :component="$action->getComponent('action-desktop', 'icon-button')"
-              :icon="$action->icon" size="sm"
+              :icon="$action->icon" :title="$action->title" size="sm"
               wire:click.prevent="executeAction('{{ $action->id }}', '{{ $model->getKey() }}')" />
           @endif
         @endforeach

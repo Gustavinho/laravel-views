@@ -52,50 +52,13 @@ class DetailView extends View
         return $details;
     }
 
-    public function getTitleProperty()
-    {
-        if (method_exists($this, 'title')) {
-            return app()->call([$this, 'title'], ['model' => $this->model]);
-        }
-
-        return $this->heading[0];
-    }
-
-    public function getSubtitleProperty()
-    {
-        if (method_exists($this, 'subtitle')) {
-            return app()->call([$this, 'subtitle'], ['model' => $this->model]);
-        }
-
-        return $this->heading[1];
-    }
-
-    public function getheadingProperty()
-    {
-        if (method_exists($this, 'heading')) {
-            $heading = app()->call([$this, 'heading'], [
-                'model' => $this->model,
-            ]);
-
-
-            if (is_array($heading)) {
-                // If there is an array of data insted of a component
-                // then creates a new attributes component
-                if (!Arr::isAssoc($heading)) {
-                    $heading = array_combine(['title', 'subtitle'], $heading);
-                }
-
-                $heading = UI::component('laravel-views::detail-view.heading', $heading);
-            }
-
-            return $heading;
-        }
-
-        return null;
-    }
-
     public function getModelWhoFiredAction()
     {
         return $this->model;
+    }
+
+    protected function appCallData()
+    {
+        return ['model' => $this->model];
     }
 }
