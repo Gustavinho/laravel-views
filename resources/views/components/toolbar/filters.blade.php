@@ -1,6 +1,6 @@
 {{-- Filters dropdown --}}
 @if (isset($this->filtersViews) && $this->filtersViews)
-  <x-lv-drop-down label="Filters">
+  <x-dynamic-component :component="$this->getComponent('filters-dropdown', 'dropdown')" label="Filters">
     {{-- Each filter view --}}
     @foreach ($this->filtersViews as $filter)
       {{-- Filter title --}}
@@ -8,10 +8,7 @@
         :label="$filter->getTitle()" />
       <div class="px-4 mt-4">
         {{-- Filter view --}}
-        @include('laravel-views::components.filters.' . $filter->view, [
-        'view' => $filter,
-        'filter' => $filter,
-        ])
+        <x-dynamic-component :component="$this->getComponent('filters-'.$filter->view)" :filter="$filter" />
       </div>
     @endforeach
 
@@ -25,5 +22,5 @@
         </button>
       </div>
     @endif
-  </x-lv-drop-down>
+  </x-dynamic-component>
 @endif

@@ -79,5 +79,8 @@ return [
         'heading' => 'laravel-views::heading',
         'checkbox' => 'laravel-views::form.checkbox',
         'table-header' => 'laravel-views::table-header',
+        'filters-select' => 'laravel-views::filters.select',
+        'filters-boolean' => 'laravel-views::filters.boolean',
+        'filters-date' => 'laravel-views::filters.date',
     ],
 ];

@@ -1,13 +1,8 @@
-{{-- components.filters.select.blade
-
-Renders the dropdown for the select filter
-To customize it you should shange the UI component used, YOU SHOULD NOT CUSTOMIZE ANYHING HERE
-UI components used:
-  - form/select --}}
+@props(['filter'])
 
 @component('laravel-views::components.form.select', [
-  'name' => "filters[{$view->id}]",
-  'model' => "filters.{$view->id}",
-  'options' => array_merge(['--' => ''], $view->options()),
-])
+  'name' => "filters[{$filter->id}]",
+  'model' => "filters.{$filter->id}",
+  'options' => array_merge(['--' => ''], $filter->options()),
+  ])
 @endcomponent

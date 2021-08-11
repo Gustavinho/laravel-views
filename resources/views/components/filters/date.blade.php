@@ -1,14 +1,10 @@
-{{-- components.filters.date.blade
+@props(['filter'])
 
-Renders the datepicker for the date filter
-To customize it you should shange the UI component used, YOU SHOULD NOT CUSTOMIZE ANYHING HERE
-UI components used:
-  - form/datepicker --}}
 
 @component('laravel-views::components.form.datepicker', [
-  'name' => "filters[{$view->id}]",
-  'model' => "filters.{$view->id}",
-  'value' => $view->selected()['selected'],
-  'id' => $view->getId(),
+  'name' => "filters[{$filter->id}]",
+  'model' => "filters.{$filter->id}",
+  'value' => $filter->selected()['selected'],
+  'id' => $filter->getId(),
 ])
 @endcomponent
