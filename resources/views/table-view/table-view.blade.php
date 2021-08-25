@@ -1,16 +1,13 @@
-<x-dynamic-component :component="$this->getComponent('layout')">
-  <x-slot name="header">
-    <div class="pr-3">
-      @if ($this->header)
-        <div class="mb-4">
-          {!! $this->header !!}
-        </div>
-      @endif
-      
-      {{-- Search input and filters --}}
-      <x-dynamic-component :component="$this->getComponent('toolbar')" :showSelectAll="false" />
+<div>
+  <x-dynamic-component :component="$this->component('alerts-handler')" />
+  <div class="pr-3">
+    <div class="mb-4">
+      {!! $this->header !!}
     </div>
-  </x-slot>
+
+    {{-- Search input and filters --}}
+    <x-dynamic-component :component="$this->component('toolbar')" :showSelectAll="false" />
+  </div>
 
   @if (count($this->items))
     {{-- Content table --}}
@@ -29,7 +26,7 @@
             @endif
             {{-- Renders all the headers --}}
             @foreach ($this->headers as $header)
-              <x-dynamic-component :component="$header->getComponent('table-header')" :header="$header"
+              <x-dynamic-component :component="$header->component('table-header')" :header="$header"
                 :sortBy="$this->sortBy" :sortOrder="$this->sortOrder" />
             @endforeach
 
@@ -61,7 +58,7 @@
               @if (count($this->actions) > 0)
                 <td>
                   <div class="px-3 py-2 flex justify-end">
-                    <x-dynamic-component :component="$this->getComponent('actions')" :actions="$this->actions"
+                    <x-dynamic-component :component="$this->component('actions-container')" :actions="$this->actions"
                       :model="$item" />
                   </div>
                 </td>
@@ -85,4 +82,6 @@
   <div class="p-4">
     {{ $this->items->links() }}
   </div>
-</x-dynamic-component>
+
+  <x-dynamic-component :component="$this->component('confirmation-message')" />
+</div>-

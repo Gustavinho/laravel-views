@@ -5,29 +5,32 @@ namespace LaravelViews\Views\Traits;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Livewire\Exceptions\PropertyNotFoundException;
+use LaravelViews\Exceptions\ComponentNotFoundException;
 
 trait WithDynamicComponents
 {
-    protected function components(): array
+    protected $components = [];
+
+    public function components($components)
     {
-        return [];
+        $this->components = array_merge($this->components, $components);
     }
 
-    public function getComponent($component, $defaultComponent = null)
+    public function component($component)
     {
-        if (is_null($component)) return null;
-
         try {
             return $this->getComponentProperty($component);
-        } catch (PropertyNotFoundException $e) {
-            if (!is_null($this->componentParent())) {
-                return $this->componentParent()?->getComponent($component, $defaultComponent);
+        } catch (ComponentNotFoundException $e) {
+
+            $configuration = 'laravel-views.components';
+
+            if (property_exists($this, 'configSet')) {
+                $configuration = implode('.', [$configuration, $this->configSet]);
             }
 
-            $components = array_merge(config('laravel-views.components'), $this->components());
+            $components = array_merge(config($configuration), $this->components);
 
-            return Arr::get($components, $component) ?? $this->getComponent($defaultComponent);
+            return Arr::get($components, $component) ?? Arr::get($components, $component);
         }
     }
 
@@ -42,11 +45,6 @@ trait WithDynamicComponents
             return app()->call([$this, $componentMethodName]);
         }
 
-        throw new PropertyNotFoundException($component, static::class);
-    }
-
-    protected function componentParent()
-    {
-        return null;
+        throw new ComponentNotFoundException($component, static::class);
     }
 }

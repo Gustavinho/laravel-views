@@ -2,11 +2,13 @@
 
 namespace LaravelViews\Actions;
 
+use Artificertech\LaravelRenderable\Renderable;
+use Illuminate\Contracts\View\View as ViewContract;
 use LaravelViews\Views\View;
 use Illuminate\Support\Str;
 use LaravelViews\Views\Traits\WithDynamicComponents;
 
-abstract class Action
+abstract class Action implements Renderable
 {
     use WithDynamicComponents;
 
@@ -16,33 +18,26 @@ abstract class Action
     /** @var String $icon Feather icon name*/
     public $icon;
 
-    public $id;
-
     /** Item the action will be executed with */
     public $item;
 
     /**
      * Current view that executed the action
-     * @var View $view
+     * @var \Livewire\Component $component
      */
-    public $view;
-
-    public function __construct()
-    {
-        $this->id = $this->getId();
-    }
+    public $component;
 
     public function isRedirect()
     {
         return get_class($this) === RedirectAction::class;
     }
 
-    public function getId()
+    public function id()
     {
         return Str::camelToDash((new \ReflectionClass($this))->getShortName());
     }
 
-    public function renderIf($item, View $view)
+    public function renderIf($item, \Livewire\Component $component)
     {
         return true;
     }
@@ -64,7 +59,7 @@ abstract class Action
             'danger' => __('There was an error executing this action'),
         ];
 
-        $this->view->emitSelf('notify', [
+        $this->component->emitSelf('notify', [
             'message' => $message ? $message : $messages[$type],
             'type' => $type
         ]);
@@ -72,11 +67,21 @@ abstract class Action
 
     public function shouldBeConfirmed()
     {
-        return method_exists($this, 'getConfirmationMessage');
+        return method_exists($this, 'confirmationMessage');
     }
 
     protected function componentParent()
     {
-        return $this->view;
+        return $this->component;
+    }
+
+    public function variableName(): string
+    {
+        return 'action';
+    }
+
+    public function render(): ViewContract
+    {
+        return view('laravel-views::actions.action');
     }
 }

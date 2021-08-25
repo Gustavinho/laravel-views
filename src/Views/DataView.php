@@ -6,12 +6,11 @@ use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\QueryStringData;
-use LaravelViews\Views\Traits\WithActions;
 use Livewire\WithPagination;
 
 abstract class DataView extends View
 {
-    use WithPagination, WithActions;
+    use WithPagination;
 
     protected $queryString = [
         'search' => ['except' => ''],

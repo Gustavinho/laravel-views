@@ -9,9 +9,7 @@ use LaravelViews\Views\Traits\WithActions;
 
 class DetailView extends View
 {
-    use WithActions;
-
-    protected $view = 'detail-view.detail-view';
+    protected $view = 'laravel-views::detail-view.detail-view';
     protected $modelClass;
 
     public $model;

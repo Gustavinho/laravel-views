@@ -1,18 +1,17 @@
 {{-- Filters dropdown --}}
-@if (isset($this->filtersViews) && $this->filtersViews)
-  <x-dynamic-component :component="$this->getComponent('filters-dropdown', 'dropdown')" label="Filters">
+@if (!empty($this->filters))
+  <x-dynamic-component :component="$this->component('dropdown')" label="Filters">
     {{-- Each filter view --}}
-    @foreach ($this->filtersViews as $filter)
+    @foreach ($this->filters as $filter)
       {{-- Filter title --}}
-      <x-dynamic-component :component="$this->getComponent('filter-dropdown-header', 'dropdown-header')"
-        :label="$filter->getTitle()" />
+      <x-dynamic-component :component="$this->component('dropdown-header')" :label="$filter->getTitle()" />
       <div class="px-4 mt-4">
         {{-- Filter view --}}
-        <x-dynamic-component :component="$this->getComponent('filters-'.$filter->view)" :filter="$filter" />
+        <x-dynamic-component :component="$this->component('filters-'.$filter->view)" :filter="$filter" />
       </div>
     @endforeach
 
-    @if (count($this->filters) > 0)
+    @if (count($this->activeFilters) > 0)
       {{-- Clear filters button --}}
       <div class="p-4 bg-gray-100 text-right flex justify-end">
         <button wire:click.prevent="clearFilters" @click="open = false"

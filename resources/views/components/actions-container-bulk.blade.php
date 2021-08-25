@@ -1,12 +1,12 @@
-@props(['showSelectAll' => true])
+@props(['actions' => [], 'model' => null, 'showSelectAll' => true])
+
 <div class="flex space-x-1">
   @if (count($this->selected) > 0)
-    <x-dynamic-component :component="$this->getComponent('bulk-dropdown', 'dropdown')" label='Actions'>
-      <x-dynamic-component :component="$this->getComponent('bulk-dropdown-header', 'dropdown-header')"
+    <x-dynamic-component :component="$this->component('dropdown')" label='Actions'>
+      <x-dynamic-component :component="$this->component('dropdown-header')"
         label='{{ count($this->selected) }} Selected' />
       @foreach ($this->bulkActions as $action)
-        <x-dynamic-component :component="$action->getComponent('action-bulk', 'icon-text-button')" :icon="$action->icon"
-          :text="$action->title" wire:click.prevent="executeBulkAction('{{ $action->id }}')" />
+        <x-renderable :renderable="$action" :model="$model" />
       @endforeach
     </x-dynamic-component>
   @endif

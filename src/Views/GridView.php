@@ -5,7 +5,7 @@ namespace LaravelViews\Views;
 class GridView extends ItemView
 {
     /** Component name */
-    protected $view = 'grid-view.grid-view';
+    protected $view = 'laravel-views::grid-view.grid-view';
 
     /** Add a white background on each card */
     public $withBackground = false;

@@ -9,26 +9,26 @@ UI components used:
 <div class="md:flex items-center">
   {{-- Search input --}}
   <div class="flex-1">
-    <x-dynamic-component :component="$this->getComponent('toolbar-search')" />
+    <x-dynamic-component :component="$this->component('toolbar-search')" />
   </div>
 
   {{-- Actions on the left --}}
   <div class="flex space-x-1 flex-1 justify-end items-center mb-4">
     {{-- Bulk actions --}}
     <div>
-      <x-dynamic-component :component="$this->getComponent('actions-bulk')" :showSelectAll="$showSelectAll" />
+      <x-dynamic-component :component="$this->component('actions-container-bulk')" :showSelectAll="$showSelectAll" />
     </div>
 
     {{-- Sorting --}}
     @if (isset($this->sortableBy) && $this->sortableBy->isNotEmpty())
       <div>
-        <x-dynamic-component :component="$this->getComponent('toolbar-sorting')" />
+        <x-dynamic-component :component="$this->component('toolbar-sorting')" />
       </div>
     @endif
 
     {{-- Filters --}}
     <div>
-      <x-dynamic-component :component="$this->getComponent('toolbar-filters')" />
+      <x-dynamic-component :component="$this->component('toolbar-filters')" />
     </div>
   </div>
 </div>

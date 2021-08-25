@@ -9,7 +9,7 @@ class ListView extends ItemView
     use WithSortableDropdown;
 
     /** Component name */
-    protected $view = 'list-view.list-view';
+    protected $view = 'laravel-views::list-view.list-view';
 
     public $itemComponent = 'laravel-views::list-view.list-item';
 

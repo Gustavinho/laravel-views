@@ -1,22 +1,24 @@
 @props([
-  'image' => '',
-  'title' => '',
-  'subtitle' => '',
-  'description' => '',
-  'withBackground' => false,
-  'model',
-  'actions' => [],
-  'hasDefaultAction' => false,
-  'selected' => false
+    'image' => '',
+    'title' => '',
+    'subtitle' => '',
+    'description' => '',
+    'withBackground' => false,
+    'model',
+    'actions' => [],
+    'hasDefaultAction' => false,
+    'selected' => false,
 ])
 
 <div class="{{ $withBackground ? 'rounded-md shadow-md' : '' }}">
   @if ($hasDefaultAction)
     <a href="#!" wire:click.prevent="onCardClick({{ $model->id }})">
-      <img src="{{ $image }}" alt="{{ $image }}" class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }} {{ $selected ? variants('gridView.selected') : "" }}">
+      <img src="{{ $image }}" alt="{{ $image }}"
+        class="hover:shadow-lg cursor-pointer rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }} {{ $selected ? variants('gridView.selected') : '' }}">
     </a>
   @else
-    <img src="{{ $image }}" alt="{{ $image }}" class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? variants('gridView.selected') : "" }}">
+    <img src="{{ $image }}" alt="{{ $image }}"
+      class="rounded-md h-48 w-full object-cover {{ $withBackground ? 'rounded-b-none' : '' }}  {{ $selected ? variants('gridView.selected') : '' }}">
   @endif
 
   <div class="pt-4 {{ $withBackground ? 'bg-white rounded-b-md p-4' : '' }}">
@@ -40,7 +42,8 @@
 
       @if (count($actions))
         <div class="flex justify-end items-center">
-          <x-dynamic-component :component="$this->getComponent('actions')" :actions="$this->actions" :model="$model" :desktop="false"/>
+          <x-dynamic-component :component="$this->component('actions-container')" :actions="$this->actions"
+            :model="$model" :desktop="false" />
         </div>
       @endif
     </div>

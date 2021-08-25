@@ -64,8 +64,8 @@ trait WithActions
     private function confirmAction($action, $modelId = null)
     {
         $actionData = [
-            'message' => $action->getConfirmationMessage($modelId ? $this->getModelWhoFiredAction($modelId) : null),
-            'id' => $action->getId()
+            'message' => $action->confirmationMessage($modelId ? $this->getModelWhoFiredAction($modelId) : null),
+            'id' => $action->id()
         ];
 
         if ($modelId) {
@@ -81,11 +81,11 @@ trait WithActions
     {
         $action = collect($this->actions)->merge($this->bulkActions)->first(
             function ($actionToFind) use ($actionId) {
-                return $actionToFind->id === $actionId;
+                return $actionToFind->id() === $actionId;
             }
         );
 
-        $action->view = $this;
+        $action->component = $this;
 
         return $action;
     }
@@ -98,7 +98,7 @@ trait WithActions
         if (method_exists($this, 'actions')) {
             $actions = $this->actions();
             foreach ($actions as $action) {
-                $action->view = $this;
+                $action->component = $this;
             }
             return $actions;
         }

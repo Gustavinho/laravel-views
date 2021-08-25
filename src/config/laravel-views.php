@@ -60,16 +60,16 @@ return [
     ],
 
     'components' => [
-        'layout' => 'laravel-views::layout',
+        // General Components
         'alerts-handler' => 'laravel-views::alerts.handler',
         'alert' => 'laravel-views::alerts.alert',
         'confirmation-message' => 'laravel-views::confirmation-message',
         'modal' => 'laravel-views::modal',
         'dropdown' => 'laravel-views::dropdown.drop-down',
         'dropdown-header' => 'laravel-views::dropdown.header',
-        'actions' => 'laravel-views::actions.actions',
-        'actions-bulk' => 'laravel-views::actions.bulk',
-        'icon' => 'laravel-views::.icon',
+        'actions-container' => 'laravel-views::actions-container',
+        'actions-container-bulk' => 'laravel-views::actions-container-bulk',
+        'icon' => 'laravel-views::icon',
         'icon-button' => 'laravel-views::buttons.icon',
         'icon-text-button' => 'laravel-views::buttons.icon-and-text',
         'toolbar' => 'laravel-views::toolbar.toolbar',
@@ -79,8 +79,19 @@ return [
         'heading' => 'laravel-views::heading',
         'checkbox' => 'laravel-views::form.checkbox',
         'table-header' => 'laravel-views::table-header',
-        'filters-select' => 'laravel-views::filters.select',
-        'filters-boolean' => 'laravel-views::filters.boolean',
-        'filters-date' => 'laravel-views::filters.date',
+        'form-select' => 'laravel-views::form.select',
+
+        // Components Used by Actions
+        'actions' => [
+            'mobile' => 'laravel-views::actions.mobile',
+            'desktop' => 'laravel-views::actions.desktop',
+        ],
+
+        // Components used by Filters
+        'filters' => [
+            'select' => 'laravel-views::filters.select',
+            'boolean' => 'laravel-views::filters.boolean',
+            'date' => 'laravel-views::filters.date',
+        ]
     ],
 ];

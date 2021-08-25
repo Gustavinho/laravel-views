@@ -7,7 +7,7 @@ use LaravelViews\UI\Header;
 abstract class TableView extends DataView
 {
     /** Component name */
-    protected $view = 'table-view.table-view';
+    protected $view = 'laravel-views::table-view.table-view';
 
     public function getHeadersProperty()
     {

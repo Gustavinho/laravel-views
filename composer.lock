@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43866e3bb91af1c88ece09a6f9dd678b",
+    "content-hash": "66758611da470d0e8812f3160f39edcd",
     "packages": [
+        {
+            "name": "artificertech/laravel-renderable",
+            "version": "v1.0-beta.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artificertech/laravel-renderable.git",
+                "reference": "30e1f826aa49245a0c62d8995dd4d98222a056ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artificertech/laravel-renderable/zipball/30e1f826aa49245a0c62d8995dd4d98222a056ac",
+                "reference": "30e1f826aa49245a0c62d8995dd4d98222a056ac",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~7|~8"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~5|~6",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Artificertech\\LaravelRenderable\\LaravelRenderableServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelRenderable": "Artificertech\\LaravelRenderable\\Facades\\LaravelRenderable"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Artificertech\\LaravelRenderable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cole Shirley",
+                    "email": "cole.shirley@artificertech.com"
+                }
+            ],
+            "description": "A package for creating classes that can be rendered as components in blade views",
+            "homepage": "https://github.com/artificertech/laravel-renderable",
+            "keywords": [
+                "LaravelRenderable",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/artificertech/laravel-renderable/issues",
+                "source": "https://github.com/artificertech/laravel-renderable/tree/v1.0-beta.1"
+            },
+            "time": "2021-08-19T23:26:48+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.9.2",
@@ -7248,5 +7307,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

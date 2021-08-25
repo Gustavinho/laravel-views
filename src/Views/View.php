@@ -5,19 +5,20 @@ namespace LaravelViews\Views;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use LaravelViews\Facades\UI;
+use LaravelViews\Views\Traits\WithActions;
 use LaravelViews\Views\Traits\WithDynamicComponents;
 use Livewire\Component;
 
 abstract class View extends Component
 {
-    use WithDynamicComponents;
+    use WithDynamicComponents, WithActions;
 
     protected $view;
     public $viewName;
 
     public function render()
     {
-        return view("laravel-views::{$this->view}");
+        return view($this->view);
     }
 
     public function getClassName()
