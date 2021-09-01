@@ -2,14 +2,25 @@
 
 namespace LaravelViews\Filters;
 
+use Artificertech\LaravelRenderable\Renderable;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
+use LaravelViews\Views\Traits\WithDynamicComponents;
 
-class BaseFilter
+abstract class BaseFilter implements Renderable
 {
-    protected $title;
+    use WithDynamicComponents;
+    protected $view;
+
+    public $title;
     public $defaultValue;
     public $id;
 
+    /**
+     * Create a new BaseFilter instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->id = $this->getId();
@@ -65,5 +76,10 @@ class BaseFilter
     public function passValuesFromRequestToFilter($values)
     {
         return $values;
+    }
+
+    public function variableName(): string
+    {
+        return 'filter';
     }
 }

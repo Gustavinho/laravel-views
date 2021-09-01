@@ -6,15 +6,15 @@ use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\QueryStringData;
+use LaravelViews\Views\Traits\WithFilters;
 use Livewire\WithPagination;
 
 abstract class DataView extends View
 {
-    use WithPagination;
+    use WithPagination, WithFilters;
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'filters',
         'sortBy',
         'sortOrder'
     ];
@@ -31,11 +31,6 @@ abstract class DataView extends View
     /** @var String $search Current query string with the search value */
     public $search;
 
-    /** @var String $filters Current query string with the filters value */
-    public $filters = [];
-
-    /** @var Array<BaseFilter> $filtersViews All filters customized in the child class */
-    public $filtersViews;
 
     /** @var Array<String> $searchBy All fields to search */
     public $searchBy;
@@ -47,34 +42,12 @@ abstract class DataView extends View
     public $selected = [];
     public $allSelected = false;
 
-    public function hydrate()
-    {
-        $this->filtersViews = $this->filters();
-    }
-
     public function mount(QueryStringData $queryStringData)
     {
-        $this->filtersViews = $this->filters();
         $this->search = $queryStringData->getSearchValue($this->search);
-
-        $this->filters = $queryStringData->getFilterValues($this->filters);
-
-        $this->applyDefaultFilters();
 
         $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
         $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
-    }
-
-    /**
-     * Check if each of the filters has a default value and it's not already set
-     */
-    public function applyDefaultFilters()
-    {
-        foreach ($this->filters() as $filter) {
-            if (empty($this->filters[$filter->id]) && $filter->defaultValue) {
-                $this->filters[$filter->id] = $filter->defaultValue;
-            }
-        }
     }
 
     public function getItemsProperty()
@@ -93,16 +66,6 @@ abstract class DataView extends View
     public function updatingSearch()
     {
         $this->resetPage();
-    }
-
-    public function updatingFilters()
-    {
-        $this->resetPage();
-    }
-
-    protected function filters()
-    {
-        return [];
     }
 
     /**
@@ -137,7 +100,7 @@ abstract class DataView extends View
     {
         $query = clone $this->initialQuery;
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
-        $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
+        $query = $this->applyFilters($query);
         $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
 
         return $query->paginate($this->paginate);
@@ -161,11 +124,6 @@ abstract class DataView extends View
             $this->sortBy = $field;
             $this->sortOrder = 'asc';
         }
-    }
-
-    public function clearFilters()
-    {
-        $this->filters = [];
     }
 
     public function clearSearch()
