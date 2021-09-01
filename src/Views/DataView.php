@@ -2,22 +2,17 @@
 
 namespace LaravelViews\Views;
 
-use LaravelViews\Data\Contracts\Filterable;
-use LaravelViews\Data\Contracts\Searchable;
-use LaravelViews\Data\Contracts\Sortable;
-use LaravelViews\Data\QueryStringData;
 use LaravelViews\Views\Traits\WithFilters;
+use LaravelViews\Views\Traits\WithSearch;
+use LaravelViews\Views\Traits\WithSorting;
 use Livewire\WithPagination;
 
 abstract class DataView extends View
 {
-    use WithPagination, WithFilters;
-
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'sortBy',
-        'sortOrder'
-    ];
+    use WithPagination,
+        WithFilters,
+        WithSearch,
+        WithSorting;
 
     /**
      * (Override) int Number of items to be showed,
@@ -28,27 +23,8 @@ abstract class DataView extends View
     /** @var int $total Total of items found */
     public $total = 0;
 
-    /** @var String $search Current query string with the search value */
-    public $search;
-
-
-    /** @var Array<String> $searchBy All fields to search */
-    public $searchBy;
-
-    public $sortBy = null;
-
-    public $sortOrder = 'asc';
-
     public $selected = [];
     public $allSelected = false;
-
-    public function mount(QueryStringData $queryStringData)
-    {
-        $this->search = $queryStringData->getSearchValue($this->search);
-
-        $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
-        $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
-    }
 
     public function getItemsProperty()
     {
@@ -58,14 +34,6 @@ abstract class DataView extends View
     protected function appCallData()
     {
         return ['items' => $this->items];
-    }
-
-    /**
-     * Reset pagination
-     */
-    public function updatingSearch()
-    {
-        $this->resetPage();
     }
 
     /**
@@ -96,38 +64,13 @@ abstract class DataView extends View
      * Returns the items from the database regarding to the filters selected by the user
      * applies the search query, the filters used and the total of items found
      */
-    public function getQueryProperty(Searchable $searchable, Filterable $filterable, Sortable $sortable)
+    public function getQueryProperty()
     {
         $query = clone $this->initialQuery;
-        $query = $searchable->searchItems($query, $this->searchBy, $this->search);
+        $query = $this->applySearch($query);
         $query = $this->applyFilters($query);
-        $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
+        $query = $this->applySorting($query);
 
         return $query->paginate($this->paginate);
-    }
-
-
-    /**
-     * LIVEWIERE ACTIONS ARE HERE
-     * All these actions are executed from the UI and those aren't for internal use
-     */
-
-    /**
-     * Sets the field the table view data will be sort by
-     * @param string $field Field to sort by
-     */
-    public function sort($field)
-    {
-        if ($this->sortBy === $field) {
-            $this->sortOrder = $this->sortOrder === 'asc' ? 'desc' : 'asc';
-        } else {
-            $this->sortBy = $field;
-            $this->sortOrder = 'asc';
-        }
-    }
-
-    public function clearSearch()
-    {
-        $this->search = '';
     }
 }

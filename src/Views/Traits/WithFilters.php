@@ -2,6 +2,8 @@
 
 namespace LaravelViews\Views\Traits;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use LaravelViews\Data\QueryStringData;
 
 trait WithFilters
@@ -38,10 +40,20 @@ trait WithFilters
         return $query;
     }
 
-    public function updatedFilter($value, $key)
+    public function updatedWithFilters($name, $value)
     {
-        if ($value == '' || $value == null) unset($this->filter[$key]);
-        $this->resetPage();
+        $name = Str::of($name);
+        $key = $name->after('.');
+        $name = $name->before('.');
+
+        if ($name == 'filter') {
+            if ($value == '' || $value == null)
+                Arr::forget($this->filter, $key);
+
+            if (method_exists($this, 'resetPage')) {
+                $this->resetPage(); // reset pagingation
+            }
+        }
     }
 
     protected function filters()
