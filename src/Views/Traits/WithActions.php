@@ -9,6 +9,45 @@ trait WithActions
 {
     private $shouldVerifyConfirmation = true;
 
+    /** @var Array Defined bulk actions */
+    public $bulkActions = [];
+
+    /** @var Array Defined bulk actions */
+    public $actions = [];
+
+    public $selected = [];
+
+    public $allSelected = false;
+
+    public function updatedAllSelected($value)
+    {
+        $this->selected = $value ? $this->query->pluck('id')->map(function ($id) {
+            return (string)$id;
+        })->toArray() : [];
+    }
+
+    public function mountWithActions()
+    {
+        if (method_exists($this, 'bulkActions')) {
+            $this->bulkActions = $this->bulkActions();
+        }
+
+        if (method_exists($this, 'actions')) {
+            $this->actions = $this->actions();
+        }
+    }
+
+    public function hydrateWithActions()
+    {
+        if (method_exists($this, 'bulkActions')) {
+            $this->bulkActions = $this->bulkActions();
+        }
+
+        if (method_exists($this, 'actions')) {
+            $this->actions = $this->actions();
+        }
+    }
+
     /**
      * @param string $action Action's name
      * @param string $id Model's id
@@ -79,7 +118,7 @@ trait WithActions
      */
     private function findAction(string $actionId)
     {
-        $action = collect($this->actions)->merge($this->bulkActions)->first(
+        $action = clone collect($this->actions)->merge($this->bulkActions)->first(
             function ($actionToFind) use ($actionId) {
                 return $actionToFind->id() === $actionId;
             }
@@ -88,35 +127,5 @@ trait WithActions
         $action->component = $this;
 
         return $action;
-    }
-
-    /**
-     * Computed properties
-     */
-    public function getActionsProperty()
-    {
-        if (method_exists($this, 'actions')) {
-            $actions = $this->actions();
-            foreach ($actions as $action) {
-                $action->component = $this;
-            }
-            return $actions;
-        }
-
-        return [];
-    }
-
-    public function getBulkActionsProperty()
-    {
-        if (method_exists($this, 'bulkActions')) {
-            return $this->bulkActions();
-        }
-
-        return [];
-    }
-
-    public function getHasBulkActionsProperty()
-    {
-        return method_exists($this, 'bulkActions') && count($this->bulkActions) > 0;
     }
 }

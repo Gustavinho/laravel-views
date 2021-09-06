@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use LaravelViews\Exceptions\ComponentNotFoundException;
 
-trait WithDynamicComponents
+trait WithConfigurableComponents
 {
     protected $components = [];
 

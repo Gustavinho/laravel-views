@@ -2,11 +2,8 @@
 
 namespace LaravelViews\UI;
 
-use LaravelViews\Views\Traits\WithDynamicComponents;
-
 class Header
 {
-    use WithDynamicComponents;
 
     /** @var string Header's title to be shown */
     public $title;
@@ -17,12 +14,6 @@ class Header
     /** @var string Width the width of the table column */
     public $width;
 
-    /**
-     * Current view that executed the action
-     * @var View $view
-     */
-    public $view;
-    
     /**
      * Sets the header's title
      * @param string $title Header's title to be shown

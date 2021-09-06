@@ -5,11 +5,11 @@ namespace LaravelViews\Filters;
 use Artificertech\LaravelRenderable\Renderable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
-use LaravelViews\Views\Traits\WithDynamicComponents;
+use LaravelViews\Views\Traits\WithConfigurableComponents;
 
 abstract class BaseFilter implements Renderable
 {
-    use WithDynamicComponents;
+    use WithConfigurableComponents;
     protected $view;
 
     public $title;
@@ -78,7 +78,7 @@ abstract class BaseFilter implements Renderable
         return $values;
     }
 
-    public function variableName(): string
+    public function renderableName(): string
     {
         return 'filter';
     }

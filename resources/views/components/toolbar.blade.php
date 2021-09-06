@@ -6,6 +6,7 @@ UI components used:
   - form/input-group
   - dropdown --}}
 @props(['showSelectAll' => true])
+{{-- Search input and filters --}}
 <div class="md:flex items-center">
   {{-- Search input --}}
   <div class="flex-1">
@@ -13,7 +14,7 @@ UI components used:
   </div>
 
   {{-- Actions on the left --}}
-  <div class="flex space-x-1 flex-1 justify-end items-center mb-4">
+  <div class="flex space-x-1 flex-1 justify-end items-center">
     {{-- Bulk actions --}}
     <div>
       <x-dynamic-component :component="$this->component('actions-container-bulk')" :showSelectAll="$showSelectAll" />

@@ -20,20 +20,9 @@ abstract class DataView extends View
      */
     protected $paginate = 20;
 
-    /** @var int $total Total of items found */
-    public $total = 0;
-
-    public $selected = [];
-    public $allSelected = false;
-
     public function getItemsProperty()
     {
         return $this->query;
-    }
-
-    protected function appCallData()
-    {
-        return ['items' => $this->items];
     }
 
     /**
@@ -43,13 +32,6 @@ abstract class DataView extends View
     public function getModelWhoFiredAction($id)
     {
         return (clone $this->initialQuery)->find($id);
-    }
-
-    public function updatedAllSelected($value)
-    {
-        $this->selected = $value ? $this->query->pluck('id')->map(function ($id) {
-            return (string)$id;
-        })->toArray() : [];
     }
 
     public function getInitialQueryProperty()
@@ -72,5 +54,10 @@ abstract class DataView extends View
         $query = $this->applySorting($query);
 
         return $query->paginate($this->paginate);
+    }
+
+    public function clickable()
+    {
+        return method_exists($this, 'itemOnClick');
     }
 }

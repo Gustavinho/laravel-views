@@ -148,6 +148,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
         foreach ($laravelViews->components() as $path => $component) {
             Blade::component('laravel-views::components.' . $path, 'lv-' . $component);
         }
+
         Blade::component('laravel-views::components.layout', 'lv-layout');
 
         // Registering class components

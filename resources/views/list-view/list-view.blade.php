@@ -1,35 +1,52 @@
 <div>
-  <div class="px-4">
-    @if ($this->header)
-      <div class="mb-4">
-        {!! $this->header !!}
-      </div>
-    @endif
-
-    {{-- Search input and filters --}}
-    <x-dynamic-component :component="$this->component('toolbar')" />
-  </div>
+  <x-dynamic-component :component="$this->component('alerts-handler')" />
 
   <div>
-    @foreach ($this->items as $item)
-      <div class="flex items-center border-b border-gray-200 ">
-        @if ($this->hasBulkActions)
-          <div class="h-full flex items-center pl-3 md:pl-4">
-            <x-dynamic-component :component="$this->component('checkbox')" wire:model="selected"
-              value="{{ $item->getKey() }}" />
-          </div>
-        @endif
-        <div class="flex-1 py-2 px-3 md:px-4">
-          {!! $this->getItemComponent($item, 'listItem')->render() !!}
-        </div>
-        <x-dynamic-component :component="$this->component('actions-container')" :actions="$this->actions"
-          :model="$item" />
+    @if ($this->component('header'))
+      <x-dynamic-component :component="$this->component('header')" class="mb-4" />
+    @endif
+
+    @include('laravel-views::toolbar')
+  </div>
+  <div>
+    @forelse  ($this->items as $item)
+      <div @if (method_exists($this, 'itemOnClick')) wire:click="itemOnClick" @endif>
+
+        <x-dynamic-component :component="$this->component('item')" :item="$item">
+
+          @if (!empty($this->bulkActions))
+            <x-slot name="bulkCheckbox">
+              <x-lv-checkbox wire:model="selected" value="{{ $item->getKey() }}" />
+            </x-slot>
+          @endif
+
+          @if (!empty($this->actions))
+            <x-slot name="actions">
+              <x-dynamic-component :component="$this->component('actions-container')" :actions="$this->actions"
+                :model="$item" />
+            </x-slot>
+          @endif
+
+        </x-dynamic-component>
+
       </div>
-    @endforeach
+    @empty
+      <div class="flex justify-center items-center p-4">
+        <h3>{{ __('It looks like there are no results') }}</h3>
+      </div>
+    @endforelse
   </div>
 
   {{-- Paginator, loading indicator and totals --}}
-  <div class="mt-8 px-4">
-    {{ $this->items->links() }}
-  </div>
+  @if ($this->items->hasPages())
+    <div class="mt-8">
+      {{ $this->items->links() }}
+    </div>
+  @endif
+
+  @if ($this->component('footer'))
+    <x-dynamic-component :component="$this->component('footer')" class="mt-4" />
+  @endif
+
+  <x-dynamic-component :component="$this->component('confirmation-message')" />
 </div>

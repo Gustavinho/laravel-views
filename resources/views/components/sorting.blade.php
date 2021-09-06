@@ -4,6 +4,7 @@ Renders the dropdown for the sorting select
 To customize it you should shange the UI component used, YOU SHOULD NOT CUSTOMIZE ANYHING HERE
 UI components used:
   - form/select --}}
+
 <div class="leading-tight">
   {{-- Sorting dropdown --}}
   <x-lv-drop-down>

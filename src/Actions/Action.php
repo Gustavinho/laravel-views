@@ -4,14 +4,10 @@ namespace LaravelViews\Actions;
 
 use Artificertech\LaravelRenderable\Renderable;
 use Illuminate\Contracts\View\View as ViewContract;
-use LaravelViews\Views\View;
 use Illuminate\Support\Str;
-use LaravelViews\Views\Traits\WithDynamicComponents;
 
 abstract class Action implements Renderable
 {
-    use WithDynamicComponents;
-
     /** @var String $title Title of the action */
     public $title;
 
@@ -70,12 +66,7 @@ abstract class Action implements Renderable
         return method_exists($this, 'confirmationMessage');
     }
 
-    protected function componentParent()
-    {
-        return $this->component;
-    }
-
-    public function variableName(): string
+    public function renderableName(): string
     {
         return 'action';
     }

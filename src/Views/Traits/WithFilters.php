@@ -8,7 +8,10 @@ use LaravelViews\Data\QueryStringData;
 
 trait WithFilters
 {
-    /** @var Array Current query string with the filters value */
+    /** @var Array Defined filters */
+    public $filters = [];
+
+    /** @var Array Current active filters from the request query string */
     public $filter = [];
 
     public function mountWithFilters(QueryStringData $queryStringData)
@@ -16,11 +19,19 @@ trait WithFilters
         $this->queryString[] = 'filter';
 
         $this->filter = $queryStringData->getFilterValues($this->filter);
+
+        if (method_exists($this, 'filters')) {
+            $this->filters = $this->filters();
+        }
     }
 
     public function hydrateWithFilters()
     {
         $this->queryString[] = 'filter';
+
+        if (method_exists($this, 'filters')) {
+            $this->filters = $this->filters();
+        }
     }
 
     /**
@@ -54,16 +65,6 @@ trait WithFilters
                 $this->resetPage(); // reset pagingation
             }
         }
-    }
-
-    protected function filters()
-    {
-        return [];
-    }
-
-    public function getFiltersProperty()
-    {
-        return $this->filters();
     }
 
     public function clearFilters()

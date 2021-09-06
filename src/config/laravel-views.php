@@ -72,26 +72,12 @@ return [
         'icon' => 'laravel-views::icon',
         'icon-button' => 'laravel-views::buttons.icon',
         'icon-text-button' => 'laravel-views::buttons.icon-and-text',
-        'toolbar' => 'laravel-views::toolbar.toolbar',
-        'toolbar-search' => 'laravel-views::toolbar.search',
-        'toolbar-sorting' => 'laravel-views::toolbar.sorting',
-        'toolbar-filters' => 'laravel-views::toolbar.filters',
-        'heading' => 'laravel-views::heading',
+        'toolbar' => 'laravel-views::toolbar',
+        'search' => 'laravel-views::search',
+        'sorting' => 'laravel-views::sorting',
+        'filters' => 'laravel-views::filters',
         'checkbox' => 'laravel-views::form.checkbox',
         'table-header' => 'laravel-views::table-header',
         'form-select' => 'laravel-views::form.select',
-
-        // Components Used by Actions
-        'actions' => [
-            'mobile' => 'laravel-views::actions.mobile',
-            'desktop' => 'laravel-views::actions.desktop',
-        ],
-
-        // Components used by Filters
-        'filters' => [
-            'select' => 'laravel-views::filters.select',
-            'boolean' => 'laravel-views::filters.boolean',
-            'date' => 'laravel-views::filters.date',
-        ]
     ],
 ];
