@@ -133,10 +133,6 @@ class LaravelViewsServiceProvider extends ServiceProvider
             return $laravelViews->css($options);
         });
 
-        Blade::directive('decodeWireAttributes', function () {
-            return '<?php foreach ($attributes->whereStartsWith(\'wire:\') as $key => $value) {$attributes[$key] = html_entity_decode($value, ENT_QUOTES); } ?>';
-        });
-
         return $this;
     }
 

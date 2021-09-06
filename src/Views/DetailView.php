@@ -8,13 +8,11 @@ abstract class DetailView extends View
 
     public $model;
 
-    public $detailsComponent = "laravel-views::details";
-
-    public $stripe = false;
+    public $detailsComponent = 'laravel-views::details';
 
     public function render()
     {
-        return view('laravel-views::detail-view.detail-view');
+        return view('laravel-views::detail-view');
     }
 
     public function getModelWhoFiredAction()

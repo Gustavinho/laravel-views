@@ -1,3 +1,5 @@
+@props(['model'])
+
 @if (!empty(($title = $this->title)))
   <div {{ $attributes }}>
     <div class="font-bold text-2xl text-gray-900">

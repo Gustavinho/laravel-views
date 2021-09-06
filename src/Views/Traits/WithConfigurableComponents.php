@@ -2,48 +2,51 @@
 
 namespace LaravelViews\Views\Traits;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\View\ComponentAttributeBag;
 use LaravelViews\Exceptions\ComponentNotFoundException;
 
 trait WithConfigurableComponents
 {
-    protected $components = [];
-
-    public function components($components)
-    {
-        $this->components = array_merge($this->components, $components);
-    }
-
     public function component($component)
     {
-        try {
-            return $this->getComponentProperty($component);
-        } catch (ComponentNotFoundException $e) {
-
-            $configuration = 'laravel-views.components';
-
-            if (property_exists($this, 'configSet')) {
-                $configuration = implode('.', [$configuration, $this->configSet]);
-            }
-
-            $components = array_merge(config($configuration), $this->components);
-
-            return Arr::get($components, $component) ?? Arr::get($components, $component);
-        }
+        return $this->componentConfiguration($component)['component'];
     }
 
-    protected function getComponentProperty($component)
+    public function componentAttributes($component)
     {
-        $studlyComponent = Str::finish(str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $component))), 'Component');
-        $componentPropertyName = lcfirst($studlyComponent);
+        return $this->componentConfiguration($component)['attributes'];
+    }
 
-        if (property_exists($this, $componentPropertyName)) return $this->$componentPropertyName;
+    protected function componentConfiguration($component)
+    {
+        try {
+            $componentConfig = $this->getLocalConfiguration($component);
+        } catch (ComponentNotFoundException $e) {
+            $componentConfig = config("laravel-views.components.{$component}", null);
 
-        if (method_exists($this, $componentMethodName = 'get' . $studlyComponent)) {
-            return app()->call([$this, $componentMethodName]);
+            if (is_null($componentConfig)) return ['component' => null, 'attributes' => null];
         }
+
+        if (is_string($componentConfig)) {
+            return [
+                'component' => $componentConfig,
+                'attributes' => null
+            ];
+        }
+
+        $componentConfig['attributes'] = new ComponentAttributeBag($componentConfig['attributes'] ?? []);
+
+        return $componentConfig;
+    }
+
+    protected function getLocalConfiguration($component)
+    {
+        $camelComponent = (string) Str::of($component)->replace('-', '_')->camel()->finish('Component');
+
+        if (property_exists($this, $camelComponent)) return $this->$camelComponent;
+
+        if (method_exists($this, $camelComponent)) return $this->$camelComponent();
 
         throw new ComponentNotFoundException($component, static::class);
     }
