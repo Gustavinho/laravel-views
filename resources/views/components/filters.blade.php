@@ -2,12 +2,12 @@
 @php
 $filters = $this->filters;
 @endphp
-<renderable :renderable="$this->component('dropdown')" label="Filters">
+<x-lv-dropdown label="Filters">
   {{-- Each filter view --}}
   @foreach ($this->filters as $filter)
 
     {{-- Filter title --}}
-    <renderable :renderable="$this->component('dropdown-header')" :label="$filter->getTitle()" />
+    <x-lv-dropdown.header :label="$filter->getTitle()" />
     <div class="px-4 mt-4">
       {{-- Filter view --}}
       <renderable :renderable="$filter"></renderable>
@@ -24,4 +24,4 @@ $filters = $this->filters;
       </button>
     </div>
   @endif
-</renderable>
+</x-lv-dropdown>

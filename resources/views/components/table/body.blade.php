@@ -1,10 +1,10 @@
-<tbody>
+<tbody {{ $attributes }}>
   @foreach ($this->items as $item)
     <tr class="border-b border-gray-200 text-sm" wire:key="{{ $item->getKey() }}">
       @if (!empty($this->bulkActions))
         <td class="pl-3">
           <span class="flex items-center justify-center">
-            <x-lv-checkbox value="{{ $item->getKey() }}" wire:model="selected" />
+            <x-lv-form.checkbox value="{{ $item->getKey() }}" wire:model="selected" />
           </span>
         </td>
       @endif

@@ -14,8 +14,8 @@
   <renderable :renderable="$this->component('details')" />
 
   @if ($this->component('footer'))
-    <renderable :renderable="$this->component('footer')" class="mt-4" />
+    <renderable :renderable="$this->component('footer')" />
   @endif
 
-  <renderable :renderable="$this->component('confirmation-message')" />
+  <renderable :renderable="$this->component('actions-confirmation')" />
 </div>

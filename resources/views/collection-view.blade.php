@@ -1,7 +1,6 @@
 <div>
   <renderable :renderable="$this->component('alerts-handler')" />
 
-
   <div>
     @if ($this->component('header'))
       <renderable :renderable="$this->component('header')" class="mb-4" />
@@ -23,5 +22,5 @@
     <renderable :renderable="$this->component('footer')" class="mt-4" />
   @endif
 
-  <renderable :renderable="$this->component('confirmation-message')" />
+  <renderable :renderable="$this->component('actions-confirmation')" />
 </div>

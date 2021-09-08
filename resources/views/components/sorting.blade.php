@@ -7,17 +7,17 @@ UI components used:
 
 <div class="leading-tight">
   {{-- Sorting dropdown --}}
-  <x-lv-drop-down>
+  <x-lv-dropdown>
     <x-slot name="trigger">
-      <x-lv-select-button>
+      <x-lv-buttons.select>
         {{ __('Sort By') }}@if ($sortableByName = $this->sortableBy->flip()->get($this->sortBy)):
           {{-- <i data-feather="arrow-{{ $sortOrder === 'asc' ? 'up' : 'down' }}" class="h-4 w-4"></i> --}}
           {{ $sortableByName }}
         @endif
-      </x-lv-select-button>
+      </x-lv-buttons.select>
     </x-slot>
 
-    <x-lv-drop-down.header label="Sort by" />
+    <x-lv-dropdown.header label="Sort by" />
 
     {{-- Each sortable item --}}
     @foreach ($this->sortableBy as $title => $column)
@@ -32,5 +32,5 @@ UI components used:
         {{ $title }}
       </a>
     @endforeach
-  </x-lv-drop-down>
+  </x-lv-dropdown>
 </div>

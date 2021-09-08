@@ -3,7 +3,7 @@
     message = notification.message;
     {{-- setTimeout(() => { open = false }, 2500) --}}
   })">
-  <div x-show='open'>
+  <div x-show='open' {{ $attributes }}>
     <template x-if="type === 'danger'">
       <renderable :renderable="$this->component('alert')" type='danger' onClose='open = false'>
         <div x-text='message'></div>

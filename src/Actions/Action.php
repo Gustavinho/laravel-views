@@ -24,7 +24,7 @@ abstract class Action implements Renderable
      */
     public function component()
     {
-        return 'laravel-views::action';
+        return 'laravel-views::actions.action';
     }
 
 

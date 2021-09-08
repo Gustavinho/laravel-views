@@ -6,7 +6,7 @@
 
         @if (!empty($this->bulkActions))
           <x-slot name="bulkCheckbox">
-            <x-lv-checkbox wire:model="selected" value="{{ $item->getKey() }}" />
+            <x-lv-form.checkbox wire:model="selected" value="{{ $item->getKey() }}" />
           </x-slot>
         @endif
 

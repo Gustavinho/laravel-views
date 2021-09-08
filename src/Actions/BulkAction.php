@@ -13,6 +13,6 @@ abstract class BulkAction extends Action
      */
     public function component()
     {
-        return 'laravel-views::action-bulk';
+        return 'laravel-views::actions.action-bulk';
     }
 }

@@ -4,14 +4,14 @@
   {{-- Mobile actions dropdown --}}
   @if ($mobile)
     <div class="{{ 'text-right relative ' . ($desktop ? 'lg:hidden' : '') }}">
-      <renderable :renderable="$this->component('dropdown')">
+      <x-lv-dropdown>
         <x-slot name="trigger">
-          <x-lv-icon-button icon="more-horizontal" size="sm" />
+          <x-lv-buttons.icon icon="more-horizontal" size="sm" />
         </x-slot>
         @foreach ($actions as $action)
           <renderable :renderable="$action" :model="$model" variant="mobile" />
         @endforeach
-      </renderable>
+      </x-lv-dropdown>
     </div>
   @endif
 

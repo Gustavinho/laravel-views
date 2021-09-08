@@ -4,8 +4,8 @@
     id = actionObject.modelId;
     message = actionObject.message;
   })">
-  <div x-show="open" x-cloak>
-    <renderable :renderable="$this->component('modal')">
+  <div x-show="open" x-cloak {{ $attributes }}>
+    <x-lv-modal>
       <div x-text='message' class="text-gray-900 text-lg font-medium"></div>
       <div class="mt-4 flex flex-col space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-row sm:items-center">
         <x-lv-button @click="open = false" variant="white" wire:loading.attr="disabled">
@@ -20,6 +20,6 @@
           <x-lv-icon icon="loader" />
         </span>
       </div>
-    </renderable>
+    </x-lv-modal>
   </div>
 </div>

@@ -1,10 +1,10 @@
 <thead
-  class="border-b border-t border-gray-200 bg-gray-100 text-xs leading-4 font-semibold uppercase tracking-wider text-left">
+  {{ $attributes->class(['border-b border-t border-gray-200 bg-gray-100 text-xs leading-4 font-semibold uppercase tracking-wider text-left']) }}>
   <tr>
     @if (!empty($this->bulkActions))
       <th class="pl-3">
         <span class="flex items-center justify-center">
-          <x-lv-checkbox wire:model="allSelected" />
+          <x-lv-form.checkbox wire:model="allSelected" />
         </span>
       </th>
     @endif

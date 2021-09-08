@@ -11,30 +11,6 @@ class LaravelViews
     private $section = null;
     private $data = [];
 
-    public function components()
-    {
-        // path => name
-        return [
-            'buttons.icon' => 'icon-button',
-            'buttons.select' => 'select-button',
-            'buttons.button' => 'button',
-            'dropdown.drop-down' => 'drop-down',
-            'dropdown.header' => 'drop-down.header',
-            'actions.actions' => 'actions',
-            'actions.drop-down' => 'actions.drop-down',
-            'actions.icon-and-title' => 'actions.icon-and-title',
-            'actions.icon' => 'actions.icon',
-            'attributes-list' => 'attributes-list',
-            'alert' => 'alert',
-            'alerts-handler' => 'alerts-handler',
-            'form.input-group' => 'form.input-group',
-            'icon' => 'icon',
-            'modal' => 'modal',
-            'form.checkbox' => 'checkbox',
-            'form.input' => 'input',
-        ];
-    }
-
     public function create($view)
     {
         $this->view = $view;

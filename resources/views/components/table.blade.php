@@ -1,7 +1,6 @@
-<div>
   {{-- Content table --}}
   @if (count($this->items))
-    <table class="overflow-x-auto min-w-full">
+    <table {{ $attributes->class(['overflow-x-auto min-w-full']) }}>
 
       <renderable :renderable="$this->component('table-head')" />
 
@@ -17,4 +16,3 @@
     </div>
 
   @endif
-</div>
