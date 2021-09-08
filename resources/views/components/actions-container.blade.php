@@ -4,14 +4,14 @@
   {{-- Mobile actions dropdown --}}
   @if ($mobile)
     <div class="{{ 'text-right relative ' . ($desktop ? 'lg:hidden' : '') }}">
-      <x-dynamic-component :component="$this->component('dropdown')">
+      <renderable :renderable="$this->component('dropdown')">
         <x-slot name="trigger">
           <x-lv-icon-button icon="more-horizontal" size="sm" />
         </x-slot>
         @foreach ($actions as $action)
-          <x-renderable :renderable="$action" :model="$model" variant="mobile" />
+          <renderable :renderable="$action" :model="$model" variant="mobile" />
         @endforeach
-      </x-dynamic-component>
+      </renderable>
     </div>
   @endif
 
@@ -19,7 +19,7 @@
   @if ($desktop)
     <div class="{{ 'lg:flex justify-items-end ' . ($mobile ? 'hidden' : '') }}">
       @foreach ($actions as $action)
-        <x-renderable :renderable="$action" :model="$model" />
+        <renderable :renderable="$action" :model="$model" />
       @endforeach
     </div>
   @endif

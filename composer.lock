@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "artificertech/laravel-renderable",
-            "version": "v1.0-beta.3",
+            "version": "v1.0-beta.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/artificertech/laravel-renderable.git",
-                "reference": "99a474a573cab81f38cecfc1deb66c2cbb594cb9"
+                "reference": "f65967fcf57b9ce010feddc57b03dcf704370c49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artificertech/laravel-renderable/zipball/99a474a573cab81f38cecfc1deb66c2cbb594cb9",
-                "reference": "99a474a573cab81f38cecfc1deb66c2cbb594cb9",
+                "url": "https://api.github.com/repos/artificertech/laravel-renderable/zipball/f65967fcf57b9ce010feddc57b03dcf704370c49",
+                "reference": "f65967fcf57b9ce010feddc57b03dcf704370c49",
                 "shasum": ""
             },
             "require": {
@@ -61,9 +61,9 @@
             ],
             "support": {
                 "issues": "https://github.com/artificertech/laravel-renderable/issues",
-                "source": "https://github.com/artificertech/laravel-renderable/tree/v1.0-beta.3"
+                "source": "https://github.com/artificertech/laravel-renderable/tree/v1.0-beta.5"
             },
-            "time": "2021-08-21T16:02:16+00:00"
+            "time": "2021-09-08T14:21:17+00:00"
         },
         {
             "name": "brick/math",

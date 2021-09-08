@@ -2,42 +2,32 @@
 
 namespace LaravelViews\Views\Traits;
 
+use Artificertech\LaravelRenderable\Contracts\Renderable;
 use Illuminate\Support\Str;
-use Illuminate\View\ComponentAttributeBag;
 use LaravelViews\Exceptions\ComponentNotFoundException;
+use LaravelViews\Facades\UI;
 
 trait WithConfigurableComponents
 {
     public function component($component)
-    {
-        return $this->componentConfiguration($component)['component'];
-    }
-
-    public function componentAttributes($component)
-    {
-        return $this->componentConfiguration($component)['attributes'];
-    }
-
-    protected function componentConfiguration($component)
     {
         try {
             $componentConfig = $this->getLocalConfiguration($component);
         } catch (ComponentNotFoundException $e) {
             $componentConfig = config("laravel-views.components.{$component}", null);
 
-            if (is_null($componentConfig)) return ['component' => null, 'attributes' => null];
+            if (is_null($componentConfig)) return null;
+        }
+
+        if ($componentConfig instanceof Renderable) {
+            return $componentConfig;
         }
 
         if (is_string($componentConfig)) {
-            return [
-                'component' => $componentConfig,
-                'attributes' => null
-            ];
+            return UI::component($componentConfig);
         }
 
-        $componentConfig['attributes'] = new ComponentAttributeBag($componentConfig['attributes'] ?? []);
-
-        return $componentConfig;
+        return UI::component($componentConfig['component'], $componentConfig['attributes'] ?? []);
     }
 
     protected function getLocalConfiguration($component)

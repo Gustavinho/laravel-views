@@ -2,6 +2,7 @@
 
 namespace LaravelViews;
 
+use Artificertech\LaravelRenderable\Renderable;
 use LaravelViews\Console\ActionMakeCommand;
 use LaravelViews\Console\FilterMakeCommand;
 use LaravelViews\Console\TableViewMakeCommand;
@@ -53,7 +54,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
         $this->app->bind('variants', function () {
             return new Variants;
         });
-        $this->app->bind('ui', UI::class);
+
+        $this->app->bind('ui', function () {
+            return new Renderable;
+        });
+
         $this->app->bind('header', function () {
             return new Header();
         });
@@ -175,6 +180,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
         Str::macro('camelToDash', function ($str) {
             return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $str));
         });
+
+        $file =  __DIR__ . '/renderableMacros.php';
+        if (file_exists($file)) {
+            require_once($file);
+        }
 
         return $this;
     }

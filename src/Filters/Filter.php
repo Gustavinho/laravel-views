@@ -8,10 +8,10 @@ abstract class Filter extends BaseFilter
 {
     public $type = 'select';
 
-    public $view = 'select';
-
-    public function render(): View
-    {
-        return view('laravel-views::filters.select');
-    }
+    /**
+     * The blade component that will be rendered.
+     *
+     * @var string
+     */
+    public string $component = 'laravel-views::filters.select';
 }

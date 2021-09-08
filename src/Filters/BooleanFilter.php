@@ -8,7 +8,12 @@ abstract class BooleanFilter extends BaseFilter
 {
     public $type = 'boolean';
 
-    public $view = 'laravel-views::filters.boolean';
+    /**
+     * The blade component that will be rendered.
+     *
+     * @var string
+     */
+    public string $component = 'laravel-views::filters.boolean';
 
     public function passValuesFromRequestToFilter($values)
     {
@@ -31,10 +36,5 @@ abstract class BooleanFilter extends BaseFilter
         $values = $this->value();
 
         return isset($values[$option]) && $values[$option];
-    }
-
-    public function render(): View
-    {
-        return view('laravel-views::filters.boolean');
     }
 }

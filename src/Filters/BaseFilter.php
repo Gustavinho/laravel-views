@@ -2,15 +2,20 @@
 
 namespace LaravelViews\Filters;
 
-use Artificertech\LaravelRenderable\Renderable;
-use Illuminate\Contracts\View\View;
+use Artificertech\LaravelRenderable\Concerns\IsRenderable;
+use Artificertech\LaravelRenderable\Contracts\Renderable;
 use Illuminate\Support\Str;
-use LaravelViews\Views\Traits\WithConfigurableComponents;
 
 abstract class BaseFilter implements Renderable
 {
-    use WithConfigurableComponents;
-    protected $view;
+    use IsRenderable;
+
+    /**
+     * Variable name this object will have in the rendered component.
+     *
+     * @var string
+     */
+    public string $renderAs = 'filter';
 
     public $title;
     public $defaultValue;
@@ -76,10 +81,5 @@ abstract class BaseFilter implements Renderable
     public function passValuesFromRequestToFilter($values)
     {
         return $values;
-    }
-
-    public function renderableName(): string
-    {
-        return 'filter';
     }
 }

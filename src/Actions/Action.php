@@ -2,12 +2,32 @@
 
 namespace LaravelViews\Actions;
 
-use Artificertech\LaravelRenderable\Renderable;
-use Illuminate\Contracts\View\View as ViewContract;
+use Artificertech\LaravelRenderable\Concerns\IsRenderable;
+use Artificertech\LaravelRenderable\Contracts\Renderable;
 use Illuminate\Support\Str;
 
 abstract class Action implements Renderable
 {
+    use IsRenderable;
+
+    /**
+     * Variable name this object will have in the rendered component.
+     *
+     * @var string
+     */
+    public string $renderAs = 'action';
+
+    /**
+     * Get the blade component that will be used for this object.
+     *
+     * @return string
+     */
+    public function component()
+    {
+        return 'laravel-views::action';
+    }
+
+
     /** @var String $title Title of the action */
     public $title;
 
@@ -64,15 +84,5 @@ abstract class Action implements Renderable
     public function shouldBeConfirmed()
     {
         return method_exists($this, 'confirmationMessage');
-    }
-
-    public function renderableName(): string
-    {
-        return 'action';
-    }
-
-    public function render(): ViewContract
-    {
-        return view('laravel-views::actions.action');
     }
 }

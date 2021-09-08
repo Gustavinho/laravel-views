@@ -2,15 +2,15 @@
 @php
 $filters = $this->filters;
 @endphp
-<x-dynamic-component :component="$this->component('dropdown')" label="Filters">
+<renderable :renderable="$this->component('dropdown')" label="Filters">
   {{-- Each filter view --}}
   @foreach ($this->filters as $filter)
 
     {{-- Filter title --}}
-    <x-dynamic-component :component="$this->component('dropdown-header')" :label="$filter->getTitle()" />
+    <renderable :renderable="$this->component('dropdown-header')" :label="$filter->getTitle()" />
     <div class="px-4 mt-4">
       {{-- Filter view --}}
-      <x-renderable :renderable="$filter"></x-renderable>
+      <renderable :renderable="$filter"></renderable>
     </div>
   @endforeach
 
@@ -24,4 +24,4 @@ $filters = $this->filters;
       </button>
     </div>
   @endif
-</x-dynamic-component>
+</renderable>

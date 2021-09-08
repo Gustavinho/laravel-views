@@ -5,14 +5,14 @@
   })">
   <div x-show='open'>
     <template x-if="type === 'danger'">
-      <x-dynamic-component :component="$this->component('alert')" type='danger' onClose='open = false'>
+      <renderable :renderable="$this->component('alert')" type='danger' onClose='open = false'>
         <div x-text='message'></div>
-      </x-dynamic-component>
+      </renderable>
     </template>
     <template x-if="type === 'success'">
-      <x-dynamic-component :component="$this->component('alert')" onClose='open = false'>
+      <renderable :renderable="$this->component('alert')" onClose='open = false'>
         <div x-text='message'></div>
-      </x-dynamic-component>
+      </renderable>
     </template>
   </div>
 </div>

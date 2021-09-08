@@ -9,15 +9,15 @@ abstract class DateFilter extends BaseFilter
 {
     public $type = 'date';
 
-    public $view = 'date';
+    /**
+     * The blade component that will be rendered.
+     *
+     * @var string
+     */
+    public string $component = 'laravel-views::filters.date';
 
     public function passValuesFromRequestToFilter($value)
     {
         return new Carbon($value);
-    }
-
-    public function render(): View
-    {
-        return view('laravel-views::filters.date');
     }
 }

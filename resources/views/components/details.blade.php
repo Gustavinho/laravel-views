@@ -1,4 +1,5 @@
 @props(['stripe' => false])
+
 <ul>
   @foreach ($this->details() as $title => $value)
     <li
@@ -7,7 +8,11 @@
         {{ $title }}
       </div>
       <div class="mt-1 text-sm leading-5 sm:mt-0 sm:w-9/12">
-        {{ $value }}
+        @if ($value instanceof \Artificertech\LaravelRenderable\Contracts\Renderable)
+          <renderable :renderable="$value" />
+        @else
+          {{ $value }}
+        @endif
       </div>
     </li>
   @endforeach

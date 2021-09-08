@@ -2,13 +2,17 @@
 
 namespace LaravelViews\Actions;
 
-use Illuminate\Contracts\View\View as ViewContract;
 use LaravelViews\Actions\Action as Action;
 
 abstract class BulkAction extends Action
 {
-    public function render(): ViewContract
+    /**
+     * Get the blade component that will be used for this object.
+     *
+     * @return string
+     */
+    public function component()
     {
-        return view('laravel-views::actions.action-bulk');
+        return 'laravel-views::action-bulk';
     }
 }

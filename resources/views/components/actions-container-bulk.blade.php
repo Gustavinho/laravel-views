@@ -5,7 +5,7 @@
     <x-dynamic-component :component="$this->component('dropdown-header')"
       label='{{ count($this->selected) }} Selected' />
     @foreach ($bulkActions as $action)
-      <x-renderable :renderable="$action" :model="$model" />
+      <renderable :renderable="$action" :model="$model" />
     @endforeach
   </x-dynamic-component>
 @endif
