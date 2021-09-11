@@ -54,9 +54,10 @@ abstract class DataView extends View
         $query = $this->applySorting($query);
 
         if ($this->paginate) {
-            $query = $query->paginate($this->paginate);
+            return $query->paginate($this->paginate);
         }
-        return $query;
+
+        return $query->get();
     }
 
     public function clickable()
