@@ -38,12 +38,14 @@ trait WithSorting
 
     /**
      * Check if each of the filters has a default value and it's not already set
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function applySorting($query)
     {
         if ($this->sortBy) {
+            $this->sortOrder = $this->sortOrder ?? 'asc';
+
             $query->orderBy($this->sortBy, $this->sortOrder);
         }
 
