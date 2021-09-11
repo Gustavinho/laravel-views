@@ -4,18 +4,14 @@ namespace LaravelViews\Views;
 
 abstract class TableView extends DataView
 {
-    /** Component name */
-    protected $view = 'table-view.table-view';
+    public $collectionComponent = 'laravel-views::table';
+    public $tableHeadComponent = 'laravel-views::table.head';
+    public $tableHeaderComponent = 'laravel-views::table.header';
+    public $tableBodyComponent = 'laravel-views::table.body';
+    public $tableCellComponent = 'laravel-views::table.cell';
 
-    /**
-     * Collects all data to be passed to the view, this includes the items searched on the database
-     * through the filters, this data will be passed to livewire render method
-     */
-    protected function getRenderData()
+    public function render()
     {
-        $data = parent::getRenderData();
-        $data['headers'] = $this->headers();
-
-        return $data;
+        return view('laravel-views::collection-view');
     }
 }

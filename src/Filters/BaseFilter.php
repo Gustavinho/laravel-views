@@ -2,14 +2,30 @@
 
 namespace LaravelViews\Filters;
 
+use Artificertech\LaravelRenderable\Concerns\IsRenderable;
+use Artificertech\LaravelRenderable\Contracts\Renderable;
 use Illuminate\Support\Str;
 
-class BaseFilter
+abstract class BaseFilter implements Renderable
 {
-    protected $title;
+    use IsRenderable;
+
+    /**
+     * Variable name this object will have in the rendered component.
+     *
+     * @var string
+     */
+    public string $renderAs = 'filter';
+
+    public $title;
     public $defaultValue;
     public $id;
 
+    /**
+     * Create a new BaseFilter instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->id = $this->getId();

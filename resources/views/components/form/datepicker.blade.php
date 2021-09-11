@@ -10,15 +10,9 @@ props:
  - $placeholder
  - $value
  - $model
- - $id
---}}
+ - $id --}}
 
-<x-lv-input
-  :value="$value"
-  :id="$id"
-  wire:model="{{ $model }}"
-  x-data="{ picker: null }"
+<x-lv-form.input :value="$value" :id="$id" wire:model="{{ $model }}" x-data="{ picker: null }"
   x-ref="{{ $id }}"
-  x-init="picker = new Pikaday({ field: $refs['{{ $id }}'], format: 'YYYY-MM-DD', onSelect: () => $dispatch('input', picker.toString('YYYY-MM-DD')) })"
->
-</x-lv-input>
+  x-init="picker = new Pikaday({ field: $refs['{{ $id }}'], format: 'YYYY-MM-DD', onSelect: () => $dispatch('input', picker.toString('YYYY-MM-DD')) })">
+</x-lv-form.input>

@@ -2,6 +2,7 @@
 
 namespace LaravelViews;
 
+use Artificertech\LaravelRenderable\Renderable;
 use LaravelViews\Console\ActionMakeCommand;
 use LaravelViews\Console\FilterMakeCommand;
 use LaravelViews\Console\TableViewMakeCommand;
@@ -14,7 +15,9 @@ use LaravelViews\UI\Variants;
 use LaravelViews\UI\Header;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\View\Compilers\BladeCompiler;
 use LaravelViews\Console\GridViewMakeCommand;
 use LaravelViews\Console\ListViewMakeCommand;
 use LaravelViews\Console\MakeViewCommand;
@@ -53,7 +56,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
         $this->app->bind('variants', function () {
             return new Variants;
         });
-        $this->app->bind('ui', UI::class);
+
+        $this->app->bind('ui', function () {
+            return new Renderable;
+        });
+
         $this->app->bind('header', function () {
             return new Header();
         });
@@ -70,7 +77,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
             ->loadCommands()
             ->publish()
             ->bladeDirectives()
-            ->loadComponents()
+            ->configureComponents()
             ->configFiles()
             ->macros();
     }
@@ -136,23 +143,44 @@ class LaravelViewsServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function loadComponents()
+    /**
+     * Configure the Blade components.
+     *
+     * @return $this
+     */
+    protected function configureComponents()
     {
-        $laravelViews = new LaravelViews;
-
-        // Registers anonymous components
-        foreach ($laravelViews->components() as $path => $component) {
-            Blade::component('laravel-views::components.' . $path, 'lv-' . $component);
-        }
-        Blade::component('laravel-views::view.layout', 'lv-layout');
-
-        // Registering class components
-        Blade::component('lv-dynamic-component', DynamicComponent::class);
-
-        // This is only for laravel 8
-        // Blade::componentNamespace('LaravelViews\\Views\\Components', 'lv');
+        $this->callAfterResolving(BladeCompiler::class, function () {
+            $this->registerComponent('badge');
+            $this->registerComponent('button');
+            $this->registerComponent('buttons.icon-and-text');
+            $this->registerComponent('buttons.icon');
+            $this->registerComponent('buttons.select');
+            $this->registerComponent('dropdown');
+            $this->registerComponent('dropdown.header');
+            $this->registerComponent('form.checkbox');
+            $this->registerComponent('form.datepicker');
+            $this->registerComponent('form.input-group');
+            $this->registerComponent('form.input');
+            $this->registerComponent('form.select');
+            $this->registerComponent('icon');
+            $this->registerComponent('img');
+            $this->registerComponent('link');
+            $this->registerComponent('modal');
+        });
 
         return $this;
+    }
+
+    /**
+     * Register the given component.
+     *
+     * @param  string  $component
+     * @return void
+     */
+    protected function registerComponent(string $component)
+    {
+        Blade::component('laravel-views::components.' . $component, 'lv-' . $component);
     }
 
     private function configFiles()
@@ -174,6 +202,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
         Str::macro('camelToDash', function ($str) {
             return strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $str));
         });
+
+        $file =  __DIR__ . '/renderableMacros.php';
+        if (file_exists($file)) {
+            require_once($file);
+        }
 
         return $this;
     }

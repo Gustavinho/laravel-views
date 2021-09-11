@@ -2,44 +2,58 @@
 
 namespace LaravelViews\Actions;
 
-use LaravelViews\Views\View;
+use Artificertech\LaravelRenderable\Concerns\IsRenderable;
+use Artificertech\LaravelRenderable\Contracts\Renderable;
 use Illuminate\Support\Str;
 
-abstract class Action
+abstract class Action implements Renderable
 {
+    use IsRenderable;
+
+    /**
+     * Variable name this object will have in the rendered component.
+     *
+     * @var string
+     */
+    public string $renderAs = 'action';
+
+    /**
+     * Get the blade component that will be used for this object.
+     *
+     * @return string
+     */
+    public function component()
+    {
+        return 'laravel-views::actions.action';
+    }
+
+
     /** @var String $title Title of the action */
     public $title;
 
     /** @var String $icon Feather icon name*/
     public $icon;
 
-    public $id;
-
     /** Item the action will be executed with */
     public $item;
 
     /**
      * Current view that executed the action
-     * @var View $view
+     * @var \Livewire\Component $component
      */
-    public $view;
-
-    public function __construct()
-    {
-        $this->id = $this->getId();
-    }
+    public $component;
 
     public function isRedirect()
     {
         return get_class($this) === RedirectAction::class;
     }
 
-    public function getId()
+    public function id()
     {
         return Str::camelToDash((new \ReflectionClass($this))->getShortName());
     }
 
-    public function renderIf($item, View $view)
+    public function renderIf($item, \Livewire\Component $component)
     {
         return true;
     }
@@ -61,7 +75,7 @@ abstract class Action
             'danger' => __('There was an error executing this action'),
         ];
 
-        $this->view->emitSelf('notify', [
+        $this->component->emitSelf('notify', [
             'message' => $message ? $message : $messages[$type],
             'type' => $type
         ]);
@@ -69,6 +83,6 @@ abstract class Action
 
     public function shouldBeConfirmed()
     {
-        return method_exists($this, 'getConfirmationMessage');
+        return method_exists($this, 'confirmationMessage');
     }
 }

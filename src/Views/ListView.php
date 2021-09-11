@@ -2,14 +2,12 @@
 
 namespace LaravelViews\Views;
 
-use LaravelViews\Views\Traits\WithSortableDropdown;
-
 class ListView extends DataView
 {
-    use WithSortableDropdown;
+    public $collectionComponent = 'laravel-views::list';
 
-    /** Component name */
-    protected $view = 'list-view.list-view';
-
-    public $itemComponent = 'laravel-views::list-view.list-item';
+    public function render()
+    {
+        return view('laravel-views::collection-view');
+    }
 }

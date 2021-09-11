@@ -4,6 +4,7 @@ namespace LaravelViews\UI;
 
 class Header
 {
+
     /** @var string Header's title to be shown */
     public $title;
 

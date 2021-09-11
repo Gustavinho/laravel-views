@@ -3,12 +3,18 @@
 namespace LaravelViews\Filters;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 
-class DateFilter extends BaseFilter
+abstract class DateFilter extends BaseFilter
 {
     public $type = 'date';
 
-    public $view = 'date-filter';
+    /**
+     * The blade component that will be rendered.
+     *
+     * @var string
+     */
+    public string $component = 'laravel-views::filters.date';
 
     public function passValuesFromRequestToFilter($value)
     {

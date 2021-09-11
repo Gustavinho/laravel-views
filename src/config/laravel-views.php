@@ -57,5 +57,18 @@ return [
 
     'gridView' => [
         'selected' => 'border-2 border-blue-500'
-    ]
+    ],
+
+    'components' => [
+        // General Components
+        'alerts-handler' => 'laravel-views::alerts.handler',
+        'alert' => 'laravel-views::alerts.alert',
+        'actions-container' => 'laravel-views::actions.container',
+        'actions-container-bulk' => 'laravel-views::actions.container-bulk',
+        'actions-confirmation' => 'laravel-views::actions.confirmation',
+        'toolbar' => 'laravel-views::toolbar',
+        'search' => 'laravel-views::search',
+        'sorting' => 'laravel-views::sorting',
+        'filters' => 'laravel-views::filters',
+    ],
 ];

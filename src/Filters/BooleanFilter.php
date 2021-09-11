@@ -2,11 +2,18 @@
 
 namespace LaravelViews\Filters;
 
-class BooleanFilter extends BaseFilter
+use Illuminate\Contracts\View\View;
+
+abstract class BooleanFilter extends BaseFilter
 {
     public $type = 'boolean';
 
-    public $view = 'boolean-filter';
+    /**
+     * The blade component that will be rendered.
+     *
+     * @var string
+     */
+    public string $component = 'laravel-views::filters.boolean';
 
     public function passValuesFromRequestToFilter($values)
     {

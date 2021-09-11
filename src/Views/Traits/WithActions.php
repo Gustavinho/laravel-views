@@ -9,6 +9,45 @@ trait WithActions
 {
     private $shouldVerifyConfirmation = true;
 
+    /** @var Array Defined bulk actions */
+    public $bulkActions = [];
+
+    /** @var Array Defined bulk actions */
+    public $actions = [];
+
+    public $selected = [];
+
+    public $allSelected = false;
+
+    public function updatedAllSelected($value)
+    {
+        $this->selected = $value ? $this->query->pluck('id')->map(function ($id) {
+            return (string)$id;
+        })->toArray() : [];
+    }
+
+    public function mountWithActions()
+    {
+        if (method_exists($this, 'bulkActions')) {
+            $this->bulkActions = $this->bulkActions();
+        }
+
+        if (method_exists($this, 'actions')) {
+            $this->actions = $this->actions();
+        }
+    }
+
+    public function hydrateWithActions()
+    {
+        if (method_exists($this, 'bulkActions')) {
+            $this->bulkActions = $this->bulkActions();
+        }
+
+        if (method_exists($this, 'actions')) {
+            $this->actions = $this->actions();
+        }
+    }
+
     /**
      * @param string $action Action's name
      * @param string $id Model's id
@@ -50,7 +89,6 @@ trait WithActions
                 // If $actionableItemId is null then it is a bulk action
                 // and it uses the current selection
                 $actionableItems = $actionableItemId ? $this->getModelWhoFiredAction($actionableItemId) : $this->selected;
-                $action->view = $this;
                 $action->handle($actionableItems, $this);
             }
         } else {
@@ -65,8 +103,8 @@ trait WithActions
     private function confirmAction($action, $modelId = null)
     {
         $actionData = [
-            'message' => $action->getConfirmationMessage($modelId ? $this->getModelWhoFiredAction($modelId) : null),
-            'id' => $action->getId()
+            'message' => $action->confirmationMessage($modelId ? $this->getModelWhoFiredAction($modelId) : null),
+            'id' => $action->id()
         ];
 
         if ($modelId) {
@@ -80,36 +118,14 @@ trait WithActions
      */
     private function findAction(string $actionId)
     {
-        $actions = collect($this->actions)->merge($this->bulkActions);
-
-        return $actions->first(
+        $action = clone collect($this->actions)->merge($this->bulkActions)->first(
             function ($actionToFind) use ($actionId) {
-                return $actionToFind->id === $actionId;
+                return $actionToFind->id() === $actionId;
             }
         );
-    }
 
-    /**
-     * Computed properties
-     */
-    public function getActionsProperty()
-    {
-         // This `getActions()` function needs to be defined by the
-         // view that is using actions
-        return $this->getActions();
-    }
+        $action->component = $this;
 
-    public function getBulkActionsProperty()
-    {
-        if (method_exists($this, 'bulkActions')) {
-            return $this->bulkActions();
-        }
-
-        return [];
-    }
-
-    public function getHasBulkActionsProperty()
-    {
-        return method_exists($this, 'bulkActions') && count($this->bulkActions) > 0;
+        return $action;
     }
 }

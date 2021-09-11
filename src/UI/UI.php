@@ -2,58 +2,87 @@
 
 namespace LaravelViews\UI;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\View\ComponentAttributeBag;
 
 class UI
 {
-    public function badge($title, $type = 'default')
+    public function badge($title, $type = 'default', $attributes = [])
     {
-        return $this->component('laravel-views::components.badge', [
-            'title' => $title,
-            'type' => $type
-        ]);
+        return $this->component(
+            'laravel-views::components.badge',
+            array_merge(
+                compact(
+                    'title',
+                    'type',
+                ),
+                $attributes
+            )
+        );
     }
 
-    public function avatar($src)
+    public function avatar($src, $attributes = [])
     {
-        return $this->component('laravel-views::components.img', [
-            'src' => $src,
-            'variant' => 'avatar'
-        ]);
+        return $this->image($src, 'avatar', $attributes);
     }
 
-    public function link($title, $to)
+    public function image($src, $variant = '', $attributes = [])
     {
-        return $this->component('laravel-views::components.link', compact(
-            'to',
-            'title'
-        ));
+        return $this->component(
+            'laravel-views::img',
+            array_merge(
+                compact(
+                    'src',
+                    'variant'
+                ),
+                $attributes
+            )
+        );
     }
 
-    public function icon($icon, $type = 'default', $class = "")
+    public function link($title, $to, $attributes = [])
     {
-        return $this->component('laravel-views::components.icon', compact(
-            'icon',
-            'type',
-            'class'
-        ));
+        return $this->component(
+            'laravel-views::components.link',
+            array_merge(
+                compact(
+                    'to',
+                    'title'
+                ),
+                $attributes
+            )
+        );
     }
 
-    public function attributes($attributes, $options = [])
+    public function icon($icon, $type = 'default', $attributes = [])
     {
-        return $this->component('laravel-views::components.attributes-list', array_merge(
-            ['data' => $attributes],
-            $options
-        ));
+        return $this->component(
+            'laravel-views::icon',
+            array_merge(
+                compact(
+                    'icon',
+                    'type',
+                ),
+                $attributes
+            )
+        );
     }
 
-    public function component($view, $data = [])
+    public function propertyList($properties, $attributes = [])
     {
-        return View::make('laravel-views::core.dynamic-component')
-            ->with([
-                'view' => $view,
-                'data' => $data,
-            ])
-            ->render();
+        return $this->component(
+            'laravel-views::property-list',
+            array_merge(
+                ['properties' => $properties],
+                $attributes
+            )
+        );
+    }
+
+    public function component($component, $attributes = [])
+    {
+        return [
+            'component' => $component,
+            'attributes' =>  new ComponentAttributeBag($attributes)
+        ];
     }
 }
