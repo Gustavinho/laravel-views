@@ -12,7 +12,7 @@
   <renderable :renderable="$this->component('collection')" />
 
   {{-- Paginator, loading indicator and totals --}}
-  @if ($this->items->hasPages())
+  @if ($this->items instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
     <div class="mt-8">
       {{ $this->items->links() }}
     </div>
