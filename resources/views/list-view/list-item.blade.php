@@ -7,10 +7,10 @@
     </div>
     <div class="flex-1">
       <div class="text-sm font-medium text-gray-900">
-        {{ $title }}
+        {!! $title !!}
       </div>
       <div class="text-sm">
-        {{ $subtitle }}
+        {!! $subtitle !!}
       </div>
     </div>
     <x-lv-actions :actions="$actions" :model="$model" />

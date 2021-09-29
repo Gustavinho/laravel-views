@@ -9,7 +9,7 @@
   @if ($this->hasBulkActions && isset($headers) <= 0)
     <button
       wire:click="$set('allSelected', {{ !$allSelected }})"
-      class="border border-transparent hover:border-gray-300 focus:border-gray-300 focus:outline-none flex items-center gap-1 text-xs px-3 py-2 rounded hover:shadow-sm font-medium"
+      class="border border-transparent hover:border-gray-300 focus:border-gray-300 focus:outline-none flex items-center text-xs px-3 py-2 rounded hover:shadow-sm font-medium"
     >
       {{ __($allSelected ? 'Unselect all' : 'Select all') }}
     </button>

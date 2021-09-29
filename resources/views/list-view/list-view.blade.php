@@ -23,6 +23,4 @@
   <div class="mt-8 px-4">
     {{ $items->links() }}
   </div>
-
-  @include('laravel-views::components.confirmation-message')
 </x-lv-layout>

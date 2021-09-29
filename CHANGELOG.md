@@ -1,6 +1,12 @@
 # Changelog
-
-## [2.2.3] - 2021-06-26
+## [2.4.0] - 2021-09-29
+### Added
+- Inline editing component
+- New tooltip component
+- Added new loading indicator next to the toolbar
+## Changed
+- Added tooltips to the icon actions.
+## [2.3.0] - 2021-06-26
 ### Added
 - Default value for filters
 - Sortable list and grid views
