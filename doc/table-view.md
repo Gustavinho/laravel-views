@@ -429,7 +429,7 @@ public function row(User $user)
     }
 ```
 
-This component will show the current value and if if you clic on it, you will be able to edit it. To update the new value you should define a new method on the table view.
+This component will show the current value and if you clic on it, you will be able to edit it. To update the new value you should define a new method on the table view.
 
 ```php
 /**
