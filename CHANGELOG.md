@@ -2,7 +2,7 @@
 ## [2.4.0] - Not released
 ### Added
 - Inline editing component
-- New tooltip component
+- New tooltip component for icon buttons using the action title
 - Added new loading indicator next to the toolbar
 ## Changed
 - Added tooltips to the icon actions.
