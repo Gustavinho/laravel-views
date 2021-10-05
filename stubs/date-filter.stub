@@ -4,19 +4,18 @@ namespace DummyNamespace;
 
 use Carbon\Carbon;
 use LaravelViews\Filters\DateFilter;
-use Illuminate\Database\Eloquent\Builder;
 
 class DummyClass extends DateFilter
 {
     /**
      * Modify the current query when the filter is used
      *
-     * @param Builder $query Current query
+     * @param $data Current dataset
      * @param Carbon $date Carbon instance with the date selected
      * @return Builder Query modified
      */
-    public function apply(Builder $query, Carbon $date, $request): Builder
+    public function apply(&$data, Carbon $date, $request)
     {
-        // $query->where('', $value);
+        // $data->where('', $value);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace LaravelViews\Views\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use LaravelViews\Data\QueryStringData;
 
 trait WithSorting
@@ -39,17 +41,33 @@ trait WithSorting
     /**
      * Check if each of the filters has a default value and it's not already set
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Support\Collection
      */
-    public function applySorting($query)
+    protected function applySorting(&$data)
     {
         if ($this->sortBy) {
             $this->sortOrder = $this->sortOrder ?? 'asc';
 
-            $query->orderBy($this->sortBy, $this->sortOrder);
+            if ($data instanceof Builder) {
+                $this->applySortingToBuilder($data);
+            } else if ($data instanceof Collection) {
+                $this->applySortingToCollection($data);
+            }
         }
 
-        return $query;
+        return $this;
+    }
+
+    protected function applySortingToBuilder(&$query)
+    {
+        $query->orderBy($this->sortBy, $this->sortOrder);
+    }
+
+    protected function applySortingToCollection(&$collection)
+    {
+        $collection = $this->sortOrder == 'asc'
+            ? $collection->sortBy($this->sortBy)
+            : $collection->sortByDesc($this->sortBy);
     }
 
     /**

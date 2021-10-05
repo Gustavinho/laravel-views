@@ -2,6 +2,7 @@
 
 namespace LaravelViews\Views;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use LaravelViews\Views\Traits\WithFilters;
 use LaravelViews\Views\Traits\WithSearch;
 use LaravelViews\Views\Traits\WithSorting;
@@ -34,11 +35,16 @@ abstract class DataView extends View
         return (clone $this->initialQuery)->find($id);
     }
 
-    public function getInitialQueryProperty()
+    public function getInitialDataProperty()
     {
+        if (method_exists($this, 'data')) {
+            return $this->data();
+        }
+
         if (method_exists($this, 'repository')) {
             return $this->repository();
         }
+
         return $this->model::query();
     }
 
@@ -48,16 +54,28 @@ abstract class DataView extends View
      */
     public function getQueryProperty()
     {
-        $query = clone $this->initialQuery;
-        $query = $this->applySearch($query);
-        $query = $this->applyFilters($query);
-        $query = $this->applySorting($query);
+        $data = clone $this->initialData;
 
+        $this->applySearch($data)
+            ->applyFilters($data)
+            ->applySorting($data)
+            ->applyPagination($data);
+
+        return $data;
+    }
+
+    protected function applyPagination(&$data)
+    {
         if ($this->paginate) {
-            return $query->paginate($this->paginate);
+            if ($data instanceof \Illuminate\Database\Eloquent\Builder)
+                $data =  $data->paginate($this->paginate);
+            else {
+                $results = $data->forPage($this->page, $this->paginate);
+                $data = new LengthAwarePaginator($results, $data->count(), $this->paginate, $this->page);
+            }
         }
 
-        return $query->get();
+        return $this;
     }
 
     public function clickable()

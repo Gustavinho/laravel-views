@@ -3,20 +3,19 @@
 namespace DummyNamespace;
 
 use LaravelViews\Filters\BooleanFilter;
-use Illuminate\Database\Eloquent\Builder;
 
 class DummyClass extends BooleanFilter
 {
     /**
      * Modify the current query when the filter is used
      *
-     * @param Builder $query Current query
+     * @param $data Current dataset
      * @param Array $value Associative array with the boolean value for each of the options
      * @return Builder Query modified
      */
-    public function apply(Builder $query, $value): Builder
+    public function apply(&$data, $value)
     {
-        return $query->where('', $value);
+        // $data->where('', $value);
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace LaravelViews\Views\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use LaravelViews\Data\QueryStringData;
 
 trait WithSearch
@@ -42,22 +44,42 @@ trait WithSearch
      * 
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function applySearch($query)
+    protected function applySearch(&$data)
     {
         if ($this->search) {
-            $relationalFields = array_filter($this->searchBy, static function ($item) {
-                return str_contains($item, '.');
-            });
-
-            $regularFields = array_diff($this->searchBy, $relationalFields);
-
-            $query->where(function ($query) use ($regularFields, $relationalFields) {
-                $this->applyRegularFields($regularFields, $query, $this->search);
-                $this->applyRelationalFields($relationalFields, $query, $this->search);
-            });
+            if ($data instanceof Builder) {
+                $this->applySearchToBuilder($data);
+            } else if ($data instanceof Collection) {
+                $this->applySearchToCollection($data);
+            }
         }
 
-        return $query;
+        return $this;
+    }
+
+    protected function applySearchToBuilder(&$query)
+    {
+        $relationalFields = array_filter($this->searchBy, static function ($item) {
+            return str_contains($item, '.');
+        });
+
+        $regularFields = array_diff($this->searchBy, $relationalFields);
+
+        $query->where(function ($query) use ($regularFields, $relationalFields) {
+            $this->applyRegularFields($regularFields, $query, $this->search);
+            $this->applyRelationalFields($relationalFields, $query, $this->search);
+        });
+    }
+
+    protected function applySearchToCollection(&$data)
+    {
+        $data =  $data->filter(function ($item) {
+            foreach ($this->searchBy as $key) {
+                if (false !== strpos(data_get($item, $key), $this->search)) {
+                    return true;
+                }
+            }
+        });
     }
 
     /**

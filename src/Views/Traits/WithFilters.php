@@ -37,18 +37,18 @@ trait WithFilters
     /**
      * Check if each of the filters has a default value and it's not already set
      * 
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return mixed
      */
-    public function applyFilters($query)
+    protected function applyFilters(&$data)
     {
         $activeFilters = array_keys($this->filter);
 
         foreach ($this->filters as $filter) {
             if (in_array($filter->id, $activeFilters))
-                $filter->apply($query, $this->filter[$filter->id], request());
+                $filter->apply($data, $this->filter[$filter->id], request());
         }
 
-        return $query;
+        return $this;
     }
 
     public function updatedWithFilters($name, $value)

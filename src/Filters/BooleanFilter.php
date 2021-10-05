@@ -2,8 +2,6 @@
 
 namespace LaravelViews\Filters;
 
-use Illuminate\Contracts\View\View;
-
 abstract class BooleanFilter extends BaseFilter
 {
     public $type = 'boolean';

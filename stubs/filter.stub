@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Builder;
 class DummyClass extends Filter
 {
     /**
-     * Modify the current query when the filter is used
+     * Modify the current dataset when the filter is used
      *
-     * @param Builder $query Current query
+     * @param $data Current dataset
      * @param $value Value selected by the user
      * @return Builder Query modified
      */
-    public function apply(Builder $query, $value, $request): Builder
+    public function apply(&$data, $value, $request): Builder
     {
-        return $query->where('', $value);
+        // $data->where('', $value);
     }
 
     /**
