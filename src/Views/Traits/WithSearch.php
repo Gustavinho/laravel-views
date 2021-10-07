@@ -3,7 +3,7 @@
 namespace LaravelViews\Views\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use LaravelViews\Data\QueryStringData;
 
 trait WithSearch
