@@ -1,13 +1,12 @@
-@props(['bulkActions', 'model' => null, 'showSelectAll' => true])
+@props(['bulkActions', 'showSelectAll' => true])
 
 @if (count($this->selected) > 0)
-  <x-dynamic-component :component="$this->component('dropdown')" label='Actions'>
-    <x-dynamic-component :component="$this->component('dropdown-header')"
-      label='{{ count($this->selected) }} Selected' />
+  <x-lv-dropdown label='Actions'>
+    <x-lv-dropdown.header label='{{ count($this->selected) }} Selected' />
     @foreach ($bulkActions as $action)
-      <renderable :renderable="$action" :model="$model" />
+      <renderable :renderable="$action" />
     @endforeach
-  </x-dynamic-component>
+  </x-lv-dropdown>
 @endif
 
 @if ($showSelectAll)

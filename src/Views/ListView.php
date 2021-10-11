@@ -2,7 +2,7 @@
 
 namespace LaravelViews\Views;
 
-class ListView extends DataView
+class ListView extends CollectionView
 {
     public $collectionComponent = 'laravel-views::list';
 

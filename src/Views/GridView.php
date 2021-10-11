@@ -2,7 +2,7 @@
 
 namespace LaravelViews\Views;
 
-class GridView extends DataView
+class GridView extends CollectionView
 {
     /** Add a white background on each card */
     public $withBackground = false;

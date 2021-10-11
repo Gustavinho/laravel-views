@@ -2,7 +2,7 @@
 
 namespace LaravelViews\Views;
 
-abstract class TableView extends DataView
+abstract class TableView extends CollectionView
 {
     public $collectionComponent = 'laravel-views::table';
     public $tableHeadComponent = 'laravel-views::table.head';

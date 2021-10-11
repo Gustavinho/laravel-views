@@ -10,12 +10,10 @@ use LaravelViews\Data\Contracts\Filterable;
 use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\TableViewFilterData;
 use LaravelViews\Data\TableViewSearchData;
-use LaravelViews\UI\UI;
 use LaravelViews\UI\Variants;
 use LaravelViews\UI\Header;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 use LaravelViews\Console\GridViewMakeCommand;
@@ -23,7 +21,6 @@ use LaravelViews\Console\ListViewMakeCommand;
 use LaravelViews\Console\MakeViewCommand;
 use LaravelViews\Data\Contracts\Sortable;
 use LaravelViews\Data\TableViewSortData;
-use LaravelViews\Views\Components\DynamicComponent;
 
 class LaravelViewsServiceProvider extends ServiceProvider
 {
@@ -156,7 +153,7 @@ class LaravelViewsServiceProvider extends ServiceProvider
             $this->registerComponent('buttons.icon-and-text');
             $this->registerComponent('buttons.icon');
             $this->registerComponent('buttons.select');
-            $this->registerComponent('dropdown');
+            $this->registerComponent('dropdown.index', 'dropdown');
             $this->registerComponent('dropdown.header');
             $this->registerComponent('form.checkbox');
             $this->registerComponent('form.datepicker');
@@ -178,9 +175,11 @@ class LaravelViewsServiceProvider extends ServiceProvider
      * @param  string  $component
      * @return void
      */
-    protected function registerComponent(string $component)
+    protected function registerComponent(string $component, $alias = null)
     {
-        Blade::component('laravel-views::components.' . $component, 'lv-' . $component);
+        $alias = $alias ?? $component;
+
+        Blade::component('laravel-views::components.' . $component, 'lv-' . $alias);
     }
 
     private function configFiles()

@@ -8,7 +8,7 @@ use LaravelViews\Views\Traits\WithSearch;
 use LaravelViews\Views\Traits\WithSorting;
 use Livewire\WithPagination;
 
-abstract class DataView extends View
+abstract class CollectionView extends View
 {
     use WithPagination,
         WithFilters,
@@ -76,10 +76,5 @@ abstract class DataView extends View
         }
 
         return $this;
-    }
-
-    public function clickable()
-    {
-        return method_exists($this, 'itemOnClick');
     }
 }

@@ -10,8 +10,9 @@
         }
     ],
     "require": {
-        "livewire/livewire": "2.*",
-        "artificertech/laravel-renderable": "^1.0"
+        "livewire/livewire": "^2.6",
+        "artificertech/laravel-renderable": "^1.0",
+        "laravel/framework": "^8.62"
     },
     "autoload": {
         "psr-4": {

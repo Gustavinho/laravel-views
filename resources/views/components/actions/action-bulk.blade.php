@@ -1,3 +1,5 @@
+@props(['action'])
+
 <button
   {{ $attributes->merge(['class' => 'group flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full focus:outline-none']) }}
   wire:click.prevent="executeBulkAction('{{ $action->id() }}')">
