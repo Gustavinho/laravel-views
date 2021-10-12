@@ -11,7 +11,7 @@ use LaravelViews\Data\Contracts\Searchable;
 use LaravelViews\Data\TableViewFilterData;
 use LaravelViews\Data\TableViewSearchData;
 use LaravelViews\UI\Variants;
-use LaravelViews\UI\Header;
+use LaravelViews\UI\SortableHeader;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -58,8 +58,8 @@ class LaravelViewsServiceProvider extends ServiceProvider
             return new Renderable;
         });
 
-        $this->app->bind('header', function () {
-            return new Header();
+        $this->app->bind('sortable-header', function () {
+            return new SortableHeader();
         });
     }
 

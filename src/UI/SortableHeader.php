@@ -2,17 +2,21 @@
 
 namespace LaravelViews\UI;
 
-class Header
+use Artificertech\LaravelRenderable\Concerns\IsRenderable;
+use Artificertech\LaravelRenderable\Contracts\Renderable;
+
+class SortableHeader implements Renderable
 {
+    use IsRenderable;
+
+    public $renderAs = 'header';
+    public $component = 'laravel-views::sortable-header';
 
     /** @var string Header's title to be shown */
     public $title;
 
     /** @var string Field the table view will be sort by */
     public $sortBy;
-
-    /** @var string Width the width of the table column */
-    public $width;
 
     /**
      * Sets the header's title
@@ -29,7 +33,7 @@ class Header
     /**
      * Sets the sort by field
      * @param string $field Field the table view will be sort by
-     * @return Header
+     * @return SortableHeader
      */
     public function sortBy(string $field)
     {
@@ -41,21 +45,10 @@ class Header
     /**
      * Checks if this header is sortable
      * @return bool
-     * @return Header
+     * @return SortableHeader
      */
     public function isSortable(): bool
     {
         return !empty($this->sortBy);
-    }
-
-    /**
-     * Sets a fixed width of the column
-     * @return Header
-     */
-    public function width(string $width)
-    {
-        $this->width = $width;
-
-        return $this;
     }
 }

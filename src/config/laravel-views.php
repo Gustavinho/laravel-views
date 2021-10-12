@@ -55,12 +55,7 @@ return [
         'default' => 'hover:text-blue-600 hover:underline'
     ],
 
-    'gridView' => [
-        'selected' => 'border-2 border-blue-500'
-    ],
-
     'components' => [
-        // General Components
         'alerts-handler' => 'laravel-views::alerts.handler',
         'alert' => 'laravel-views::alerts.alert',
         'actions-container' => 'laravel-views::actions.container',

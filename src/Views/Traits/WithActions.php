@@ -88,7 +88,7 @@ trait WithActions
             } else {
                 // If $actionableItemId is null then it is a bulk action
                 // and it uses the current selection
-                $actionableItems = $actionableItemId ? $this->getModelWhoFiredAction($actionableItemId) : $this->selected;
+                $actionableItems = $actionableItemId ? $this->getItemThatFiredAction($actionableItemId) : $this->selected;
                 $action->handle($actionableItems, $this);
             }
         } else {
@@ -103,7 +103,7 @@ trait WithActions
     private function confirmAction($action, $modelId = null)
     {
         $actionData = [
-            'message' => $action->confirmationMessage($modelId ? $this->getModelWhoFiredAction($modelId) : null),
+            'message' => $action->confirmationMessage($modelId ? $this->getItemThatFiredAction($modelId) : null),
             'id' => $action->id()
         ];
 

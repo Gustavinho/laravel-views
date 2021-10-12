@@ -30,9 +30,14 @@ abstract class CollectionView extends View
      * Clones the initial query (to avoid modifying it)
      * and get a model by an Id
      */
-    public function getModelWhoFiredAction($id)
+    public function getItemThatFiredAction($key)
     {
-        return (clone $this->initialQuery)->find($id);
+        $data = clone $this->initialData;
+        if ($data instanceof \Illuminate\Database\Eloquent\Builder)
+            return $data->find($key);
+        else {
+            return $data->get($key);
+        }
     }
 
     public function getInitialDataProperty()
@@ -67,9 +72,13 @@ abstract class CollectionView extends View
     protected function applyPagination(&$data)
     {
         if ($this->paginate) {
-            if ($data instanceof \Illuminate\Database\Eloquent\Builder)
+            if ($data instanceof \Illuminate\Database\Eloquent\Builder) {
+                $key = $data->getModel()->getKeyName();
+
                 $data =  $data->paginate($this->paginate);
-            else {
+
+                $data->setCollection($data->keyBy($key));
+            } else {
                 $results = $data->forPage($this->page, $this->paginate);
                 $data = new LengthAwarePaginator($results, $data->count(), $this->paginate, $this->page);
             }
