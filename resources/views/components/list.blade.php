@@ -10,8 +10,7 @@
 
       @if (!empty($this->actions))
         <x-slot name="actions">
-          <renderable :renderable="$this->component('actions-container')" :actions="$this->actions" :item="$item"
-            :$key="$key" />
+          <renderable :renderable="$this->component('actions-container')" :actions="$this->actions" :key="$key" />
         </x-slot>
       @endif
 
