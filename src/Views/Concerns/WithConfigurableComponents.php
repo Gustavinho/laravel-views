@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelViews\Views\Traits;
+namespace LaravelViews\Views\Concerns;
 
 use Artificertech\LaravelRenderable\Contracts\Renderable;
 use Illuminate\Support\Str;

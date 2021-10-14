@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelViews\Views\Traits;
+namespace LaravelViews\Views\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -15,27 +15,20 @@ trait WithSorting
     /** @var Array Defined sortable columns */
     public $sortableBy;
 
-    public function mountWithSorting(QueryStringData $queryStringData)
+    public function initializeWithSorting()
     {
         $this->queryString[] = 'sortBy';
         $this->queryString[] = 'sortOrder';
-
-        $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
-        $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
 
         if (method_exists($this, 'sortableBy')) {
             $this->sortableBy = collect($this->sortableBy());
         }
     }
 
-    public function hydrateWithSorting()
+    public function mountWithSorting(QueryStringData $queryStringData)
     {
-        $this->queryString[] = 'sortBy';
-        $this->queryString[] = 'sortOrder';
-
-        if (method_exists($this, 'sortableBy')) {
-            $this->sortableBy = collect($this->sortableBy());
-        }
+        $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
+        $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
     }
 
     /**

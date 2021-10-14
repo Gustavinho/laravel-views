@@ -1,8 +1,8 @@
-<div x-data='{ open: false, action: "", id: "", message: ""}' x-init="@this.on('openConfirmationModal', (actionObject) => {
+<div x-data='{ open: false, action: "", id: "", message: "", args: {}}' x-init="@this.on('openConfirmationModal', (actionObject) => {
     open = true;
-    action = actionObject.id;
-    id = actionObject.modelId;
+    action = actionObject.alias;
     message = actionObject.message;
+    args = actionObject.args;
   })">
   <div x-show="open" x-cloak {{ $attributes }}>
     <x-lv-modal>
@@ -12,9 +12,9 @@
           {{ __('Cancel') }}
         </x-lv-button>
         <x-lv-button variant="danger"
-          @click="await $wire.call('confirmAndExecuteAction', action, id, false); open = false"
+          @click="await $wire.call('executeAction', action, 'actionConfirmed', ...args); open = false"
           wire:loading.attr="disabled">
-          {{ __("Yes, I'm sure") }}
+          {{ __('Confirm') }}
         </x-lv-button>
         <span wire:loading class="animate-spin">
           <x-lv-icon icon="loader" />

@@ -8,7 +8,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
 
 @props(['dropDownWidth' => 'w-64', 'label' => ''])
 
-<div class="relative" x-data="{ open: false }">
+<div {{ $attributes->class(['relative']) }} x-data="{ open: false }">
   <span @click="open = true" class="cursor-pointer">
     @if ($label)
       <x-lv-buttons.select>

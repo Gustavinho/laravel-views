@@ -7,7 +7,7 @@
       @endif
     </div>
     <div class="flex justify-end">
-      <renderable :renderable="$this->component('actions-container')" :actions="$this->actions" :model="$this->model" />
+      <renderable :renderable="$this->component('actions-container')" :actions="$this->actions" />
     </div>
   </div>
 

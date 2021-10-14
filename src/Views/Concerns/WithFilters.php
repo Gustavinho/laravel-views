@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelViews\Views\Traits;
+namespace LaravelViews\Views\Concerns;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -14,24 +14,18 @@ trait WithFilters
     /** @var Array Current active filters from the request query string */
     public $filter = [];
 
-    public function mountWithFilters(QueryStringData $queryStringData)
+    public function initializeWithFilters()
     {
         $this->queryString[] = 'filter';
-
-        $this->filter = $queryStringData->getFilterValues($this->filter);
 
         if (method_exists($this, 'filters')) {
             $this->filters = $this->filters();
         }
     }
 
-    public function hydrateWithFilters()
+    public function mountWithFilters(QueryStringData $queryStringData)
     {
-        $this->queryString[] = 'filter';
-
-        if (method_exists($this, 'filters')) {
-            $this->filters = $this->filters();
-        }
+        $this->filter = $queryStringData->getFilterValues($this->filter);
     }
 
     /**

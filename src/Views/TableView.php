@@ -7,7 +7,7 @@ abstract class TableView extends CollectionView
     protected $collectionComponent = [
         'component' => 'laravel-views::table',
         'attributes' => [
-            'class' => 'overflow-x-auto min-w-full'
+            'class' => 'w-full'
         ],
     ];
 
@@ -68,7 +68,7 @@ abstract class TableView extends CollectionView
         ]
     ];
 
-    // No Results 
+    // No Results
     protected $noResultsComponent = [
         'component' => 'laravel-views::no-results',
         'attributes' => [

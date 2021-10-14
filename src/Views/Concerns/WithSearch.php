@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelViews\Views\Traits;
+namespace LaravelViews\Views\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -15,16 +15,14 @@ trait WithSearch
     /** @var Array<String> $searchBy All fields to search */
     public $searchBy;
 
-    public function mountWithSearch(QueryStringData $queryStringData)
+    public function initializeWithSearch()
     {
         $this->queryString['search'] = ['except' => ''];
-
-        $this->search = $queryStringData->getSearchValue($this->search);
     }
 
-    public function hydrateWithSearch()
+    public function mountWithSearch(QueryStringData $queryStringData)
     {
-        $this->queryString['search'] = ['except' => ''];
+        $this->search = $queryStringData->getSearchValue($this->search);
     }
 
     public function updatingWithSearch($name, $value)

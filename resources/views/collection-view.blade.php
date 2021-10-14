@@ -8,9 +8,9 @@
 
     @include('laravel-views::toolbar')
   </div>
-
-  <renderable :renderable="$this->component('collection')" />
-
+  <div class="overflow-x-auto">
+    <renderable :renderable="$this->component('collection')" />
+  </div>
   {{-- Paginator, loading indicator and totals --}}
   @if ($this->items instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
     <div class="mt-8">

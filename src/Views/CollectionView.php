@@ -3,9 +3,12 @@
 namespace LaravelViews\Views;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use LaravelViews\Views\Traits\WithFilters;
-use LaravelViews\Views\Traits\WithSearch;
-use LaravelViews\Views\Traits\WithSorting;
+use LaravelViews\Actions\Action;
+use LaravelViews\Actions\BulkAction;
+use LaravelViews\Views\Concerns\WithBulkActions;
+use LaravelViews\Views\Concerns\WithFilters;
+use LaravelViews\Views\Concerns\WithSearch;
+use LaravelViews\Views\Concerns\WithSorting;
 use Livewire\WithPagination;
 
 abstract class CollectionView extends View
@@ -13,7 +16,8 @@ abstract class CollectionView extends View
     use WithPagination,
         WithFilters,
         WithSearch,
-        WithSorting;
+        WithSorting,
+        WithBulkActions;
 
     /**
      * (Override) int Number of items to be showed,
@@ -24,20 +28,6 @@ abstract class CollectionView extends View
     public function getItemsProperty()
     {
         return $this->query;
-    }
-
-    /**
-     * Clones the initial query (to avoid modifying it)
-     * and get a model by an Id
-     */
-    public function getItemThatFiredAction($key)
-    {
-        $data = clone $this->initialData;
-        if ($data instanceof \Illuminate\Database\Eloquent\Builder)
-            return $data->find($key);
-        else {
-            return $data->get($key);
-        }
     }
 
     public function getInitialDataProperty()
@@ -85,5 +75,11 @@ abstract class CollectionView extends View
         }
 
         return $this;
+    }
+
+    public function executing($key, Action $action)
+    {
+        if (!($action instanceof BulkAction))
+            return [$this->items->get($key)];
     }
 }
