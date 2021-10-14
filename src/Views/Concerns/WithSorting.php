@@ -3,8 +3,8 @@
 namespace LaravelViews\Views\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use LaravelViews\Data\QueryStringData;
 
 trait WithSorting
 {
@@ -15,20 +15,22 @@ trait WithSorting
     /** @var Array Defined sortable columns */
     public $sortableBy;
 
+    public $queryStringWithSorting = [
+        'sortBy',
+        'sortOrder'
+    ];
+
     public function initializeWithSorting()
     {
-        $this->queryString[] = 'sortBy';
-        $this->queryString[] = 'sortOrder';
-
         if (method_exists($this, 'sortableBy')) {
             $this->sortableBy = collect($this->sortableBy());
         }
     }
 
-    public function mountWithSorting(QueryStringData $queryStringData)
+    public function mountWithSorting(Request $request)
     {
-        $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
-        $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
+        $this->sortBy = $request->query('sortBy', $this->sortBy);
+        $this->sortOrder = $request->query('sortOrder', $this->sortOrder);
     }
 
     /**

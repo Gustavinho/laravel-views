@@ -3,26 +3,24 @@
 namespace LaravelViews\Views\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use LaravelViews\Data\QueryStringData;
 
 trait WithSearch
 {
     /** @var String $search Current query string with the search value */
     public $search;
 
-
     /** @var Array<String> $searchBy All fields to search */
     public $searchBy;
 
-    public function initializeWithSearch()
-    {
-        $this->queryString['search'] = ['except' => ''];
-    }
+    public $queryStringWithSearch = [
+        'search' => ['except' => '']
+    ];
 
-    public function mountWithSearch(QueryStringData $queryStringData)
+    public function mountWithSearch(Request $request)
     {
-        $this->search = $queryStringData->getSearchValue($this->search);
+        $this->search = $request->query('search', $this->search);
     }
 
     public function updatingWithSearch($name, $value)
