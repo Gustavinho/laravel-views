@@ -1,10 +1,15 @@
-{{-- Filters dropdown --}}
 @php
-$filters = $this->filters;
+$clearable = false;
 @endphp
+{{-- Filters dropdown --}}
 <x-lv-dropdown label="Filters">
   {{-- Each filter view --}}
   @foreach ($this->filters as $filter)
+    @php
+      if ($this->{$filter->id} != $filter->defaultValue) {
+          $clearable = true;
+      }
+    @endphp
 
     {{-- Filter title --}}
     <x-lv-dropdown.header :label="$filter->getTitle()" />
@@ -13,8 +18,7 @@ $filters = $this->filters;
       <renderable :renderable="$filter"></renderable>
     </div>
   @endforeach
-
-  @if (count($this->filter) > 0)
+  @if ($clearable)
     {{-- Clear filters button --}}
     <div class="p-4 bg-gray-100 text-right flex justify-end">
       <button wire:click.prevent="clearFilters" @click="open = false"

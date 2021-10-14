@@ -25,9 +25,20 @@ abstract class CollectionView extends View
      */
     protected $paginate = 20;
 
+    /**
+     * Returns the items from the database regarding to the filters selected by the user
+     * applies the search query, the filters used and the total of items found
+     */
     public function getItemsProperty()
     {
-        return $this->query;
+        $data = clone $this->initialData;
+
+        $this->applySearch($data)
+            ->applyFilters($data)
+            ->applySorting($data)
+            ->applyPagination($data);
+
+        return $data;
     }
 
     public function getInitialDataProperty()
@@ -43,21 +54,6 @@ abstract class CollectionView extends View
         return $this->model::query();
     }
 
-    /**
-     * Returns the items from the database regarding to the filters selected by the user
-     * applies the search query, the filters used and the total of items found
-     */
-    public function getQueryProperty()
-    {
-        $data = clone $this->initialData;
-
-        $this->applySearch($data)
-            ->applyFilters($data)
-            ->applySorting($data)
-            ->applyPagination($data);
-
-        return $data;
-    }
 
     protected function applyPagination(&$data)
     {
@@ -79,7 +75,13 @@ abstract class CollectionView extends View
 
     public function executing($key, Action $action)
     {
-        if (!($action instanceof BulkAction))
-            return [$this->items->get($key)];
+        if (($action instanceof BulkAction)) return;
+
+        $data = clone $this->initialData;
+        if ($data instanceof \Illuminate\Database\Eloquent\Builder) {
+            return [$data->find($key)];
+        } else {
+            return [$data->get($key)];
+        }
     }
 }

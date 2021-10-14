@@ -2,6 +2,8 @@
 
 namespace LaravelViews\Views;
 
+use Illuminate\Support\Facades\Log;
+
 class ListView extends CollectionView
 {
     public $collectionComponent = 'laravel-views::list';
@@ -16,6 +18,7 @@ class ListView extends CollectionView
 
     public function render()
     {
+        Log::debug('rendering');
         return view('laravel-views::collection-view');
     }
 }

@@ -1,4 +1,4 @@
 @props(['filter'])
 
-<x-lv-form.datepicker id="$filter->getId()" name="filters[{{ $filter->id }}]" model="filters[{{ $filter->id }}]"
-  :value="$filter->selected()['selected']" />
+<x-lv-form.datepicker :id="$filter->id" name="{{ $filter->id }}" model="{{ $filter->id }}"
+  :value="$this->{$filter->id}" />

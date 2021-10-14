@@ -2,31 +2,29 @@
 
 namespace LaravelViews\Views\Concerns;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use LaravelViews\Data\QueryStringData;
+use Illuminate\Http\Request;
 
 trait WithFilters
 {
     /** @var Array Defined filters */
     public $filters = [];
 
-    /** @var Array Current active filters from the request query string */
-    public $filter = [];
+    protected $defaultFilter = [];
 
-    public function initializeWithFilters()
+    public function bootWithFilters(Request $request)
     {
-        $this->queryString[] = 'filter';
-
         if (method_exists($this, 'filters')) {
             $this->filters = $this->filters();
         }
+
+        foreach ($this->filters as $filter) {
+            if (!isset($this->{$filter->id}))
+                $this->{$filter->id} = $request->query($filter->id, $filter->defaultValue);
+
+            $this->queryString[$filter->id] = ['except' => $filter->defaultValue];
+        }
     }
 
-    public function mountWithFilters(QueryStringData $queryStringData)
-    {
-        $this->filter = $queryStringData->getFilterValues($this->filter);
-    }
 
     /**
      * Check if each of the filters has a default value and it's not already set
@@ -35,34 +33,30 @@ trait WithFilters
      */
     protected function applyFilters(&$data)
     {
-        $activeFilters = array_keys($this->filter);
-
         foreach ($this->filters as $filter) {
-            if (in_array($filter->id, $activeFilters))
-                $filter->apply($data, $this->filter[$filter->id], request());
+            if ($filter->shouldFilter($this->{$filter->id}))
+                $data = $filter->apply(
+                    $data,
+                    $filter->parseValue($this->{$filter->id})
+                ) ?? $data;
         }
 
         return $this;
     }
 
-    public function updatedWithFilters($name, $value)
+    public function updatedWithFilters()
     {
-        $name = Str::of($name);
-        $key = $name->after('.');
-        $name = $name->before('.');
-
-        if ($name == 'filter') {
-            if ($value == '' || $value == null)
-                Arr::forget($this->filter, $key);
-
-            if (method_exists($this, 'resetPage')) {
-                $this->resetPage(); // reset pagingation
-            }
+        if (method_exists($this, 'resetPage')) {
+            $this->resetPage(); // reset pagingation
         }
     }
 
-    public function clearFilters()
+    public function clearFilters($filterId = null)
     {
-        $this->filter = [];
+        foreach ($this->filters as $filter) {
+            if ($filterId != null && $filter->id != $filterId) continue;
+
+            $this->{$filter->id} = $filter->defaultValue;
+        }
     }
 }

@@ -4,4 +4,4 @@
 $options = array_merge(['--' => null], $filter->options());
 @endphp
 
-<x-lv-form.select name="filters[{{ $filter->id }}]" model="filter.{{ $filter->id }}" :options="$options" />
+<x-lv-form.select name="{{ $filter->id }}" model="{{ $filter->id }}" :options="$options" />
