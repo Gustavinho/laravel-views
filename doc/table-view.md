@@ -4,7 +4,7 @@
 
 This view creates a dynamic data table with some features like filters, pagination and search input, you can customize the headers, the data to be displayed for each row.
 
-- [Home](../README.md)
+- [Home](../README)
 - [Table view](#table-view)
     - [Create new table view](#create-new-table-view)
     - [Defining initial data](#defining-initial-data)
@@ -26,15 +26,13 @@ This view creates a dynamic data table with some features like filters, paginati
     - [Showing feedback messages](#showing-feedback-messages)
     - [Hiding actions](#hiding-actions)
     - [Confirmation message](#confirmation-message)
-- [Inline editing](#inline-editing)
 - [Showing UI components](#showing-ui-components)
     - [Avatar](#avatar)
     - [Badges](#badges)
-    - [Icons](#icons)
 
 ## Table View example
 
-![](../doc/table.png)
+![](table.png)
 
 The table view doesn't have any styled container or title as the image example so you can render the table view inside any container you want.
 
@@ -413,53 +411,6 @@ public function getConfirmationMessage($item = null)
     return 'My custom confirmation message';
 }
 ```
-
-# Inline editing
-It is possible to edit a field on the data table inline using an `editable` component instead of plain text in the `row` method.
-
-```php
-use LaravelViews\Facades\UI;
-
-public function row(User $user)
-    {
-        return [
-            // ...Other fields
-            UI::editable($user, 'email'),
-        ];
-    }
-```
-
-This component will show the current value and if you clic on it, you will be able to edit it. To update the new value you should define a new method on the table view.
-
-```php
-/**
- * Method fired by the `editable` component, it
- * gets the model instance and a key value array
- * with the modified
- */
-public function update(User $user, $data)
-{
-}
-```
-
-The `update` method gets the model instance, and a key-value array with the modified data so you can save it directly on the model.
-
-```php
-use LaravelViews\Views\Traits\WithAlerts;
-
-/**
- * Method fired by the `editable` component, it
- * gets the model instance and a key-value array
- * with the modified
- */
-public function update(User $user, $data)
-{
-    $user->update($data);
-    $this->success();
-}
-```
-
-Notice that you can fire a success or error alert as the actions with the `WithAlerts` trait.
 
 # Showing UI components
 You can display some UI components instead of plain text like avatars, badges or icons, some of these components has different variants, you can customize these varians with the `laravel-views.php` config file.

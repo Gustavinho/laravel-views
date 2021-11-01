@@ -1,0 +1,7 @@
+  - [Sample](http://laravel-views-ex.test)
+  - [Overview](/)
+  - [Getting Started](/laravel-views.md)
+  - [Table View](/table-view.md)
+  - [Grid View](/grid-view.md)
+  - [List View](/list-view.md)
+  - [Detail View](/detail-view.md)
