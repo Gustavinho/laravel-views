@@ -20,13 +20,11 @@
     },
     "require-dev": {
         "phpunit/phpunit": "9.5.*",
-        "orchestra/testbench": "7.0.0",
         "laravel/legacy-factories": "^1.1",
-        "brianium/paratest": "^6.3",
-        "nunomaduro/larastan": "^0.7.6"
+        "nunomaduro/larastan": "^0.7.6",
+        "orchestra/testbench": "^7.0"
     },
     "scripts": {
-        "test": "./vendor/bin/testbench package:test --parallel",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
         "larastan": "./vendor/bin/phpstan analyse"
     },
