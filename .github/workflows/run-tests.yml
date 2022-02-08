@@ -34,7 +34,11 @@ jobs:
             testbench: ^6.6
           - laravel: 7.*
             testbench: ^5.0
-
+        exclude:
+          - laravel: 9.*
+            php: 7.3
+          - laravel: 9.*
+            php: 7.4
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - Testbench ${{ matrix.testbench }}
 
     steps:
