@@ -23,8 +23,7 @@
         "orchestra/testbench": "7.0.0",
         "laravel/legacy-factories": "^1.1",
         "brianium/paratest": "^6.3",
-        "nunomaduro/larastan": "^0.7.6",
-        "nunomaduro/collision": "^6.1"
+        "nunomaduro/larastan": "^0.7.6"
     },
     "scripts": {
         "test": "./vendor/bin/testbench package:test --parallel",
