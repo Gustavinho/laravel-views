@@ -22,7 +22,6 @@
         "phpunit/phpunit": "7.0.*|8.5.*|9.5.*",
         "orchestra/testbench": "4.*|5.*|6.*",
         "laravel/legacy-factories": "^1.1",
-        "spatie/laravel-ray": "^1.12",
         "brianium/paratest": "^6.3",
         "nunomaduro/collision": "^5.3",
         "nunomaduro/larastan": "^0.7.6"
