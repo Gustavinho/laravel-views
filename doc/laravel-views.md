@@ -17,8 +17,8 @@
 - [Components customization](#components-customization)
     - [Component variants using tailwindcss](#component-variants-using-tailwindcss)
     - [Components full customization](#components-full-customization)
-- [Table view](doc/table-view.md)
-- [Grid view](doc/grid-view.md)
+- [Table view](./table-view.md)
+- [Grid view](./grid-view.md)
 
 # Version compatibility
 |Laravel views|Alpine|Livewire|Laravel|
