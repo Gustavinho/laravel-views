@@ -30,4 +30,14 @@ class DummyClass extends TableView
     {
         return [];
     }
+
+     /**
+     * Set de class for tr
+     *
+     * @param $model Current model for each row
+     */
+    public function trClass($model): string
+    {
+        return '';
+    }
 }
