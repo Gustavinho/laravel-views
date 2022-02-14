@@ -30,4 +30,9 @@ class MockReviewTableViewWithSearch extends TableView
             $review->user->email,
         ];
     }
+
+	public function trClass(ReviewTest $review)
+	{
+		return '';
+	}
 }

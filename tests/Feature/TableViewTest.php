@@ -32,6 +32,14 @@ class TableViewTest extends TestCase
             ->assertSeeUsers($users);
     }
 
+	public function testSeeTrClassOnTable()
+	{
+		$users = factory(UserTest::class, 7)->create();
+
+		Livewire::test(MockTableView::class)
+			->assertSeeHtml('<tr class="border-b border-gray-200 text-sm class-tr" wire:key="1">');
+	}
+
     public function testSeeAllDataSettingAModelClass()
     {
         $users = factory(UserTest::class, 7)->create();
