@@ -17,7 +17,7 @@ Render an editable input field --}}
     x-model="value"
     @keydown.enter="$wire.update(id, {
       [field]: value
-    }); editing = false;"
+    }); editing = false; original = value"
     @keydown.escape="editing = false; value = original;"
     class="block appearance-none w-full bg-white border-gray-300 hover:border-gray-500 px-2 py-1 rounded focus:outline-none focus:bg-white focus:border-blue-600 focus:border-2 border">
   <div x-show="!editing"
