@@ -21,7 +21,8 @@ props:
       @endif
       {{-- Renders all the headers --}}
       @foreach ($headers as $header)
-        <th class="px-3 py-3" {{ is_object($header) && ! empty($header->width) ? 'width=' . $header->width . '' : '' }}>
+        <th class="px-3 py-3 {{ is_object($header) && !empty($header->classNames) ? $header->classNames : '' }}"
+            {{ is_object($header) && ! empty($header->width) ? 'width=' . $header->width . '' : '' }}>
           @if (is_string($header))
             {{ $header }}
           @else
@@ -61,9 +62,15 @@ props:
         @endif
         {{-- Renders all the content cells --}}
         @foreach ($view->row($item) as $column)
-          <td class="px-3 py-2 whitespace-no-wrap">
-            {!! $column !!}
-          </td>
+          @if (is_object($column))
+            <td class="px-3 py-2 whitespace-no-wrap {{ !empty($column->classNames) ? $column->classNames : '' }}">
+              {!! $column->title !!}
+            </td>
+          @else
+            <td class="px-3 py-2 whitespace-no-wrap">
+              {!! $column !!}
+            </td>
+          @endif
         @endforeach
 
         {{-- Renders all the actions row --}}

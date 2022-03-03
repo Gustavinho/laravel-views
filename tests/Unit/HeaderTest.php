@@ -25,4 +25,10 @@ class HeaderTest extends TestCase
         $header = Header::width('100px');
         $this->assertEquals($header->width, '100px');
     }
+
+    public function testSetClasses()
+    {
+        $header = Header::classNames('bg-red-500');
+        $this->assertEquals($header->classNames, 'bg-red-500');
+    }
 }

@@ -13,6 +13,9 @@ class Header
     /** @var string Width the width of the table column */
     public $width;
 
+    /** @var string Class names that will be added */
+    public $classNames;
+
     /**
      * Sets the header's title
      * @param string $title Header's title to be shown
@@ -54,6 +57,18 @@ class Header
     public function width(string $width)
     {
         $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Sets additional class names to header cell
+     * @param string $classNames Class names that will be added
+     * @return Header
+     */
+    public function classNames(string $classNames)
+    {
+        $this->classNames = $classNames;
 
         return $this;
     }
