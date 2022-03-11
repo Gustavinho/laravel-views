@@ -20,9 +20,8 @@ UI components used:
   @if (count($items))
     {{-- Content table --}}
     <div class="overflow-x-scroll lg:overflow-x-visible">
-      @include('laravel-views::components.table')
+      @include('laravel-views::components.table.table')
     </div>
-
   @else
     {{-- Empty data message --}}
     <div class="flex justify-center items-center p-4">
@@ -35,4 +34,3 @@ UI components used:
     {{ $items->links() }}
   </div>
 </x-lv-layout>
-
