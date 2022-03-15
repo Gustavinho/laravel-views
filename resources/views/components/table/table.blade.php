@@ -24,9 +24,10 @@ props:
           </td>
         @endif
         {{-- Renders all the content cells --}}
-        @foreach ($view->row($item) as $column)
+        @foreach ($view->row($item) as $cell)
           <td @php
             $header = $headers[$loop->index];
+            
             $classNames = 'px-3 py-3 whitespace-no-wrap';
             
             if (is_object($header) && !empty($header->visibleBreakpoint)) {
@@ -34,7 +35,11 @@ props:
             }
           @endphp
             class="{{ $classNames }}">
-            {!! $column !!}
+            @if (!$cell instanceof LaravelViews\UI\Cell)
+              {!! $cell !!}
+            @else
+              {!! $cell->content !!}
+            @endif
           </td>
         @endforeach
 
