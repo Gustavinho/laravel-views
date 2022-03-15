@@ -26,12 +26,16 @@ props:
         {{-- Renders all the content cells --}}
         @foreach ($view->row($item) as $cell)
           <td @php
-            $header = $headers[$loop->index];
-            
             $classNames = 'px-3 py-3 whitespace-no-wrap';
             
+            // Here we access the corresponding header object to check if cell should be visible
+            $header = $headers[$loop->index];
             if (is_object($header) && !empty($header->visibleBreakpoint)) {
                 $classNames .= ' ' . $header->getResponsiveClassNames();
+            }
+            
+            if (is_object($cell) && !empty($cell->classNames)) {
+                $classNames .= ' ' . $cell->classNames;
             }
           @endphp
             class="{{ $classNames }}">

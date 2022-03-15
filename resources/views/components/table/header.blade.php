@@ -26,6 +26,10 @@ props:
           if (is_object($header) && !empty($header->visibleBreakpoint)) {
               $classNames .= ' ' . $header->getResponsiveClassNames();
           }
+          
+          if (is_object($header) && !empty($header->classNames)) {
+              $classNames .= ' ' . $header->classNames;
+          }
         @endphp
         class="{{ $classNames }}">
         @if (is_string($header))
