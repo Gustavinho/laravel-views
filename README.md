@@ -1,11 +1,14 @@
-# Laravel views
-
 ![Laravel views](doc/laravel-views.png)
+
+# Laravel views
 
 Laravel package to create beautiful common views like data tables using the [TALL stack](https://tallstack.dev/).
 
-- [Read the full documentation](https://laravelviews.com)
-- [See live examples](https://laravelviews.com/examples/table-view)
+# Documentation
+Read the [full documentation](https://laravelviews.com)
+
+# Live examples
+See some [live examples](https://laravelviews.com/examples/table-view) for the different views.
 
 ## Contributing
 
@@ -19,7 +22,6 @@ Here's the plan for what's coming:
 
 - **New form view**
 - **New layout view**
-- Add tooltips to actions buttons
 - Add a download action
 - Add translations
 - Add links as a UI helpers
