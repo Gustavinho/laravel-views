@@ -1,4 +1,10 @@
 # Changelog
+## [2.4.1] - 2023-01-02
+### Fixed
+- Fixed a bug displaying error alerts as success
+- Fixed a bug with XSS injections
+- Fixed a bug using dynamic tailwindcss classes
+- Fixed a bug resetting the value with the the inline editing
 ## [2.4.0] - 2021-09-29
 ### Added
 - Inline editing component
