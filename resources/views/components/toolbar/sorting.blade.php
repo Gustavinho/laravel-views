@@ -6,7 +6,7 @@ UI components used:
   - form/select --}}
 <div class="leading-tight">
   {{-- Sorting dropdown --}}
-  <x-lv-drop-down :dropDownWidth="64">
+  <x-lv-drop-down>
     <x-slot name="trigger">
       <x-lv-select-button>
         {{ __('Sort By') }}@if ($sortableByName = $sortableBy->flip()->get($sortBy)):
