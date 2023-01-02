@@ -1,4 +1,4 @@
-![Laravel views](doc/laravel-views.png)
+![Laravel views](https://laravelviews.com/img/docs/table.png)
 
 # Laravel views
 
@@ -27,8 +27,14 @@ Here's the plan for what's coming:
 - Add links as a UI helpers
 
 ## Upgrade guide
+### From 2.4.0 to 2.4.1
+**Publish blade componentes**
+
+Some of the internal components have changed, if you have published these components before to customize them, you will not have them up to date, unfourtunately you need to publish them again with `php artisan vendor:publish --tag=views --provider='LaravelViews\LaravelViewsServiceProvider'` and customize them as you need.
+
 ### From 2.2 to 2.3
 **Cached views**
+
 
 The blade directives have changed, you need to clear the cached views with `php artisan view:clear`
 

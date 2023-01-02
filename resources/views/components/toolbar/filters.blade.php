@@ -1,6 +1,6 @@
 {{-- Filters dropdown --}}
 @if (isset($filtersViews) && $filtersViews)
-  <x-lv-drop-down :dropDownWidth="64" label="Filters">
+  <x-lv-drop-down label="Filters">
     {{-- Each filter view --}}
     @foreach ($filtersViews as $filter)
       {{-- Filter title --}}
