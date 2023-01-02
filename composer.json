@@ -25,6 +25,8 @@
         "orchestra/testbench": "^7.0"
     },
     "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "test:verbose": "composer run test -- --testdox",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
         "larastan": "./vendor/bin/phpstan analyse"
     },
