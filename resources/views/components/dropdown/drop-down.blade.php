@@ -7,7 +7,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
  - trigger
 --}}
 
-@props(['size' => null, 'label' => ''])
+@props(['size' => null, 'dropDownWidth' => null, 'label' => '',])
 
 <div
   class="relative"
@@ -27,7 +27,8 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
 
   <div
     {{ $attributes->class([
-      'bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 ',
+      'bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10',
+      "w-".($dropDownWidth ? $dropDownWidth : ''),
       'w-full' => $size === 'full',
       'w-64' => !$size,
       'w-48' => $size === 'sm',
