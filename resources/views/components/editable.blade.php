@@ -6,8 +6,8 @@ Render an editable input field --}}
 <div x-data="{
     field: '{{ $field }}',
     id: {{ $model->id }},
-    value: {{ json_encode($model->$field) }},
-    original: {{ json_encode($model->$field) }},
+    value: {{ json_encode(strip_tags($model->$field)) }},
+    original: {{ json_encode(strip_tags($model->$field)) }},
     editing: false
   }"
   @click.away="editing = false; value = original;">
