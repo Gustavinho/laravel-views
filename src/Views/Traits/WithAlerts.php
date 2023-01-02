@@ -30,5 +30,4 @@ trait WithAlerts
             'type' => $type
         ]);
     }
-
 }
