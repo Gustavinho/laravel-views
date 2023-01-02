@@ -5,6 +5,7 @@
 - Fixed a bug with XSS injections
 - Fixed a bug using dynamic tailwindcss classes
 - Fixed a bug resetting the value with the the inline editing
+- Removed `doc` files from this repo
 ## [2.4.0] - 2021-09-29
 ### Added
 - Inline editing component
