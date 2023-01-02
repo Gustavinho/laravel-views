@@ -1,4 +1,4 @@
-![Laravel views](doc/laravel-views.png)
+![Laravel views](https://laravelviews.com/img/docs/table.png)
 
 # Laravel views
 
