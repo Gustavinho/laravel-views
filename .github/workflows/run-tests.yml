@@ -7,6 +7,7 @@ on:
      - dev
      - release/**
      - feature/**
+     - bug/**
      - tests/**
   pull_request:
     branches:
@@ -15,7 +16,6 @@ on:
      - /^release-.*$/
      - /^release/.*$/
      - /^feature/.*$/
-     - /^bug/.*$/
      - /^tests/.*$/
 
 jobs:
