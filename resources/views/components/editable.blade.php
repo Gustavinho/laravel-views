@@ -11,7 +11,8 @@ Render an editable input field --}}
     editing: false
   }"
   @click.away="editing = false; value = original;">
-  <input x-cloak
+  <input
+    x-cloak
     x-ref="input"
     x-show="editing"
     x-model="value"

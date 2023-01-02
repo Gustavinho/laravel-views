@@ -1,4 +1,5 @@
 <div
+  x-cloak
   x-data='{ open: false, message: "", type: "success" }'
   x-init="@this.on('notify', (notification) => {
     open = true;
