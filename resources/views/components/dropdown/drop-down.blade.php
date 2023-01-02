@@ -7,7 +7,15 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
  - trigger
 --}}
 
-@props(['dropDownWidth' => 64, 'label' => ''])
+@props(['size' => 'lg', 'dropDownWidth' => null, 'label' => '',])
+
+@php
+  $sizes = [
+    'full' => 'full',
+    'sm' => 'w-48',
+    'lg' => 'w-64'
+  ]
+@endphp
 
 <div
   class="relative"
@@ -26,7 +34,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
   </span>
 
   <div
-    class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 w-{{ isset($dropDownWidth) ? $dropDownWidth : 'full' }}"
+    class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 {{ isset($dropDownWidth) ? "w-$dropDownWidth" : '' }} {{ $sizes[$size] }}"
     x-show.transition="open"
     @click.away="open = false"
     x-cloak
