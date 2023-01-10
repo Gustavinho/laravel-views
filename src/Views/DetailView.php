@@ -14,6 +14,8 @@ class DetailView extends View
     protected $view = 'detail-view.detail-view';
     protected $modelClass;
     protected $detailComponent = null;
+    public $emptyComponent = 'laravel-views::components.empty';
+
 
     public $title = '';
     public $subtitle = '';

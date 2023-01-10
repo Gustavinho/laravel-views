@@ -5,6 +5,7 @@
   </div>
 
   <div>
+    @if (count($items))
     @foreach ($items as $item)
       <div class="flex items-center border-b border-gray-200 ">
         @if ($this->hasBulkActions)
@@ -17,6 +18,10 @@
         </div>
       </div>
     @endforeach
+    @else
+    {{-- Empty data message --}}
+      <x-lv-dynamic-component :view="$emptyComponent"/>
+    @endif
   </div>
 
   {{-- Paginator, loading indicator and totals --}}
