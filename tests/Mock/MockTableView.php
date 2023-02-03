@@ -26,4 +26,9 @@ class MockTableView extends TableView
             $user->email
         ];
     }
+
+	public function trClass(UserTest  $user)
+	{
+		return 'class-tr';
+	}
 }

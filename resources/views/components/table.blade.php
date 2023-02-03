@@ -51,7 +51,7 @@ props:
 
   <tbody>
     @foreach ($items as $item)
-      <tr class="border-b border-gray-200 text-sm" wire:key="{{ $item->getKey() }}">
+      <tr class="border-b border-gray-200 text-sm {{$view->trClass($item)}}" wire:key="{{ $item->getKey() }}">
         @if ($this->hasBulkActions)
           <td class="pl-3">
             <span class="flex items-center justify-center">
