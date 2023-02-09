@@ -53,7 +53,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
   </div>
 @else
     {{-- Empty data message --}}
-      <x-lv-dynamic-component :view="$emptyComponent"/>
+      <x-lv-dynamic-component :view="$emptyComponent" :data="[]"/>
     @endif
   {{-- Paginator, loading indicator and totals --}}
   <div class="mt-8">

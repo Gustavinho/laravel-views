@@ -20,7 +20,7 @@
     @endforeach
     @else
     {{-- Empty data message --}}
-      <x-lv-dynamic-component :view="$emptyComponent"/>
+      <x-lv-dynamic-component :view="$emptyComponent" :data="[]"/>
     @endif
   </div>
 

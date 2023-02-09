@@ -25,7 +25,7 @@ UI components used:
 
   @else
     {{-- Empty data message --}}
-    <x-lv-dynamic-component :view="$emptyComponent"/>
+    <x-lv-dynamic-component :view="$emptyComponent" :data="[]"/>
   @endif
 
   {{-- Paginator, loading indicator and totals --}}
