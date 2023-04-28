@@ -11,7 +11,7 @@ interface Sortable
      *
      * @param Builder $query Current Eloquent query builder
      * @param String $field Field the query will be sort by
-     * @param Bool $sortnat Compare items as strings using "natural ordering" like natsort()
+     * @param Int $sortnat Compare items as strings using "natural ordering" like natsort()
      * @param String $order Could be asc or desc
      *
      * @return Builder Updated Eloquent query builder

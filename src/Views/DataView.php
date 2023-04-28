@@ -44,7 +44,7 @@ abstract class DataView extends View
 
     public $sortBy = null;
 
-    public $sortNatural = false;
+    public $sortNatural = 0;
 
     public $sortOrder = 'asc';
 
@@ -176,7 +176,7 @@ abstract class DataView extends View
      * Sets the field the table view data will be sort by
      * @param string $field Field to sort by
      */
-    public function sort($field, $sortnat = false)
+    public function sort($field, $sortnat = 0)
     {
         if ($this->sortBy === $field) {
             $this->sortOrder = $this->sortOrder === 'asc' ? 'desc' : 'asc';

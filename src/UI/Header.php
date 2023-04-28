@@ -10,7 +10,7 @@ class Header
     /** @var string Field the table view will be sort by */
     public $sortBy;
 
-    /** @var bool Compare items as strings using "natural ordering" like natsort() */
+    /** @var int Compare items as strings using "natural ordering" like natsort() */
     public $sortNatural;
 
     /** @var string Width the width of the table column */
@@ -45,7 +45,7 @@ class Header
      * @param bool $sortnat If the table view should be sorted by "natural ordering" like natsort()
      * @return Header
      */
-    public function sortNatural(bool $sortnat = true)
+    public function sortNatural(int $sortnat = 1)
     {
         $this->sortNatural = $sortnat;
 
