@@ -25,9 +25,7 @@ UI components used:
 
   @else
     {{-- Empty data message --}}
-    <div class="flex justify-center items-center p-4">
-      <h3>{{ __('There are no items in this table') }}</h3>
-    </div>
+    <x-lv-dynamic-component :view="$emptyComponent" :data="[]"/>
   @endif
 
   {{-- Paginator, loading indicator and totals --}}

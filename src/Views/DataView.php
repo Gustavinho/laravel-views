@@ -50,6 +50,8 @@ abstract class DataView extends View
 
     public $selected = [];
     public $allSelected = false;
+    
+    public $emptyComponent = 'laravel-views::components.empty';
 
     public function hydrate()
     {
