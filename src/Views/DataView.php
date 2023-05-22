@@ -17,6 +17,7 @@ abstract class DataView extends View
         'search' => ['except' => ''],
         'filters',
         'sortBy',
+        'sortNatural',
         'sortOrder'
     ];
 
@@ -43,6 +44,8 @@ abstract class DataView extends View
 
     public $sortBy = null;
 
+    public $sortNatural = 0;
+
     public $sortOrder = 'asc';
 
     public $selected = [];
@@ -63,6 +66,7 @@ abstract class DataView extends View
         $this->applyDefaultFilters();
 
         $this->sortBy = $queryStringData->getValue('sortBy', $this->sortBy);
+        $this->sortNatural = $queryStringData->getValue('sortNatural', $this->sortNatural);
         $this->sortOrder = $queryStringData->getValue('sortOrder', $this->sortOrder);
     }
 
@@ -152,7 +156,7 @@ abstract class DataView extends View
         $query = clone $this->initialQuery;
         $query = $searchable->searchItems($query, $this->searchBy, $this->search);
         $query = $filterable->applyFilters($query, $this->filters(), $this->filters);
-        $query = $sortable->sortItems($query, $this->sortBy, $this->sortOrder);
+        $query = $sortable->sortItems($query, $this->sortBy, $this->sortNatural, $this->sortOrder);
 
         return $query;
     }
@@ -172,7 +176,7 @@ abstract class DataView extends View
      * Sets the field the table view data will be sort by
      * @param string $field Field to sort by
      */
-    public function sort($field)
+    public function sort($field, $sortnat = 0)
     {
         if ($this->sortBy === $field) {
             $this->sortOrder = $this->sortOrder === 'asc' ? 'desc' : 'asc';
@@ -180,6 +184,8 @@ abstract class DataView extends View
             $this->sortBy = $field;
             $this->sortOrder = 'asc';
         }
+
+        $this->sortNatural = $sortnat;
     }
 
     public function clearFilters()
