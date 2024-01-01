@@ -19,7 +19,7 @@ props:
   <div class="inline-block relative w-full">
     <select
       class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none"
-      {{ isset($model) ? 'wire:model='.$model : '' }} name="{{ $name }}" class="{{ $class ?? '' }}"
+      {{ isset($model) ? 'wire:model.live='.$model : '' }} name="{{ $name }}" class="{{ $class ?? '' }}"
     >
       @if (count($options))
         @foreach ($options as $option => $value)

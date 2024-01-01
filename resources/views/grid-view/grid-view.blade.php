@@ -34,7 +34,7 @@ You can customize all the html and css classes but YOU MUST KEEP THE BLADE AND L
       <div class="relative">
         @if ($this->hasBulkActions)
           <div class="absolute top-0 lef-0 p-2">
-            <x-lv-checkbox wire:model="selected" value="{{ $item->getKey() }}"/>
+            <x-lv-checkbox wire:model.live="selected" value="{{ $item->getKey() }}"/>
           </div>
         @endif
         <x-lv-dynamic-component

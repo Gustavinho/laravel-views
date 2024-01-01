@@ -9,7 +9,7 @@ class TestSuccessAction extends Action
 {
     public function handle($model, View $view)
     {
-        $view->emit('test-event');
+        $view->dispatch('test-event');
         $this->success();
     }
 }

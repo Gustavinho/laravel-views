@@ -9,7 +9,7 @@
       <div class="flex items-center border-b border-gray-200 ">
         @if ($this->hasBulkActions)
           <div class="h-full flex items-center pl-3 md:pl-4">
-            <x-lv-checkbox wire:model="selected" value="{{ $item->getKey() }}" />
+            <x-lv-checkbox wire:model.live="selected" value="{{ $item->getKey() }}" />
           </div>
         @endif
         <div class="py-2 px-3 md:px-4 flex-1">

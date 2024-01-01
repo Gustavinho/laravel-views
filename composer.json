@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "livewire/livewire": "2.*"
+        "livewire/livewire": "^3.0"
     },
     "autoload": {
         "psr-4": {

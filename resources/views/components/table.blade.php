@@ -15,7 +15,7 @@ props:
       @if ($this->hasBulkActions)
         <th class="pl-3">
           <span class="flex items-center justify-center">
-            <x-lv-checkbox wire:model="allSelected" />
+            <x-lv-checkbox wire:model.live="allSelected" />
           </span>
         </th>
       @endif
@@ -55,7 +55,7 @@ props:
         @if ($this->hasBulkActions)
           <td class="pl-3">
             <span class="flex items-center justify-center">
-              <x-lv-checkbox value="{{ $item->getKey() }}" wire:model="selected" />
+              <x-lv-checkbox value="{{ $item->getKey() }}" wire:model.live="selected" />
             </span>
           </td>
         @endif

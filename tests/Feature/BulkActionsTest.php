@@ -18,7 +18,7 @@ class BulkActionsTest extends TestCase
     public function testSeeCheckBoxesWhenBulkActionsIsDefiend()
     {
         $user = factory(UserTest::class)->create();
-        $input = '<input type="checkbox" class="w-4 h-4 rounded" value="'.$user->getKey().'" wire:model="selected">';
+        $input = '<input type="checkbox" class="w-4 h-4 rounded" value="'.$user->getKey().'" wire:model.live="selected">';
 
         Livewire::test(MockTableViewWithActions::class)
             ->assertDontSeeHtml($input);

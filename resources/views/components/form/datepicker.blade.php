@@ -16,7 +16,7 @@ props:
 <x-lv-input
   :value="$value"
   :id="$id"
-  wire:model="{{ $model }}"
+  wire:model.live="{{ $model }}"
   x-data="{ picker: null }"
   x-ref="{{ $id }}"
   x-init="picker = new Pikaday({ field: $refs['{{ $id }}'], format: 'YYYY-MM-DD', onSelect: () => $dispatch('input', picker.toString('YYYY-MM-DD')) })"

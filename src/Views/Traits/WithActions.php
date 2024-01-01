@@ -72,7 +72,7 @@ trait WithActions
         if ($modelId) {
             $actionData['modelId'] = $modelId;
         }
-        $this->emitSelf('openConfirmationModal', $actionData);
+        $this->dispatch('openConfirmationModal', actionData: $actionData)->self();
     }
 
     /**

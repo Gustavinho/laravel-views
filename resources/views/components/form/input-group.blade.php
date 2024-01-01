@@ -27,7 +27,7 @@ props:
     @if (isset($id))
       id="{{ $id ?? ''}}"
     @endif
-    wire:model="{{ $model ?? '' }}"
+    wire:model.live="{{ $model ?? '' }}"
   >
   <div class="absolute right-0 top-0 mt-2 mr-4 text-purple-lighter">
     <a wire:click.prevent="{{ $onClick ?? '' }}" href="#" class="text-gray-400 hover:text-blue-600">

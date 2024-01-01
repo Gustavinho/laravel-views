@@ -14,7 +14,7 @@ abstract class DataView extends View
     use WithPagination, WithActions;
 
     protected $queryString = [
-        'search' => ['except' => ''],
+        'search',
         'filters',
         'sortBy',
         'sortOrder'
@@ -29,8 +29,8 @@ abstract class DataView extends View
     /** @var int $total Total of items found */
     public $total = 0;
 
-    /** @var String $search Current query string with the search value */
-    public $search;
+    /** @var String $query Current query string with the search value */
+    public $query;
 
     /** @var String $filters Current query string with the filters value */
     public $filters = [];
